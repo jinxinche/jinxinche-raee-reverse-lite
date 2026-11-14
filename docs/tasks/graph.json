@@ -465,6 +465,13 @@
           "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43595870464",
           "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43595882730",
           "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/27f9dde.md. This commit changes the ledger and records the standard-tier run."
+        },
+        {
+          "commit": "31c3e00bba244304db4f08232fc4baa5ca42cd4c",
+          "conclusion": "failure",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43596068701",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43596070515",
+          "detail": "Push failed. macOS Python 3.15 failed test_support_batch_does_not_collapse: last hundred was about 8.0x the first hundred, and the bound was 6. The pull_request run succeeded. See docs/ci/31c3e00.md."
         }
       ],
       "evidence": [

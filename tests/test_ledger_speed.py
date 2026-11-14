@@ -60,9 +60,11 @@ def test_support_batch_does_not_collapse(store):
     assert first_done is not None and last_started is not None
     first = first_done - started
     last = finished - last_started
-    # On this shape, before the fix, the last hundred was about 18x the first
-    # hundred. After the fix the same comparison was about 3x.
-    assert last < first * 6
+    # Before the fix this shape was about 18x on this VM. After the fix it was
+    # about 3x here. GitHub Actions on 31c3e00, macOS Python 3.15, measured
+    # 0.603s / 0.075s, about 8x, and failed a bound of 6. The bound stays
+    # under the pre-fix ratio.
+    assert last < first * 12
     assert store.decision(claims[0])["accepted_pass"] is True
     assert store.get(claims[0])["projection"]["extra"]["accepted_pass"] is True
 
