@@ -18,7 +18,7 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. No n
 **Executed.**
 
 - `12735f05` Actions: failure. Ubuntu passed; Windows and macOS failed. `docs/ci/12735f05.md`.
-- `d38e889`, `0a74bed`, `345c7f8`, `45eff3c`, `772dfac`, `c661219`, and `746addd` Actions: 12 of 12 jobs succeeded on both the push run and the pull_request run for each of those commits. `docs/ci/c661219.md` and `docs/ci/746addd.md`.
+- `d38e889`, `0a74bed`, `345c7f8`, `45eff3c`, `772dfac`, `c661219`, `746addd`, and `27f9dde` Actions: 12 of 12 jobs succeeded on both the push run and the pull_request run for each of those commits. `docs/ci/27f9dde.md`.
 - Dev ELF and zlib `minigzip` headless Ghidra runs, including a decompiled `crc32`.
 - Baseline dev check without reading the final-acceptance file, then `accept.py`: 8/8 final inputs matched collected surfaces. Non-blind. Level `-9` stayed `not_compared`.
 - LTO candidate: decompress median 99.6% of baseline. Enhancement not met.

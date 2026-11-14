@@ -458,6 +458,13 @@
           "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591930851",
           "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591936161",
           "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/746addd.md. This is the A20 review target."
+        },
+        {
+          "commit": "27f9dde860b30201dd5d8fe44c9451cef8e01180",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43595870464",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43595882730",
+          "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/27f9dde.md. This commit changes the ledger and records the standard-tier run."
         }
       ],
       "evidence": [
