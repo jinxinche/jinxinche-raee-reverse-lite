@@ -395,7 +395,7 @@
       ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "772dfac504843adc33d336167dc464de7fb4284b",
+      "inputs_version": "c6612192b5e05d2a5c4c84daa57c0bb3d35099f7",
       "budget": {
         "agents": 1,
         "ci_jobs": 6
@@ -444,12 +444,20 @@
           "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43588199093",
           "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43588204438",
           "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/772dfac.md. This commit records the 45eff3c Actions result and is not itself the reviewed SHA in that file."
+        },
+        {
+          "commit": "c6612192b5e05d2a5c4c84daa57c0bb3d35099f7",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591711285",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591714049",
+          "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/c661219.md. This is the A20 review target."
         }
       ],
       "evidence": [
         "docs/ci/12735f05.md",
         "docs/ci/45eff3c.md",
         "docs/ci/772dfac.md",
+        "docs/ci/c661219.md",
         ".github/workflows/core.yml"
       ],
       "limitations": [
@@ -538,24 +546,24 @@
         "A18",
         "A19"
       ],
-      "state": "QUEUED",
+      "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "772dfac504843adc33d336167dc464de7fb4284b",
+      "inputs_version": "c6612192b5e05d2a5c4c84daa57c0bb3d35099f7",
       "budget": {
         "agents": 1
       },
       "exit_gate": "Final tree matches the evidence, and every required check has an executed result.",
-      "gate_met": false,
-      "checkpoint": "The previous review named 45eff3c. That is not a review of 772dfac, whose Actions are now recorded in docs/ci/772dfac.md. This task stays open until a review names the commit that contains the A19 probe and the 772dfac record, after that commit's Actions exist.",
+      "gate_met": true,
+      "checkpoint": "Review is of c661219, whose push and pull_request Actions runs both succeeded with 12 jobs. That commit contains the 772dfac Actions record and the second standard-tier probe. The speed goal stays missed. The standard tier was not completed. REA comparison is one sample and is not a ranking.",
       "evidence": [
         "docs/DELIVERY.md",
-        "docs/ci/772dfac.md"
+        "docs/ci/c661219.md"
       ],
       "limitations": [
         "non-blind acceptance",
         "standard tier not completed",
         "enhancement not met",
-        "review does not yet name the commit that added the second A19 probe"
+        "the commit that records this review is newer than c661219"
       ]
     }
   ]
