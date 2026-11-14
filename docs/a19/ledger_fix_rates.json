@@ -1,0 +1,27 @@
+{
+  "shape": "100 claims, 500 observations, 2000 supports, same statement as docs/a19/attempt2.json",
+  "before": {
+    "tree": "main before the ledger change, measured on this VM",
+    "first_100_relations_per_second": 1602.81,
+    "last_100_relations_per_second": 86.65,
+    "relation_seconds": 9.957,
+    "last_over_first_time_ratio": 18.5
+  },
+  "after": {
+    "tree": "this branch after the decision-edge and projection-cache change",
+    "first_100_relations_per_second": 2267.71,
+    "last_100_relations_per_second": 766.66,
+    "relation_seconds": 1.9088,
+    "last_over_first_time_ratio": 2.96
+  },
+  "attempt3_probe": {
+    "budget_document": "docs/a19/ATTEMPT3_BUDGET.md",
+    "first_100_relations_per_second": 1729.8,
+    "last_100_relations_per_second": 789.89,
+    "support_seconds": 1.9096,
+    "derived_from_500_per_second": 5323.7,
+    "projected_total_seconds": 1940.17,
+    "session_cap_seconds": 2700,
+    "full_tier_started": true
+  }
+}

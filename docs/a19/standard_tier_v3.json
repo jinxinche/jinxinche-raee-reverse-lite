@@ -1,0 +1,22 @@
+{
+  "budget_document": "docs/a19/STANDARD_TIER_BUDGET.md",
+  "standard_tier_executed": true,
+  "standard_tier_pass": true,
+  "load_seconds": 19.814044417000332,
+  "mixed_seconds": 1800.0353935979992,
+  "iterations": 29510,
+  "record_counts": {
+    "claim": 1001,
+    "evaluation": 10002,
+    "observation": 10001,
+    "retraction": 1
+  },
+  "relation_count": 50003,
+  "retraction_before_accepted_pass": true,
+  "retraction_after_accepted_pass": false,
+  "cancelled_state": "CANCELLED",
+  "target_runs": 20,
+  "target_stdout_ok": true,
+  "directory_bytes": 102793465,
+  "integrity_ok": true
+}

@@ -39,12 +39,12 @@ python3 -m raee_reverse --root /tmp/rrl-readme report --out /tmp/rrl-readme/repo
 ## What was executed
 
 - Phase 0 notes: `docs/phase0/`.
-- `python3 -m pytest -q` on this VM, on the tree that added the second A19 probe: 54 passed in 4.38s.
+- `python3 -m pip install .` and `python3 -m pytest -q` on this VM after the ledger change: 57 passed in 6.49s.
 - Synthetic ELF plus headless Ghidra 12.2: `docs/phase2/DEV_SAMPLE.md`.
 - zlib 1.4 sandbox build and sealed surfaces: `docs/phase2/ZLIB.md`. Acceptance is non-blind.
 - Compatible baseline: `generated/zlib-baseline/`. It matched the sealed surfaces. Reproduction copy: `repro/zlib-baseline/`.
 - LTO candidate missed the frozen speed goal: `docs/evidence/zlib_enhancement.json`.
 - REA 6.9.0 static comparison: `docs/a18/REA_COMPARISON.md`.
-- Standard stress tier: not completed. The stopped load remains in `docs/a19/standard_tier.json`. A later probe did not start the full tier: `docs/a19/attempt2.json`.
+- Standard stress tier: the stopped load remains a failure in `docs/a19/standard_tier.json`. A later run passed the declared floors: `docs/a19/standard_tier_v3.json`.
 
 Task states: `docs/tasks/graph.json`. One agent wrote them. A scheduler `SUCCEEDED` is not `accepted_pass`.
