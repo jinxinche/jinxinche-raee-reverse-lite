@@ -46,5 +46,6 @@ python3 -m raee_reverse --root /tmp/rrl-readme report --out /tmp/rrl-readme/repo
 - LTO candidate missed the frozen speed goal: `docs/evidence/zlib_enhancement.json`.
 - REA 6.9.0 static comparison: `docs/a18/REA_COMPARISON.md`.
 - Standard stress tier: the stopped load remains a failure in `docs/a19/standard_tier.json`. A later run passed the declared floors: `docs/a19/standard_tier_v3.json`.
+- `python3 -m raee_reverse --root /tmp/rrl-route route --task-json /tmp/route-task.json --profiles config/model_profiles.json --prices config/prices.json` chose `deterministic_tool` at T0. `accepted_pass` in that result was false. Record id `d5ead1c546af4d1398f43f7daf259908`.
 
 Task states: `docs/tasks/graph.json`. One agent wrote them. A scheduler `SUCCEEDED` is not `accepted_pass`.

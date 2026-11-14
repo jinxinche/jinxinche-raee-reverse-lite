@@ -29,7 +29,7 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. No n
 
 **Unverified.** Whether another compiler emits the same gzip bytes. Whether REA and this tool differ on a larger task set. Latency percentiles for the standard tier were not recorded.
 
-**Not done.** A faster zlib. A blind acceptance set. The extended stress tier. Optional REA engines (Hopper, IDA, JADX, Kuna) were not installed. Network namespaces were not available (`unshare` returned operation not permitted). REA was not asked to execute the ELF, so runtime behavior is not a compared surface.
+**Not done.** A faster zlib. A blind acceptance set. The extended stress tier. Optional REA engines (Hopper, IDA, JADX, Kuna) were not installed. Network namespaces were not available (`unshare` returned operation not permitted). REA was not asked to execute the ELF, so runtime behavior is not a compared surface. The five routing policies in the decision-unit spec were not executed (`docs/a18/routing_comparison.json`, `executed` false). No savings percentage is claimed.
 
 ## Commands run on the c661219 tree
 

@@ -65,7 +65,11 @@
       "evidence": [
         "src/raee_reverse/model.py",
         "src/raee_reverse/errors.py",
-        "src/raee_reverse/interfaces.py"
+        "src/raee_reverse/interfaces.py",
+        "src/raee_reverse/decision.py",
+        "src/raee_reverse/budget_ledger.py",
+        "config/model_profiles.json",
+        "config/prices.json"
       ],
       "limitations": [
         "MCP transport is not implemented"
@@ -226,10 +230,13 @@
       "gate_met": true,
       "evidence": [
         "docs/evidence/zlib_phase2.json",
-        "src/raee_reverse/experiments.py"
+        "src/raee_reverse/experiments.py",
+        "src/raee_reverse/decision.py",
+        "tests/test_decision_unit.py"
       ],
       "limitations": [
-        "one hypothesis pair on tune-alpha; level -9 differed from the default"
+        "one hypothesis pair on tune-alpha; level -9 differed from the default",
+        "routing is auditable rules; no live model was called"
       ]
     },
     {
@@ -274,7 +281,8 @@
       "checkpoint": "Measured v on dev checks. Round-trip without compress is null, not zero. Shapley is uncertain because those coalitions are missing. Synthetic validation samples are marked measured_on_zlib false.",
       "evidence": [
         "docs/a12/zlib_dev_attribution.json",
-        "src/raee_reverse/attribution.py"
+        "src/raee_reverse/attribution.py",
+        "tests/test_decision_unit.py"
       ],
       "limitations": [
         "causal_claim is false",
@@ -381,10 +389,12 @@
         "src/raee_reverse/cli.py",
         "src/raee_reverse/mcp_server.py",
         "src/raee_reverse/report_html.py",
-        "tests/test_contract_report.py"
+        "tests/test_contract_report.py",
+        "tests/test_decision_unit.py"
       ],
       "limitations": [
-        "MCP implements initialize, tools/list, and tools/call only"
+        "MCP implements initialize, tools/list, and tools/call only",
+        "route prints a plan; ok is not a verification pass"
       ]
     },
     {
@@ -504,12 +514,14 @@
       "exit_gate": "Compare this tool with REA 6.9.0 under the same task, budget, and tools, or record that the run did not happen.",
       "gate_met": true,
       "evidence": [
-        "docs/a18/REA_COMPARISON.md"
+        "docs/a18/REA_COMPARISON.md",
+        "docs/a18/routing_comparison.json"
       ],
       "limitations": [
         "single sample",
         "runtime execution was not part of the REA commands",
-        "environment_healthy was false because optional engines were not installed"
+        "environment_healthy was false because optional engines were not installed",
+        "the five routing policies were not executed; no savings number"
       ],
       "checkpoint": "REA 6.9.0 was installed and run on the same checksum ELF and Ghidra 12.2. One analyze and one function query. Sample size 1. No suite score."
     },
@@ -538,13 +550,15 @@
         "docs/a19/attempt2.json",
         "docs/a19/ATTEMPT3_BUDGET.md",
         "docs/a19/standard_tier_v3.json",
-        "docs/a19/ledger_fix_rates.json"
+        "docs/a19/ledger_fix_rates.json",
+        "tests/test_decision_unit.py"
       ],
       "limitations": [
         "the 10041-relation stop remains a failure",
         "attempt2 remains not a pass",
         "extended tier not run",
-        "latency percentiles were not recorded"
+        "latency percentiles were not recorded",
+        "routing budget contention is a unit test, not the 30 minute tier"
       ],
       "checkpoint": "The first load remains a failure at 10041 relations and 21000 records. Attempt 2 did not start the full tier. After the ledger change, attempt 3 was declared, the probe projected 1940 seconds, and tools/run_standard_tier.py exited 0 with standard_tier_pass true: load 19.814s, mixed 1800.035s, 50003 relations, 20 target runs."
     },
