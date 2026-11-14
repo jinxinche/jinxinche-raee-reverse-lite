@@ -8,10 +8,12 @@ not executed.
 
 from __future__ import annotations
 
+import json
 import os
 import shutil
 import signal
 import subprocess
+import sys
 import tempfile
 import threading
 import time
@@ -85,20 +87,17 @@ def run_sandboxed(
     env["TMPDIR"] = str(work)
     env["LANG"] = "C"
     command = list(argv)
-    prlimit = shutil.which("prlimit") if os.name == "posix" else None
-    if prlimit is not None:
-        prefix = [prlimit]
-        if cpu_seconds is not None:
-            prefix.append(f"--cpu={int(cpu_seconds)}")
-        if fsize_bytes is not None:
-            prefix.append(f"--fsize={int(fsize_bytes)}")
-        if as_bytes is not None:
-            prefix.append(f"--as={int(as_bytes)}")
-        prefix.extend(["--nofile=64", "--nproc=128", "--"])
-        command = prefix + command
-        rlimits_applied = True
-    else:
-        limitations.append("prlimit is not available; resource limits were not applied by this runner")
+    command, rlimits_applied, limit_note = _limit_command(
+        command,
+        cpu_seconds=cpu_seconds,
+        fsize_bytes=fsize_bytes,
+        as_bytes=as_bytes,
+    )
+    if limit_note:
+        limitations.append(limit_note)
+    if rlimits_applied and shutil.which("prlimit") is None and os.name == "posix":
+        env["RRL_RLIMITS"] = _rlimit_spec(cpu_seconds, fsize_bytes, as_bytes)
+        env["RRL_ARGV"] = json.dumps(list(argv))
     proc = subprocess.Popen(
         command,
         cwd=work,
@@ -206,16 +205,76 @@ def _read_capped(stream, limit: int) -> tuple[bytes, bool]:
     return b"".join(chunks)[:limit], True
 
 
+_RLIMIT_WRAPPER = """
+import json, os, resource
+spec = json.loads(os.environ["RRL_RLIMITS"])
+names = {
+    "cpu": "RLIMIT_CPU",
+    "fsize": "RLIMIT_FSIZE",
+    "as": "RLIMIT_AS",
+    "nofile": "RLIMIT_NOFILE",
+    "nproc": "RLIMIT_NPROC",
+}
+for key, value in spec.items():
+    limit = getattr(resource, names[key], None)
+    if limit is None:
+        continue
+    try:
+        resource.setrlimit(limit, (int(value), int(value)))
+    except (OSError, ValueError):
+        pass
+argv = json.loads(os.environ["RRL_ARGV"])
+os.execv(argv[0], argv)
+"""
+
+
+def _rlimit_spec(cpu_seconds, fsize_bytes, as_bytes) -> str:
+    spec = {"nofile": 64, "nproc": 128}
+    if cpu_seconds is not None:
+        spec["cpu"] = int(cpu_seconds)
+    if fsize_bytes is not None:
+        spec["fsize"] = int(fsize_bytes)
+    if as_bytes is not None:
+        spec["as"] = int(as_bytes)
+    return json.dumps(spec)
+
+
+def _limit_command(argv, *, cpu_seconds, fsize_bytes, as_bytes):
+    """Return (command, applied, limitation note).
+
+    Linux uses prlimit. Other POSIX hosts set the limits in a short-lived
+    Python process that then execs the target. A missing mechanism is recorded
+    and is not described as applied.
+    """
+    if os.name != "posix":
+        return list(argv), False, None
+    prlimit = shutil.which("prlimit")
+    if prlimit is not None:
+        prefix = [prlimit]
+        if cpu_seconds is not None:
+            prefix.append(f"--cpu={int(cpu_seconds)}")
+        if fsize_bytes is not None:
+            prefix.append(f"--fsize={int(fsize_bytes)}")
+        if as_bytes is not None:
+            prefix.append(f"--as={int(as_bytes)}")
+        prefix.extend(["--nofile=64", "--nproc=128", "--"])
+        return prefix + list(argv), True, None
+    return [sys.executable, "-c", _RLIMIT_WRAPPER], True, "rlimits were applied with resource.setrlimit before exec because prlimit is absent"
+
+
 def _kill(proc: subprocess.Popen) -> None:
     if proc.poll() is not None:
         return
     if os.name == "posix":
         try:
             os.killpg(proc.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            proc.kill()
-    else:
+            return
+        except (ProcessLookupError, PermissionError, OSError):
+            pass
+    try:
         proc.kill()
+    except OSError:
+        pass
 
 
 def _kill_if_running(proc: subprocess.Popen) -> None:

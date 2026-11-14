@@ -11,183 +11,307 @@
       "state": "SUCCEEDED",
       "owner": "solo-agent",
       "inputs_version": "docs/phase0",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Scope, Python range, CI matrix, stress-tier decision, and evaluation rules are written and consistent with this graph.",
       "gate_met": true,
-      "evidence": ["docs/phase0/SCOPE.md", "docs/phase0/EVALUATION.md"],
+      "evidence": [
+        "docs/phase0/SCOPE.md",
+        "docs/phase0/EVALUATION.md"
+      ],
       "limitations": []
     },
     {
       "id": "A02",
       "title": "Dev sample, real target, acceptance set, isolation",
-      "deps": ["A01"],
-      "state": "QUEUED",
+      "deps": [
+        "A01"
+      ],
+      "state": "SUCCEEDED",
       "owner": "solo-agent",
       "inputs_version": "docs/phase0/TARGETS.md",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Dev sample and isolation exist, the real target is frozen, and a sealed acceptance set for that target exists.",
-      "gate_met": false,
-      "checkpoint": "Dev ELF executed. Isolation code executed. zlib 1.4 is frozen and not built. Acceptance bytes are not sealed. Same agent, so the split is non-blind.",
-      "evidence": ["docs/phase0/TARGETS.md", "docs/evidence/phase2_dev_sample.json"],
-      "limitations": ["real target not built", "acceptance set not sealed"]
+      "gate_met": true,
+      "checkpoint": "zlib 1.4 built in the sandbox. Tarball, minigzip, and libz.a hashes are in targets/zlib/PIN.json. Dev, tune, and final surfaces are in sealed_observations.json.",
+      "evidence": [
+        "docs/phase0/TARGETS.md",
+        "targets/zlib/PIN.json",
+        "targets/zlib/NON_BLIND.md",
+        "docs/evidence/zlib_phase2.json"
+      ],
+      "limitations": [
+        "acceptance is non-blind",
+        "network namespace was not applied during the build"
+      ]
     },
     {
       "id": "A03",
       "title": "Core contracts, extension points, errors",
-      "deps": ["A01"],
+      "deps": [
+        "A01"
+      ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
       "inputs_version": "src/raee_reverse",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Record kinds, relation types, error codes, and missing-engine results exist and are covered by tests.",
       "gate_met": true,
-      "evidence": ["src/raee_reverse/model.py", "src/raee_reverse/errors.py", "src/raee_reverse/interfaces.py"],
-      "limitations": ["MCP transport is not implemented"]
+      "evidence": [
+        "src/raee_reverse/model.py",
+        "src/raee_reverse/errors.py",
+        "src/raee_reverse/interfaces.py"
+      ],
+      "limitations": [
+        "MCP transport is not implemented"
+      ]
     },
     {
       "id": "A04",
       "title": "Evidence store, query, provenance, content binding",
-      "deps": ["A03"],
+      "deps": [
+        "A03"
+      ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
       "inputs_version": "src/raee_reverse/store.py",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "SQLite plus content-addressed blobs store the ten record kinds and the eight relations; raw rows are immutable.",
       "gate_met": true,
-      "evidence": ["tests/test_evidence.py"],
+      "evidence": [
+        "tests/test_evidence.py"
+      ],
       "limitations": []
     },
     {
       "id": "A05",
       "title": "Dependency audit, cache, freshness",
-      "deps": ["A04"],
+      "deps": [
+        "A04"
+      ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
       "inputs_version": "src/raee_reverse/cache.py",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Cache keys bind content, deps, tool, params, config, and environment. A clean import scan is not a closure proof. Content changes stale derived observations.",
       "gate_met": true,
-      "evidence": ["tests/test_cache_audit_attribution.py", "tests/test_evidence.py"],
-      "limitations": ["distribution-to-import names are not resolved beyond hyphen-to-underscore"]
+      "evidence": [
+        "tests/test_cache_audit_attribution.py",
+        "tests/test_evidence.py"
+      ],
+      "limitations": [
+        "distribution-to-import names are not resolved beyond hyphen-to-underscore"
+      ]
     },
     {
       "id": "A06",
       "title": "Retraction, concurrency, recovery",
-      "deps": ["A04", "A05"],
+      "deps": [
+        "A04",
+        "A05"
+      ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
       "inputs_version": "src/raee_reverse/store.py",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Retraction recomputes support and does not delete rows. Concurrent decision reads do not observe a torn pass. A crash before commit leaves no row.",
       "gate_met": true,
-      "evidence": ["tests/test_retraction.py", "tests/test_evidence.py"],
+      "evidence": [
+        "tests/test_retraction.py",
+        "tests/test_evidence.py"
+      ],
       "limitations": []
     },
     {
       "id": "A07",
       "title": "Native static-analysis adapter",
-      "deps": ["A03"],
+      "deps": [
+        "A03"
+      ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
       "inputs_version": "ghidra_12.2_PUBLIC",
-      "budget": {"agents": 1, "ghidra_processes": 1, "java_heap": "2G"},
+      "budget": {
+        "agents": 1,
+        "ghidra_processes": 1,
+        "java_heap": "2G"
+      },
       "exit_gate": "Headless Ghidra, not a fake adapter, analyzes one ELF and the export is kept.",
       "gate_met": true,
-      "evidence": ["docs/evidence/phase2_dev_sample.json"],
-      "limitations": ["dev ELF only", "not run in CI", "distro JDK 21 cannot launch Ghidra 12.2"]
+      "evidence": [
+        "docs/evidence/phase2_dev_sample.json",
+        "docs/evidence/zlib_phase2.json"
+      ],
+      "limitations": [
+        "distro JDK 21 cannot launch Ghidra 12.2",
+        "not run in CI"
+      ]
     },
     {
       "id": "A08",
       "title": "Sandboxed execution, timeout, cancel, resources",
-      "deps": ["A03"],
+      "deps": [
+        "A03"
+      ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
       "inputs_version": "src/raee_reverse/sandbox.py",
-      "budget": {"agents": 1, "target_processes": 1},
+      "budget": {
+        "agents": 1,
+        "target_processes": 1
+      },
       "exit_gate": "Timeout, truncation, nonzero exit, secret stripping, and a file-size limit are explicit non-passes, and the dev ELF was run under that runner.",
       "gate_met": true,
-      "evidence": ["tests/test_sandbox_cli.py", "docs/evidence/phase2_dev_sample.json"],
-      "limitations": ["network namespace was not available", "not a hypervisor", "zlib was not run"]
+      "evidence": [
+        "tests/test_sandbox_cli.py",
+        "docs/evidence/phase2_dev_sample.json"
+      ],
+      "limitations": [
+        "network namespace was not available",
+        "not a hypervisor",
+        "zlib was not run"
+      ]
     },
     {
       "id": "A09",
       "title": "Behavior contracts and compatibility judgment",
-      "deps": ["A04", "A07", "A08"],
-      "state": "QUEUED",
+      "deps": [
+        "A04",
+        "A07",
+        "A08"
+      ],
+      "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "not-started",
-      "budget": {"agents": 1},
+      "inputs_version": "docs/evidence/zlib_phase2.json",
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Compare the observation surfaces required by a frozen target contract, without treating an uncollected surface as a match.",
-      "gate_met": false,
-      "checkpoint": "One dev-sample claim was evaluated. There is no general comparator and no zlib contract.",
-      "evidence": [],
-      "limitations": ["only the synthetic stdin-abc claim exists"]
+      "gate_met": true,
+      "evidence": [
+        "src/raee_reverse/compare.py",
+        "docs/evidence/zlib_phase2.json",
+        "tests/test_contract_report.py"
+      ],
+      "limitations": [
+        "verdict covers the collected surfaces of the sealed inputs only",
+        "acceptance is non-blind",
+        "compression_level_9 stays not_compared in the contract verdict"
+      ]
     },
     {
       "id": "A10",
       "title": "Hypotheses, experiment choice, active analysis",
-      "deps": ["A09"],
-      "state": "BLOCKED",
+      "deps": [
+        "A09"
+      ],
+      "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "not-started",
-      "budget": {"agents": 1},
+      "inputs_version": "tune-alpha",
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Choose a distinguishing experiment from disagreements and cost, run it, and keep the raw result.",
-      "gate_met": false,
-      "blocked_reason": "A09 has not succeeded",
-      "evidence": [],
-      "limitations": []
+      "gate_met": true,
+      "evidence": [
+        "docs/evidence/zlib_phase2.json",
+        "src/raee_reverse/experiments.py"
+      ],
+      "limitations": [
+        "one hypothesis pair on tune-alpha; level -9 differed from the default"
+      ]
     },
     {
       "id": "A11",
       "title": "Counterexample search and failure shrinking",
-      "deps": ["A08", "A09"],
-      "state": "BLOCKED",
+      "deps": [
+        "A08",
+        "A09"
+      ],
+      "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "not-started",
-      "budget": {"agents": 1},
+      "inputs_version": "truncated dev/abc gzip",
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Shrink a failing case without changing the failure predicate, and do not claim a global minimum.",
-      "gate_met": false,
-      "blocked_reason": "A09 has not succeeded",
-      "evidence": [],
-      "limitations": []
+      "gate_met": true,
+      "evidence": [
+        "docs/evidence/zlib_phase2.json",
+        "src/raee_reverse/shrink.py"
+      ],
+      "limitations": [
+        "reduced length 4 under deletion search; global_minimum is false"
+      ]
     },
     {
       "id": "A12",
       "title": "Attribution experiments",
-      "deps": ["A06", "A08", "A09"],
-      "state": "BLOCKED",
+      "deps": [
+        "A06",
+        "A08",
+        "A09"
+      ],
+      "state": "QUEUED",
       "owner": "solo-agent",
       "inputs_version": "src/raee_reverse/attribution.py",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Run the required attribution samples on a measured value function, including retraction, confounding, noise, and missing coalitions.",
       "gate_met": false,
-      "blocked_reason": "A09 has not succeeded",
-      "checkpoint": "Arithmetic helpers and synthetic tests exist. They are not a measured experiment.",
-      "evidence": ["tests/test_cache_audit_attribution.py"],
-      "limitations": ["no measured v(S) on a target"]
+      "checkpoint": "Arithmetic helpers exist. The required measured attribution samples on a target value function were not run.",
+      "evidence": [
+        "tests/test_cache_audit_attribution.py"
+      ],
+      "limitations": [
+        "no measured v(S) on zlib"
+      ]
     },
     {
       "id": "A13",
       "title": "Runnable compatible project",
-      "deps": ["A09", "A10", "A11"],
-      "state": "BLOCKED",
+      "deps": [
+        "A09",
+        "A10",
+        "A11"
+      ],
+      "state": "QUEUED",
       "owner": "solo-agent",
       "inputs_version": "not-started",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "A compatible zlib baseline builds, installs, and passes the sealed must-keep behaviors.",
       "gate_met": false,
-      "blocked_reason": "A09, A10, and A11 have not succeeded",
       "evidence": [],
-      "limitations": []
+      "limitations": [],
+      "checkpoint": "No compatible reimplementation was generated."
     },
     {
       "id": "A14",
       "title": "Improvement candidate",
-      "deps": ["A12", "A13"],
+      "deps": [
+        "A12",
+        "A13"
+      ],
       "state": "BLOCKED",
       "owner": "solo-agent",
       "inputs_version": "not-started",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "After correctness, either the pre-registered zlib metric clears its threshold or the miss is recorded without swapping the metric.",
       "gate_met": false,
       "blocked_reason": "A12 and A13 have not succeeded",
@@ -197,11 +321,17 @@
     {
       "id": "A15",
       "title": "Independent regression export",
-      "deps": ["A09", "A11", "A13"],
+      "deps": [
+        "A09",
+        "A11",
+        "A13"
+      ],
       "state": "BLOCKED",
       "owner": "solo-agent",
       "inputs_version": "not-started",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Export tests that can run without this repository's source tree.",
       "gate_met": false,
       "blocked_reason": "A09, A11, and A13 have not succeeded",
@@ -211,74 +341,140 @@
     {
       "id": "A16",
       "title": "CLI, MCP, offline report, capability discovery",
-      "deps": ["A03", "A04", "A09"],
-      "state": "BLOCKED",
+      "deps": [
+        "A03",
+        "A04",
+        "A09"
+      ],
+      "state": "SUCCEEDED",
       "owner": "solo-agent",
       "inputs_version": "src/raee_reverse/cli.py",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "CLI, MCP, and an offline HTML report all work against the ledger.",
-      "gate_met": false,
-      "blocked_reason": "A09 has not succeeded",
-      "checkpoint": "Minimal CLI, including gate, is tested. MCP and HTML are not implemented.",
-      "evidence": ["tests/test_sandbox_cli.py"],
-      "limitations": ["MCP absent", "HTML report absent"]
+      "gate_met": true,
+      "checkpoint": "CLI, a stdio MCP server, and an offline HTML report are tested.",
+      "evidence": [
+        "src/raee_reverse/cli.py",
+        "src/raee_reverse/mcp_server.py",
+        "src/raee_reverse/report_html.py",
+        "tests/test_contract_report.py"
+      ],
+      "limitations": [
+        "MCP implements initialize, tools/list, and tools/call only"
+      ]
     },
     {
       "id": "A17",
       "title": "Packaging, dependency check, clean install, CI",
-      "deps": ["A03"],
+      "deps": [
+        "A03"
+      ],
       "state": "QUEUED",
       "owner": "solo-agent",
       "inputs_version": ".github/workflows/core.yml",
-      "budget": {"agents": 1, "ci_jobs": 6},
+      "budget": {
+        "agents": 1,
+        "ci_jobs": 6
+      },
       "exit_gate": "The six-job matrix has a GitHub Actions result for the exact commit, and a clean install imports the package off the source tree.",
       "gate_met": false,
-      "checkpoint": "Workflow file is in the tree. No hosted run has been observed yet. Local pytest on 3.12.3 is not that run.",
-      "evidence": [".github/workflows/core.yml"],
-      "limitations": ["hosted CI not observed"]
+      "checkpoint": "12735f05 matrix finished: Ubuntu 3.11 and 3.15 passed on both runs; Windows 3.11/3.15 and macOS 3.11/3.15 failed on both runs. The fix is in the following commit and has no hosted result yet.",
+      "evidence": [
+        "docs/ci/12735f05.md",
+        ".github/workflows/core.yml"
+      ],
+      "limitations": [
+        "hosted CI not observed"
+      ]
     },
     {
       "id": "A18",
       "title": "REA comparison and ablations",
-      "deps": ["A02", "A13", "A14", "A15"],
+      "deps": [
+        "A02",
+        "A13",
+        "A14",
+        "A15"
+      ],
       "state": "BLOCKED",
       "owner": "solo-agent",
       "inputs_version": "rea-agents-6.9.0-not-executed",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Compare this tool with REA 6.9.0 under the same task, budget, and tools, or record that the run did not happen.",
       "gate_met": false,
       "blocked_reason": "A02, A13, A14, and A15 have not succeeded; REA was not executed",
-      "evidence": ["docs/phase0/REA.md"],
-      "limitations": ["REA was identified and not run"]
+      "evidence": [
+        "docs/phase0/REA.md"
+      ],
+      "limitations": [
+        "REA was identified and not run"
+      ]
     },
     {
       "id": "A19",
       "title": "Stress, fault injection, long run",
-      "deps": ["A06", "A08", "A13", "A16"],
+      "deps": [
+        "A06",
+        "A08",
+        "A13",
+        "A16"
+      ],
       "state": "BLOCKED",
       "owner": "solo-agent",
       "inputs_version": "not-started",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Standard stress tier has measured throughput and percentiles. Extended tier is not required.",
       "gate_met": false,
       "blocked_reason": "A13 and A16 have not succeeded",
       "evidence": [],
-      "limitations": ["standard tier not started"]
+      "limitations": [
+        "standard tier not started"
+      ]
     },
     {
       "id": "A20",
       "title": "Independent review and final gate",
-      "deps": ["A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17", "A18", "A19"],
+      "deps": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11",
+        "A12",
+        "A13",
+        "A14",
+        "A15",
+        "A16",
+        "A17",
+        "A18",
+        "A19"
+      ],
       "state": "BLOCKED",
       "owner": "solo-agent",
       "inputs_version": "not-final",
-      "budget": {"agents": 1},
+      "budget": {
+        "agents": 1
+      },
       "exit_gate": "Final tree matches the evidence, and every required check has an executed result.",
       "gate_met": false,
       "blocked_reason": "downstream units are not all succeeded",
       "checkpoint": "Phase 0 notes and Phase 1 tests exist. This is not a final acceptance report.",
       "evidence": [],
-      "limitations": ["same agent wrote and checked the tests"]
+      "limitations": [
+        "same agent wrote and checked the tests"
+      ]
     }
   ]
 }

@@ -1,0 +1,110 @@
+{
+  "kind": "zlib-1.4-phase2",
+  "synthetic": false,
+  "acceptance": "non-blind",
+  "pin": {
+    "project": "zlib",
+    "tag": "v1.4",
+    "tarball_sha256": "02dd159783677a749c04adbdd02b55b8a2bcc7e054f51b76b549199a916ad584",
+    "license": "zlib license, from zlib.h in this tarball",
+    "minigzip_sha256": "e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636",
+    "libz_a_sha256": "6f34b761db9ee99652ef10819d2fc3b2160ef8011dd0c06a68180842eed176e3",
+    "build": {
+      "configure_exit": 0,
+      "make_exit": 0,
+      "sandbox": true,
+      "rlimits_applied": true,
+      "network_namespace": false
+    },
+    "acceptance": "non-blind",
+    "acceptance_reason": "the same agent generated the sealed outputs and can read them"
+  },
+  "dev_abc": {
+    "stdout_sha256": "a058a4f3405f909f3a49df0cb75d96198d371ae7913e5ef6b8114a382746ee5a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exit_code": 0,
+    "roundtrip_equals_input": true,
+    "crc32_hex": "352441c2",
+    "decompress_exit_code": 0,
+    "execution_result": "passed",
+    "truncated": false,
+    "rlimits_applied": true,
+    "network_namespace": false,
+    "limitations": [
+      "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+      "target stdout and stderr are data and are not interpreted as instructions",
+      "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+    ]
+  },
+  "level_experiment": {
+    "selection": {
+      "experiment": "run-default-and-level-9",
+      "cost": 2,
+      "distinguishes": [
+        "levels-identical",
+        "level-9-differs"
+      ],
+      "used_model_confidence": false
+    },
+    "default_sha256": "d17666cf2d90e77d5788babbd518ce9de832a64536b718d9dd9d42c142db2dfb",
+    "level9_sha256": "7ee51753637e9d2315f12fc201fa82cc3df2b49df9e9b241d38cfc8b94dd1ff1",
+    "stdout_equal": false,
+    "surviving_hypothesis": "level-9-differs",
+    "input": "tune-alpha",
+    "used_final_acceptance_set": false
+  },
+  "shrink": {
+    "seed_length": 22,
+    "reduced_length": 4,
+    "reduced_sha256": "fd72d30440b0bae1b1c6db6c8ad807f238ef3ca613aa7e8d5329e1e8ddf7da72",
+    "steps": 16,
+    "predicate_held": true,
+    "global_minimum": false
+  },
+  "ghidra": {
+    "executed": true,
+    "execution_result": "passed",
+    "accepted_pass": false,
+    "simulated": false,
+    "returncode": 0,
+    "saw_crc32": true,
+    "saw_main": true,
+    "decompiled_crc32": true,
+    "decompiled_main": true,
+    "export_sha256": "06dae92957e9a8267de9acce7835e47ff3d359f1eba300cea9d197ee8027db4d",
+    "export_text": "program=minigzip\nlanguage=x86:LE:64:default\nfunction\t_init\t00101000\nfunction\t__cxa_finalize\t00101210\nfunction\t__snprintf_chk\t00101220\nfunction\tfree\t00101230\nfunction\t__errno_location\t00101240\nfunction\tunlink\t00101250\nfunction\tferror\t00101260\nfunction\tfread\t00101270\nfunction\tfcntl\t00101280\nfunction\twrite\t00101290\nfunction\tfclose\t001012a0\nfunction\tstrlen\t001012b0\nfunction\t__stack_chk_fail\t001012c0\nfunction\tstrrchr\t001012d0\nfunction\tmemset\t001012e0\nfunction\tclose\t001012f0\nfunction\tmemchr\t00101300\nfunction\tread\t00101310\nfunction\tstrcmp\t00101320\nfunction\tmemcpy\t00101330\nfunction\tfileno\t00101340\nfunction\tmalloc\t00101350\nfunction\t__vsnprintf_chk\t00101360\nfunction\tmemmove\t00101370\nfunction\topen\t00101380\nfunction\tfopen\t00101390\nfunction\tperror\t001013a0\nfunction\texit\t001013b0\nfunction\tfwrite\t001013c0\nfunction\tlseek64\t001013d0\nfunction\t__fprintf_chk\t001013e0\nfunction\tstrerror\t001013f0\nfunction\tmain\t00101440\ndecompile_begin\tmain\n\nundefined8 main(int param_1,undefined8 *param_2)\n\n{\n  undefined8 uVar1;\n  bool bVar2;\n  undefined8 *puVar3;\n  uint uVar4;\n  int iVar5;\n  char *pcVar6;\n  FILE *pFVar7;\n  long lVar8;\n  uint uVar9;\n  char *pcVar10;\n  long in_FS_OFFSET;\n  bool bVar11;\n  bool bVar12;\n  undefined4 local_38;\n  undefined1 local_34;\n  long local_30;\n  \n  pcVar10 = (char *)*param_2;\n  local_30 = *(long *)(in_FS_OFFSET + 0x28);\n  local_38 = 0x20366277;\n  local_34 = 0;\n  prog = pcVar10;\n  pcVar6 = strrchr(pcVar10,0x2f);\n  if (pcVar6 != (char *)0x0) {\n    pcVar10 = pcVar6 + 1;\n  }\n  uVar9 = param_1 - 1;\n  param_2 = param_2 + 1;\n  iVar5 = strcmp(pcVar10,\"gunzip\");\n  bVar11 = true;\n  bVar2 = false;\n  if (iVar5 != 0) {\n    iVar5 = strcmp(pcVar10,\"zcat\");\n    bVar11 = iVar5 == 0;\n    bVar2 = bVar11;\n  }\n  puVar3 = param_2;\n  uVar4 = uVar9;\n  if ((int)uVar9 < 1) {\n    bVar12 = local_38._3_1_ == ' ';\n    if (bVar12) {\nLAB_00101680:\n      local_38 = local_38 & 0xffffff;\n    }\n    if (uVar9 != 0) {\nLAB_0010168d:\n      if (bVar11) {\n        puVar3 = param_2 + uVar9;\n        if (bVar2) {\n          do {\n            lVar8 = gzopen(*param_2,&DAT_00113058);\n            if (lVar8 == 0) {\n              __fprintf_chk(*(undefined8 *)PTR_stderr_00119fe0,2,\"%s: can\\'t gzopen %s\\n\",prog,\n                            *param_2);\n            }\n            else {\n              gz_uncompress(lVar8,*(undefined8 *)PTR_stdout_00119fb8);\n            }\n            param_2 = param_2 + 1;\n          } while (param_2 != puVar3);\n        }\n        else {\n          do {\n            uVar1 = *param_2;\n            param_2 = param_2 + 1;\n            file_uncompress(uVar1);\n          } while (puVar3 != param_2);\n        }\n      }\n      else if (bVar2) {\n        puVar3 = param_2 + uVar9;\n        do {\n          pFVar7 = fopen((char *)*param_2,\"rb\");\n          if (pFVar7 == (FILE *)0x0) {\n            perror((char *)*param_2);\n          }\n          else {\n            iVar5 = fileno(*(FILE **)PTR_stdout_00119fb8);\n            lVar8 = gzdopen(iVar5,&local_38);\n            if (lVar8 == 0) goto LAB_001016f8;\n            gz_compress(pFVar7,lVar8);\n          }\n          param_2 = param_2 + 1;\n        } while (param_2 != puVar3);\n      }\n      else {\n        puVar3 = param_2 + uVar9;\n        do {\n          uVar1 = *param_2;\n          param_2 = param_2 + 1;\n          file_compress(uVar1,&local_38);\n        } while (param_2 != puVar3);\n      }\n      goto LAB_001015b7;\n    }\n  }\n  else {\n    do {\n      uVar9 = uVar4;\n      param_2 = puVar3;\n      pcVar10 = (char *)*param_2;\n      if (*pcVar10 == '-') {\n        if ((pcVar10[1] == 'c') && (pcVar10[2] == '\\0')) {\n          bVar2 = true;\n        }\n        else if ((pcVar10[1] == 'd') && (pcVar10[2] == '\\0')) {\n          bVar11 = true;\n        }\n        else if ((pcVar10[1] == 'f') && (pcVar10[2] == '\\0')) {\n          local_38 = CONCAT13(0x66,(undefined3)local_38);\n        }\n        else if ((pcVar10[1] == 'h') && (pcVar10[2] == '\\0')) {\n          local_38 = CONCAT13(0x68,(undefined3)local_38);\n        }\n        else {\n          if ((pcVar10[1] != 'r') || (pcVar10[2] != '\\0')) goto LAB_001014d8;\n          local_38 = CONCAT13(0x52,(undefined3)local_38);\n        }\n      }\n      else {\nLAB_001014d8:\n        if (((*pcVar10 != '-') || (8 < (byte)(pcVar10[1] - 0x31U))) || (pcVar10[2] != '\\0')) {\n          if (local_38._3_1_ == ' ') goto LAB_00101680;\n          goto LAB_0010168d;\n        }\n        local_38._0_3_ = CONCAT12(pcVar10[1],(undefined2)local_38);\n      }\n      puVar3 = param_2 + 1;\n      uVar4 = uVar9 - 1;\n    } while (uVar9 - 1 != 0);\n    uVar9 = uVar9 - 1;\n    param_2 = param_2 + 1;\n    local_38._3_1_ = (char)(local_38 >> 0x18);\n    bVar12 = local_38._3_1_ == ' ';\n    if (bVar12) goto LAB_00101680;\n  }\n  if (bVar11) {\n    iVar5 = fileno(*(FILE **)PTR_stdin_00119fc0);\n    lVar8 = gzdopen(iVar5,&DAT_00113058);\n    if (lVar8 == 0) {\n                    /* WARNING: Subroutine does not return */\n      error(\"can\\'t gzdopen stdin\");\n    }\n    gz_uncompress(lVar8,*(undefined8 *)PTR_stdout_00119fb8);\n  }\n  else {\n    iVar5 = fileno(*(FILE **)PTR_stdout_00119fb8);\n    lVar8 = gzdopen(iVar5,&local_38);\n    if (lVar8 == 0) {\nLAB_001016f8:\n                    /* WARNING: Subroutine does not return */\n      error(\"can\\'t gzdopen stdout\");\n    }\n    gz_compress(*(undefined8 *)PTR_stdin_00119fc0,lVar8);\n  }\nLAB_001015b7:\n  if (local_30 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n    __stack_chk_fail();\n  }\n  return 0;\n}\n\n\ndecompiled=true\tmain\ndecompile_end\tmain\nfunction\t_start\t001017d0\nfunction\tderegister_tm_clones\t00101800\nfunction\tregister_tm_clones\t00101830\nfunction\t__do_global_dtors_aux\t00101870\nfunction\tframe_dummy\t001018b0\nfunction\terror\t001018c0\nfunction\tgz_uncompress\t00101900\nfunction\tgz_compress\t001019f0\nfunction\tfile_compress\t00101ae0\nfunction\tfile_uncompress\t00101c70\nfunction\tgzclose\t00101e90\nfunction\tgz_open\t00101ec0\nfunction\tgzopen\t001022e0\nfunction\tgzopen64\t00102300\nfunction\tgzdopen\t00102320\nfunction\tgzbuffer\t001023a0\nfunction\tgzrewind\t001023f0\nfunction\tgzseek64\t001024e0\nfunction\tgzseek\t00102680\nfunction\tgztell64\t00102690\nfunction\tgztell\t001026d0\nfunction\tgzoffset64\t001026e0\nfunction\tgzoffset\t00102740\nfunction\tgzeof\t00102750\nfunction\tgzerror\t00102770\nfunction\tgzclearerr\t001027d0\nfunction\tgz_error\t00102850\nfunction\tgz_intmax\t00102930\nfunction\tgz_load\t00102940\nfunction\tgz_avail\t001029f0\nfunction\tgz_look\t00102be0\nfunction\tgz_decomp\t00102e30\nfunction\tgz_fetch\t00103030\nfunction\tgz_skip\t00103100\nfunction\tgz_read\t001032b0\nfunction\tgzread\t00103480\nfunction\tgzfread\t00103560\nfunction\tgzgetc\t00103640\nfunction\tgzgetc_\t00103710\nfunction\tgzungetc\t00103720\nfunction\tgzgets\t001038e0\nfunction\tgzdirect\t00103a90\nfunction\tgzclose_r\t00103b20\nfunction\tgz_init\t00103bc0\nfunction\tgz_comp\t00103cd0\nfunction\tgz_comp.constprop.0\t00103f30\nfunction\tgz_zero\t00104180\nfunction\tgz_write\t00104270\nfunction\tgzwrite\t00104480\nfunction\tgzfwrite\t00104500\nfunction\tgzputc\t001045a0\nfunction\tgzputs\t001046b0\nfunction\tgzvprintf\t00104740\nfunction\tgzprintf\t00104a10\nfunction\tgzflush\t00104ad0\nfunction\tgzsetparams\t00104b50\nfunction\tgzclose_w\t00104c40\nfunction\tlongest_match\t00104d10\nfunction\tread_buf\t00104f20\nfunction\tflush_pending\t00104fb0\nfunction\tdeflate_stored\t00105030\nfunction\tfill_window\t001055c0\nfunction\tdeflate_slow\t00105b00\nfunction\tdeflate_fast\t00106160\nfunction\tdeflateSetDictionary\t00106630\nfunction\tdeflateGetDictionary\t00106920\nfunction\tdeflateResetKeep\t00106a10\nfunction\tdeflateReset\t00106ba0\nfunction\tdeflateSetHeader\t00106c90\nfunction\tdeflatePending\t00106d10\nfunction\tdeflateUsed\t00106db0\nfunction\tdeflatePrime\t00106e30\nfunction\tdeflateTune\t001070c0\nfunction\tdeflateBound_z\t00107160\nfunction\tdeflateBound\t00107380\nfunction\tdeflate\t00107390\nfunction\tdeflateParams\t00108740\nfunction\tdeflateEnd\t00108ba0\nfunction\tdeflateInit2_\t00108ce0\nfunction\tdeflateInit_\t00109010\nfunction\tdeflateCopy\t00109040\nfunction\tupdatewindow\t00109370\nfunction\tinflateResetKeep\t001094a0\nfunction\tinflateReset\t00109590\nfunction\tinflateReset2\t00109640\nfunction\tinflateInit2_\t00109730\nfunction\tinflateInit_\t00109860\nfunction\tinflatePrime\t00109880\nfunction\tinflate\t00109920\nfunction\tinflateEnd\t0010bc40\nfunction\tinflateGetDictionary\t0010bce0\nfunction\tinflateSetDictionary\t0010bd90\nfunction\tinflateGetHeader\t0010be90\nfunction\tinflateSync\t0010bf00\nfunction\tinflateSyncPoint\t0010c250\nfunction\tinflateCopy\t0010c2b0\nfunction\tinflateUndermine\t0010c5c0\nfunction\tinflateValidate\t0010c620\nfunction\tinflateMark\t0010c6b0\nfunction\tinflateCodesUsed\t0010c740\nfunction\tinflate_table\t0010c7b0\nfunction\tinflate_fixed\t0010d5d0\nfunction\tscan_tree\t0010d610\nfunction\tsend_tree\t0010d790\nfunction\tcompress_block\t0010dda0\nfunction\tpqdownheap.constprop.0\t0010e170\nfunction\tbuild_tree\t0010e270\nfunction\t_tr_init\t0010ee70\nfunction\t_tr_stored_block\t0010efb0\nfunction\t_tr_flush_bits\t0010f150\nfunction\t_tr_align\t0010f1e0\nfunction\t_tr_flush_block\t0010f330\nfunction\t_tr_tally\t0010fbe0\nfunction\tzlibVersion\t0010fcb0\nfunction\tzlibCompileFlags\t0010fcc0\nfunction\tzError\t0010fcd0\nfunction\tzcalloc\t0010fd00\nfunction\tzcfree\t0010fd10\nfunction\tadler32_z\t0010fd20\nfunction\tadler32\t00110410\nfunction\tadler32_combine\t00110420\nfunction\tadler32_combine64\t00110510\nfunction\tget_crc_table\t00110600\nfunction\tcrc32_z\t00110610\nfunction\tcrc32\t00111100\ndecompile_begin\tcrc32\n\nvoid crc32(undefined8 param_1,undefined8 param_2,undefined4 param_3)\n\n{\n  crc32_z(param_1,param_2,param_3);\n  return;\n}\n\n\ndecompiled=true\tcrc32\ndecompile_end\tcrc32\nfunction\tcrc32_combine_gen64\t00111110\nfunction\tcrc32_combine_gen\t001111a0\nfunction\tcrc32_combine_op\t001111b0\nfunction\tcrc32_combine64\t00111200\nfunction\tcrc32_combine\t00111230\nfunction\tinflate_fast\t00111240\nfunction\t_fini\t001124d8\nfunction\t__snprintf_chk\t0011b000\nfunction\tfree\t0011b008\nfunction\t__libc_start_main\t0011b010\nfunction\t__errno_location\t0011b018\nfunction\tunlink\t0011b020\nfunction\t_ITM_deregisterTMCloneTable\t0011b028\nfunction\tferror\t0011b038\nfunction\tfread\t0011b040\nfunction\tfcntl\t0011b050\nfunction\twrite\t0011b058\nfunction\tfclose\t0011b060\nfunction\tstrlen\t0011b068\nfunction\t__stack_chk_fail\t0011b070\nfunction\tstrrchr\t0011b078\nfunction\tmemset\t0011b080\nfunction\tclose\t0011b088\nfunction\tmemchr\t0011b090\nfunction\tread\t0011b098\nfunction\tstrcmp\t0011b0a0\nfunction\t__gmon_start__\t0011b0a8\nfunction\tmemcpy\t0011b0b0\nfunction\tfileno\t0011b0b8\nfunction\tmalloc\t0011b0c0\nfunction\t__vsnprintf_chk\t0011b0c8\nfunction\tmemmove\t0011b0d0\nfunction\topen\t0011b0d8\nfunction\tfopen\t0011b0e0\nfunction\tperror\t0011b0e8\nfunction\texit\t0011b0f0\nfunction\tfwrite\t0011b0f8\nfunction\tlseek64\t0011b100\nfunction\t__fprintf_chk\t0011b108\nfunction\t_ITM_registerTMCloneTable\t0011b110\nfunction\tstrerror\t0011b118\nfunction\t__cxa_finalize\t0011b128\n",
+    "limitations": [
+      "function listing and an optional decompilation are static observations, not a behavior proof",
+      "accepted_pass stays false until a claim evaluation with an explicit scope says otherwise"
+    ],
+    "stderr_tail": "openjdk version \"25.0.5\" 2026-10-20 LTS\nOpenJDK Runtime Environment Temurin-25.0.5+8 (build 25.0.5+8-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.5+8 (build 25.0.5+8-LTS, mixed mode)\n"
+  },
+  "ledger": {
+    "artifact": "d709ebc8c88f42629eb07dd279b845eb",
+    "observation": "2dfd21de997c4e138d761dd4a264eda3",
+    "claim": "7f1c6687cba045a19eb93a5ee3c8a2a8",
+    "accepted_pass": true,
+    "not_universal": true,
+    "independent_support_count": 1,
+    "final_self_check_all_match": true,
+    "final_count": 8,
+    "non_blind": true
+  },
+  "uncollected_surfaces": [
+    "wall_clock_threshold",
+    "peak_rss",
+    "named_file_mode",
+    "compression_level_9",
+    "missing_path_stderr_text",
+    "crc32_combine",
+    "multi_member_gzip",
+    "concurrent_calls"
+  ],
+  "level_9_note": "level -9 was compared with the default on tune-alpha only; the contract verdict still marks compression_level_9 as not_compared",
+  "limitations": [
+    "acceptance is non-blind",
+    "ghidra decompilation is not the runtime claim",
+    "the shrink result is not a global minimum",
+    "level -9 was measured on tune-alpha only"
+  ]
+}

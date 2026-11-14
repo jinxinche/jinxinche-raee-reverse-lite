@@ -80,19 +80,49 @@ def test_static_omission_dynamic_and_clean_scan(tmp_path):
     assert audit_python_tree(broken, set())["status"] == "uncertain"
 
 
-def test_unreadable_file_is_uncertain(tmp_path):
+def test_unreadable_file_is_uncertain(tmp_path, monkeypatch):
     root = tmp_path / "hidden"
     root.mkdir()
     target = root / "mod.py"
     target.write_text("import json\n", encoding="utf-8")
-    target.chmod(0)
-    try:
-        report = audit_python_tree(root, set())
-    finally:
-        target.chmod(0o644)
+    original = Path.read_text
+
+    def deny(self, *args, **kwargs):
+        if self.name == "mod.py":
+            raise PermissionError("denied")
+        return original(self, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", deny)
+    report = audit_python_tree(root, set())
     assert report["status"] == "uncertain"
     assert report["unreadable"]
     assert report["accepted_pass"] is False
+    assert report["closure_proof"] is False
+
+    # mode 0 does not make the owner unable to read on every platform.
+    # When the read still succeeds, a clean scan of that readable file is the
+    # honest result. The PermissionError path above is the uncertain case.
+    target.chmod(0)
+    try:
+        try:
+            target.read_bytes()
+            owner_can_read = True
+        except OSError:
+            owner_can_read = False
+    finally:
+        target.chmod(0o644)
+    monkeypatch.undo()
+    target.chmod(0)
+    try:
+        chmod_report = audit_python_tree(root, set())
+    finally:
+        target.chmod(0o644)
+    if owner_can_read:
+        assert chmod_report["status"] == "no_omission_detected"
+    else:
+        assert chmod_report["status"] == "uncertain"
+        assert chmod_report["unreadable"]
+    assert chmod_report["accepted_pass"] is False
 
 
 def test_package_audit_is_not_a_closure_proof():

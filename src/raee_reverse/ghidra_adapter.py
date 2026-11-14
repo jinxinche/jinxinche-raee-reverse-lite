@@ -22,6 +22,7 @@ def analyze_elf(
     script_path: Path,
     output_path: Path,
     timeout: float = 180,
+    extra_env: dict | None = None,
 ) -> dict:
     elf = Path(elf)
     if ghidra_home is None or java_home is None:
@@ -40,6 +41,8 @@ def analyze_elf(
     env["PATH"] = str(Path(java_home) / "bin") + os.pathsep + env.get("PATH", "")
     env["RRL_GHIDRA_OUT"] = str(output_path)
     env["MAXMEM"] = "2G"
+    for key, value in (extra_env or {}).items():
+        env[str(key)] = str(value)
     command = [
         str(headless),
         str(project_dir),

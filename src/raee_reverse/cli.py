@@ -15,6 +15,7 @@ from pathlib import Path
 
 from raee_reverse import __version__
 from raee_reverse.errors import RrlError
+from raee_reverse.report_html import render_html
 from raee_reverse.scheduler import Scheduler
 from raee_reverse.store import Store
 
@@ -98,6 +99,8 @@ def main(argv: list[str] | None = None) -> int:
 
     audit = sub.add_parser("audit")
     audit.add_argument("path")
+    report = sub.add_parser("report")
+    report.add_argument("--out", required=True)
 
     args = parser.parse_args(argv)
     root = _root(args.root)
@@ -219,6 +222,10 @@ def _dispatch(store: Store, args: argparse.Namespace) -> int:
         return _emit({"actions": store.recover_running()})
     if args.command == "audit":
         return _emit(store.audit_tree(args.path))
+    if args.command == "report":
+        destination = Path(args.out)
+        destination.write_text(render_html(store), encoding="utf-8")
+        return _emit({"path": str(destination), "offline": True, "accepted_pass": False})
     raise RrlError("E_USAGE", "unhandled command")
 
 

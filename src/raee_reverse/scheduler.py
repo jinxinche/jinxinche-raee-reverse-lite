@@ -38,10 +38,13 @@ def _kill(proc: subprocess.Popen) -> None:
     if os.name == "posix":
         try:
             os.killpg(proc.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            proc.kill()
-    else:
+            return
+        except (ProcessLookupError, PermissionError, OSError):
+            pass
+    try:
         proc.kill()
+    except OSError:
+        pass
 
 
 class Scheduler:
