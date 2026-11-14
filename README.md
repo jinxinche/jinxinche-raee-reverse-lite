@@ -15,7 +15,7 @@ python3 -m raee_reverse --version
 
 `python3 -m raee_reverse --version` printed `raee-reverse-lite 0.1.0`.
 
-Python range: 3.11 up to, and not including, 3.16. The core CI matrix is Linux, Windows, and macOS on 3.11 and 3.15. Hosted results are per commit: `docs/ci/12735f05.md` is a failure, and `docs/ci/0a74bed.md`, `docs/ci/772dfac.md`, and `docs/ci/c661219.md` are successes for those SHAs.
+Python range: 3.11 up to, and not including, 3.16. The core CI matrix is Linux, Windows, and macOS on 3.11 and 3.15. Hosted results are per commit: `docs/ci/12735f05.md` is a failure, and `docs/ci/0a74bed.md`, `docs/ci/c661219.md`, and `docs/ci/746addd.md` are successes for those SHAs.
 
 There are no runtime dependencies. `pytest` is a test extra (`pip install ".[dev]"`).
 

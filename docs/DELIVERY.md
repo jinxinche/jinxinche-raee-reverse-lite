@@ -18,7 +18,7 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. No n
 **Executed.**
 
 - `12735f05` Actions: failure. Ubuntu passed; Windows and macOS failed. `docs/ci/12735f05.md`.
-- `d38e889`, `0a74bed`, `345c7f8`, `45eff3c`, `772dfac`, and `c661219` Actions: 12 of 12 jobs succeeded on both the push run and the pull_request run for each of those commits. `docs/ci/772dfac.md` and `docs/ci/c661219.md`.
+- `d38e889`, `0a74bed`, `345c7f8`, `45eff3c`, `772dfac`, `c661219`, and `746addd` Actions: 12 of 12 jobs succeeded on both the push run and the pull_request run for each of those commits. `docs/ci/c661219.md` and `docs/ci/746addd.md`.
 - Dev ELF and zlib `minigzip` headless Ghidra runs, including a decompiled `crc32`.
 - Baseline dev check without reading the final-acceptance file, then `accept.py`: 8/8 final inputs matched collected surfaces. Non-blind. Level `-9` stayed `not_compared`.
 - LTO candidate: decompress median 99.6% of baseline. Enhancement not met.
@@ -43,7 +43,7 @@ These ran on the working tree that was committed as `c6612192b5e05d2a5c4c84daa57
 ## Known gaps
 
 - A19 remains queued. The standard tier did not reach its declared floors. The 10,041-relation stop remains a failure. The second probe did not start the 1,800 second phase or the 20 target runs.
-- Review target `c6612192b5e05d2a5c4c84daa57c0bb3d35099f7` has green Actions on both runs: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591711285 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591714049. Six jobs succeeded in each run. The commit that adds this paragraph is newer than `c661219` and is not that result.
-- `772dfac504843adc33d336167dc464de7fb4284b` also has green Actions: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43588199093 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43588204438. A review that named only `45eff3c` was not a review of `772dfac`.
+- Review target `746addd657822b01ec6a328ebfb5cf925c8d139e` has green Actions on both runs: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591930851 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591936161. Six jobs succeeded in each run. That commit reviews `c661219` and does not change Python code. The commit that adds this paragraph is newer than `746addd`.
+- `c6612192b5e05d2a5c4c84daa57c0bb3d35099f7` also has green Actions: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591711285 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591714049. The commands below were run on the working tree that became `c661219`, before that commit.
 - Final acceptance is non-blind (`targets/zlib/NON_BLIND.md`).
 - REA remains one static sample. No optional engines were installed, and no ranking was computed.
