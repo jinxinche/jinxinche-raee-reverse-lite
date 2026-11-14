@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+dist/
+build/
+*.egg-info/
+.rrl/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+samples/dev/checksum_cli
+samples/dev/*.o
+docs/evidence/local/

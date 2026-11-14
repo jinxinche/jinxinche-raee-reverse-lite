@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "raee-reverse-lite"
+version = "0.1.0"
+description = "Role-aware evidence ledger for lightweight reverse engineering. This release is the Phase 1 foundation, not the full pipeline."
+readme = "README.md"
+requires-python = ">=3.11,<3.16"
+license = "MIT"
+authors = [{name = "RAEE Reverse Lite contributors"}]
+keywords = ["evidence", "reverse-engineering", "raee", "cli"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
+  "Environment :: Console",
+  "Development Status :: 3 - Alpha",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+rrl = "raee_reverse.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/jinxinche/jinxinche-raee-reverse-lite"
+Source = "https://github.com/jinxinche/jinxinche-raee-reverse-lite"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

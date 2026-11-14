@@ -1,0 +1,105 @@
+{
+  "kind": "phase2-dev-sample",
+  "synthetic": true,
+  "real_target": "zlib 1.4 minigzip is frozen and was not executed in this run",
+  "host": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "python": "3.12.3"
+  },
+  "elf_sha256": "89f0c6003fe2846b6d3b88d71f031340457c4977dc070130c7d8b518a561d9ae",
+  "runs": {
+    "abc": {
+      "outcome": "completed",
+      "execution_result": "passed",
+      "accepted_pass": false,
+      "returncode": 0,
+      "stdout": "count=3 sum=294\n",
+      "stderr": "",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "duration_seconds": 0.01013914999998633
+    },
+    "empty": {
+      "outcome": "completed",
+      "execution_result": "passed",
+      "accepted_pass": false,
+      "returncode": 0,
+      "stdout": "count=0 sum=0\n",
+      "stderr": "",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "duration_seconds": 0.010116680000010092
+    },
+    "fail": {
+      "outcome": "behavior_failed",
+      "execution_result": "failed",
+      "accepted_pass": false,
+      "returncode": 3,
+      "stdout": "count=3 sum=294\n",
+      "stderr": "",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "duration_seconds": 0.010120501000074
+    }
+  },
+  "ghidra": {
+    "executed": true,
+    "execution_result": "passed",
+    "accepted_pass": false,
+    "simulated": false,
+    "returncode": 0,
+    "tool_version_hint": "ghidra_12.2_PUBLIC",
+    "java_home": "/tmp/jdk25/jdk-25.0.5+8",
+    "saw_main": true,
+    "decompiled_main": true,
+    "export_sha256": "449b4a12cfe418a9133ba86b4bbf1b4645d6f4610f411434a3ceb09f3481efef",
+    "export_text": "program=checksum_cli\nlanguage=x86:LE:64:default\nfunction\t_init\t00101000\nfunction\t__cxa_finalize\t00101090\nfunction\tfread\t001010a0\nfunction\t__stack_chk_fail\t001010b0\nfunction\tprintf\t001010c0\nfunction\tfgetc\t001010d0\nfunction\tstrcmp\t001010e0\nfunction\tfwrite\t001010f0\nfunction\t_start\t00101100\nfunction\tderegister_tm_clones\t00101130\nfunction\tregister_tm_clones\t00101160\nfunction\t__do_global_dtors_aux\t001011a0\nfunction\tframe_dummy\t001011e0\nfunction\tchecksum\t001011e9\ndecompile_begin\tchecksum\n\nuint32_t checksum(uchar *data,size_t length,uint32_t *count)\n\n{\n  uint32_t *count_local;\n  size_t length_local;\n  uchar *data_local;\n  uint32_t sum;\n  size_t index;\n  \n  sum = 0;\n  for (index = 0; index < length; index = index + 1) {\n    sum = (data[index] + sum) % 0xfff1;\n  }\n  *count = (uint32_t)length;\n  return sum;\n}\n\n\ndecompile_end\tchecksum\nfunction\tmain\t00101267\ndecompile_begin\tmain\n\nint main(int argc,char **argv)\n\n{\n  long lVar1;\n  int iVar2;\n  uint32_t param2;\n  long in_FS_OFFSET;\n  char **argv_local;\n  int argc_local;\n  uint32_t count;\n  int fail;\n  int index;\n  int extra;\n  size_t length;\n  size_t got;\n  uchar buffer [4096];\n  \n  lVar1 = *(long *)(in_FS_OFFSET + 0x28);\n  length = 0;\n  count = 0;\n  fail = 0;\n  index = 1;\n  do {\n    if (argc <= index) {\n      while ((length < 0x1000 && (got = fread(buffer + length,1,0x1000 - length,stdin), got != 0)))\n      {\n        length = length + got;\n      }\n      if ((length == 0x1000) && (extra = fgetc(stdin), extra != -1)) {\n        fwrite(\"input too large\\n\",1,0x10,stderr);\n        iVar2 = 2;\n      }\n      else {\n        param2 = checksum(buffer,length,&count);\n        printf(\"count=%u sum=%u\\n\",count,param2);\n        if (fail == 0) {\n          iVar2 = 0;\n        }\n        else {\n          iVar2 = 3;\n        }\n      }\nLAB_00101492:\n      if (lVar1 != *(long *)(in_FS_OFFSET + 0x28)) {\n                    /* WARNING: Subroutine does not return */\n        __stack_chk_fail();\n      }\n      return iVar2;\n    }\n    iVar2 = strcmp(argv[index],\"--fail\");\n    if (iVar2 != 0) {\n      iVar2 = strcmp(argv[index],\"--spin\");\n      if (iVar2 == 0) {\n        do {\n                    /* WARNING: Do nothing block with infinite loop */\n        } while( true );\n      }\n      fwrite(\"unknown argument\\n\",1,0x11,stderr);\n      iVar2 = 2;\n      goto LAB_00101492;\n    }\n    fail = 1;\n    index = index + 1;\n  } while( true );\n}\n\n\ndecompile_end\tmain\nfunction\t_fini\t001014a8\nfunction\t__libc_start_main\t00105000\nfunction\t_ITM_deregisterTMCloneTable\t00105008\nfunction\tfread\t00105010\nfunction\t__stack_chk_fail\t00105018\nfunction\tprintf\t00105020\nfunction\tfgetc\t00105028\nfunction\tstrcmp\t00105030\nfunction\t__gmon_start__\t00105038\nfunction\tfwrite\t00105040\nfunction\t_ITM_registerTMCloneTable\t00105048\nfunction\t__cxa_finalize\t00105050\nsaw_main=true\ndecompiled_main=true\n",
+    "limitations": [
+      "function listing and an optional decompilation are static observations, not a behavior proof",
+      "accepted_pass stays false until a claim evaluation with an explicit scope says otherwise"
+    ],
+    "stderr_tail": "openjdk version \"25.0.5\" 2026-10-20 LTS\nOpenJDK Runtime Environment Temurin-25.0.5+8 (build 25.0.5+8-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.5+8 (build 25.0.5+8-LTS, mixed mode)\n",
+    "stdout_tail": "y Points                   0.059 secs\n    ELF Scalar Operand References              0.005 secs\n    Embedded Media                             0.003 secs\n    External Entry References                  0.001 secs\n    Function ID                                0.015 secs\n    Function Start Pre Search                  0.006 secs\n    Function Start Search                      0.044 secs\n    Function Start Search After Code           0.001 secs\n    Function Start Search After Data           0.000 secs\n    GCC Exception Handlers                     0.027 secs\n    Non-Returning Functions - Discovered       0.001 secs\n    Non-Returning Functions - Known            0.002 secs\n    Reference                                  0.009 secs\n    Shared Return Calls                        0.003 secs\n    Source Language Support                    0.001 secs\n    Stack                                      0.020 secs\n    Subroutine References                      0.001 secs\n    Subroutine References - One Time           0.000 secs\n    Variadic Function Signature Override       0.965 secs\n    x86 Constant Reference Analyzer            0.042 secs\n-----------------------------------------------------\n     Total Time   2 secs\n-----------------------------------------------------\n (AutoAnalysisManager)  \nINFO  REPORT: Analysis succeeded for file: file:///tmp/rrl-phase2-k98oaekk/checksum_cli (HeadlessAnalyzer)  \nINFO  REPORT: Execute script: ExportDevSample.java  (HeadlessAnalyzer)  \nINFO  SCRIPT: /workspace/samples/dev/ghidra/ExportDevSample.java (HeadlessAnalyzer)  \nINFO  ANALYZING changes made by post scripts: file:///tmp/rrl-phase2-k98oaekk/checksum_cli (HeadlessAnalyzer)  \nINFO  REPORT: Post-analysis succeeded for file: file:///tmp/rrl-phase2-k98oaekk/checksum_cli (HeadlessAnalyzer)  \nINFO  /checksum_cli: file created (ubuntu) (LocalFileSystem)  \nINFO  REPORT: Save succeeded for: /checksum_cli (rrl-dev:/checksum_cli) (HeadlessAnalyzer)  \nINFO  REPORT: Import succeeded (HeadlessAnalyzer)  \n"
+  },
+  "ledger": {
+    "artifact": "cd8ad1fe1d05475bb0aa3beffdf5cbef",
+    "observation": "05451c1a100c42bbb4a7bad360418a09",
+    "ghidra_observation": "c33a88d355ac4f2c8b6b6e5c70b88119",
+    "claim": "83773b1769ef486bbe8f1f152f0b9bfa",
+    "accepted_pass": true,
+    "execution_result": "passed",
+    "independent_support_count": 1,
+    "not_universal": true,
+    "notes": [
+      "a matching finite scope is not equivalence on all inputs"
+    ]
+  },
+  "executed": true,
+  "sandbox_executed": true,
+  "analysis_chain_executed": true,
+  "limitations": [
+    "synthetic sample only; zlib 1.4 was not built or compared",
+    "accepted_pass covers stdin abc on this host only",
+    "Ghidra decompilation is a static observation and does not prove the runtime claim",
+    "network namespace availability is whatever the sandbox probe reported"
+  ]
+}
