@@ -35,13 +35,16 @@ python -m raee_reverse --root /tmp/rrl-demo gate CLAIM_ID
 - Unit tests: `python -m pytest`.
 - Synthetic ELF plus headless Ghidra 12.2: `docs/phase2/DEV_SAMPLE.md`.
 - zlib 1.4 sandbox build, sealed dev/tune/final surfaces, and Ghidra on `minigzip`: `docs/phase2/ZLIB.md`. Acceptance is non-blind.
+- Compatible baseline: `generated/zlib-baseline/`. It matched the sealed surfaces. The reproduction copy is `repro/zlib-baseline/`.
 - Offline HTML: `python -m raee_reverse --root DIR report --out report.html`.
 - MCP stdio: `python -m raee_reverse.mcp_server --root DIR`.
 
 ## What is not in this tree
 
 - A compatible or improved clone of zlib, an REA comparison, and the standard stress tier.
-- A hosted CI result for the commit that fixes the Windows and macOS failures. The finished result for `12735f05` is a failure: `docs/ci/12735f05.md`.
+- An enhanced zlib. The pre-registered LTO candidate missed the 10% decompress bar (`docs/evidence/zlib_enhancement.json`).
+- An REA comparison, and the standard stress tier. A smaller declared ledger budget is in `docs/a19/`.
+- `d38e889` is the green 12-job matrix. `12735f05` remains a recorded failure: `docs/ci/12735f05.md`.
 
 Check that graph JSON is valid and A14 still blocked. Also verify json dump didn't break trailing issues.
 

@@ -1,0 +1,23 @@
+{
+  "goal": "docs/phase4/GOAL.md",
+  "payload_sha256": "a117210941a0b00dcb2d8577e680d84b6fa0eaf760d2afc654c953b9859d54fa",
+  "payload_bytes": 4194304,
+  "runs_per_median": 21,
+  "warmup_excluded": 1,
+  "candidate": "zlib 1.4 CFLAGS=-O3 -flto LDFLAGS=-flto",
+  "acceptance": "non-blind",
+  "used_final_acceptance_inputs": false,
+  "correct": true,
+  "baseline_decompress_median_seconds": 0.011698509999860107,
+  "candidate_decompress_median_seconds": 0.011647673999959807,
+  "decompress_ratio_candidate_over_baseline": 0.9956544893408726,
+  "baseline_compress_median_seconds": 0.02572616299994479,
+  "candidate_compress_median_seconds": 0.025785240000004706,
+  "compress_ratio_candidate_over_baseline": 1.0022963782068877,
+  "decompress_bar_met": false,
+  "compress_cap_met": true,
+  "enhancement_met": false,
+  "delivery": "compatible baseline done, enhancement not met",
+  "stable_improvement": false,
+  "sample_size": 21
+}

@@ -1,0 +1,12 @@
+{
+  "budget_document": "docs/a19/BUDGET.md",
+  "records_inserted": 400,
+  "relations_inserted": 200,
+  "wall_seconds": 0.3025414929998078,
+  "rss_bytes": 21430272,
+  "integrity_ok": true,
+  "budget_pass": true,
+  "standard_tier_executed": false,
+  "standard_tier_pass": false,
+  "extended_tier_executed": false
+}

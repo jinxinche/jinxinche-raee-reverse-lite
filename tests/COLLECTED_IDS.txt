@@ -50,3 +50,5 @@ tests/test_scheduler.py::test_perf_task_does_not_share_a_batch
 tests/test_scheduler.py::test_dev_tasks_can_overlap
 tests/test_scheduler.py::test_timeout_is_infra_and_not_success
 tests/test_scheduler.py::test_kill_and_recover_does_not_mark_success
+tests/test_zlib_contract.py::test_level_9_stays_out_of_the_verdict
+tests/test_zlib_contract.py::test_a_mismatch_is_not_compatible

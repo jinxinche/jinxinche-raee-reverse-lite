@@ -1,0 +1,143 @@
+{
+  "value_function": {
+    "argument": "set of dev checks: compress, roundtrip, crc",
+    "baseline": "empty set, v=0",
+    "direction": "higher means more satisfied dev checks (3 inputs x included checks)",
+    "measured": true,
+    "missing_value": "null, not zero",
+    "confounders": [
+      "one Linux host",
+      "process-start time is not in v",
+      "crc oracle for abc is the previously recorded 352441c2"
+    ]
+  },
+  "values": {
+    "": 0.0,
+    "compress": 3.0,
+    "crc": 3.0,
+    "compress,crc": 6.0,
+    "compress,roundtrip": 6.0,
+    "compress,crc,roundtrip": 9.0,
+    "roundtrip": null,
+    "crc,roundtrip": null
+  },
+  "group_removal": {
+    "causal_claim": false,
+    "not_independent_cause": true,
+    "treated_missing_as_zero": false,
+    "factors": [
+      "compress",
+      "roundtrip",
+      "crc"
+    ],
+    "deltas": {
+      "compress": {
+        "status": "missing",
+        "value": null
+      },
+      "roundtrip": {
+        "status": "computed",
+        "value": 3.0,
+        "not_independent_cause": true
+      },
+      "crc": {
+        "status": "computed",
+        "value": 3.0,
+        "not_independent_cause": true
+      }
+    },
+    "definition": "delta_i = v(N) - v(N without i)"
+  },
+  "interaction_compress_crc": {
+    "causal_claim": false,
+    "not_independent_cause": true,
+    "treated_missing_as_zero": false,
+    "factors": [
+      "compress",
+      "roundtrip",
+      "crc"
+    ],
+    "context": [],
+    "pair": [
+      "compress",
+      "crc"
+    ],
+    "definition": "I = v(T+i+j) - v(T+i) - v(T+j) + v(T)",
+    "scope": "this context only",
+    "status": "computed",
+    "value": 0.0
+  },
+  "interaction_compress_roundtrip": {
+    "causal_claim": false,
+    "not_independent_cause": true,
+    "treated_missing_as_zero": false,
+    "factors": [
+      "compress",
+      "roundtrip",
+      "crc"
+    ],
+    "context": [],
+    "pair": [
+      "compress",
+      "roundtrip"
+    ],
+    "definition": "I = v(T+i+j) - v(T+i) - v(T+j) + v(T)",
+    "scope": "this context only",
+    "status": "missing",
+    "value": null,
+    "observed": {
+      "both": 6.0,
+      "left": 3.0,
+      "right": null,
+      "context": 0.0
+    }
+  },
+  "shapley": {
+    "causal_claim": false,
+    "not_independent_cause": true,
+    "treated_missing_as_zero": false,
+    "factors": [
+      "compress",
+      "roundtrip",
+      "crc"
+    ],
+    "constrained_value_function": true,
+    "same_as_unconstrained_shapley": false,
+    "excluded_factors": [
+      "roundtrip-without-compress"
+    ],
+    "constrained_explanation": "roundtrip without compress is unexecutable, so this is not the unconstrained Shapley value",
+    "sample_count": null,
+    "seed": null,
+    "status": "uncertain",
+    "values": null,
+    "missing_coalitions": [
+      "roundtrip",
+      "crc,roundtrip"
+    ],
+    "reason": "missing coalition is not treated as zero"
+  },
+  "same_source_duplicate_v_unchanged": true,
+  "retraction_of_crc_is_group_removal": {
+    "status": "computed",
+    "value": 3.0,
+    "not_independent_cause": true
+  },
+  "validation_samples": {
+    "measured_on_zlib": false,
+    "single_factor_delta": 1.0,
+    "and_interaction": 1.0,
+    "xor_interaction": -2.0,
+    "redundant_interaction": -1.0,
+    "negative_delta_i": -1.0,
+    "missing_delta_status": "missing",
+    "missing_delta_value": null,
+    "shapley_with_missing_coalition": "uncertain",
+    "shapley_values": null,
+    "same_source_duplicate_does_not_increase_v": true,
+    "note": "Same-source copies are one factor. A retracted crc check is the group-removal of crc, not a deletion of the compress row."
+  },
+  "causal_claim": false,
+  "used_final_acceptance_file": false,
+  "serves_choice": "A later experiment should not spend budget re-measuring crc if group removal shows it is the check that moves v, and should not treat a zero compress/crc interaction as a mechanism proof."
+}
