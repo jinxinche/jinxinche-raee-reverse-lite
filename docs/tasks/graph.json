@@ -380,7 +380,7 @@
       },
       "exit_gate": "The six-job matrix has a GitHub Actions result for the exact commit, and a clean install imports the package off the source tree.",
       "gate_met": false,
-      "checkpoint": "12735f05 matrix finished: Ubuntu 3.11 and 3.15 passed on both runs; Windows 3.11/3.15 and macOS 3.11/3.15 failed on both runs. The fix is in the following commit and has no hosted result yet.",
+      "checkpoint": "12735f05 matrix failed on Windows and macOS (both runs). The code fix is ea7a62668b9ed93409b781221650a10945970559 and has no hosted result yet.",
       "evidence": [
         "docs/ci/12735f05.md",
         ".github/workflows/core.yml"
