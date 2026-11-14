@@ -18,7 +18,7 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. No n
 **Executed.**
 
 - `12735f05` Actions: failure. Ubuntu passed; Windows and macOS failed. `docs/ci/12735f05.md`.
-- `d38e889` and `0a74bed` Actions: 12 of 12 jobs succeeded on both the push run and the pull_request run. `docs/ci/0a74bed.md`.
+- `d38e889`, `0a74bed`, `345c7f8`, and `45eff3c` Actions: 12 of 12 jobs succeeded on both the push run and the pull_request run for each of those commits. `docs/ci/0a74bed.md` and `docs/ci/45eff3c.md`.
 - Dev ELF and zlib `minigzip` headless Ghidra runs, including a decompiled `crc32`.
 - Baseline dev check without reading the final-acceptance file, then `accept.py`: 8/8 final inputs matched collected surfaces. Non-blind. Level `-9` stayed `not_compared`.
 - LTO candidate: decompress median 99.6% of baseline. Enhancement not met.
@@ -32,5 +32,5 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. No n
 ## Known gaps
 
 - A19 remains queued. The standard tier did not reach its declared floors.
-- Review target `345c7f8f583ad215cc6e14e145c9cf593e265e9c` has green Actions on both runs: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587778297 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587781297. A later commit that only records this paragraph is not that result.
+- Review target `45eff3cca002348797df23cd74e505ffdde279cc` has green Actions on both runs: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587944673 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587949731. Six jobs succeeded in each run. A later commit that only records this paragraph is not that result.
 - Final acceptance is non-blind (`targets/zlib/NON_BLIND.md`).

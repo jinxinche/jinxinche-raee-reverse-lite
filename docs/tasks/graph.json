@@ -395,7 +395,7 @@
       ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "d38e889db02c6e576db5f376882242f25506dce9",
+      "inputs_version": "45eff3cca002348797df23cd74e505ffdde279cc",
       "budget": {
         "agents": 1,
         "ci_jobs": 6
@@ -429,15 +429,23 @@
           "conclusion": "success",
           "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587778297",
           "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587781297",
-          "detail": "12 of 12 jobs succeeded on both runs. This is the review target for the delivery note."
+          "detail": "12 of 12 jobs succeeded on both runs."
+        },
+        {
+          "commit": "45eff3cca002348797df23cd74e505ffdde279cc",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587944673",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587949731",
+          "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/45eff3c.md. This commit records the review of 345c7f8."
         }
       ],
       "evidence": [
         "docs/ci/12735f05.md",
+        "docs/ci/45eff3c.md",
         ".github/workflows/core.yml"
       ],
       "limitations": [
-        "The 12735f05 failure remains part of this record. Success applies only to d38e889."
+        "The 12735f05 failure remains part of this record. Later successes apply only to the commits named in history."
       ]
     },
     {
@@ -521,21 +529,22 @@
       ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "345c7f8f583ad215cc6e14e145c9cf593e265e9c",
+      "inputs_version": "45eff3cca002348797df23cd74e505ffdde279cc",
       "budget": {
         "agents": 1
       },
       "exit_gate": "Final tree matches the evidence, and every required check has an executed result.",
       "gate_met": true,
-      "checkpoint": "Review is of 345c7f8, whose push and pull_request Actions runs both succeeded. The speed goal stays missed. The standard tier was not completed. REA comparison is one sample.",
+      "checkpoint": "Review is of 45eff3c, whose push and pull_request Actions runs both succeeded with 12 jobs. The speed goal stays missed. The standard tier was not completed. REA comparison is one sample.",
       "evidence": [
-        "docs/DELIVERY.md"
+        "docs/DELIVERY.md",
+        "docs/ci/45eff3c.md"
       ],
       "limitations": [
         "non-blind acceptance",
         "standard tier not completed",
         "enhancement not met",
-        "a commit that only records this review is newer than 345c7f8"
+        "a commit that only records this review is newer than 45eff3c"
       ]
     }
   ]
