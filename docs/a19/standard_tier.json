@@ -1,0 +1,10 @@
+{
+  "budget_document": "docs/a19/STANDARD_TIER_BUDGET.md",
+  "standard_tier_executed": false,
+  "standard_tier_pass": false,
+  "reason": "The load did not reach 50,000 relations. A 1,000-relation probe predicted about 91 seconds for 50,000 relations. The real load reached 10,041 relations in about 5 minutes and then about 12 relations per second, because each support relation appends an evaluation and rewalks the ledger. Finishing the load and then running the 30 minute mixed phase would not fit this session. The process was stopped. The partial database was left under /tmp and is not a pass.",
+  "observed_relations_at_stop": 10041,
+  "observed_records_at_stop": 21000,
+  "directory": "/tmp/a19-standard",
+  "extended_tier_executed": false
+}

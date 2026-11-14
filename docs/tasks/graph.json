@@ -416,6 +416,13 @@
           "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586365044",
           "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586369116",
           "detail": "12 of 12 jobs succeeded: Linux, Windows, and macOS, Python 3.11 and 3.15, on both the push run and the pull_request run. The jobs install the package with pip install . and then run pytest."
+        },
+        {
+          "commit": "0a74bedfd7e60db03cc89d95765a800e688703a5",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586941928",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586944166",
+          "detail": "12 of 12 jobs succeeded on both the push run and the pull_request run."
         }
       ],
       "evidence": [
@@ -435,21 +442,23 @@
         "A14",
         "A15"
       ],
-      "state": "BLOCKED",
+      "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "rea-agents-6.9.0-not-executed",
+      "inputs_version": "rea-agents 6.9.0",
       "budget": {
         "agents": 1
       },
       "exit_gate": "Compare this tool with REA 6.9.0 under the same task, budget, and tools, or record that the run did not happen.",
-      "gate_met": false,
-      "blocked_reason": "A02, A13, A14, and A15 have not succeeded; REA was not executed",
+      "gate_met": true,
       "evidence": [
-        "docs/phase0/REA.md"
+        "docs/a18/REA_COMPARISON.md"
       ],
       "limitations": [
-        "REA was identified and not run"
-      ]
+        "single sample",
+        "runtime execution was not part of the REA commands",
+        "environment_healthy was false because optional engines were not installed"
+      ],
+      "checkpoint": "REA 6.9.0 was installed and run on the same checksum ELF and Ghidra 12.2. One analyze and one function query. Sample size 1. No suite score."
     },
     {
       "id": "A19",
@@ -469,14 +478,15 @@
       "exit_gate": "Standard stress tier has measured throughput and percentiles. Extended tier is not required.",
       "gate_met": false,
       "evidence": [
-        "docs/a19/BUDGET.md",
+        "docs/a19/STANDARD_TIER_BUDGET.md",
+        "docs/a19/standard_tier.json",
         "docs/a19/result.json"
       ],
       "limitations": [
-        "standard tier not run",
-        "extended tier not required and not run"
+        "standard tier not completed",
+        "extended tier not run"
       ],
-      "checkpoint": "Declared budget in docs/a19/BUDGET.md was run: 400 records, 200 relations, verify_integrity, 0.30 s, RSS about 21 MiB, budget_pass true. Standard tier was not executed."
+      "checkpoint": "Standard-tier budget was declared, then a load was stopped at 10041 relations because inserts had slowed to about 12 per second. The 30 minute mixed phase did not run. standard_tier_pass is false. The earlier 200-relation budget pass is not this tier."
     },
     {
       "id": "A20",
