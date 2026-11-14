@@ -1,0 +1,17 @@
+{
+  "project": "zlib",
+  "tag": "v1.4",
+  "tarball_sha256": "02dd159783677a749c04adbdd02b55b8a2bcc7e054f51b76b549199a916ad584",
+  "license": "zlib license, from zlib.h in this tarball",
+  "minigzip_sha256": "e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636",
+  "libz_a_sha256": "6f34b761db9ee99652ef10819d2fc3b2160ef8011dd0c06a68180842eed176e3",
+  "build": {
+    "configure_exit": 0,
+    "make_exit": 0,
+    "sandbox": true,
+    "rlimits_applied": true,
+    "network_namespace": false
+  },
+  "acceptance": "non-blind",
+  "acceptance_reason": "the same agent generated the sealed outputs and can read them"
+}

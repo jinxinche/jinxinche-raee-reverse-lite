@@ -1,0 +1,115 @@
+{
+  "budget_document": "docs/a19/ATTEMPT2_BUDGET.md",
+  "probe_script": "tools/probe_a19_attempt2.py",
+  "probe_script_sha256": "c3afa1f8cd001986070c03725912974b5207f0bb1e98cd4db03c96a70008dffa",
+  "standard_tier_executed": false,
+  "standard_tier_pass": false,
+  "full_tier_started": false,
+  "start_full_tier": false,
+  "reason": "The pre-declared rule scales the last-100 support rate linearly with relation count through 50,000 relations, then adds 1,800 seconds. That projection is 8,638 seconds, above the 2,700 second cap, so the full tier was not started. A constant-rate extrapolation from the same last-100 sample is 2,348 seconds and would fit the cap, but the probe itself slowed from about 1,434 relations/s in the first 100 supports to 91.25/s in the last 100, and the earlier stopped load measured about 12/s at 10,041 relations. The constant-rate reading is recorded and was not used to start a run.",
+  "stop_reason": "completed-requested-supports",
+  "relations": 2000,
+  "relation_seconds": 9.648596137000823,
+  "last_100_seconds": 1.0958395500001643,
+  "last_100_relations_per_second": 91.25423516607427,
+  "first_100_relations_per_second": 1434.0487161742076,
+  "projected_remaining_load_seconds": 6838.038792001025,
+  "projected_load_plus_1800_seconds": 8638.038792001025,
+  "constant_rate_load_seconds_for_50000": 547.9197750000822,
+  "constant_rate_load_plus_1800_seconds": 2347.919775000082,
+  "session_cap_seconds": 2700,
+  "record_counts": {
+    "claim": 100,
+    "evaluation": 2000,
+    "observation": 500
+  },
+  "directory_bytes": 7458817,
+  "directory": "/tmp/a19-attempt2",
+  "stamps": [
+    {
+      "relations": 100,
+      "seconds": 0.0697326380004597
+    },
+    {
+      "relations": 200,
+      "seconds": 0.17507754400048725
+    },
+    {
+      "relations": 300,
+      "seconds": 0.3021668569999747
+    },
+    {
+      "relations": 400,
+      "seconds": 0.4639915470006599
+    },
+    {
+      "relations": 500,
+      "seconds": 0.6563435530006245
+    },
+    {
+      "relations": 600,
+      "seconds": 0.8903531450005175
+    },
+    {
+      "relations": 700,
+      "seconds": 1.1579527769999913
+    },
+    {
+      "relations": 800,
+      "seconds": 1.471524183000838
+    },
+    {
+      "relations": 900,
+      "seconds": 1.8235183830001915
+    },
+    {
+      "relations": 1000,
+      "seconds": 2.2242976530005762
+    },
+    {
+      "relations": 1100,
+      "seconds": 2.6768385020004644
+    },
+    {
+      "relations": 1200,
+      "seconds": 3.1959407180002017
+    },
+    {
+      "relations": 1300,
+      "seconds": 3.7602707760006524
+    },
+    {
+      "relations": 1400,
+      "seconds": 4.3875682740008415
+    },
+    {
+      "relations": 1500,
+      "seconds": 5.068563069000447
+    },
+    {
+      "relations": 1600,
+      "seconds": 5.813737010000295
+    },
+    {
+      "relations": 1700,
+      "seconds": 6.636711088000084
+    },
+    {
+      "relations": 1800,
+      "seconds": 7.5465237320004235
+    },
+    {
+      "relations": 1900,
+      "seconds": 8.552754711000489
+    },
+    {
+      "relations": 2000,
+      "seconds": 9.648594261000653
+    }
+  ],
+  "previous_failure_unchanged": "docs/a19/standard_tier.json",
+  "mixed_phase_ran": false,
+  "target_runs": 0,
+  "prior_stop_relations": 10041,
+  "prior_stop_records": 21000
+}

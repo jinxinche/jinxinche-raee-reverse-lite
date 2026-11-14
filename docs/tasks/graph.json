@@ -1,0 +1,578 @@
+{
+  "schema": "raee-reverse-lite.task-graph.v1",
+  "actual_agent_concurrency": 1,
+  "observed_scheduler_batch_concurrency_in_unit_test": 2,
+  "note": "One agent executed this graph. The concurrency figure of 2 is from tests/test_scheduler.py::test_dev_tasks_can_overlap on this VM. It is not a claim that 20 agents ran.",
+  "units": [
+    {
+      "id": "A01",
+      "title": "Freeze scope, requirements, metrics, and done criteria",
+      "deps": [],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "docs/phase0",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Scope, Python range, CI matrix, stress-tier decision, and evaluation rules are written and consistent with this graph.",
+      "gate_met": true,
+      "evidence": [
+        "docs/phase0/SCOPE.md",
+        "docs/phase0/EVALUATION.md"
+      ],
+      "limitations": []
+    },
+    {
+      "id": "A02",
+      "title": "Dev sample, real target, acceptance set, isolation",
+      "deps": [
+        "A01"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "docs/phase0/TARGETS.md",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Dev sample and isolation exist, the real target is frozen, and a sealed acceptance set for that target exists.",
+      "gate_met": true,
+      "checkpoint": "zlib 1.4 built in the sandbox. Tarball, minigzip, and libz.a hashes are in targets/zlib/PIN.json. Dev, tune, and final surfaces are in sealed_observations.json.",
+      "evidence": [
+        "docs/phase0/TARGETS.md",
+        "targets/zlib/PIN.json",
+        "targets/zlib/NON_BLIND.md",
+        "docs/evidence/zlib_phase2.json"
+      ],
+      "limitations": [
+        "acceptance is non-blind",
+        "network namespace was not applied during the build"
+      ]
+    },
+    {
+      "id": "A03",
+      "title": "Core contracts, extension points, errors",
+      "deps": [
+        "A01"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "src/raee_reverse",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Record kinds, relation types, error codes, and missing-engine results exist and are covered by tests.",
+      "gate_met": true,
+      "evidence": [
+        "src/raee_reverse/model.py",
+        "src/raee_reverse/errors.py",
+        "src/raee_reverse/interfaces.py"
+      ],
+      "limitations": [
+        "MCP transport is not implemented"
+      ]
+    },
+    {
+      "id": "A04",
+      "title": "Evidence store, query, provenance, content binding",
+      "deps": [
+        "A03"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "src/raee_reverse/store.py",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "SQLite plus content-addressed blobs store the ten record kinds and the eight relations; raw rows are immutable.",
+      "gate_met": true,
+      "evidence": [
+        "tests/test_evidence.py"
+      ],
+      "limitations": []
+    },
+    {
+      "id": "A05",
+      "title": "Dependency audit, cache, freshness",
+      "deps": [
+        "A04"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "src/raee_reverse/cache.py",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Cache keys bind content, deps, tool, params, config, and environment. A clean import scan is not a closure proof. Content changes stale derived observations.",
+      "gate_met": true,
+      "evidence": [
+        "tests/test_cache_audit_attribution.py",
+        "tests/test_evidence.py"
+      ],
+      "limitations": [
+        "distribution-to-import names are not resolved beyond hyphen-to-underscore"
+      ]
+    },
+    {
+      "id": "A06",
+      "title": "Retraction, concurrency, recovery",
+      "deps": [
+        "A04",
+        "A05"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "src/raee_reverse/store.py",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Retraction recomputes support and does not delete rows. Concurrent decision reads do not observe a torn pass. A crash before commit leaves no row.",
+      "gate_met": true,
+      "evidence": [
+        "tests/test_retraction.py",
+        "tests/test_evidence.py"
+      ],
+      "limitations": []
+    },
+    {
+      "id": "A07",
+      "title": "Native static-analysis adapter",
+      "deps": [
+        "A03"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "ghidra_12.2_PUBLIC",
+      "budget": {
+        "agents": 1,
+        "ghidra_processes": 1,
+        "java_heap": "2G"
+      },
+      "exit_gate": "Headless Ghidra, not a fake adapter, analyzes one ELF and the export is kept.",
+      "gate_met": true,
+      "evidence": [
+        "docs/evidence/phase2_dev_sample.json",
+        "docs/evidence/zlib_phase2.json"
+      ],
+      "limitations": [
+        "distro JDK 21 cannot launch Ghidra 12.2",
+        "not run in CI"
+      ]
+    },
+    {
+      "id": "A08",
+      "title": "Sandboxed execution, timeout, cancel, resources",
+      "deps": [
+        "A03"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "src/raee_reverse/sandbox.py",
+      "budget": {
+        "agents": 1,
+        "target_processes": 1
+      },
+      "exit_gate": "Timeout, truncation, nonzero exit, secret stripping, and a file-size limit are explicit non-passes, and the dev ELF was run under that runner.",
+      "gate_met": true,
+      "evidence": [
+        "tests/test_sandbox_cli.py",
+        "docs/evidence/phase2_dev_sample.json"
+      ],
+      "limitations": [
+        "network namespace was not available",
+        "not a hypervisor",
+        "zlib was not run"
+      ]
+    },
+    {
+      "id": "A09",
+      "title": "Behavior contracts and compatibility judgment",
+      "deps": [
+        "A04",
+        "A07",
+        "A08"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "docs/evidence/zlib_phase2.json",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Compare the observation surfaces required by a frozen target contract, without treating an uncollected surface as a match.",
+      "gate_met": true,
+      "evidence": [
+        "src/raee_reverse/compare.py",
+        "docs/evidence/zlib_phase2.json",
+        "tests/test_contract_report.py"
+      ],
+      "limitations": [
+        "verdict covers the collected surfaces of the sealed inputs only",
+        "acceptance is non-blind",
+        "compression_level_9 stays not_compared in the contract verdict"
+      ]
+    },
+    {
+      "id": "A10",
+      "title": "Hypotheses, experiment choice, active analysis",
+      "deps": [
+        "A09"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "tune-alpha",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Choose a distinguishing experiment from disagreements and cost, run it, and keep the raw result.",
+      "gate_met": true,
+      "evidence": [
+        "docs/evidence/zlib_phase2.json",
+        "src/raee_reverse/experiments.py"
+      ],
+      "limitations": [
+        "one hypothesis pair on tune-alpha; level -9 differed from the default"
+      ]
+    },
+    {
+      "id": "A11",
+      "title": "Counterexample search and failure shrinking",
+      "deps": [
+        "A08",
+        "A09"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "truncated dev/abc gzip",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Shrink a failing case without changing the failure predicate, and do not claim a global minimum.",
+      "gate_met": true,
+      "evidence": [
+        "docs/evidence/zlib_phase2.json",
+        "src/raee_reverse/shrink.py"
+      ],
+      "limitations": [
+        "reduced length 4 under deletion search; global_minimum is false"
+      ]
+    },
+    {
+      "id": "A12",
+      "title": "Attribution experiments",
+      "deps": [
+        "A06",
+        "A08",
+        "A09"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "dev inputs empty, abc, hello",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Run the required attribution samples on a measured value function, including retraction, confounding, noise, and missing coalitions.",
+      "gate_met": true,
+      "checkpoint": "Measured v on dev checks. Round-trip without compress is null, not zero. Shapley is uncertain because those coalitions are missing. Synthetic validation samples are marked measured_on_zlib false.",
+      "evidence": [
+        "docs/a12/zlib_dev_attribution.json",
+        "src/raee_reverse/attribution.py"
+      ],
+      "limitations": [
+        "causal_claim is false",
+        "one Linux host",
+        "final-acceptance file was not used"
+      ]
+    },
+    {
+      "id": "A13",
+      "title": "Runnable compatible project",
+      "deps": [
+        "A09",
+        "A10",
+        "A11"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "zlib v1.4 tarball 02dd159783677a749c04adbdd02b55b8a2bcc7e054f51b76b549199a916ad584",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "A compatible zlib baseline builds, installs, and passes the sealed must-keep behaviors.",
+      "gate_met": true,
+      "evidence": [
+        "generated/zlib-baseline/README.md",
+        "docs/evidence/zlib_baseline_acceptance.json"
+      ],
+      "limitations": [
+        "acceptance is non-blind",
+        "this is the upstream sources, not a new codec"
+      ],
+      "checkpoint": "Official zlib 1.4 build installed as prefix/bin/minigzip. Sealed surfaces matched, including 8/8 final inputs. Non-blind. compression_level_9 stayed not_compared."
+    },
+    {
+      "id": "A14",
+      "title": "Improvement candidate",
+      "deps": [
+        "A12",
+        "A13"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "docs/phase4/GOAL.md",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "After correctness, either the pre-registered zlib metric clears its threshold or the miss is recorded without swapping the metric.",
+      "gate_met": true,
+      "evidence": [
+        "docs/phase4/GOAL.md",
+        "docs/evidence/zlib_enhancement.json"
+      ],
+      "limitations": [
+        "enhancement_met false",
+        "one sample of 21 runs",
+        "metric was not swapped"
+      ],
+      "checkpoint": "Goal frozen before the LTO candidate. Candidate decompress median was 99.6% of baseline, not the required 90%. Delivery: compatible baseline done, enhancement not met."
+    },
+    {
+      "id": "A15",
+      "title": "Independent regression export",
+      "deps": [
+        "A09",
+        "A11",
+        "A13"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "repro/zlib-baseline",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Export tests that can run without this repository's source tree.",
+      "gate_met": true,
+      "evidence": [
+        "repro/zlib-baseline/README-REPRO.md",
+        "repro/zlib-baseline/SHA256SUMS"
+      ],
+      "limitations": [
+        "still needs the repository tarball to build",
+        "acceptance remains non-blind"
+      ],
+      "checkpoint": "Pack copies the baseline scripts and harness. It does not include sealed expected bytes."
+    },
+    {
+      "id": "A16",
+      "title": "CLI, MCP, offline report, capability discovery",
+      "deps": [
+        "A03",
+        "A04",
+        "A09"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "src/raee_reverse/cli.py",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "CLI, MCP, and an offline HTML report all work against the ledger.",
+      "gate_met": true,
+      "checkpoint": "CLI, a stdio MCP server, and an offline HTML report are tested.",
+      "evidence": [
+        "src/raee_reverse/cli.py",
+        "src/raee_reverse/mcp_server.py",
+        "src/raee_reverse/report_html.py",
+        "tests/test_contract_report.py"
+      ],
+      "limitations": [
+        "MCP implements initialize, tools/list, and tools/call only"
+      ]
+    },
+    {
+      "id": "A17",
+      "title": "Packaging, dependency check, clean install, CI",
+      "deps": [
+        "A03"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "746addd657822b01ec6a328ebfb5cf925c8d139e",
+      "budget": {
+        "agents": 1,
+        "ci_jobs": 6
+      },
+      "exit_gate": "The six-job matrix has a GitHub Actions result for the exact commit, and a clean install imports the package off the source tree.",
+      "gate_met": true,
+      "history": [
+        {
+          "commit": "12735f05e808377c298ef6bf3ae43553ed3c4d41",
+          "conclusion": "failure",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43585751593",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43585758402",
+          "detail": "Ubuntu 3.11 and 3.15 passed. Windows 3.11/3.15 and macOS 3.11/3.15 failed on both runs. See docs/ci/12735f05.md."
+        },
+        {
+          "commit": "d38e889db02c6e576db5f376882242f25506dce9",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586365044",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586369116",
+          "detail": "12 of 12 jobs succeeded: Linux, Windows, and macOS, Python 3.11 and 3.15, on both the push run and the pull_request run. The jobs install the package with pip install . and then run pytest."
+        },
+        {
+          "commit": "0a74bedfd7e60db03cc89d95765a800e688703a5",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586941928",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586944166",
+          "detail": "12 of 12 jobs succeeded on both the push run and the pull_request run."
+        },
+        {
+          "commit": "345c7f8f583ad215cc6e14e145c9cf593e265e9c",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587778297",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587781297",
+          "detail": "12 of 12 jobs succeeded on both runs."
+        },
+        {
+          "commit": "45eff3cca002348797df23cd74e505ffdde279cc",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587944673",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587949731",
+          "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/45eff3c.md. This commit records the review of 345c7f8."
+        },
+        {
+          "commit": "772dfac504843adc33d336167dc464de7fb4284b",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43588199093",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43588204438",
+          "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/772dfac.md. This commit records the 45eff3c Actions result and is not itself the reviewed SHA in that file."
+        },
+        {
+          "commit": "c6612192b5e05d2a5c4c84daa57c0bb3d35099f7",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591711285",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591714049",
+          "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/c661219.md."
+        },
+        {
+          "commit": "746addd657822b01ec6a328ebfb5cf925c8d139e",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591930851",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591936161",
+          "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/746addd.md. This is the A20 review target."
+        }
+      ],
+      "evidence": [
+        "docs/ci/12735f05.md",
+        "docs/ci/45eff3c.md",
+        "docs/ci/772dfac.md",
+        "docs/ci/c661219.md",
+        "docs/ci/746addd.md",
+        ".github/workflows/core.yml"
+      ],
+      "limitations": [
+        "The 12735f05 failure remains part of this record. Later successes apply only to the commits named in history."
+      ]
+    },
+    {
+      "id": "A18",
+      "title": "REA comparison and ablations",
+      "deps": [
+        "A02",
+        "A13",
+        "A14",
+        "A15"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "rea-agents 6.9.0",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Compare this tool with REA 6.9.0 under the same task, budget, and tools, or record that the run did not happen.",
+      "gate_met": true,
+      "evidence": [
+        "docs/a18/REA_COMPARISON.md"
+      ],
+      "limitations": [
+        "single sample",
+        "runtime execution was not part of the REA commands",
+        "environment_healthy was false because optional engines were not installed"
+      ],
+      "checkpoint": "REA 6.9.0 was installed and run on the same checksum ELF and Ghidra 12.2. One analyze and one function query. Sample size 1. No suite score."
+    },
+    {
+      "id": "A19",
+      "title": "Stress, fault injection, long run",
+      "deps": [
+        "A06",
+        "A08",
+        "A13",
+        "A16"
+      ],
+      "state": "QUEUED",
+      "owner": "solo-agent",
+      "inputs_version": "docs/a19/ATTEMPT2_BUDGET.md",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Standard stress tier has measured throughput and percentiles. Extended tier is not required.",
+      "gate_met": false,
+      "evidence": [
+        "docs/a19/STANDARD_TIER_BUDGET.md",
+        "docs/a19/standard_tier.json",
+        "docs/a19/result.json",
+        "docs/a19/ATTEMPT2_BUDGET.md",
+        "docs/a19/attempt2.json"
+      ],
+      "limitations": [
+        "standard tier not completed",
+        "extended tier not run",
+        "the 10041-relation stop remains a failure"
+      ],
+      "checkpoint": "The first load remains a failure at 10041 relations and 21000 records. A second budget was declared, then a 2000-support probe finished in 9.649 seconds and was not scaled into the full tier because the linear relation-count projection plus 1800 seconds was 8638 seconds, above the 2700 second cap. No 30 minute phase and no 20 target runs were recorded for this attempt."
+    },
+    {
+      "id": "A20",
+      "title": "Independent review and final gate",
+      "deps": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11",
+        "A12",
+        "A13",
+        "A14",
+        "A15",
+        "A16",
+        "A17",
+        "A18",
+        "A19"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "746addd657822b01ec6a328ebfb5cf925c8d139e",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Final tree matches the evidence, and every required check has an executed result.",
+      "gate_met": true,
+      "checkpoint": "Review is of 746addd, whose push and pull_request Actions runs both succeeded with 12 jobs. That commit reviews c661219 and does not change Python code. The speed goal stays missed. The standard tier was not completed. REA comparison is one sample and is not a ranking.",
+      "evidence": [
+        "docs/DELIVERY.md",
+        "docs/ci/746addd.md"
+      ],
+      "limitations": [
+        "non-blind acceptance",
+        "standard tier not completed",
+        "enhancement not met",
+        "the commit that records this review is newer than 746addd"
+      ]
+    }
+  ]
+}

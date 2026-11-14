@@ -1,0 +1,22 @@
+{
+  "observed": true,
+  "assumed": false,
+  "system": "Linux-6.12.113+-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "python": "3.12.3",
+  "python_executable": "/usr/bin/python3",
+  "java_resolved_by_path": "openjdk version \"25.0.5\" 2026-10-20 LTS",
+  "java_usr_bin": "openjdk version \"21.0.13.0.3\" 2026-10-24",
+  "javac_resolved_by_path": "javac 25.0.5",
+  "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "node": "v22.23.4",
+  "tools": {
+    "prlimit": "/usr/bin/prlimit",
+    "unshare": "/usr/bin/unshare",
+    "bwrap": null,
+    "ghidra_on_path": null
+  },
+  "cpu_count": 4,
+  "model_api_env_names_present": [],
+  "note": "This file is a probe of the process that ran the script. Disk and memory figures belong in ENVIRONMENT.md because they come from the shell commands recorded there."
+}

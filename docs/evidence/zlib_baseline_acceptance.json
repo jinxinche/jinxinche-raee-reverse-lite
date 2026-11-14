@@ -1,0 +1,291 @@
+{
+  "acceptance": "non-blind",
+  "compatible_baseline_matches_sealed_surfaces": true,
+  "final_match_count": 8,
+  "final_count": 8,
+  "compression_level_9": "not_compared",
+  "universal": false,
+  "accepted_pass": false,
+  "rows": [
+    {
+      "split": "dev",
+      "name": "empty",
+      "input_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "dev",
+      "name": "abc",
+      "input_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "dev",
+      "name": "hello",
+      "input_sha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "tune",
+      "name": "tune-alpha",
+      "input_sha256": "536fed3d7148800b719db3ea86ac70c00c4f4be9732b19180991b81d030fb4f0",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "tune",
+      "name": "tune-repeat",
+      "input_sha256": "7a5acd6cf62dca719d30fb1461c772156494014c440eae357488087420893250",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "tune",
+      "name": "tune-range",
+      "input_sha256": "fdeab9acf3710362bd2658cdc9a29e8f9c757fcf9811603a8c447cd1d9151108",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "final",
+      "name": "final-0-len1",
+      "input_sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "final",
+      "name": "final-1-len2",
+      "input_sha256": "5a42b2a3e19c361c1512b051423a27adb76c3530b4e2d74762b00dc4ddce2f45",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "final",
+      "name": "final-2-len7",
+      "input_sha256": "8cb3758a0e8d9371470e2dc13a1dfc7455732e2d6f57887ea6e2ab5c558b929d",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "final",
+      "name": "final-3-len16",
+      "input_sha256": "434084e1baae0d2d1496b62d83bcc1a4ffa4e9211660316956592e3a5c674fc8",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "final",
+      "name": "final-4-len32",
+      "input_sha256": "c1a867c372c35c1d9438d3cd19b9528b18fa38503a92c996c0ff4f3fc587fc3f",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "final",
+      "name": "final-5-len100",
+      "input_sha256": "b88a05295d2b0a835130f1c773b62f4f36345458c0175342e325d9743fd2e9cd",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "final",
+      "name": "final-6-len256",
+      "input_sha256": "8781c2e1685406cef2a57d529244a2b15113811987cf8f06e5cc0e38606906fa",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    },
+    {
+      "split": "final",
+      "name": "final-7-len1000",
+      "input_sha256": "5d50b2e4ed620c387af89614ee0fabbe810804015fddd45eb261da1b9db117d0",
+      "compatible_on_collected_surfaces": true,
+      "mismatches": [],
+      "not_compared": [
+        "wall_clock_threshold",
+        "peak_rss",
+        "named_file_mode",
+        "compression_level_9",
+        "missing_path_stderr_text",
+        "crc32_combine",
+        "multi_member_gzip",
+        "concurrent_calls"
+      ],
+      "compression_level_9": "not_compared",
+      "universal": false,
+      "acceptance": "non-blind"
+    }
+  ]
+}
