@@ -423,6 +423,13 @@
           "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586941928",
           "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43586944166",
           "detail": "12 of 12 jobs succeeded on both the push run and the pull_request run."
+        },
+        {
+          "commit": "345c7f8f583ad215cc6e14e145c9cf593e265e9c",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587778297",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587781297",
+          "detail": "12 of 12 jobs succeeded on both runs. This is the review target for the delivery note."
         }
       ],
       "evidence": [
@@ -512,19 +519,23 @@
         "A18",
         "A19"
       ],
-      "state": "BLOCKED",
+      "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "not-final",
+      "inputs_version": "345c7f8f583ad215cc6e14e145c9cf593e265e9c",
       "budget": {
         "agents": 1
       },
       "exit_gate": "Final tree matches the evidence, and every required check has an executed result.",
-      "gate_met": false,
-      "blocked_reason": "downstream units are not all succeeded",
-      "checkpoint": "Phase 0 notes and Phase 1 tests exist. This is not a final acceptance report.",
-      "evidence": [],
+      "gate_met": true,
+      "checkpoint": "Review is of 345c7f8, whose push and pull_request Actions runs both succeeded. The speed goal stays missed. The standard tier was not completed. REA comparison is one sample.",
+      "evidence": [
+        "docs/DELIVERY.md"
+      ],
       "limitations": [
-        "same agent wrote and checked the tests"
+        "non-blind acceptance",
+        "standard tier not completed",
+        "enhancement not met",
+        "a commit that only records this review is newer than 345c7f8"
       ]
     }
   ]

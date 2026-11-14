@@ -32,5 +32,5 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. No n
 ## Known gaps
 
 - A19 remains queued. The standard tier did not reach its declared floors.
-- A20 in `docs/tasks/graph.json` stays blocked until this commit's own Actions result exists. This file was written with that limit.
+- Review target `345c7f8f583ad215cc6e14e145c9cf593e265e9c` has green Actions on both runs: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587778297 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43587781297. A later commit that only records this paragraph is not that result.
 - Final acceptance is non-blind (`targets/zlib/NON_BLIND.md`).
