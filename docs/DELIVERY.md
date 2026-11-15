@@ -76,3 +76,8 @@ Hosted CI for `52d4a9e8b4918f75653b2912602a23d1cf510088`:
 On the pull request run, Ubuntu and macOS passed for 3.11 and 3.15. Both Windows jobs failed in `python -m pytest`. `tests/test_frozen_records.py::test_closed_failures_are_unchanged` saw SHA-256 `fb477586213a3b73dc55aeee71d0e78f93d2dc986da4c00d41257eed36de79d8` for `docs/phase4/GOAL.md` instead of `d20552ca4b56fb3db6c2ca8e498e0cde1fd0712d0f3700b791793650998bf2eb`. `tests/test_held_out.py::test_manifest_is_not_blind_and_the_seal_matches` saw the seal miss. Windows checkout rewrote those text files to CRLF. The tests were not deleted. The checker and the frozen-record test now hash LF text, and `.gitattributes` asks Git to keep those files as LF. `docs/ci/52d4a9e.md`.
 
 The 31c3e00 macOS Python 3.15 failure stays on the record.
+
+Hosted CI for `4b469df2dd581591f03bb0b60170a4a97efda435`:
+
+- Pull request: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43696080740 success. Six jobs, including Windows 3.11 and 3.15.
+- Push: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43696077652 failure. `macos-latest / py3.11` failed `tests/test_ledger_speed.py::test_support_batch_does_not_collapse` with `1.124669541000003 < (0.05146579200001611 * 12)`, about 22x. The other five push jobs passed. The test was not deleted. The 12x bound stays under the pre-fix ratio of about 18. A second batch is required only when the first window exceeds 12x. `docs/ci/4b469df.md`.
