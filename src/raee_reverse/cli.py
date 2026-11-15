@@ -14,6 +14,8 @@ import sys
 from pathlib import Path
 
 from raee_reverse import __version__
+from raee_reverse.budget_ledger import BudgetLedger
+from raee_reverse.decision import load_profiles, record_decision, route
 from raee_reverse.errors import RrlError
 from raee_reverse.report_html import render_html
 from raee_reverse.scheduler import Scheduler
@@ -101,6 +103,10 @@ def main(argv: list[str] | None = None) -> int:
     audit.add_argument("path")
     report = sub.add_parser("report")
     report.add_argument("--out", required=True)
+    route_cmd = sub.add_parser("route")
+    route_cmd.add_argument("--task-json", required=True)
+    route_cmd.add_argument("--profiles", required=True)
+    route_cmd.add_argument("--prices", required=True)
 
     args = parser.parse_args(argv)
     root = _root(args.root)
@@ -226,6 +232,16 @@ def _dispatch(store: Store, args: argparse.Namespace) -> int:
         destination = Path(args.out)
         destination.write_text(render_html(store), encoding="utf-8")
         return _emit({"path": str(destination), "offline": True, "accepted_pass": False})
+    if args.command == "route":
+        task = json.loads(Path(args.task_json).read_text(encoding="utf-8"))
+        profiles = load_profiles(args.profiles, args.prices)
+        budget = BudgetLedger(store.root / "budget.sqlite")
+        try:
+            plan = route(task, profiles, budget)
+            record_id = record_decision(store, plan)
+        finally:
+            budget.close()
+        return _emit({"record_id": record_id, "plan": plan, "accepted_pass": False})
     raise RrlError("E_USAGE", "unhandled command")
 
 

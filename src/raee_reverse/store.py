@@ -113,6 +113,10 @@ CREATE TABLE IF NOT EXISTS tasks (
 );
 CREATE INDEX IF NOT EXISTS idx_rel_src ON relations(src_id);
 CREATE INDEX IF NOT EXISTS idx_rel_dst ON relations(dst_id);
+CREATE INDEX IF NOT EXISTS idx_rel_src_type ON relations(src_id, rel_type);
+CREATE INDEX IF NOT EXISTS idx_rel_dst_type ON relations(dst_id, rel_type);
+CREATE INDEX IF NOT EXISTS idx_proj_family_applicability
+  ON proj(source_family, applicability, entity_kind);
 CREATE TRIGGER IF NOT EXISTS records_no_update BEFORE UPDATE ON records
 BEGIN SELECT RAISE(ABORT, 'immutable_record'); END;
 CREATE TRIGGER IF NOT EXISTS records_no_delete BEFORE DELETE ON records
@@ -152,6 +156,8 @@ class Store:
         self._depth = 0
         self._owner: int | None = None
         self.failpoint: str | None = None
+        self._proj_cache: dict[str, dict] = {}
+        self._family_retracted_cache: dict[str, bool] = {}
         self._conn = sqlite3.connect(self.db_path, check_same_thread=False, isolation_level=None)
         self._conn.row_factory = sqlite3.Row
         self._conn.execute("PRAGMA journal_mode=WAL")
@@ -184,6 +190,8 @@ class Store:
                 raise RrlError("E_INJECTED_CRASH", "injected crash before commit")
             self._conn.commit()
         except Exception:
+            self._proj_cache.clear()
+            self._family_retracted_cache.clear()
             try:
                 self._conn.rollback()
             except sqlite3.Error:
@@ -329,9 +337,12 @@ class Store:
             if rel == RelType.DEPENDS_ON and role == "necessary" and not slot:
                 slot = f"sole:{dst_id}"
             relation_id = self._insert_relation(rel, src_id, dst_id, basis, role, slot)
+            stale: set[str] = set()
             if rel == RelType.SUPERSEDES:
-                self._mark_stale_in(dst_id, "superseded", {"superseded_by": src_id}, set())
-            self._fixpoint(self._claims_affected([src_id, dst_id]))
+                self._mark_stale_in(dst_id, "superseded", {"superseded_by": src_id}, stale)
+            if stale or rel in (RelType.SUPPORTS, RelType.CONTRADICTS, RelType.DEPENDS_ON):
+                seeds = list(stale) if stale else [src_id, dst_id]
+                self._fixpoint(self._claims_affected(seeds))
             return relation_id
 
     def mark_stale(self, entity_id: str, reason: str, details: dict | None = None) -> dict:
@@ -339,8 +350,9 @@ class Store:
             raise RrlError("E_REASON", "a stale mark needs a reason")
         with self._tx():
             self._must_record(entity_id)
-            self._mark_stale_in(entity_id, reason, details or {}, set())
-            self._fixpoint(self._claims_affected([entity_id]))
+            stale: set[str] = set()
+            self._mark_stale_in(entity_id, reason, details or {}, stale)
+            self._fixpoint(self._claims_affected(list(stale)))
             return self.decision(entity_id) if self._kind(entity_id) == Kind.CLAIM.value else {"id": entity_id, "applicability": self._proj(entity_id)["applicability"]}
 
     def note_content_change(self, artifact_id: str, data: bytes) -> dict:
@@ -1001,6 +1013,8 @@ class Store:
         values.append(self._last_seq())
         values.append(entity_id)
         self._conn.execute(f"UPDATE proj SET {', '.join(assignments)} WHERE entity_id=?", values)
+        self._family_retracted_cache.pop(current["source_family"], None)
+        self._proj_cache.pop(entity_id, None)
 
     def _analyze(self, claim_id: str) -> dict:
         record = self._must_record(claim_id)
@@ -1184,15 +1198,21 @@ class Store:
         return missing
 
     def _family_retracted(self, family: str) -> bool:
-        rows = self._conn.execute(
-            "SELECT entity_id FROM proj WHERE source_family=? AND applicability=?",
+        cached = self._family_retracted_cache.get(family)
+        if cached is not None:
+            return cached
+        row = self._conn.execute(
+            """
+            SELECT 1 FROM proj
+            WHERE source_family=? AND applicability=?
+              AND entity_kind NOT IN ('retraction', 'evaluation')
+            LIMIT 1
+            """,
             (family, Applicability.RETRACTED.value),
-        ).fetchall()
-        for row in rows:
-            kind = self._kind_or_none(row["entity_id"])
-            if kind not in (None, Kind.RETRACTION.value, Kind.EVALUATION.value):
-                return True
-        return False
+        ).fetchone()
+        value = row is not None
+        self._family_retracted_cache[family] = value
+        return value
 
     def _premise_ok(self, evidence_id: str) -> bool:
         src = self._proj(evidence_id)
@@ -1319,18 +1339,38 @@ class Store:
         )
 
     def _claims_affected(self, seeds: list[str]) -> list[str]:
-        nodes = set(seeds)
-        relations = self._conn.execute("SELECT src_id, dst_id FROM relations").fetchall()
-        changed = True
-        while changed:
-            changed = False
-            for relation in relations:
-                if relation["src_id"] in nodes or relation["dst_id"] in nodes:
-                    for node in (relation["src_id"], relation["dst_id"]):
-                        if node not in nodes:
-                            nodes.add(node)
-                            changed = True
-        return sorted(node for node in nodes if self._kind_or_none(node) == Kind.CLAIM.value)
+        """Claims whose stored decision can change because one of ``seeds`` changed.
+
+        A claim reads an entity when that entity supports or contradicts the
+        claim, or when the claim depends on that entity. Dependents of those
+        claims are included. ``derived_from`` is not a decision edge: staleness
+        walks it first and the caller passes every id that walk marked.
+        """
+        pending = list(seeds)
+        seen: set[str] = set()
+        claims: list[str] = []
+        while pending:
+            node = pending.pop()
+            if node in seen:
+                continue
+            seen.add(node)
+            if self._kind_or_none(node) == Kind.CLAIM.value and node not in claims:
+                claims.append(node)
+            pending.extend(self._decision_readers(node))
+        return sorted(claims)
+
+    def _decision_readers(self, entity_id: str) -> list[str]:
+        rows = self._conn.execute(
+            """
+            SELECT dst_id AS claim_id FROM relations
+            WHERE src_id=? AND rel_type IN ('supports', 'contradicts')
+            UNION
+            SELECT src_id AS claim_id FROM relations
+            WHERE dst_id=? AND rel_type='depends_on'
+            """,
+            (entity_id, entity_id),
+        ).fetchall()
+        return [row["claim_id"] for row in rows]
 
     def _rels(self, *, src: str | None = None, dst: str | None = None, rel_type: str | None = None) -> list[dict]:
         clauses = []
@@ -1368,10 +1408,13 @@ class Store:
         return None if row is None else row["kind"]
 
     def _proj(self, entity_id: str) -> dict:
+        cached = self._proj_cache.get(entity_id)
+        if cached is not None:
+            return cached
         row = self._conn.execute("SELECT * FROM proj WHERE entity_id=?", (entity_id,)).fetchone()
         if row is None:
             raise RrlError("E_NOT_FOUND", "projection not found", id=entity_id)
-        return {
+        loaded = {
             "entity_id": row["entity_id"],
             "entity_kind": row["entity_kind"],
             "provenance": row["provenance"],
@@ -1385,6 +1428,8 @@ class Store:
             "extra": json.loads(row["extra_json"]),
             "updated_seq": row["updated_seq"],
         }
+        self._proj_cache[entity_id] = loaded
+        return loaded
 
     def _event(self, event_type: str, subject_id: str | None, payload: dict) -> None:
         self._conn.execute(

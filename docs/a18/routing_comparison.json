@@ -1,0 +1,30 @@
+{
+  "executed": false,
+  "reason": "No configured profile has an available endpoint and a known price. The shipped prices file is empty.",
+  "policies": [
+    "fixed_high_tier",
+    "fixed_economy",
+    "fixed_by_task_type",
+    "auto_difficulty_routing",
+    "auto_routing_plus_context_optimization"
+  ],
+  "metrics": {
+    "correct_completion_rate": "not_collected",
+    "unsupported_conclusion_rate": "not_collected",
+    "coverage": "not_collected",
+    "unfinished_rate": "not_collected",
+    "total_cost": "not_collected",
+    "input_tokens": "not_collected",
+    "output_tokens": "not_collected",
+    "other_billed_tokens": "not_collected",
+    "cost_per_success": "not_collected",
+    "latency_distribution": "not_collected",
+    "routing_overhead": "not_collected",
+    "upgrade_rate": "not_collected",
+    "upgrade_success_rate": "not_collected",
+    "wrong_downgrade_rate": "not_collected",
+    "unnecessary_upgrade_rate": "not_collected"
+  },
+  "savings_percent": null,
+  "high_tier_answers_are_ground_truth": false
+}

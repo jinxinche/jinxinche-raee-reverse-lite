@@ -65,7 +65,11 @@
       "evidence": [
         "src/raee_reverse/model.py",
         "src/raee_reverse/errors.py",
-        "src/raee_reverse/interfaces.py"
+        "src/raee_reverse/interfaces.py",
+        "src/raee_reverse/decision.py",
+        "src/raee_reverse/budget_ledger.py",
+        "config/model_profiles.json",
+        "config/prices.json"
       ],
       "limitations": [
         "MCP transport is not implemented"
@@ -226,10 +230,13 @@
       "gate_met": true,
       "evidence": [
         "docs/evidence/zlib_phase2.json",
-        "src/raee_reverse/experiments.py"
+        "src/raee_reverse/experiments.py",
+        "src/raee_reverse/decision.py",
+        "tests/test_decision_unit.py"
       ],
       "limitations": [
-        "one hypothesis pair on tune-alpha; level -9 differed from the default"
+        "one hypothesis pair on tune-alpha; level -9 differed from the default",
+        "routing is auditable rules; no live model was called"
       ]
     },
     {
@@ -274,7 +281,8 @@
       "checkpoint": "Measured v on dev checks. Round-trip without compress is null, not zero. Shapley is uncertain because those coalitions are missing. Synthetic validation samples are marked measured_on_zlib false.",
       "evidence": [
         "docs/a12/zlib_dev_attribution.json",
-        "src/raee_reverse/attribution.py"
+        "src/raee_reverse/attribution.py",
+        "tests/test_decision_unit.py"
       ],
       "limitations": [
         "causal_claim is false",
@@ -381,10 +389,12 @@
         "src/raee_reverse/cli.py",
         "src/raee_reverse/mcp_server.py",
         "src/raee_reverse/report_html.py",
-        "tests/test_contract_report.py"
+        "tests/test_contract_report.py",
+        "tests/test_decision_unit.py"
       ],
       "limitations": [
-        "MCP implements initialize, tools/list, and tools/call only"
+        "MCP implements initialize, tools/list, and tools/call only",
+        "route prints a plan; ok is not a verification pass"
       ]
     },
     {
@@ -458,6 +468,20 @@
           "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591930851",
           "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591936161",
           "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/746addd.md. This is the A20 review target."
+        },
+        {
+          "commit": "27f9dde860b30201dd5d8fe44c9451cef8e01180",
+          "conclusion": "success",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43595870464",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43595882730",
+          "detail": "12 of 12 jobs succeeded on both runs. See docs/ci/27f9dde.md. This commit changes the ledger and records the standard-tier run."
+        },
+        {
+          "commit": "31c3e00bba244304db4f08232fc4baa5ca42cd4c",
+          "conclusion": "failure",
+          "push_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43596068701",
+          "pull_request_run": "https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43596070515",
+          "detail": "Push failed. macOS Python 3.15 failed test_support_batch_does_not_collapse: last hundred was about 8.0x the first hundred, and the bound was 6. The pull_request run succeeded. See docs/ci/31c3e00.md."
         }
       ],
       "evidence": [
@@ -490,12 +514,14 @@
       "exit_gate": "Compare this tool with REA 6.9.0 under the same task, budget, and tools, or record that the run did not happen.",
       "gate_met": true,
       "evidence": [
-        "docs/a18/REA_COMPARISON.md"
+        "docs/a18/REA_COMPARISON.md",
+        "docs/a18/routing_comparison.json"
       ],
       "limitations": [
         "single sample",
         "runtime execution was not part of the REA commands",
-        "environment_healthy was false because optional engines were not installed"
+        "environment_healthy was false because optional engines were not installed",
+        "the five routing policies were not executed; no savings number"
       ],
       "checkpoint": "REA 6.9.0 was installed and run on the same checksum ELF and Ghidra 12.2. One analyze and one function query. Sample size 1. No suite score."
     },
@@ -508,27 +534,33 @@
         "A13",
         "A16"
       ],
-      "state": "QUEUED",
+      "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "docs/a19/ATTEMPT2_BUDGET.md",
+      "inputs_version": "docs/a19/standard_tier_v3.json",
       "budget": {
         "agents": 1
       },
-      "exit_gate": "Standard stress tier has measured throughput and percentiles. Extended tier is not required.",
-      "gate_met": false,
+      "exit_gate": "The floors in docs/a19/STANDARD_TIER_BUDGET.md are met by an executed run. Extended tier is not required. Latency percentiles were not a declared pass threshold.",
+      "gate_met": true,
       "evidence": [
         "docs/a19/STANDARD_TIER_BUDGET.md",
         "docs/a19/standard_tier.json",
         "docs/a19/result.json",
         "docs/a19/ATTEMPT2_BUDGET.md",
-        "docs/a19/attempt2.json"
+        "docs/a19/attempt2.json",
+        "docs/a19/ATTEMPT3_BUDGET.md",
+        "docs/a19/standard_tier_v3.json",
+        "docs/a19/ledger_fix_rates.json",
+        "tests/test_decision_unit.py"
       ],
       "limitations": [
-        "standard tier not completed",
+        "the 10041-relation stop remains a failure",
+        "attempt2 remains not a pass",
         "extended tier not run",
-        "the 10041-relation stop remains a failure"
+        "latency percentiles were not recorded",
+        "routing budget contention is a unit test, not the 30 minute tier"
       ],
-      "checkpoint": "The first load remains a failure at 10041 relations and 21000 records. A second budget was declared, then a 2000-support probe finished in 9.649 seconds and was not scaled into the full tier because the linear relation-count projection plus 1800 seconds was 8638 seconds, above the 2700 second cap. No 30 minute phase and no 20 target runs were recorded for this attempt."
+      "checkpoint": "The first load remains a failure at 10041 relations and 21000 records. Attempt 2 did not start the full tier. After the ledger change, attempt 3 was declared, the probe projected 1940 seconds, and tools/run_standard_tier.py exited 0 with standard_tier_pass true: load 19.814s, mixed 1800.035s, 50003 relations, 20 target runs."
     },
     {
       "id": "A20",

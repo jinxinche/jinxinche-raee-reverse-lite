@@ -18,17 +18,18 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. No n
 **Executed.**
 
 - `12735f05` Actions: failure. Ubuntu passed; Windows and macOS failed. `docs/ci/12735f05.md`.
-- `d38e889`, `0a74bed`, `345c7f8`, `45eff3c`, `772dfac`, `c661219`, and `746addd` Actions: 12 of 12 jobs succeeded on both the push run and the pull_request run for each of those commits. `docs/ci/c661219.md` and `docs/ci/746addd.md`.
+- `d38e889`, `0a74bed`, `345c7f8`, `45eff3c`, `772dfac`, `c661219`, `746addd`, and `27f9dde` Actions: 12 of 12 jobs succeeded on both the push run and the pull_request run for each of those commits. `docs/ci/27f9dde.md`.
 - Dev ELF and zlib `minigzip` headless Ghidra runs, including a decompiled `crc32`.
 - Baseline dev check without reading the final-acceptance file, then `accept.py`: 8/8 final inputs matched collected surfaces. Non-blind. Level `-9` stayed `not_compared`.
 - LTO candidate: decompress median 99.6% of baseline. Enhancement not met.
 - REA 6.9.0 `analyze` and `function checksum` on the same ELF. Both static runs showed modulus `0xfff1`. Sample size 1.
 - Standard-tier load stopped at 10,041 relations and 21,000 records. Not a pass. `docs/a19/standard_tier.json`.
 - A second probe, declared in `docs/a19/ATTEMPT2_BUDGET.md` before it ran, inserted 2,000 supports in 9.649 seconds and did not start the full tier. `standard_tier_pass` is false. `docs/a19/attempt2.json`.
+- After the ledger change, a third budget was declared in `docs/a19/ATTEMPT3_BUDGET.md`. The probe projected 1,940 seconds, under the 2,700 second cap. `python3 tools/run_standard_tier.py /tmp/a19-standard-v3 /tmp/a19-standard-v3-result.json /tmp/checksum_cli` then exited 0. `standard_tier_executed` is true and `standard_tier_pass` is true. Load 19.814 seconds, mixed phase 1800.035 seconds, 50,003 relations, 20 target runs, retraction cleared `accepted_pass`, cancel state `CANCELLED`. `docs/a19/standard_tier_v3.json`. The earlier failure files were not changed.
 
-**Unverified.** Whether another compiler emits the same gzip bytes. Whether REA and this tool differ on a larger task set. Whether the ledger can finish 50,000 relations if the reevaluation cost is reduced.
+**Unverified.** Whether another compiler emits the same gzip bytes. Whether REA and this tool differ on a larger task set. Latency percentiles for the standard tier were not recorded.
 
-**Not done.** A faster zlib. A blind acceptance set. The standard stress tier and the extended tier. Optional REA engines (Hopper, IDA, JADX, Kuna) were not installed. Network namespaces were not available (`unshare` returned operation not permitted). REA was not asked to execute the ELF, so runtime behavior is not a compared surface.
+**Not done.** A faster zlib. A blind acceptance set. The extended stress tier. Optional REA engines (Hopper, IDA, JADX, Kuna) were not installed. Network namespaces were not available (`unshare` returned operation not permitted). REA was not asked to execute the ELF, so runtime behavior is not a compared surface. The five routing policies in the decision-unit spec were not executed (`docs/a18/routing_comparison.json`, `executed` false). No savings percentage is claimed.
 
 ## Commands run on the c661219 tree
 
@@ -42,7 +43,7 @@ These ran on the working tree that was committed as `c6612192b5e05d2a5c4c84daa57
 
 ## Known gaps
 
-- A19 remains queued. The standard tier did not reach its declared floors. The 10,041-relation stop remains a failure. The second probe did not start the 1,800 second phase or the 20 target runs.
+- The 10,041-relation stop and the second probe remain failures. They are not this run. Support rates before and after the ledger change are in `docs/a19/ledger_fix_rates.json`.
 - Review target `746addd657822b01ec6a328ebfb5cf925c8d139e` has green Actions on both runs: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591930851 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591936161. Six jobs succeeded in each run. That commit reviews `c661219` and does not change Python code. The commit that adds this paragraph is newer than `746addd`.
 - `c6612192b5e05d2a5c4c84daa57c0bb3d35099f7` also has green Actions: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591711285 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591714049. The commands below were run on the working tree that became `c661219`, before that commit.
 - Final acceptance is non-blind (`targets/zlib/NON_BLIND.md`).
