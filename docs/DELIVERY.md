@@ -81,3 +81,10 @@ Hosted CI for `4b469df2dd581591f03bb0b60170a4a97efda435`:
 
 - Pull request: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43696080740 success. Six jobs, including Windows 3.11 and 3.15.
 - Push: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43696077652 failure. `macos-latest / py3.11` failed `tests/test_ledger_speed.py::test_support_batch_does_not_collapse` with `1.124669541000003 < (0.05146579200001611 * 12)`, about 22x. The other five push jobs passed. The test was not deleted. The 12x bound stays under the pre-fix ratio of about 18. A second batch is required only when the first window exceeds 12x. `docs/ci/4b469df.md`.
+
+Hosted CI for `af0f4df42ec8adac70ef72f35f99b55353aec15a` succeeded on both runs. Each run had six jobs: Ubuntu, Windows, and macOS, on Python 3.11 and 3.15.
+
+- Push: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43696321259 success.
+- Pull request: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43696324483 success.
+
+`docs/ci/af0f4df.md`. This paragraph is newer than `af0f4df`.
