@@ -2,7 +2,9 @@
 
 from pathlib import Path
 
-from raee_reverse.held_out import gzip_decompress, judge_crc, load_manifest, verify_inputs, verify_seal
+import hashlib
+
+from raee_reverse.held_out import gzip_decompress, judge_crc, load_manifest, logical_text_bytes, verify_inputs, verify_seal
 from raee_reverse.path_guard import SealViolation, install, restore
 
 REPO = Path(__file__).resolve().parents[1]
@@ -17,6 +19,12 @@ def test_manifest_is_not_blind_and_the_seal_matches():
     inputs = verify_inputs(REPO)
     assert inputs
     assert all(item["matches_manifest"] for item in inputs)
+
+
+def test_crlf_manifest_still_matches_the_lf_seal():
+    raw = (REPO / "targets" / "zlib" / "held_out" / "MANIFEST.json").read_bytes()
+    crlf = raw.replace(b"\n", b"\r\n")
+    assert hashlib.sha256(logical_text_bytes(crlf)).hexdigest() == hashlib.sha256(logical_text_bytes(raw)).hexdigest()
 
 
 def test_published_crc_rejects_an_injected_wrong_value():

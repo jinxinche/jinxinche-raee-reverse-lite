@@ -32,8 +32,18 @@ def load_manifest(repo: Path) -> dict:
     return data
 
 
+def logical_text_bytes(data: bytes) -> bytes:
+    """Hash text after turning CRLF into LF. Binary input is left alone.
+
+    Windows checkout rewrites text files. The seal is of the LF manifest.
+    """
+    if b"\0" in data:
+        return data
+    return data.replace(b"\r\n", b"\n")
+
+
 def verify_seal(repo: Path) -> dict:
-    raw = manifest_path(repo).read_bytes()
+    raw = logical_text_bytes(manifest_path(repo).read_bytes())
     digest = hashlib.sha256(raw).hexdigest()
     sealed = (repo / "targets" / "zlib" / "held_out" / "SEAL.sha256").read_text(encoding="utf-8").strip()
     return {"sha256": digest, "seal": sealed, "match": digest == sealed}

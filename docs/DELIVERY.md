@@ -68,4 +68,11 @@ Commands, in order, on this host with CPython 3.12.3:
 - `python3 tools/check_collection_floor.py` printed `collection floor matches 93 tests`.
 - `python3 -m raee_reverse --version` printed `raee-reverse-lite 0.1.0`.
 
-Hosted CI for this commit is not that local run. The 31c3e00 macOS Python 3.15 failure stays on the record.
+Hosted CI for `52d4a9e8b4918f75653b2912602a23d1cf510088`:
+
+- Push: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43695797385 failure.
+- Pull request: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43695808476 failure.
+
+On the pull request run, Ubuntu and macOS passed for 3.11 and 3.15. Both Windows jobs failed in `python -m pytest`. `tests/test_frozen_records.py::test_closed_failures_are_unchanged` saw SHA-256 `fb477586213a3b73dc55aeee71d0e78f93d2dc986da4c00d41257eed36de79d8` for `docs/phase4/GOAL.md` instead of `d20552ca4b56fb3db6c2ca8e498e0cde1fd0712d0f3700b791793650998bf2eb`. `tests/test_held_out.py::test_manifest_is_not_blind_and_the_seal_matches` saw the seal miss. Windows checkout rewrote those text files to CRLF. The tests were not deleted. The checker and the frozen-record test now hash LF text, and `.gitattributes` asks Git to keep those files as LF. `docs/ci/52d4a9e.md`.
+
+The 31c3e00 macOS Python 3.15 failure stays on the record.

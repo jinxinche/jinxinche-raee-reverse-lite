@@ -7,7 +7,7 @@ This directory is a separate held-out set. It is still not blind. One agent wrot
 ## What is isolated
 
 - Input bytes live here. Expected gzip bytes are not stored.
-- `MANIFEST.json` records the SHA-256 and length of each input. `SEAL.sha256` is the SHA-256 of that manifest file.
+- `MANIFEST.json` records the SHA-256 and length of each input. `SEAL.sha256` is the SHA-256 of that manifest with LF newlines. A Windows checkout that rewrites the file to CRLF still matches, because the checker turns CRLF into LF before hashing. The input files are binary and are not rewritten.
 - `tools/measure_zlib_crc32.py` installs `raee_reverse.path_guard` before it builds or times anything. The guard raises if that process opens `targets/zlib/held_out` or `targets/zlib/sealed_observations.json`.
 - The candidate is one fixed PCLMULQDQ path. There is no loop that reads expected answers and retries.
 

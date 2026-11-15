@@ -1,4 +1,4 @@
-"""Previous failures stay byte-for-byte. The new crc32 goal does not replace them."""
+"""Previous failure records stay. Checkout newline conversion is not a rewrite."""
 
 import hashlib
 from pathlib import Path
@@ -17,9 +17,20 @@ FROZEN = {
 }
 
 
+def _logical(data: bytes) -> bytes:
+    if b"\0" in data:
+        return data
+    return data.replace(b"\r\n", b"\n")
+
+
 def test_closed_failures_are_unchanged():
     for name, digest in FROZEN.items():
-        assert hashlib.sha256((REPO / name).read_bytes()).hexdigest() == digest
+        assert hashlib.sha256(_logical((REPO / name).read_bytes())).hexdigest() == digest
+
+
+def test_crlf_checkout_is_not_a_rewrite_of_the_closed_goal():
+    original = (REPO / "docs/phase4/GOAL.md").read_bytes()
+    assert hashlib.sha256(_logical(original.replace(b"\n", b"\r\n"))).hexdigest() == FROZEN["docs/phase4/GOAL.md"]
 
 
 def test_new_crc32_goal_does_not_claim_the_closed_goal():
