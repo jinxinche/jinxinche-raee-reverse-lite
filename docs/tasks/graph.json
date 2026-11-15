@@ -515,15 +515,18 @@
       "gate_met": true,
       "evidence": [
         "docs/a18/REA_COMPARISON.md",
-        "docs/a18/routing_comparison.json"
+        "docs/a18/routing_comparison.json",
+        "docs/a18/routing_comparison_2026-11-15.json",
+        "docs/a18/REA_RUNTIME.md",
+        "docs/a18/rea_runtime_2026-11-15.json"
       ],
       "limitations": [
-        "single sample",
-        "runtime execution was not part of the REA commands",
+        "single static sample, not a ranking",
+        "runtime comparison was attempted and is not complete: capture-process idle-killed the ELF before it printed, and one gdb command could not load it",
         "environment_healthy was false because optional engines were not installed",
-        "the five routing policies were not executed; no savings number"
+        "the five routing policies were not executed; savings_percent is null"
       ],
-      "checkpoint": "REA 6.9.0 was installed and run on the same checksum ELF and Ghidra 12.2. One analyze and one function query. Sample size 1. No suite score."
+      "checkpoint": "REA 6.9.0 static sample remains one function. On 2026-11-15 capture-process and debug-with-gdb were run and did not produce a scored runtime pair. No live model endpoint or price was available, so the five-policy comparison stayed unexecuted."
     },
     {
       "id": "A19",
@@ -536,11 +539,11 @@
       ],
       "state": "SUCCEEDED",
       "owner": "solo-agent",
-      "inputs_version": "docs/a19/standard_tier_v3.json",
+      "inputs_version": "docs/a19/extended_tier.json",
       "budget": {
         "agents": 1
       },
-      "exit_gate": "The floors in docs/a19/STANDARD_TIER_BUDGET.md are met by an executed run. Extended tier is not required. Latency percentiles were not a declared pass threshold.",
+      "exit_gate": "The floors in docs/a19/STANDARD_TIER_BUDGET.md stay met by standard_tier_v3. The extended floors in docs/a19/EXTENDED_TIER_BUDGET.json are a separate run.",
       "gate_met": true,
       "evidence": [
         "docs/a19/STANDARD_TIER_BUDGET.md",
@@ -551,16 +554,17 @@
         "docs/a19/ATTEMPT3_BUDGET.md",
         "docs/a19/standard_tier_v3.json",
         "docs/a19/ledger_fix_rates.json",
+        "docs/a19/EXTENDED_TIER_BUDGET.md",
+        "docs/a19/extended_probe.json",
+        "docs/a19/extended_tier.json",
         "tests/test_decision_unit.py"
       ],
       "limitations": [
         "the 10041-relation stop remains a failure",
         "attempt2 remains not a pass",
-        "extended tier not run",
-        "latency percentiles were not recorded",
         "routing budget contention is a unit test, not the 30 minute tier"
       ],
-      "checkpoint": "The first load remains a failure at 10041 relations and 21000 records. Attempt 2 did not start the full tier. After the ledger change, attempt 3 was declared, the probe projected 1940 seconds, and tools/run_standard_tier.py exited 0 with standard_tier_pass true: load 19.814s, mixed 1800.035s, 50003 relations, 20 target runs."
+      "checkpoint": "The first load remains a failure at 10041 relations and 21000 records. Attempt 2 did not start the full tier. Attempt 3 passed the standard floors. The extended tier was declared, the probe projected 2336.889 seconds, and tools/run_extended_tier.py exited 0 with extended_tier_pass true."
     },
     {
       "id": "A20",
@@ -601,9 +605,10 @@
       ],
       "limitations": [
         "non-blind acceptance",
-        "standard tier not completed",
-        "enhancement not met",
-        "the commit that records this review is newer than 746addd"
+        "the 10041-relation stop and attempt 2 remain failures",
+        "the closed zlib wall-time goal remains missed",
+        "the review recorded here is of 746addd and does not cover the crc32 goal, the extended tier, or this branch",
+        "this agent is not an independent reviewer of its own commit"
       ]
     }
   ]

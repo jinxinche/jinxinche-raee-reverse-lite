@@ -1,50 +1,71 @@
 # Delivery report
 
-One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. No new enhancement goal was opened.
+One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. A different crc32 goal was frozen in `docs/phase4/GOAL_CRC32.md` before its measurement.
 
 ## Versions
 
-- Tool: `raee-reverse-lite` 0.1.0. On the working tree committed as `c661219`, `python3 -m raee_reverse --version` printed that string.
-- Python for that command: CPython 3.12.3 (`3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]`). Supported range `>=3.11,<3.16`.
-- zlib: tag `v1.4`, tarball SHA-256 `02dd159783677a749c04adbdd02b55b8a2bcc7e054f51b76b549199a916ad584`. Not rebuilt on `c661219`.
-- Ghidra: 12.2 public, with Temurin JDK 25.0.5. Distro JDK 21 cannot launch it. Not re-run on `c661219`.
-- REA: `rea-agents` 6.9.0. `rea --version` printed `6.9.0` in the earlier install. Not re-run on `c661219`.
-- Node used for that install: v22.23.4.
+- Tool: `raee-reverse-lite` 0.1.0.
+- Python for the commands below: CPython 3.12.3 (`3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]`). Supported range `>=3.11,<3.16`.
+- Host for the measurements: `Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Fri Nov 13 20:22:28 UTC 2026 x86_64`, gcc 13, 4 CPUs, Intel Xeon.
+- zlib: tag `v1.4`, tarball SHA-256 `02dd159783677a749c04adbdd02b55b8a2bcc7e054f51b76b549199a916ad584`.
+- Ghidra: 12.2 public, with Temurin JDK 25.0.5. Not re-run on this slice.
+- REA: `rea-agents` 6.9.0. `rea --version` printed `6.9.0`.
+- GDB used only for the runtime attempt: `GNU gdb (Ubuntu 15.1-1ubuntu1~24.04.1) 15.1`. `rizin` was not on `PATH`.
 
 ## Four-way status
 
-**Implemented.** The ledger, sandbox, Ghidra adapter, minimal CLI, MCP stdio server, offline HTML report, zlib 1.4 baseline, reproduction pack, and attribution helpers.
+**Implemented.** The ledger, sandbox, Ghidra adapter, CLI, MCP stdio server, offline HTML report, zlib 1.4 baseline, the five-policy comparison harness, the held-out checker and path guard, the crc32 PCLMULQDQ candidate, and the extended-tier probe and runner.
 
 **Executed.**
 
 - `12735f05` Actions: failure. Ubuntu passed; Windows and macOS failed. `docs/ci/12735f05.md`.
 - `d38e889`, `0a74bed`, `345c7f8`, `45eff3c`, `772dfac`, `c661219`, `746addd`, and `27f9dde` Actions: 12 of 12 jobs succeeded on both the push run and the pull_request run for each of those commits. `docs/ci/27f9dde.md`.
-- Dev ELF and zlib `minigzip` headless Ghidra runs, including a decompiled `crc32`.
-- Baseline dev check without reading the final-acceptance file, then `accept.py`: 8/8 final inputs matched collected surfaces. Non-blind. Level `-9` stayed `not_compared`.
-- LTO candidate: decompress median 99.6% of baseline. Enhancement not met.
-- REA 6.9.0 `analyze` and `function checksum` on the same ELF. Both static runs showed modulus `0xfff1`. Sample size 1.
+- `31c3e00` push Actions: `macos-latest / py3.15` failed `tests/test_ledger_speed.py::test_support_batch_does_not_collapse` at about 8x. The pull_request run for that commit succeeded. `docs/ci/31c3e00.md`. The test was not deleted.
 - Standard-tier load stopped at 10,041 relations and 21,000 records. Not a pass. `docs/a19/standard_tier.json`.
-- A second probe, declared in `docs/a19/ATTEMPT2_BUDGET.md` before it ran, inserted 2,000 supports in 9.649 seconds and did not start the full tier. `standard_tier_pass` is false. `docs/a19/attempt2.json`.
-- After the ledger change, a third budget was declared in `docs/a19/ATTEMPT3_BUDGET.md`. The probe projected 1,940 seconds, under the 2,700 second cap. `python3 tools/run_standard_tier.py /tmp/a19-standard-v3 /tmp/a19-standard-v3-result.json /tmp/checksum_cli` then exited 0. `standard_tier_executed` is true and `standard_tier_pass` is true. Load 19.814 seconds, mixed phase 1800.035 seconds, 50,003 relations, 20 target runs, retraction cleared `accepted_pass`, cancel state `CANCELLED`. `docs/a19/standard_tier_v3.json`. The earlier failure files were not changed.
+- Attempt 2 inserted 2,000 supports in 9.649 seconds and did not start the full tier. `docs/a19/attempt2.json`.
+- Standard-tier v3 passed its own floors: load 19.814 seconds, mixed 1800.035 seconds, 50,003 relations. `docs/a19/standard_tier_v3.json`.
+- LTO candidate missed the closed speed goal: decompress median ratio 0.9956544893408726 against 0.90, compress 1.0022963782068877 against 1.05. `docs/evidence/zlib_enhancement.json`.
+- crc32 goal, second build, `make` exit 0 for both trees. Command: `python3 tools/measure_zlib_crc32.py /tmp/zlib-crc32-work /tmp/zlib-crc32-result.json`. Baseline median 0.00280024 seconds, candidate median 0.000744777 seconds, ratio 0.2659689883724252. Correct, including `cbf43926` for `123456789` and identical `minigzip` stdout for empty, `abc`, and `hello`. `enhancement_met` true for this one sample. `stable_improvement` false. `docs/evidence/zlib_crc32_goal.json`.
+- An earlier candidate `make` exited 2 because the shared library did not link `crc32_z_pclmul_try`. That run is recorded in the same file and is not the acceptance measurement. Its ratio was 0.25433241847325494.
+- Held-out check: `python3 tools/check_held_out.py /tmp/zlib-crc32-work/candidate/zlib-1.4/minigzip /tmp/zlib-crc32-work/candidate/zlib-1.4/crc32_bench /tmp/held-out-check.json`. `pass` true, `blind` false. Python zlib 1.3 agreed with `cbf43926`. GNU gzip 1.12 decompressed all five candidate gzip streams. `docs/evidence/held_out_check.json`.
+- Routing availability: `python3 tools/record_routing_availability.py`. `executed` false, `savings_percent` null. `docs/a18/routing_comparison_2026-11-15.json`. No live model was called.
+- REA runtime attempt: `python3 tools/run_rea_runtime.py /tmp/rea-runtime /tmp/rea-runtime.json /tmp/checksum_cli`. `comparison_complete` false. `docs/a18/rea_runtime_2026-11-15.json`.
+- Extended probe: `python3 tools/probe_extended_tier.py /tmp/a19-extended-probe /tmp/a19-extended-probe.json`. Finished in 2.851 seconds. Projected 2336.889 seconds and 2,719,779,400 directory bytes. `start_allowed` true. `docs/a19/extended_probe.json`.
+- Extended tier: `python3 tools/run_extended_tier.py /tmp/a19-extended /tmp/a19-extended-result.json /tmp/checksum_cli /tmp/a19-extended-probe.json`. `extended_tier_executed` true and `extended_tier_pass` true. Load 170.475 seconds, mixed 1801.876 seconds, 250,006 relations, 10,002 claims, 100,032 observations, 20 target runs, directory 682,324,385 bytes. Load P50/P95/P99 seconds: 0.000200465, 0.001171793, 0.004716798 (sample size 360,000). Mixed P50/P95/P99 seconds: 0.000451200, 0.518006233, 2.978321967 (sample size 13,081). `docs/a19/extended_tier.json`.
 
-**Unverified.** Whether another compiler emits the same gzip bytes. Whether REA and this tool differ on a larger task set. Latency percentiles for the standard tier were not recorded.
+**Unverified.** Whether another compiler or another machine emits the same crc32 ratio. The ratio is one pair of 21-run medians on this host. Whether REA and this tool differ on a scored runtime task set. Whether a live five-policy comparison would change cost. Hosted CI for this commit is not this local pytest run.
 
-**Not done.** A faster zlib. A blind acceptance set. The extended stress tier. Optional REA engines (Hopper, IDA, JADX, Kuna) were not installed. Network namespaces were not available (`unshare` returned operation not permitted). REA was not asked to execute the ELF, so runtime behavior is not a compared surface. The five routing policies in the decision-unit spec were not executed (`docs/a18/routing_comparison.json`, `executed` false). No savings percentage is claimed.
+**Not done.** A live five-policy comparison. A completed REA runtime comparison. A blind acceptance set. Optional REA engines were not installed. Network namespaces were not available. No savings percentage is claimed. The closed zlib wall-time goal was not met and was not reopened.
 
-## Commands run on the c661219 tree
+## Live models
 
-These ran on the working tree that was committed as `c6612192b5e05d2a5c4c84daa57c0bb3d35099f7`, before that commit. Hosted pytest for that SHA is the Actions result above, not this local run.
+No. `config/model_profiles.json` has no available model profile and no endpoint. `config/prices.json` is empty and `observed_at` is null. None of the checked provider API key variables were set. Local ports 11434, 1234, and 8080 did not accept a connection. The harness in `src/raee_reverse/routing_compare.py` is covered by unit tests with a scripted transport. Those tests set `counts_as_project_comparison` false. They are not the comparison.
+
+## New zlib goal
+
+`docs/phase4/GOAL_CRC32.md`. Median in-process `crc32()` time on one 16 MiB buffer, candidate at most 90% of the zlib 1.4 baseline, one thread, same tarball, default `./configure && make`, not `CFLAGS="-O3 -flto"`. Outcome on the clean rebuild: pass for this sample, ratio 0.2659689883724252. Not a stable improvement. The closed goal remains missed.
+
+## Acceptance
+
+Not blind. One agent wrote the inputs, the checker, and the candidate. Isolation is the path guard in the measurement process, a manifest hash in `targets/zlib/held_out/SEAL.sha256`, and the absence of stored expected gzip bytes. The published CRC `cbf43926` and GNU gzip 1.12 are external checks. An injected CRC `00000000` fails `judge_crc`. `targets/zlib/NON_BLIND.md` is unchanged.
+
+## Extended tier
+
+Budget and floors were written in `docs/a19/EXTENDED_TIER_BUDGET.md` before the probe. Cap: projected seconds at most 4,200 and directory at most 4 GiB. The probe was inside the cap, so the full run started. It passed the declared floors. The 10,041-relation stop and attempt 2 stay failures. The standard-tier v3 pass stays a pass of the standard floors.
+
+## REA
+
+`rea-agents` 6.9.0. Task: `/tmp/checksum_cli` with stdin `abc`, contract line `count=3 sum=294`. Sample size of scored pairs: 0. `capture-process` returned signal 9 `idle_timeout` and did not show the contract line. `debug-with-gdb run` reported that no executable was loaded. This is an uncompleted comparison, not a ranking.
+
+## Local tests on this tree
+
+Commands, in order, on this host with CPython 3.12.3:
 
 - `python3 -m pip install .`
+- `python3 -m pytest -q --tb=line` : 1 failed, 92 passed, 1 warning, in 6.70s. `tests/test_scheduler.py::test_dependencies_retries_cancel_and_exclusivity` asserted `RUNNING == CANCELLED`. The scheduler thread then raised `task not found` while the fixture was closing the store. The test was not changed and was not skipped.
+- `python3 -m pytest tests/test_scheduler.py::test_dependencies_retries_cancel_and_exclusivity -q --tb=line` : 1 passed in 0.43s.
+- `python3 -m pytest -q --tb=line` : 93 passed in 6.79s.
+- `python3 tools/check_collection_floor.py` printed `collection floor matches 93 tests`.
 - `python3 -m raee_reverse --version` printed `raee-reverse-lite 0.1.0`.
-- `python3 -m pytest -q` : 54 passed in 4.38s.
-- `python3 -m raee_reverse --root /tmp/rrl-a20 init`, then `claim add` for the README statement. Claim id `a3ff1af276f8405aad230b79b13e013d`. `gate` on that id exited 2. `report --out /tmp/rrl-a20/report.html` wrote 901 bytes starting with `<!DOCTYPE html>`.
-- `python3 /tmp/a19-attempt2-probe.py`. The same bytes are `tools/probe_a19_attempt2.py`, SHA-256 `c3afa1f8cd001986070c03725912974b5207f0bb1e98cd4db03c96a70008dffa`. It inserted 2,000 supports in 9.649 seconds and did not start the full tier.
 
-## Known gaps
-
-- The 10,041-relation stop and the second probe remain failures. They are not this run. Support rates before and after the ledger change are in `docs/a19/ledger_fix_rates.json`.
-- Review target `746addd657822b01ec6a328ebfb5cf925c8d139e` has green Actions on both runs: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591930851 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591936161. Six jobs succeeded in each run. That commit reviews `c661219` and does not change Python code. The commit that adds this paragraph is newer than `746addd`.
-- `c6612192b5e05d2a5c4c84daa57c0bb3d35099f7` also has green Actions: push https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591711285 and pull request https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/43591714049. The commands below were run on the working tree that became `c661219`, before that commit.
-- Final acceptance is non-blind (`targets/zlib/NON_BLIND.md`).
-- REA remains one static sample. No optional engines were installed, and no ranking was computed.
+Hosted CI for this commit is not that local run. The 31c3e00 macOS Python 3.15 failure stays on the record.

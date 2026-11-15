@@ -1,0 +1,23 @@
+{
+  "id": "zlib-crc32-pclmul-2026-11-15",
+  "status": "frozen",
+  "supersedes_closed_goal": false,
+  "closed_goal": "docs/phase4/GOAL.md",
+  "closed_goal_result": "docs/evidence/zlib_enhancement.json",
+  "closed_goal_remains": "missed",
+  "zlib_version": "1.4",
+  "tarball_sha256": "02dd159783677a749c04adbdd02b55b8a2bcc7e054f51b76b549199a916ad584",
+  "task_scope": "in-process crc32 of one 16 MiB buffer; minigzip stdout is a compatibility constraint and is not the speed metric",
+  "metric": "median wall time of one crc32 call, lower better",
+  "payload_bytes": 16777216,
+  "payload_formula": "(i * 17 + 3) & 0xff",
+  "warmup_excluded": 1,
+  "runs": 21,
+  "threads": 1,
+  "crc32_ratio_max": 0.9,
+  "published_check_ascii": "123456789",
+  "published_check_crc32_hex": "cbf43926",
+  "minigzip_identity_inputs": ["empty", "abc", "hello"],
+  "candidate": "zlib 1.4 plus targets/zlib/candidate/crc32_pclmul.c, default configure, one thread, not CFLAGS=-O3 -flto",
+  "command": "python3 tools/measure_zlib_crc32.py /tmp/zlib-crc32-work /tmp/zlib-crc32-result.json"
+}

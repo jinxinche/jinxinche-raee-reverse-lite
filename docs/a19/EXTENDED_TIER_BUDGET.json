@@ -1,0 +1,42 @@
+{
+  "declared_before_probe": true,
+  "declared_before_execution": true,
+  "does_not_change": [
+    "docs/a19/standard_tier.json",
+    "docs/a19/attempt2.json",
+    "docs/a19/standard_tier_v3.json"
+  ],
+  "scale": {
+    "claims": 10000,
+    "observations": 100000,
+    "relations": 250000,
+    "supports": 100000,
+    "derived_from": 150000
+  },
+  "mixed_seconds_minimum": 1800,
+  "concurrency_levels": [1, 2, 4, 8, 16],
+  "target_runs": 20,
+  "directory_cap_bytes": 4294967296,
+  "probe": {
+    "claims": 100,
+    "observations": 1000,
+    "supports": 2000,
+    "derived_from": 500,
+    "stop_seconds": 120,
+    "stop_directory_bytes": 536870912,
+    "directory": "/tmp/a19-extended-probe"
+  },
+  "projection": {
+    "support_rate": "last_100_supports",
+    "load_safety_factor": 1.5,
+    "directory_safety_factor": 2,
+    "mixed_seconds": 1800,
+    "setup_seconds": 180
+  },
+  "start_only_if": {
+    "projected_seconds_at_most": 4200,
+    "projected_directory_bytes_at_most": 4294967296
+  },
+  "full_directory": "/tmp/a19-extended",
+  "expected_stdout": "count=3 sum=294\n"
+}
