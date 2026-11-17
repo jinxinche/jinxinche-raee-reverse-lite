@@ -17,3 +17,11 @@ targets/zlib/published_acceptance/MANIFEST.json text eol=lf
 targets/zlib/published_acceptance/SEAL.sha256 text eol=lf
 targets/zlib/published_acceptance/ORIGIN.md text eol=lf
 targets/zlib/published_acceptance/inputs/* -text
+targets/zlib/blind_acceptance/MANIFEST.json text eol=lf
+targets/zlib/blind_acceptance/SEAL.sha256 text eol=lf
+targets/zlib/blind_acceptance/ORIGIN.md text eol=lf
+targets/zlib/blind_acceptance/ISOLATION.md text eol=lf
+targets/zlib/blind_acceptance/LICENSE.md text eol=lf
+targets/zlib/blind_acceptance/GFDL-1.2.txt text eol=lf
+targets/zlib/blind_acceptance/crc32_stdin.c text eol=lf
+targets/zlib/blind_acceptance/enwik8.zip -text

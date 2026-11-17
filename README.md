@@ -51,6 +51,7 @@ python3 -m raee_reverse --root /tmp/rrl-readme report --out /tmp/rrl-readme/repo
 - Standard stress tier: the stopped load remains a failure in `docs/a19/standard_tier.json`. A later run passed the declared floors: `docs/a19/standard_tier_v3.json`.
 - Held-out zlib inputs are in `targets/zlib/held_out/`. They are not blind. `targets/zlib/NON_BLIND.md` is unchanged.
 - The Canterbury corpus under `targets/zlib/published_acceptance/` is a separate check. It is not blind. Expected gzip bytes are not stored.
+- The enwik8 check under `targets/zlib/blind_acceptance/` is a later set. Its seal commit is the checker and the published file. Candidate runs are recorded only after that commit. The MIT license does not cover `enwik8.zip`.
 - Extended stress tier passed the floors declared in `docs/a19/EXTENDED_TIER_BUDGET.md`. The earlier standard-tier failures stay failures. Result: `docs/a19/extended_tier.json`.
 - `python3 -m raee_reverse --root /tmp/rrl-route route --task-json /tmp/route-task.json --profiles config/model_profiles.json --prices config/prices.json` chose `deterministic_tool` at T0. `accepted_pass` in that result was false. Record id `d5ead1c546af4d1398f43f7daf259908`.
 
