@@ -45,6 +45,18 @@ KEY_NAMES = (
     "XAI_API_KEY",
 )
 LOCAL_PORTS = (11434, 1234, 8080)
+PROVIDER_TCP_TARGETS = (
+    ("api.openai.com", 443),
+    ("api.anthropic.com", 443),
+    ("generativelanguage.googleapis.com", 443),
+    ("api.groq.com", 443),
+    ("api.mistral.ai", 443),
+    ("api.x.ai", 443),
+    ("openrouter.ai", 443),
+    ("api.deepseek.com", 443),
+    ("api.together.xyz", 443),
+    ("api.fireworks.ai", 443),
+)
 
 
 def _profiles_for(profiles: list[dict[str, Any]], tier: str) -> list[dict[str, Any]]:
@@ -338,6 +350,60 @@ def local_port_open(port: int, host: str = "127.0.0.1") -> bool:
         return False
     finally:
         probe.close()
+
+
+def tcp_probe(host: str, port: int, timeout: float = 2.0) -> dict[str, Any]:
+    """Open a TCP connection and close it. This does not send an API request."""
+    started = time.perf_counter()
+    probe = socket.socket()
+    probe.settimeout(timeout)
+    try:
+        code = probe.connect_ex((host, port))
+    except OSError as exc:
+        return {
+            "host": host,
+            "port": port,
+            "connected": False,
+            "error": f"{type(exc).__name__}: {exc}",
+            "seconds": time.perf_counter() - started,
+        }
+    finally:
+        probe.close()
+    return {
+        "host": host,
+        "port": port,
+        "connected": code == 0,
+        "connect_errno": code,
+        "seconds": time.perf_counter() - started,
+    }
+
+
+def probe_record(
+    profiles: list[dict[str, Any]],
+    prices: dict[str, Any],
+    env: dict[str, str],
+    ports: dict[int, bool],
+    tcp_results: list[dict[str, Any]],
+    local_binaries: dict[str, str | None],
+) -> dict[str, Any]:
+    """Availability plus what this host could actually reach. Never a savings claim."""
+    record = availability_record(profiles, prices, env, ports)
+    connected = [item["host"] for item in tcp_results if item.get("connected")]
+    record["counts_as_project_comparison"] = False
+    record["model_calls"] = 0
+    record["prices_copied_from_the_network"] = False
+    record["tcp_probes"] = tcp_results
+    record["tcp_hosts_connected"] = connected
+    record["local_binaries"] = local_binaries
+    record["missing_conditions"] = list(record["missing_conditions"])
+    record["missing_conditions"].append(
+        "TCP reachability is not a model endpoint and no model request was sent"
+    )
+    if not connected and not any(local_binaries.values()):
+        record["missing_conditions"].append(
+            "no checked provider host accepted TCP and no local model binary was found"
+        )
+    return record
 
 
 def availability_record(profiles: list[dict[str, Any]], prices: dict[str, Any], env: dict[str, str], ports: dict[int, bool]) -> dict[str, Any]:

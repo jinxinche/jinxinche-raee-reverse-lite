@@ -6,6 +6,7 @@ from raee_reverse.routing_compare import (
     POLICIES,
     availability_record,
     measured_cost_ratio,
+    probe_record,
     run_policy,
 )
 
@@ -212,3 +213,20 @@ def test_availability_record_stays_unexecuted_without_inventing_a_price():
     assert record["metrics"]["total_cost"] == "not_collected"
     assert "no model profile has available=true" in record["missing_conditions"]
     assert set(POLICIES) == set(record["policies"])
+
+
+def test_tcp_probe_does_not_execute_a_comparison():
+    record = probe_record(
+        [{"id": "t1-unverified", "tier": "T1", "available": False, "price_status": "unknown"}],
+        {"observed_at": None, "prices": {}},
+        {},
+        {11434: False, 1234: False, 8080: False},
+        [{"host": "api.openai.com", "port": 443, "connected": True, "connect_errno": 0}],
+        {"ollama": None},
+    )
+    assert record["executed"] is False
+    assert record["savings_percent"] is None
+    assert record["counts_as_project_comparison"] is False
+    assert record["model_calls"] == 0
+    assert record["prices_copied_from_the_network"] is False
+    assert "api.openai.com" in record["tcp_hosts_connected"]

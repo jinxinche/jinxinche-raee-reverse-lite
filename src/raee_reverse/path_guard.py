@@ -12,6 +12,7 @@ from pathlib import Path
 DENIED = (
     "targets/zlib/held_out",
     "targets/zlib/sealed_observations.json",
+    "targets/zlib/published_acceptance",
 )
 
 

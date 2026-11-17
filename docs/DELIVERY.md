@@ -1,20 +1,21 @@
 # Delivery report
 
-One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. A different crc32 goal was frozen in `docs/phase4/GOAL_CRC32.md` before its measurement.
+One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. A different crc32 goal was frozen in `docs/phase4/GOAL_CRC32.md` before its measurement. A second minigzip wall-time goal was frozen in `docs/phase4/GOAL_MINIGZIP_ATTEMPT2.md` before its candidate was built. That attempt is closed as missed.
 
 ## Versions
 
 - Tool: `raee-reverse-lite` 0.1.0.
-- Python for the commands below: CPython 3.12.3 (`3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]`). Supported range `>=3.11,<3.16`.
-- Host for the measurements: `Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Fri Nov 13 20:22:28 UTC 2026 x86_64`, gcc 13, 4 CPUs, Intel Xeon.
+- Python for the commands on this slice: CPython 3.12.3. Supported range `>=3.11,<3.16`.
+- Host for the measurements on this slice: `Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Mon Nov 16 16:06:22 UTC 2026 x86_64`, gcc 13, 4 CPUs, Intel Xeon.
 - zlib: tag `v1.4`, tarball SHA-256 `02dd159783677a749c04adbdd02b55b8a2bcc7e054f51b76b549199a916ad584`.
 - Ghidra: 12.2 public, with Temurin JDK 25.0.5. Not re-run on this slice.
-- REA: `rea-agents` 6.9.0. `rea --version` printed `6.9.0`.
-- GDB used only for the runtime attempt: `GNU gdb (Ubuntu 15.1-1ubuntu1~24.04.1) 15.1`. `rizin` was not on `PATH`.
+- REA: `rea-agents` 6.9.0 from `/tmp/rea-6.9.0`. `rea --version` printed `6.9.0`.
+- GDB: `GNU gdb (Ubuntu 15.1-1ubuntu1~24.04.1) 15.1`. `rizin` was not on `PATH`. Apt has no `rizin` package. Radare2 was not substituted.
+- GNU gzip 1.12. CPython's zlib is 1.3, which is not the zlib 1.4 under test.
 
 ## Four-way status
 
-**Implemented.** The ledger, sandbox, Ghidra adapter, CLI, MCP stdio server, offline HTML report, zlib 1.4 baseline, the five-policy comparison harness, the held-out checker and path guard, the crc32 PCLMULQDQ candidate, and the extended-tier probe and runner.
+**Implemented.** The ledger, sandbox, Ghidra adapter, CLI, MCP stdio server, offline HTML report, zlib 1.4 baseline, the five-policy comparison harness, the held-out checker and path guard, the crc32 PCLMULQDQ candidate, the extended-tier probe and runner, a published-corpus acceptance checker, and the minigzip attempt-2 measurement script.
 
 **Executed.**
 
@@ -29,25 +30,34 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. A di
 - An earlier candidate `make` exited 2 because the shared library did not link `crc32_z_pclmul_try`. That run is recorded in the same file and is not the acceptance measurement. Its ratio was 0.25433241847325494.
 - Held-out check: `python3 tools/check_held_out.py /tmp/zlib-crc32-work/candidate/zlib-1.4/minigzip /tmp/zlib-crc32-work/candidate/zlib-1.4/crc32_bench /tmp/held-out-check.json`. `pass` true, `blind` false. Python zlib 1.3 agreed with `cbf43926`. GNU gzip 1.12 decompressed all five candidate gzip streams. `docs/evidence/held_out_check.json`.
 - Routing availability: `python3 tools/record_routing_availability.py`. `executed` false, `savings_percent` null. `docs/a18/routing_comparison_2026-11-15.json`. No live model was called.
-- REA runtime attempt: `python3 tools/run_rea_runtime.py /tmp/rea-runtime /tmp/rea-runtime.json /tmp/checksum_cli`. `comparison_complete` false. `docs/a18/rea_runtime_2026-11-15.json`.
+- REA runtime attempt: `python3 tools/run_rea_runtime.py /tmp/rea-runtime /tmp/rea-runtime.json /tmp/checksum_cli`. `comparison_complete` false. `docs/a18/rea_runtime_2026-11-15.json`. Scored pairs on that date: 0.
+- Routing probe on 2026-11-17: `python3 tools/record_routing_probe.py docs/a18/routing_comparison_2026-11-17.json`. `executed` false, `savings_percent` null, `model_calls` 0. Ten provider hosts accepted TCP on port 443. No API key, no endpoint, and no price were present, so no model request was sent. `docs/a18/ROUTING_2026-11-17.md`.
+- Published-corpus check, stock zlib 1.4 `minigzip`: `python3 tools/check_published_acceptance.py /tmp/zlib-base/zlib-1.4/minigzip /tmp/zlib-base/zlib-1.4/crc32_bench docs/evidence/published_acceptance_stock.json`. `pass` true, `blind` false, sample size 11. GNU gzip 1.12 and CPython zlib 1.3 agreed with the candidate bytes.
+- The same check on the attempt-2 candidate: `pass` true, `blind` false, sample size 11. `docs/evidence/published_acceptance_attempt2.json`. The set was not used to edit the candidate.
+- REA runtime on 2026-11-17: `python3 tools/run_rea_runtime.py /tmp/rea-runtime-2026 /tmp/rea-runtime-2026.json /tmp/checksum_cli`. `comparison_complete` true for four scored pairs. `ranking` false. `capture-process` still ended with signal 9 `idle_timeout` and did not show the contract line. One-shot `debug-with-gdb run` still reported `No executable file specified`. `docs/a18/rea_runtime_2026-11-17.json`.
+- Minigzip attempt 2: `python3 tools/measure_zlib_minigzip_attempt2.py /tmp/zlib-minigzip-attempt2 /tmp/zlib-minigzip-attempt2.json`. Decompress median ratio 1.003810222421081 against 0.90. Compress median ratio 1.0277633298808058 against 1.05. Correct. `enhancement_met` false. `stable_improvement` false. `attempt_status` `closed_missed`. `docs/evidence/zlib_minigzip_attempt2.json`.
 - Extended probe: `python3 tools/probe_extended_tier.py /tmp/a19-extended-probe /tmp/a19-extended-probe.json`. Finished in 2.851 seconds. Projected 2336.889 seconds and 2,719,779,400 directory bytes. `start_allowed` true. `docs/a19/extended_probe.json`.
 - Extended tier: `python3 tools/run_extended_tier.py /tmp/a19-extended /tmp/a19-extended-result.json /tmp/checksum_cli /tmp/a19-extended-probe.json`. `extended_tier_executed` true and `extended_tier_pass` true. Load 170.475 seconds, mixed 1801.876 seconds, 250,006 relations, 10,002 claims, 100,032 observations, 20 target runs, directory 682,324,385 bytes. Load P50/P95/P99 seconds: 0.000200465, 0.001171793, 0.004716798 (sample size 360,000). Mixed P50/P95/P99 seconds: 0.000451200, 0.518006233, 2.978321967 (sample size 13,081). `docs/a19/extended_tier.json`.
 
-**Unverified.** Whether another compiler or another machine emits the same crc32 ratio. The ratio is one pair of 21-run medians on this host. Whether REA and this tool differ on a scored runtime task set. Whether a live five-policy comparison would change cost. Hosted CI for this commit is not this local pytest run.
+**Unverified.** Whether another compiler or another machine emits the same crc32 ratio or the same attempt-2 minigzip ratio. Each ratio is one pair of medians on this host. Whether the four-task REA sample would look the same on another host. Whether a live five-policy comparison would change cost. Hosted CI for this commit is not this local pytest run.
 
-**Not done.** A live five-policy comparison. A completed REA runtime comparison. A blind acceptance set. Optional REA engines were not installed. Network namespaces were not available. No savings percentage is claimed. The closed zlib wall-time goal was not met and was not reopened.
+**Not done.** A live five-policy comparison. Prices and a callable model endpoint were missing, so savings stays null. A blind acceptance set. The Canterbury check is explicitly not blind: the same agent selected the corpus, wrote the harness, and wrote the attempt-2 candidate. `rizin` is still absent. Network namespaces were not available. No savings percentage is claimed. The closed zlib wall-time goal was not met and was not reopened. Attempt 2 on the same metric was also missed and was not turned into a pass.
 
 ## Live models
 
-No. `config/model_profiles.json` has no available model profile and no endpoint. `config/prices.json` is empty and `observed_at` is null. None of the checked provider API key variables were set. Local ports 11434, 1234, and 8080 did not accept a connection. The harness in `src/raee_reverse/routing_compare.py` is covered by unit tests with a scripted transport. Those tests set `counts_as_project_comparison` false. They are not the comparison.
+No comparison was executed. `config/model_profiles.json` has no available model profile and no endpoint. `config/prices.json` is empty and `observed_at` is null. None of the checked provider API key variables were set. Local ports 11434, 1234, and 8080 did not accept a connection. No local model binary was on `PATH`. Ten public API hosts accepted TCP on port 443 on 2026-11-17. That is not an endpoint this project can call, and no price was invented from it. The harness in `src/raee_reverse/routing_compare.py` is covered by unit tests with a scripted transport. Those tests set `counts_as_project_comparison` false. They are not the comparison. The 2026-11-15 record is unchanged.
 
 ## New zlib goal
 
 `docs/phase4/GOAL_CRC32.md`. Median in-process `crc32()` time on one 16 MiB buffer, candidate at most 90% of the zlib 1.4 baseline, one thread, same tarball, default `./configure && make`, not `CFLAGS="-O3 -flto"`. Outcome on the clean rebuild: pass for this sample, ratio 0.2659689883724252. Not a stable improvement. The closed goal remains missed.
 
+`docs/phase4/GOAL_MINIGZIP_ATTEMPT2.md` is the same minigzip wall-time metric as the closed goal: 4 MiB buffer, sandboxed process, 21-run median, decompress ratio at most 0.90, compress ratio at most 1.05. Both trees use `./configure && make` with no `CFLAGS` or `LDFLAGS` override. The candidate changes `minigzip` buffering and hooks the existing PCLMULQDQ crc32 path. Outcome: closed as missed. Decompress ratio 1.003810222421081. Compress ratio 1.0277633298808058. `stable_improvement` false.
+
 ## Acceptance
 
-Not blind. One agent wrote the inputs, the checker, and the candidate. Isolation is the path guard in the measurement process, a manifest hash in `targets/zlib/held_out/SEAL.sha256`, and the absence of stored expected gzip bytes. The published CRC `cbf43926` and GNU gzip 1.12 are external checks. An injected CRC `00000000` fails `judge_crc`. `targets/zlib/NON_BLIND.md` is unchanged.
+The held-out set is not blind. One agent wrote those inputs, the checker, and the candidate. Isolation is the path guard in the measurement process, a manifest hash in `targets/zlib/held_out/SEAL.sha256`, and the absence of stored expected gzip bytes. The published CRC `cbf43926` and GNU gzip 1.12 are external checks. An injected CRC `00000000` fails `judge_crc`. `targets/zlib/NON_BLIND.md` is unchanged.
+
+The Canterbury set under `targets/zlib/published_acceptance/` is also not blind. The inputs are the published corpus (`cantrbry.tar.gz`, SHA-256 `f140e8a5b73d3f53198555a63bfb827889394a42f20825df33c810c3d5e3f8fb`), not bytes invented for this candidate. Expected gzip bytes are not stored. The oracles are GNU gzip 1.12 and CPython zlib 1.3. The same agent selected the files, wrote the harness, and wrote the attempt-2 candidate, so `blind` stays false. The measurement process refuses that directory. Both the stock zlib 1.4 `minigzip` and the attempt-2 candidate passed all 11 files on this host. An injected CRC `00000000` fails `judge_observed_crc`.
 
 ## Extended tier
 
@@ -55,11 +65,15 @@ Budget and floors were written in `docs/a19/EXTENDED_TIER_BUDGET.md` before the 
 
 ## REA
 
-`rea-agents` 6.9.0. Task: `/tmp/checksum_cli` with stdin `abc`, contract line `count=3 sum=294`. Sample size of scored pairs: 0. `capture-process` returned signal 9 `idle_timeout` and did not show the contract line. `debug-with-gdb run` reported that no executable was loaded. This is an uncompleted comparison, not a ranking.
+`rea-agents` 6.9.0. The 2026-11-15 attempt stays scored-pairs 0: `capture-process` returned signal 9 `idle_timeout` and did not show `count=3 sum=294`, and `debug-with-gdb run` reported that no executable was loaded.
+
+On 2026-11-17 those two failures were run again and still failed the same way. A persistent GDB session then ran `file` and `run < <stdin file>` for four stdin values (`abc`, empty, `a`, `hello`). This tool's sandbox ran the same bytes. All four pairs were scored and both sides matched the contract stdout. `comparison_complete` is true for that task set. `ranking` is false. Model cost is unknown. `rizin` is still absent. `docs/a18/REA_RUNTIME_2026-11-17.md`.
 
 ## Local tests on this tree
 
-Commands, in order, on this host with CPython 3.12.3:
+On this slice, after the measurements above, `python3 -m pip install .` and `python3 -m pytest -q --tb=line` : 104 passed in 6.96s. `python3 tools/check_collection_floor.py` printed `collection floor matches 104 tests`. The earlier 93-test run stays a record of that tree. Hosted CI for this commit is not that local run.
+
+Commands from the previous slice, in order, on that host with CPython 3.12.3:
 
 - `python3 -m pip install .`
 - `python3 -m pytest -q --tb=line` : 1 failed, 92 passed, 1 warning, in 6.70s. `tests/test_scheduler.py::test_dependencies_retries_cancel_and_exclusivity` asserted `RUNNING == CANCELLED`. The scheduler thread then raised `task not found` while the fixture was closing the store. The test was not changed and was not skipped.
