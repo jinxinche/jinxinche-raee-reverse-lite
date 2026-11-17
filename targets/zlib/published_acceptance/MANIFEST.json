@@ -1,0 +1,69 @@
+{
+  "blind": false,
+  "blind_claim": false,
+  "inputs_invented_for_this_candidate": false,
+  "inputs_origin": "Canterbury corpus, cantrbry.tar.gz, as published for compression research",
+  "origin_url": "https://corpus.canterbury.ac.nz/resources/cantrbry.tar.gz",
+  "origin_tar_sha256": "f140e8a5b73d3f53198555a63bfb827889394a42f20825df33c810c3d5e3f8fb",
+  "oracle": "GNU gzip and CPython zlib, not the candidate",
+  "expected_gzip_stored": false,
+  "tuned_on_this_set": false,
+  "blind_reason": "The same agent selected this published corpus, wrote the checker harness, and wrote the minigzip attempt-2 candidate. The input bytes were not invented for that candidate, and expected gzip bytes are not stored. GNU gzip and CPython zlib are the oracles. Selecting the files and writing the harness in the same session as the candidate is not isolation, so this set is not blind.",
+  "inputs": [
+    {
+      "name": "alice29.txt",
+      "sha256": "7467306ee0feed4971260f3c87421154a05be571d944e9cb021a5713700c38f0",
+      "length": 152089
+    },
+    {
+      "name": "asyoulik.txt",
+      "sha256": "eaa3526fe53859f34ecdf255712f9ecf0b2c903451d4755b2edaa2e2599cb0fc",
+      "length": 125179
+    },
+    {
+      "name": "cp.html",
+      "sha256": "e0cd21cef5b6c4069461e949be100080c3ce887de6f1dd8626c480528efaaf61",
+      "length": 24603
+    },
+    {
+      "name": "fields.c",
+      "sha256": "85d73e354cc50cec76cb5a50537cf8dc035f8cbb8480f9e1cbe2f7d6c23393c7",
+      "length": 11150
+    },
+    {
+      "name": "grammar.lsp",
+      "sha256": "1b0805dfc0ae706b35aac2bb4e15f02485efd24dda5dbd29de7b2f84d1a88c15",
+      "length": 3721
+    },
+    {
+      "name": "kennedy.xls",
+      "sha256": "9af47239ca29dfe20e633f80bbbb9a4cc9783d0803d7b2b5626f42e4c3790420",
+      "length": 1029744
+    },
+    {
+      "name": "lcet10.txt",
+      "sha256": "5314ba1dbb03f471df88bec6cd120a938ef60d0fd3511c5c1dce61bf7463245f",
+      "length": 426754
+    },
+    {
+      "name": "plrabn12.txt",
+      "sha256": "07e2e0b461af78c7c647cb53dab39de560198e16f799b4516eccf0fbd69f764c",
+      "length": 481861
+    },
+    {
+      "name": "ptt5",
+      "sha256": "0ec3a75089bb52342813496b17e51377bc9eba3cb519a444d67025354841d650",
+      "length": 513216
+    },
+    {
+      "name": "sum",
+      "sha256": "ee5733cd76ecc2f9d8ff156adc3c02a7a851051dcf43a2d56ff4ee4ff606bdb3",
+      "length": 38240
+    },
+    {
+      "name": "xargs.1",
+      "sha256": "c58aeb5d2d1e12751d47e7412b45784405fc30a5671b03d480fa05776e183619",
+      "length": 4227
+    }
+  ]
+}

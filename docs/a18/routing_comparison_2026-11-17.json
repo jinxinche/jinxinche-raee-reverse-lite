@@ -1,0 +1,161 @@
+{
+  "executed": false,
+  "savings_percent": null,
+  "high_tier_answers_are_ground_truth": false,
+  "policies": [
+    "fixed_high_tier",
+    "fixed_economy",
+    "fixed_by_task_type",
+    "auto_difficulty_routing",
+    "auto_routing_plus_context_optimization"
+  ],
+  "metrics": {
+    "correct_completion_rate": "not_collected",
+    "unsupported_conclusion_rate": "not_collected",
+    "coverage": "not_collected",
+    "unfinished_rate": "not_collected",
+    "total_cost": "not_collected",
+    "input_tokens": "not_collected",
+    "output_tokens": "not_collected",
+    "other_billed_tokens": "not_collected",
+    "cost_per_success": "not_collected",
+    "latency_distribution": "not_collected",
+    "routing_overhead": "not_collected",
+    "upgrade_rate": "not_collected",
+    "upgrade_success_rate": "not_collected",
+    "wrong_downgrade_rate": "not_collected",
+    "unnecessary_upgrade_rate": "not_collected"
+  },
+  "missing_conditions": [
+    "no model profile has available=true",
+    "config/prices.json has no prices; an empty price is unknown, not zero",
+    "prices.observed_at is null",
+    "no profile has an endpoint URL",
+    "none of the checked provider API key variables are set",
+    "no local model port among 11434, 1234, and 8080 accepted a connection",
+    "TCP reachability is not a model endpoint and no model request was sent"
+  ],
+  "profiles_available": [],
+  "profiles_with_known_price": [],
+  "provider_key_variables_set": [],
+  "local_ports_open": [],
+  "checked_key_variables": [
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "AZURE_OPENAI_API_KEY",
+    "GEMINI_API_KEY",
+    "GOOGLE_API_KEY",
+    "MISTRAL_API_KEY",
+    "GROQ_API_KEY",
+    "OPENROUTER_API_KEY",
+    "TOGETHER_API_KEY",
+    "FIREWORKS_API_KEY",
+    "DEEPSEEK_API_KEY",
+    "XAI_API_KEY"
+  ],
+  "checked_local_ports": [
+    11434,
+    1234,
+    8080
+  ],
+  "counts_as_project_comparison": false,
+  "model_calls": 0,
+  "prices_copied_from_the_network": false,
+  "tcp_probes": [
+    {
+      "host": "api.openai.com",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.007007145999978093
+    },
+    {
+      "host": "api.anthropic.com",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.006511475000024802
+    },
+    {
+      "host": "generativelanguage.googleapis.com",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.006431414000189761
+    },
+    {
+      "host": "api.groq.com",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.0065560600000935665
+    },
+    {
+      "host": "api.mistral.ai",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.0006456140001773747
+    },
+    {
+      "host": "api.x.ai",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.000743292999914047
+    },
+    {
+      "host": "openrouter.ai",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.0005511310000656522
+    },
+    {
+      "host": "api.deepseek.com",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.00038996599982965563
+    },
+    {
+      "host": "api.together.xyz",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.0005107299998599046
+    },
+    {
+      "host": "api.fireworks.ai",
+      "port": 443,
+      "connected": true,
+      "connect_errno": 0,
+      "seconds": 0.0019625830000222777
+    }
+  ],
+  "tcp_hosts_connected": [
+    "api.openai.com",
+    "api.anthropic.com",
+    "generativelanguage.googleapis.com",
+    "api.groq.com",
+    "api.mistral.ai",
+    "api.x.ai",
+    "openrouter.ai",
+    "api.deepseek.com",
+    "api.together.xyz",
+    "api.fireworks.ai"
+  ],
+  "local_binaries": {
+    "ollama": null,
+    "llama-server": null,
+    "llama-cli": null,
+    "vllm": null
+  },
+  "observed_at": "2026-11-17T05:35:29Z",
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.12.113+-x86_64-with-glibc2.39",
+    "uname": "Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Mon Nov 16 16:06:22 UTC 2026 x86_64"
+  },
+  "note": "No model request was sent. Connected TCP ports are not endpoints configured for this project, and no price was copied into config/prices.json."
+}

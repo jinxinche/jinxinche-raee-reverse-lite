@@ -1,0 +1,165 @@
+{
+  "comparison_complete": true,
+  "executed": true,
+  "attempts_executed": true,
+  "ranking": false,
+  "promotes_static_sample": false,
+  "static_record": "docs/a18/REA_COMPARISON.md",
+  "prior_record": "docs/a18/rea_runtime_2026-11-15.json",
+  "rea_version": "6.9.0",
+  "rea_path": "/tmp/rea-6.9.0/node_modules/.bin/rea",
+  "gdb_version": "GNU gdb (Ubuntu 15.1-1ubuntu1~24.04.1) 15.1",
+  "rizin_on_path": false,
+  "sample_size_scored_pairs": 4,
+  "model_calls": 0,
+  "model_cost": {
+    "status": "unknown",
+    "amount": null,
+    "reason": "no usage report; no model endpoint was configured"
+  },
+  "savings_percent": null,
+  "task_set": [
+    {
+      "id": "abc",
+      "stdin_hex": "616263",
+      "stdout": "count=3 sum=294\n"
+    },
+    {
+      "id": "empty",
+      "stdin_hex": "",
+      "stdout": "count=0 sum=0\n"
+    },
+    {
+      "id": "a",
+      "stdin_hex": "61",
+      "stdout": "count=1 sum=97\n"
+    },
+    {
+      "id": "hello",
+      "stdin_hex": "68656c6c6f",
+      "stdout": "count=5 sum=532\n"
+    }
+  ],
+  "attempts": {
+    "capture_process": {
+      "command": "rea capture-process /tmp/rea-runtime-2026/scenario.json --format json",
+      "returncode": 0,
+      "elapsed_seconds": 2.578109033999908,
+      "exit": {
+        "code": null,
+        "signal": 9,
+        "reason": "idle_timeout"
+      },
+      "rendered_nonempty_lines": "abc",
+      "contract_line_present": false,
+      "stderr_tail": "}\n{\"rea_progress\":{\"phase\":\"running\",\"completed\":3,\"total\":null,\"message\":\"elapsed_ms=1038 frames=1 samples=1 interactions=1\",\"sequence\":11}}\n{\"rea_progress\":{\"phase\":\"cleanup\",\"completed\":3,\"total\":null,\"message\":\"elapsed_ms=1188 frames=1 samples=1 interactions=1 disposition=idle_timeout owned_process_group=cleaned terminal_renderer=cleaned temporary_root=cleaned\",\"terminal\":true,\"sequence\":12}}\n",
+      "scored_pair": false,
+      "note": "PTY input does not deliver EOF. The scenario schema has input, resize, and signal only."
+    },
+    "debug_with_gdb_oneshot": {
+      "command": "rea debug-with-gdb run --inferior-tty <pty> --format json",
+      "note": "One GDB command cannot both load the ELF and redirect stdin. run with redirection is rejected. This call is run alone, so the session has no executable loaded.",
+      "elf_not_passed": "/tmp/checksum_cli",
+      "returncode": 0,
+      "elapsed_seconds": 1.375031295000099,
+      "stdout_head": "{\"evidence_id\":\"ev_169754b2c55c7c88f4067f56c37ab885334e16eb2f58c975ef47e124fab5b984\",\"subject\":null,\"provider\":{\"id\":\"gnu.gdb\",\"name\":\"GNU GDB\",\"version\":null},\"analysis_profile\":null,\"predicate_type\":\"rea.debugger.console-observation\",\"operation\":\"gdb_console\",\"parameters\":{\"session_id\":\"23c45c44-95bd-457d-bf52-5488b2a0f0d1\",\"command\":\"run\"},\"raw_result\":{\"command\":\"run\",\"mi\":\"4^error,msg=\\\"No executable file specified.\\\\nUse the \\\\\\\"file\\\\\\\" or \\\\\\\"exec-file\\\\\\\" command.\\\"\",\"records\":[\"~\\\"Starting program:  \\\\n\\\"\",\"&\\\"No executable file specified.\\\\n\\\"\",\"&\\\"Use the \\\\\\\"file\\\\\\\" or \\\\\\\"exec-f",
+      "contract_line_present": false,
+      "scored_pair": false
+    }
+  },
+  "declared_tasks": 4,
+  "metrics": {
+    "correct_completion_rate": 1.0,
+    "rea_correct_completion_rate": 1.0,
+    "this_tool_correct_completion_rate": 1.0,
+    "coverage": 1.0,
+    "time_to_correct_result": [
+      0.2115541040000153,
+      0.17299291599988464,
+      0.1691617110000152,
+      0.1633035560000735
+    ],
+    "model_cost": {
+      "status": "unknown",
+      "amount": null,
+      "reason": "no usage report; no model endpoint was configured"
+    },
+    "resource_cost": "wall seconds are on each row; no other resource meter was read"
+  },
+  "rows": [
+    {
+      "task_id": "abc",
+      "expected_stdout": "count=3 sum=294\n",
+      "rea_seconds": 0.2115541040000153,
+      "rea": {
+        "observed": true,
+        "correct": true,
+        "returncode": 0
+      },
+      "rea_error": null,
+      "this_tool": {
+        "observed": true,
+        "correct": true,
+        "returncode": 0
+      },
+      "this_tool_seconds": 0.012820749999946202,
+      "this_tool_execution_result": "passed"
+    },
+    {
+      "task_id": "empty",
+      "expected_stdout": "count=0 sum=0\n",
+      "rea_seconds": 0.17299291599988464,
+      "rea": {
+        "observed": true,
+        "correct": true,
+        "returncode": 0
+      },
+      "rea_error": null,
+      "this_tool": {
+        "observed": true,
+        "correct": true,
+        "returncode": 0
+      },
+      "this_tool_seconds": 0.012301767000053587,
+      "this_tool_execution_result": "passed"
+    },
+    {
+      "task_id": "a",
+      "expected_stdout": "count=1 sum=97\n",
+      "rea_seconds": 0.1691617110000152,
+      "rea": {
+        "observed": true,
+        "correct": true,
+        "returncode": 0
+      },
+      "rea_error": null,
+      "this_tool": {
+        "observed": true,
+        "correct": true,
+        "returncode": 0
+      },
+      "this_tool_seconds": 0.012012763000029736,
+      "this_tool_execution_result": "passed"
+    },
+    {
+      "task_id": "hello",
+      "expected_stdout": "count=5 sum=532\n",
+      "rea_seconds": 0.1633035560000735,
+      "rea": {
+        "observed": true,
+        "correct": true,
+        "returncode": 0
+      },
+      "rea_error": null,
+      "this_tool": {
+        "observed": true,
+        "correct": true,
+        "returncode": 0
+      },
+      "this_tool_seconds": 0.012296621999894342,
+      "this_tool_execution_result": "passed"
+    }
+  ],
+  "rea_workflow": "persistent gdb_console: file, then run < stdin file",
+  "reason": "Scored pairs were executed with REA 6.9.0 persistent GDB and this tool's sandbox on the same stdin bytes. capture-process still does not deliver EOF. One-shot debug-with-gdb run still does not load the ELF. This is not a ranking. Model cost is unknown."
+}

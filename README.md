@@ -15,7 +15,7 @@ python3 -m raee_reverse --version
 
 `python3 -m raee_reverse --version` printed `raee-reverse-lite 0.1.0`.
 
-Python range: 3.11 up to, and not including, 3.16. The core CI matrix is Linux, Windows, and macOS on 3.11 and 3.15. Hosted results are per commit: `docs/ci/12735f05.md` is a failure, and `docs/ci/0a74bed.md`, `docs/ci/c661219.md`, and `docs/ci/746addd.md` are successes for those SHAs.
+Python range: 3.11 up to, and not including, 3.16. The core CI matrix is Linux, Windows, and macOS on 3.11 and 3.15. Hosted results are per commit: `docs/ci/12735f05.md` is a failure, and `docs/ci/0a74bed.md`, `docs/ci/c661219.md`, `docs/ci/746addd.md`, and `docs/ci/dce3995.md` are successes for those SHAs.
 
 There are no runtime dependencies. `pytest` is a test extra (`pip install ".[dev]"`).
 
@@ -45,10 +45,12 @@ python3 -m raee_reverse --root /tmp/rrl-readme report --out /tmp/rrl-readme/repo
 - Compatible baseline: `generated/zlib-baseline/`. It matched the sealed surfaces. Reproduction copy: `repro/zlib-baseline/`.
 - LTO candidate missed the frozen speed goal: `docs/evidence/zlib_enhancement.json`. That goal stays missed.
 - A separate crc32 goal is in `docs/phase4/GOAL_CRC32.md`. Its measurement is `docs/evidence/zlib_crc32_goal.json`.
-- REA 6.9.0 static comparison: `docs/a18/REA_COMPARISON.md`. A later runtime attempt did not become a comparison: `docs/a18/REA_RUNTIME.md`.
-- The five routing policies were not executed. `docs/a18/routing_comparison_2026-11-15.json` has `executed` false and `savings_percent` null.
+- Minigzip attempt 2 missed the same wall-time bar: `docs/phase4/ATTEMPT2_RESULT.md`. `stable_improvement` is false.
+- REA 6.9.0 static comparison: `docs/a18/REA_COMPARISON.md`. The 2026-11-15 runtime attempt did not become a comparison. A 2026-11-17 run scored four pairs and is not a ranking: `docs/a18/REA_RUNTIME_2026-11-17.md`.
+- The five routing policies were not executed. `docs/a18/routing_comparison_2026-11-17.json` has `executed` false and `savings_percent` null.
 - Standard stress tier: the stopped load remains a failure in `docs/a19/standard_tier.json`. A later run passed the declared floors: `docs/a19/standard_tier_v3.json`.
 - Held-out zlib inputs are in `targets/zlib/held_out/`. They are not blind. `targets/zlib/NON_BLIND.md` is unchanged.
+- The Canterbury corpus under `targets/zlib/published_acceptance/` is a separate check. It is not blind. Expected gzip bytes are not stored.
 - Extended stress tier passed the floors declared in `docs/a19/EXTENDED_TIER_BUDGET.md`. The earlier standard-tier failures stay failures. Result: `docs/a19/extended_tier.json`.
 - `python3 -m raee_reverse --root /tmp/rrl-route route --task-json /tmp/route-task.json --profiles config/model_profiles.json --prices config/prices.json` chose `deterministic_tool` at T0. `accepted_pass` in that result was false. Record id `d5ead1c546af4d1398f43f7daf259908`.
 

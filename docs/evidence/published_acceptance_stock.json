@@ -1,0 +1,214 @@
+{
+  "minigzip": "/tmp/zlib-base/zlib-1.4/minigzip",
+  "minigzip_sha256": "e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636",
+  "crc_bench": "/tmp/zlib-base/zlib-1.4/crc32_bench",
+  "blind": false,
+  "blind_claim": false,
+  "blind_reason": "The same agent selected this published corpus, wrote the checker harness, and wrote the minigzip attempt-2 candidate. The input bytes were not invented for that candidate, and expected gzip bytes are not stored. GNU gzip and CPython zlib are the oracles. Selecting the files and writing the harness in the same session as the candidate is not isolation, so this set is not blind.",
+  "inputs_invented_for_this_candidate": false,
+  "inputs_origin": "Canterbury corpus, cantrbry.tar.gz, as published for compression research",
+  "origin_url": "https://corpus.canterbury.ac.nz/resources/cantrbry.tar.gz",
+  "origin_tar_sha256": "f140e8a5b73d3f53198555a63bfb827889394a42f20825df33c810c3d5e3f8fb",
+  "expected_gzip_stored": false,
+  "oracle": "GNU gzip and CPython zlib",
+  "tuned_on_this_set": false,
+  "seal_match": true,
+  "inputs_match_manifest": true,
+  "sample_size": 11,
+  "python": "3.12.3",
+  "python_implementation": "CPython",
+  "python_zlib": "1.3",
+  "gzip": "gzip 1.12",
+  "uname": "Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Mon Nov 16 16:06:22 UTC 2026 x86_64",
+  "rows": [
+    {
+      "name": "alice29.txt",
+      "length": 152089,
+      "crc_exit": 0,
+      "observed_crc32": "66007dba",
+      "python_crc32": "66007dba",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "asyoulik.txt",
+      "length": 125179,
+      "crc_exit": 0,
+      "observed_crc32": "015e5966",
+      "python_crc32": "015e5966",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "cp.html",
+      "length": 24603,
+      "crc_exit": 0,
+      "observed_crc32": "a8e0b833",
+      "python_crc32": "a8e0b833",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "fields.c",
+      "length": 11150,
+      "crc_exit": 0,
+      "observed_crc32": "4f618664",
+      "python_crc32": "4f618664",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "grammar.lsp",
+      "length": 3721,
+      "crc_exit": 0,
+      "observed_crc32": "d313977d",
+      "python_crc32": "d313977d",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "kennedy.xls",
+      "length": 1029744,
+      "crc_exit": 0,
+      "observed_crc32": "43e6dc8c",
+      "python_crc32": "43e6dc8c",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "lcet10.txt",
+      "length": 426754,
+      "crc_exit": 0,
+      "observed_crc32": "4d331faf",
+      "python_crc32": "4d331faf",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "plrabn12.txt",
+      "length": 481861,
+      "crc_exit": 0,
+      "observed_crc32": "a3247aeb",
+      "python_crc32": "a3247aeb",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "ptt5",
+      "length": 513216,
+      "crc_exit": 0,
+      "observed_crc32": "4b17e59c",
+      "python_crc32": "4b17e59c",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "sum",
+      "length": 38240,
+      "crc_exit": 0,
+      "observed_crc32": "37aa0cbb",
+      "python_crc32": "37aa0cbb",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    },
+    {
+      "name": "xargs.1",
+      "length": 4227,
+      "crc_exit": 0,
+      "observed_crc32": "decc31f7",
+      "python_crc32": "decc31f7",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no per-file published crc is stored for this corpus",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    }
+  ],
+  "pass": true,
+  "self_built_is_not_the_only_check": true
+}
