@@ -70,9 +70,68 @@ def test_recorded_enwik8_runs_match_their_rows_and_the_seal_commit():
     assert stock["minigzip_sha256"] == pin["minigzip_sha256"]
     assert stock["reproduction"]["libz_sha256"] == pin["libz_a_sha256"]
     assert stock["minigzip_sha256"] != attempt["minigzip_sha256"]
+    _require_seal_ancestor()
+
+
+def _commit_present(sha: str) -> bool:
+    probe = subprocess.run(
+        ["git", "cat-file", "-e", f"{sha}^{{commit}}"],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return probe.returncode == 0
+
+
+def _require_seal_ancestor() -> None:
+    """The seal commit must be an ancestor of HEAD.
+
+    actions/checkout uses fetch-depth 1, so a shallow clone does not contain
+    the parent. Deepen until that commit is present, then require the
+    ancestor check. A missing object, a failed fetch, or a non-ancestor is a
+    failure.
+    """
+    if not _commit_present(SEAL):
+        shallow = subprocess.run(
+            ["git", "rev-parse", "--is-shallow-repository"],
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if shallow.returncode != 0 or shallow.stdout.strip() != "true":
+            raise AssertionError(f"seal commit {SEAL} is absent and this clone is not shallow")
+        branch = subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        ref = branch.stdout.strip()
+        if branch.returncode != 0 or not ref or ref == "HEAD":
+            raise AssertionError("cannot name the current branch in order to deepen the clone")
+        for _ in range(8):
+            deepened = subprocess.run(
+                ["git", "fetch", "--deepen=1", "origin", ref],
+                cwd=REPO,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if deepened.returncode != 0:
+                detail = (deepened.stderr or deepened.stdout or "git fetch failed").strip()
+                raise AssertionError(f"shallow clone could not fetch the seal commit: {detail}")
+            if _commit_present(SEAL):
+                break
+        else:
+            raise AssertionError(f"seal commit {SEAL} is still absent after deepening")
     ancestor = subprocess.run(
         ["git", "merge-base", "--is-ancestor", SEAL, "HEAD"],
         cwd=REPO,
+        capture_output=True,
+        text=True,
         check=False,
     )
-    assert ancestor.returncode == 0
+    assert ancestor.returncode == 0, (ancestor.stderr or ancestor.stdout or "seal commit is not an ancestor of HEAD").strip()
