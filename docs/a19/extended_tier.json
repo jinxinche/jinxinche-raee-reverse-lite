@@ -1,0 +1,62 @@
+{
+  "budget_document": "docs/a19/EXTENDED_TIER_BUDGET.json",
+  "probe_start_allowed": true,
+  "extended_tier_executed": true,
+  "extended_tier_pass": true,
+  "load_stopped_early": false,
+  "load_seconds": 170.475287686,
+  "mixed_seconds": 1801.8755998450001,
+  "iterations": 11651,
+  "record_counts": {
+    "claim": 10002,
+    "evaluation": 100004,
+    "observation": 100032,
+    "retraction": 2
+  },
+  "relation_count": 250006,
+  "retraction_before_accepted_pass": true,
+  "retraction_after_accepted_pass": false,
+  "cancelled_state": "CANCELLED",
+  "target_runs": 20,
+  "target_stdout_ok": true,
+  "target_accepted_pass_false": true,
+  "directory_bytes": 682324385,
+  "integrity_ok": true,
+  "latency": {
+    "load_inserts": {
+      "sample_size": 360000,
+      "p50": 0.00020046500003445544,
+      "p95": 0.0011717929999122134,
+      "p99": 0.004716798000117706
+    },
+    "mixed_operations": {
+      "sample_size": 13081,
+      "p50": 0.0004512000000431726,
+      "p95": 0.518006233000051,
+      "p99": 2.9783219670002836
+    }
+  },
+  "interleaved": {
+    "query": true,
+    "report": true,
+    "write": true,
+    "retract": true,
+    "cancel": true
+  },
+  "concurrency_levels": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "command": "python3 tools/run_extended_tier.py /tmp/a19-extended /tmp/a19-extended-result.json /tmp/checksum_cli /tmp/a19-extended-probe.json",
+  "probe_file": "docs/a19/extended_probe.json",
+  "python": "3.12.3",
+  "uname": "Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Fri Nov 13 20:22:28 UTC 2026 x86_64",
+  "does_not_replace": [
+    "docs/a19/standard_tier.json",
+    "docs/a19/attempt2.json",
+    "docs/a19/standard_tier_v3.json"
+  ]
+}

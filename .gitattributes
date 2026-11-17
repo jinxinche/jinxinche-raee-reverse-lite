@@ -1,0 +1,13 @@
+docs/phase4/GOAL.md text eol=lf
+docs/phase4/GOAL_CRC32.md text eol=lf
+docs/phase4/GOAL_CRC32.json text eol=lf
+docs/evidence/zlib_enhancement.json text eol=lf
+docs/a18/routing_comparison.json text eol=lf
+docs/a18/REA_COMPARISON.md text eol=lf
+docs/a19/*.json text eol=lf
+docs/a19/*.md text eol=lf
+targets/zlib/NON_BLIND.md text eol=lf
+targets/zlib/held_out/MANIFEST.json text eol=lf
+targets/zlib/held_out/SEAL.sha256 text eol=lf
+targets/zlib/held_out/ISOLATION.md text eol=lf
+targets/zlib/held_out/inputs/* -text

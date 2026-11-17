@@ -1,0 +1,117 @@
+{
+  "goal": "docs/phase4/GOAL_CRC32.json",
+  "goal_sha256": "07512994fba2ef569481a8728bc70a1ddb7cbda577b2ab65ff3aef998a30c519",
+  "closed_goal_untouched": true,
+  "supersedes_closed_goal": false,
+  "bar": 0.9,
+  "threads": 1,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.12.113+-x86_64-with-glibc2.39",
+    "uname": "Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Fri Nov 13 20:22:28 UTC 2026 x86_64",
+    "gcc": "13",
+    "cpu": "Intel(R) Xeon(R) Processor",
+    "nproc": 4
+  },
+  "enhancement_met": true,
+  "stable_improvement": false,
+  "baseline_build": {
+    "configure_exit": 0,
+    "make_exit": 0,
+    "configure_stderr_tail": "",
+    "make_stderr_tail": "",
+    "minigzip": true,
+    "libz": true
+  },
+  "candidate_build": {
+    "configure_exit": 0,
+    "make_exit": 0,
+    "configure_stderr_tail": "",
+    "make_stderr_tail": "",
+    "minigzip": true,
+    "libz": true
+  },
+  "correct": true,
+  "baseline_crc": "562b09ab",
+  "candidate_crc": "562b09ab",
+  "baseline_check123456789": "cbf43926",
+  "candidate_check123456789": "cbf43926",
+  "minigzip_identity": {
+    "empty": {
+      "same_stdout": true,
+      "bytes": 20
+    },
+    "abc": {
+      "same_stdout": true,
+      "bytes": 23
+    },
+    "hello": {
+      "same_stdout": true,
+      "bytes": 25
+    }
+  },
+  "baseline_samples_seconds": [
+    0.002858416,
+    0.002793183,
+    0.002893579,
+    0.002804645,
+    0.002774314,
+    0.002890122,
+    0.00278416,
+    0.002770076,
+    0.002781098,
+    0.002911244,
+    0.002786828,
+    0.002768411,
+    0.002817276,
+    0.002830889,
+    0.00276957,
+    0.002813433,
+    0.002931051,
+    0.002785859,
+    0.002770689,
+    0.00280024,
+    0.002876564
+  ],
+  "candidate_samples_seconds": [
+    0.000746009,
+    0.000744717,
+    0.000751797,
+    0.000757975,
+    0.000738818,
+    0.000806092,
+    0.00076331,
+    0.000746191,
+    0.000754682,
+    0.000739055,
+    0.000737758,
+    0.000738385,
+    0.000737919,
+    0.000749992,
+    0.000738751,
+    0.000736658,
+    0.000740935,
+    0.000744777,
+    0.000784647,
+    0.00082732,
+    0.000737569
+  ],
+  "baseline_median_seconds": 0.00280024,
+  "candidate_median_seconds": 0.000744777,
+  "ratio_candidate_over_baseline": 0.2659689883724252,
+  "bar_met": true,
+  "delivery": "enhancement met on this single sample",
+  "sample_size": 21,
+  "warmup_excluded": 1,
+  "command": "python3 tools/measure_zlib_crc32.py /tmp/zlib-crc32-work /tmp/zlib-crc32-result.json",
+  "acceptance_run": "second build, after the shared library link was fixed",
+  "earlier_shared_library_link": {
+    "make_exit": 2,
+    "reason": "libz.so, examplesh, and minigzipsh referenced crc32_z_pclmul_try because the PIC object list did not include crc32_pclmul.lo. Static minigzip and crc32_bench existed. That run is not the acceptance measurement.",
+    "ratio_candidate_over_baseline": 0.25433241847325494,
+    "baseline_median_seconds": 0.002784761,
+    "candidate_median_seconds": 0.000708255,
+    "correct": true,
+    "enhancement_met_on_that_binary": true
+  }
+}

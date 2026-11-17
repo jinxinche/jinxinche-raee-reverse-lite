@@ -1,0 +1,55 @@
+{
+  "comparison_complete": false,
+  "executed": false,
+  "attempts_executed": true,
+  "ranking": false,
+  "promotes_static_sample": false,
+  "static_record": "docs/a18/REA_COMPARISON.md",
+  "rea_version": "6.9.0",
+  "rea_path": "/tmp/rea-6.9.0/node_modules/.bin/rea",
+  "gdb_version": "GNU gdb (Ubuntu 15.1-1ubuntu1~24.04.1) 15.1",
+  "sample_size_scored_pairs": 0,
+  "model_calls": 0,
+  "model_cost": {
+    "status": "unknown",
+    "amount": null,
+    "reason": "no usage report; no model endpoint was configured"
+  },
+  "metrics": {
+    "correct_completion_rate": "not_collected",
+    "unsupported_conclusion_rate": "not_collected",
+    "coverage": "not_collected",
+    "open_issues": "not_collected",
+    "time_to_correct_result": "not_collected",
+    "model_cost": "not_collected",
+    "human_interventions": 0,
+    "resource_cost": "not_collected"
+  },
+  "savings_percent": null,
+  "rizin_on_path": false,
+  "attempts": {
+    "capture_process": {
+      "command": "rea capture-process /tmp/rea-runtime/scenario.json --format json",
+      "returncode": 0,
+      "elapsed_seconds": 2.3755169069999056,
+      "exit": {
+        "code": null,
+        "signal": 9,
+        "reason": "idle_timeout"
+      },
+      "rendered_nonempty_lines": "abc",
+      "contract_line_present": false,
+      "stderr_tail": "\n{\"rea_progress\":{\"phase\":\"settling\",\"completed\":3,\"total\":null,\"message\":\"elapsed_ms=1135 frames=1 samples=1 interactions=1\",\"sequence\":12}}\n{\"rea_progress\":{\"phase\":\"cleanup\",\"completed\":3,\"total\":null,\"message\":\"elapsed_ms=1195 frames=1 samples=1 interactions=1 disposition=idle_timeout owned_process_group=cleaned terminal_renderer=cleaned temporary_root=cleaned\",\"terminal\":true,\"sequence\":13}}\n"
+    },
+    "debug_with_gdb": {
+      "command": "rea debug-with-gdb run --inferior-tty <pty> --format json",
+      "note": "One GDB command cannot both load the ELF and redirect stdin. run with redirection is rejected. This call is run alone, so the session has no executable loaded.",
+      "elf_not_passed": "/tmp/checksum_cli",
+      "returncode": 0,
+      "elapsed_seconds": 1.2624164329999985,
+      "stdout_head": "{\"evidence_id\":\"ev_2fdfcc32d8ed84d3e38bcbdca1ad9e5f33ec3cf5a95fb484d1502d1f320d6086\",\"subject\":null,\"provider\":{\"id\":\"gnu.gdb\",\"name\":\"GNU GDB\",\"version\":null},\"analysis_profile\":null,\"predicate_type\":\"rea.debugger.console-observation\",\"operation\":\"gdb_console\",\"parameters\":{\"session_id\":\"aa737f2d-bcd7-4ca3-9534-b77e7ba80cf0\",\"command\":\"run\"},\"raw_result\":{\"command\":\"run\",\"mi\":\"4^error,msg=\\\"No executable file specified.\\\\nUse the \\\\\\\"file\\\\\\\" or \\\\\\\"exec-file\\\\\\\" command.\\\"\",\"records\":[\"~\\\"Starting program:  \\\\n\\\"\",\"&\\\"No executable file specified.\\\\n\\\"\",\"&\\\"Use the \\\\\\\"file\\\\\\\" or \\\\\\\"exec-f",
+      "contract_line_present": false
+    }
+  },
+  "reason": "REA 6.9.0 ran. capture-process uses a PTY and idle-killed checksum_cli before it printed, because the program reads stdin until EOF and the PTY did not deliver EOF. debug-with-gdb accepts one command and rejects run with stdin redirection, so one command cannot load this ELF and feed abc. rizin is not on PATH. This is not a completed runtime comparison."
+}

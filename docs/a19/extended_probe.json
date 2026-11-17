@@ -1,0 +1,39 @@
+{
+  "budget_document": "docs/a19/EXTENDED_TIER_BUDGET.json",
+  "measurements": {
+    "finished": true,
+    "claims": 100,
+    "observations": 1000,
+    "supports": 2000,
+    "derived_from": 500,
+    "claim_seconds": 0.04826775500009717,
+    "observation_seconds": 0.2595945829999664,
+    "support_seconds": 2.3746289270000034,
+    "derived_seconds": 0.1657242869999891,
+    "last_support_count": 100,
+    "last_support_seconds": 0.15742270299995198,
+    "directory_bytes": 13598897,
+    "stop_reason": null
+  },
+  "projection": {
+    "finished_probe": true,
+    "rates": {
+      "claims_per_second": 2071.776489289769,
+      "observations_per_second": 3852.160505214122,
+      "supports_per_second": 635.2323908453694,
+      "derived_from_per_second": 3017.059291979533
+    },
+    "raw_load_seconds": 237.92622289995506,
+    "projected_load_seconds": 356.8893343499326,
+    "projected_seconds": 2336.8893343499326,
+    "projected_directory_bytes": 2719779400,
+    "start_allowed": true,
+    "reason": null,
+    "pass": false
+  },
+  "start_allowed": true,
+  "projected_load_seconds": 356.8893343499326,
+  "projected_seconds": 2336.8893343499326,
+  "extended_tier_pass": false,
+  "elapsed_seconds": 2.8505837780001
+}

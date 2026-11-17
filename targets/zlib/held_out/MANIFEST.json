@@ -1,0 +1,32 @@
+{
+  "blind": false,
+  "blind_reason": "One agent wrote these inputs, the checker, and the candidate. A single agent can read this manifest. That is not a blind acceptance.",
+  "isolation": "tools/measure_zlib_crc32.py installs a process guard that refuses targets/zlib/held_out and targets/zlib/sealed_observations.json. Expected gzip bytes are not stored. The published CRC of 123456789 is a constant in the checker.",
+  "inputs": [
+    {
+      "name": "itu-123456789",
+      "sha256": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+      "length": 9
+    },
+    {
+      "name": "pattern-4099",
+      "sha256": "0b1e5e9724d2c224da07a9256610b66d85e41a4a1cdac97c51f9bc8cafc3ed21",
+      "length": 4099
+    },
+    {
+      "name": "pattern-100003",
+      "sha256": "5358cc618cb9f6e13548c823bf06107684617fcdc75b526211166a77629bd00c",
+      "length": 100003
+    },
+    {
+      "name": "zeros-1000",
+      "sha256": "541b3e9daa09b20bf85fa273e5cbd3e80185aa4ec298e765db87742b70138a53",
+      "length": 1000
+    },
+    {
+      "name": "ff-2000",
+      "sha256": "19813270963599ad8ba084792ca1c8fcae3bc421aee518e709642df647fba6fe",
+      "length": 2000
+    }
+  ]
+}
