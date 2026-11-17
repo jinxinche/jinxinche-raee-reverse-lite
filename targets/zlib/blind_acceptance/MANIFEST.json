@@ -1,0 +1,76 @@
+{
+  "blind": true,
+  "blind_claim": true,
+  "inputs_invented_for_this_candidate": false,
+  "tuned_on_this_set": false,
+  "expected_gzip_stored": false,
+  "candidates_frozen_before_seal": true,
+  "starting_ref": "8a06e96fffff1cfe6958010babaea5a9308d4961",
+  "seal_time": "2026-11-17T06:13:09Z",
+  "set_author": {
+    "role": "set_author",
+    "agent": "bc-b2b647e7-62a7-5f3e-b41b-f15985b779c4",
+    "run_url": "https://cursor.com/agents/bc-b2b647e7-62a7-5f3e-b41b-f15985b779c4"
+  },
+  "candidate_authors": {
+    "role": "candidate_author",
+    "agent": "bc-641141af-3ffd-5b16-acb9-663777242042",
+    "commits": [
+      "52d4a9e8b4918f75653b2912602a23d1cf510088",
+      "a912990a978ee37a595b82ae11ae6b0e4cb6ab81",
+      "dce39956bc96275342517d9aa307be2ffc743435"
+    ],
+    "frozen_at": "8a06e96fffff1cfe6958010babaea5a9308d4961"
+  },
+  "inputs_origin": "enwik8, the first 100000000 bytes of the English Wikipedia pages-articles dump dated 2006-03-03, as published by Matt Mahoney",
+  "origin_url": "http://mattmahoney.net/dc/enwik8.zip",
+  "documentation_url": "http://mattmahoney.net/dc/textdata.html",
+  "upstream_dump_url": "http://download.wikipedia.org/enwiki/20060303/enwiki-20060303-pages-articles.xml.bz2",
+  "origin_zip_sha256": "547994d9980ebed1288380d652999f38a14fe291a6247c157c3d33d4932534bc",
+  "origin_zip_bytes": 36445475,
+  "excluded_canterbury_tar_sha256": "f140e8a5b73d3f53198555a63bfb827889394a42f20825df33c810c3d5e3f8fb",
+  "license": "GNU Free Documentation License 1.2 with no invariant sections, front-cover texts, or back-cover texts. Wikipedia states that text published before 15 June 2009 was released under the GFDL. See LICENSE.md. The repository MIT license does not cover this file.",
+  "license_urls": [
+    "https://www.gnu.org/licenses/old-licenses/fdl-1.2.txt",
+    "https://creativecommons.org/licenses/by-sa/4.0/",
+    "https://en.wikipedia.org/wiki/Wikipedia:Copyrights"
+  ],
+  "oracle": "GNU gzip and CPython zlib, not the candidate",
+  "published_checksums": {
+    "md5": "a1fa5ffddb56f4953e226637dabbb36a",
+    "sha1": "57b8363b814821dc9d47aa4d41f58733519076b2",
+    "length": 100000000,
+    "source": "http://mattmahoney.net/dc/textdata.html"
+  },
+  "blind_reason": "The set author is bc-b2b647e7-62a7-5f3e-b41b-f15985b779c4. The candidate author is the earlier agent bc-641141af-3ffd-5b16-acb9-663777242042. The stock zlib 1.4 tree and the attempt-2 candidate were already frozen at starting_ref 8a06e96fffff1cfe6958010babaea5a9308d4961 before this manifest was written. This agent did not author or modify those candidates. The input is the published enwik8 file, not bytes invented for those candidates. Expected gzip bytes are not stored. The set was not used to tune the candidates.",
+  "checker_files": [
+    {
+      "path": "src/raee_reverse/blind_acceptance.py",
+      "sha256": "7545a3cdc3c97f2989a7a75e5e075259e5a4deae9f6a4aa9b1fc83d95f798df3"
+    },
+    {
+      "path": "tools/check_blind_acceptance.py",
+      "sha256": "ac0e813ae671c34f34cf642dd2c31e9d16b233c84a865e429724cb0a66573da5"
+    },
+    {
+      "path": "tools/reproduce_frozen_zlib_builds.py",
+      "sha256": "25723f237bf9334d4643e8f75ce73d057beb8eced724e273e632430fe831374e"
+    },
+    {
+      "path": "targets/zlib/blind_acceptance/crc32_stdin.c",
+      "sha256": "20ecf8b1fcd9ab9aee3928239597095a718c28087f71771b833a7298ce6efda4"
+    }
+  ],
+  "inputs": [
+    {
+      "name": "enwik8",
+      "container": "enwik8.zip",
+      "container_member": "enwik8",
+      "container_sha256": "547994d9980ebed1288380d652999f38a14fe291a6247c157c3d33d4932534bc",
+      "sha256": "2b49720ec4d78c3c9fabaee6e4179a5e997302b3a70029f30f2d582218c024a8",
+      "md5": "a1fa5ffddb56f4953e226637dabbb36a",
+      "sha1": "57b8363b814821dc9d47aa4d41f58733519076b2",
+      "length": 100000000
+    }
+  ]
+}
