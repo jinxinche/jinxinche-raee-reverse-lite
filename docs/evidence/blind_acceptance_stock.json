@@ -1,0 +1,124 @@
+{
+  "label": "stock",
+  "executed": true,
+  "pass": true,
+  "blind": true,
+  "blind_claim": true,
+  "blind_reason": "The set author is bc-b2b647e7-62a7-5f3e-b41b-f15985b779c4. The candidate author is the earlier agent bc-641141af-3ffd-5b16-acb9-663777242042. The stock zlib 1.4 tree and the attempt-2 candidate were already frozen at starting_ref 8a06e96fffff1cfe6958010babaea5a9308d4961 before this manifest was written. This agent did not author or modify those candidates. The input is the published enwik8 file, not bytes invented for those candidates. Expected gzip bytes are not stored. The set was not used to tune the candidates.",
+  "inputs_invented_for_this_candidate": false,
+  "tuned_on_this_set": false,
+  "expected_gzip_stored": false,
+  "inputs_origin": "enwik8, the first 100000000 bytes of the English Wikipedia pages-articles dump dated 2006-03-03, as published by Matt Mahoney",
+  "origin_url": "http://mattmahoney.net/dc/enwik8.zip",
+  "origin_zip_sha256": "547994d9980ebed1288380d652999f38a14fe291a6247c157c3d33d4932534bc",
+  "documentation_url": "http://mattmahoney.net/dc/textdata.html",
+  "license": "GNU Free Documentation License 1.2 with no invariant sections, front-cover texts, or back-cover texts. Wikipedia states that text published before 15 June 2009 was released under the GFDL. See LICENSE.md. The repository MIT license does not cover this file.",
+  "starting_ref": "8a06e96fffff1cfe6958010babaea5a9308d4961",
+  "candidates_frozen_before_seal": true,
+  "set_author": {
+    "role": "set_author",
+    "agent": "bc-b2b647e7-62a7-5f3e-b41b-f15985b779c4",
+    "run_url": "https://cursor.com/agents/bc-b2b647e7-62a7-5f3e-b41b-f15985b779c4"
+  },
+  "candidate_authors": {
+    "role": "candidate_author",
+    "agent": "bc-641141af-3ffd-5b16-acb9-663777242042",
+    "commits": [
+      "52d4a9e8b4918f75653b2912602a23d1cf510088",
+      "a912990a978ee37a595b82ae11ae6b0e4cb6ab81",
+      "dce39956bc96275342517d9aa307be2ffc743435"
+    ],
+    "frozen_at": "8a06e96fffff1cfe6958010babaea5a9308d4961"
+  },
+  "seal_time": "2026-11-17T06:13:09Z",
+  "source_commit": "f3a79dce276c4919936ef06be8eba56ad91f7c5c",
+  "seal_match": true,
+  "checker_match": true,
+  "inputs_match_manifest": true,
+  "oracle": "GNU gzip and CPython zlib",
+  "gzip": "gzip 1.12",
+  "python": "3.12.3",
+  "python_implementation": "CPython",
+  "python_zlib": "1.3",
+  "uname": "Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Mon Nov 16 16:06:22 UTC 2026 x86_64",
+  "minigzip": "/tmp/blind-zlib-builds/baseline/zlib-1.4/minigzip",
+  "minigzip_sha256": "e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636",
+  "crc_stdin": "/tmp/blind-zlib-builds/baseline/zlib-1.4/crc32_stdin",
+  "crc_stdin_sha256": "17f03885ed0ee9a4bd76ab4d3b118c091b548d51c1e5c6792e0f57131f2a7a0f",
+  "reproduction": {
+    "candidate_patch": false,
+    "source": "/tmp/blind-zlib-builds/baseline/zlib-1.4",
+    "configure_exit": 0,
+    "make_exit": 0,
+    "recipe": [
+      "./configure",
+      "make"
+    ],
+    "cflags_override": null,
+    "ldflags_override": null,
+    "configure_stderr_tail": "",
+    "make_stderr_tail": "",
+    "minigzip": "/tmp/blind-zlib-builds/baseline/zlib-1.4/minigzip",
+    "minigzip_sha256": "e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636",
+    "libz_sha256": "6f34b761db9ee99652ef10819d2fc3b2160ef8011dd0c06a68180842eed176e3",
+    "crc_stdin": {
+      "command": [
+        "gcc",
+        "-O2",
+        "-I.",
+        "-o",
+        "crc32_stdin",
+        "/workspace/targets/zlib/blind_acceptance/crc32_stdin.c",
+        "libz.a"
+      ],
+      "exit": 0,
+      "stderr_tail": "",
+      "present": true,
+      "sha256": "17f03885ed0ee9a4bd76ab4d3b118c091b548d51c1e5c6792e0f57131f2a7a0f"
+    }
+  },
+  "rows": [
+    {
+      "name": "enwik8",
+      "length": 100000000,
+      "sha256": "2b49720ec4d78c3c9fabaee6e4179a5e997302b3a70029f30f2d582218c024a8",
+      "crc_exit": 0,
+      "observed_crc32": "81838409",
+      "python_crc32": "81838409",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 36548933,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true
+    }
+  ],
+  "negative_control": {
+    "injected_crc": "00000000",
+    "python_crc32": "81838409",
+    "judge_pass": false,
+    "judge_reason": "observed crc is the injected 00000000 value",
+    "failed_as_required": true,
+    "corrupted_gzip": {
+      "ran": true,
+      "byte_index": 18274466,
+      "gzip_external_ran": true,
+      "gzip_external_accepted_original": false,
+      "python_zlib_accepted_original": false,
+      "rejected": true
+    }
+  },
+  "unverified": [
+    "This check is one published file, enwik8. It does not cover other inputs.",
+    "Results are for this host, compiler, and the reproduced binaries only.",
+    "A reproduced binary hash can differ from an earlier pin without a source change.",
+    "No wall-time or routing-cost claim is made here."
+  ],
+  "unfinished": [],
+  "sample_size": 1
+}
