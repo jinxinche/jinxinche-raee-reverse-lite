@@ -39,7 +39,7 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. A di
 - Extended probe: `python3 tools/probe_extended_tier.py /tmp/a19-extended-probe /tmp/a19-extended-probe.json`. Finished in 2.851 seconds. Projected 2336.889 seconds and 2,719,779,400 directory bytes. `start_allowed` true. `docs/a19/extended_probe.json`.
 - Extended tier: `python3 tools/run_extended_tier.py /tmp/a19-extended /tmp/a19-extended-result.json /tmp/checksum_cli /tmp/a19-extended-probe.json`. `extended_tier_executed` true and `extended_tier_pass` true. Load 170.475 seconds, mixed 1801.876 seconds, 250,006 relations, 10,002 claims, 100,032 observations, 20 target runs, directory 682,324,385 bytes. Load P50/P95/P99 seconds: 0.000200465, 0.001171793, 0.004716798 (sample size 360,000). Mixed P50/P95/P99 seconds: 0.000451200, 0.518006233, 2.978321967 (sample size 13,081). `docs/a19/extended_tier.json`.
 
-**Unverified.** Whether another compiler or another machine emits the same crc32 ratio or the same attempt-2 minigzip ratio. Each ratio is one pair of medians on this host. Whether the four-task REA sample would look the same on another host. Whether a live five-policy comparison would change cost. Hosted CI for this commit is not this local pytest run.
+**Unverified.** Whether another compiler or another machine emits the same crc32 ratio or the same attempt-2 minigzip ratio. Each ratio is one pair of medians on this host. Whether the four-task REA sample would look the same on another host. Whether a live five-policy comparison would change cost. Hosted CI for `dce3995` is recorded below. This paragraph is a later commit, so it is not itself that green SHA.
 
 **Not done.** A live five-policy comparison. Prices and a callable model endpoint were missing, so savings stays null. A blind acceptance set. The Canterbury check is explicitly not blind: the same agent selected the corpus, wrote the harness, and wrote the attempt-2 candidate. `rizin` is still absent. Network namespaces were not available. No savings percentage is claimed. The closed zlib wall-time goal was not met and was not reopened. Attempt 2 on the same metric was also missed and was not turned into a pass.
 
@@ -71,7 +71,14 @@ On 2026-11-17 those two failures were run again and still failed the same way. A
 
 ## Local tests on this tree
 
-On this slice, after the measurements above, `python3 -m pip install .` and `python3 -m pytest -q --tb=line` : 104 passed in 6.96s. `python3 tools/check_collection_floor.py` printed `collection floor matches 104 tests`. The earlier 93-test run stays a record of that tree. Hosted CI for this commit is not that local run.
+On this slice, after the measurements above, `python3 -m pip install .` and `python3 -m pytest -q --tb=line` : 104 passed in 6.96s. `python3 tools/check_collection_floor.py` printed `collection floor matches 104 tests`. The earlier 93-test run stays a record of that tree.
+
+Hosted CI for `dce39956bc96275342517d9aa307be2ffc743435` succeeded on both runs. Each run had six jobs: Ubuntu, Windows, and macOS, on Python 3.11 and 3.15.
+
+- Push: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/44025474427 success.
+- Pull request: https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/44025503417 success.
+
+`docs/ci/dce3995.md`. This paragraph is newer than `dce3995`.
 
 Commands from the previous slice, in order, on that host with CPython 3.12.3:
 
