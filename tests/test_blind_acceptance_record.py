@@ -89,11 +89,13 @@ def _deepen_checked_out_commit(head_sha: str) -> subprocess.CompletedProcess[str
 
     A pull_request checkout is detached, so a branch name is not available.
     ``git rev-parse HEAD`` is the commit itself. Passing the literal ref
-    ``HEAD`` to fetch would mean the remote's default branch.
+    ``HEAD`` to fetch would mean the remote's default branch. One generation
+    is not enough: the seal object can be fetched while the commits that
+    connect it to this merge commit are still beyond the shallow boundary.
     """
     attempts = (
-        ["git", "fetch", "--deepen=1", "origin", head_sha],
-        ["git", "fetch", "--deepen=1", "origin"],
+        ["git", "fetch", "--deepen=20", "origin", head_sha],
+        ["git", "fetch", "--deepen=20", "origin"],
     )
     last: subprocess.CompletedProcess[str] | None = None
     for command in attempts:
@@ -104,49 +106,58 @@ def _deepen_checked_out_commit(head_sha: str) -> subprocess.CompletedProcess[str
     return last
 
 
-def _require_seal_ancestor() -> None:
-    """The seal commit must be an ancestor of HEAD.
-
-    actions/checkout uses fetch-depth 1, so a shallow clone does not contain
-    the parent. Deepen the checked-out commit until the seal is present, then
-    require the ancestor check. A missing object, a failed fetch, or a
-    non-ancestor is a failure. This holds for a branch checkout and for the
-    detached merge commit used by a pull_request run.
-    """
-    if not _commit_present(SEAL):
-        shallow = subprocess.run(
-            ["git", "rev-parse", "--is-shallow-repository"],
-            cwd=REPO,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        if shallow.returncode != 0 or shallow.stdout.strip() != "true":
-            raise AssertionError(f"seal commit {SEAL} is absent and this clone is not shallow")
-        head = subprocess.run(
-            ["git", "rev-parse", "HEAD"],
-            cwd=REPO,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        head_sha = head.stdout.strip()
-        if head.returncode != 0 or len(head_sha) != 40:
-            raise AssertionError("cannot resolve HEAD in order to deepen the clone")
-        for _ in range(8):
-            deepened = _deepen_checked_out_commit(head_sha)
-            if deepened.returncode != 0:
-                detail = (deepened.stderr or deepened.stdout or "git fetch failed").strip()
-                raise AssertionError(f"shallow clone could not fetch the seal commit: {detail}")
-            if _commit_present(SEAL):
-                break
-        else:
-            raise AssertionError(f"seal commit {SEAL} is still absent after deepening")
-    ancestor = subprocess.run(
+def _ancestor_check() -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
         ["git", "merge-base", "--is-ancestor", SEAL, "HEAD"],
         cwd=REPO,
         capture_output=True,
         text=True,
         check=False,
     )
-    assert ancestor.returncode == 0, (ancestor.stderr or ancestor.stdout or "seal commit is not an ancestor of HEAD").strip()
+
+
+def _require_seal_ancestor() -> None:
+    """The seal commit must be an ancestor of HEAD.
+
+    actions/checkout uses fetch-depth 1, so a shallow clone does not contain
+    the parent. Deepen the checked-out commit until the ancestor check passes.
+    The seal object can appear before the path that links it to HEAD, so
+    presence alone is not success. A missing object, a failed fetch, or a
+    non-ancestor after deepening is a failure. This holds for a branch
+    checkout and for the detached merge commit used by a pull_request run.
+    """
+    ancestor = _ancestor_check()
+    if ancestor.returncode == 0:
+        return
+    shallow = subprocess.run(
+        ["git", "rev-parse", "--is-shallow-repository"],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if shallow.returncode != 0 or shallow.stdout.strip() != "true":
+        if not _commit_present(SEAL):
+            raise AssertionError(f"seal commit {SEAL} is absent and this clone is not shallow")
+        raise AssertionError((ancestor.stderr or ancestor.stdout or "seal commit is not an ancestor of HEAD").strip())
+    head = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    head_sha = head.stdout.strip()
+    if head.returncode != 0 or len(head_sha) != 40:
+        raise AssertionError("cannot resolve HEAD in order to deepen the clone")
+    for _ in range(4):
+        deepened = _deepen_checked_out_commit(head_sha)
+        if deepened.returncode != 0:
+            detail = (deepened.stderr or deepened.stdout or "git fetch failed").strip()
+            raise AssertionError(f"shallow clone could not fetch the seal commit: {detail}")
+        ancestor = _ancestor_check()
+        if ancestor.returncode == 0:
+            return
+    if not _commit_present(SEAL):
+        raise AssertionError(f"seal commit {SEAL} is still absent after deepening")
+    raise AssertionError((ancestor.stderr or ancestor.stdout or "seal commit is not an ancestor of HEAD").strip())
