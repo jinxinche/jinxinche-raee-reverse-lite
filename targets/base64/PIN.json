@@ -1,0 +1,12 @@
+{
+  "project": "base64",
+  "upstream": "aklomp/base64",
+  "tag": "v0.5.3",
+  "source_url": "https://github.com/aklomp/base64/archive/refs/tags/v0.5.3.tar.gz",
+  "tarball_sha256": "74f83a5396660dfe5a09f0339982c03c44ef018e459a8bfcde8b31ca7444aa42",
+  "license": "BSD-2-Clause, from LICENSE in this tarball",
+  "tool": "bin/base64",
+  "interface": "stdin/stdout encode and decode, the same role as a base64 utility",
+  "kind": "encoder, not a compressor",
+  "pinned_before_analysis": true
+}

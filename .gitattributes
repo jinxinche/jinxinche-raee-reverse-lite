@@ -32,3 +32,5 @@ targets/zlib/blind_acceptance/LICENSE.md text eol=lf
 targets/zlib/blind_acceptance/GFDL-1.2.txt text eol=lf
 targets/zlib/blind_acceptance/crc32_stdin.c text eol=lf
 targets/zlib/blind_acceptance/enwik8.zip -text
+targets/lua/dist/lua-5.4.9.tar.gz -text
+targets/base64/dist/base64-0.5.3.tar.gz -text
