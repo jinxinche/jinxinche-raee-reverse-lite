@@ -25,6 +25,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+engines = ["r2pipe>=2.1"]
 
 [project.scripts]
 rrl = "raee_reverse.cli:main"

@@ -50,6 +50,7 @@ def _public_run(result: dict) -> dict:
         "truncated": result["truncated"],
         "rlimits_applied": result["rlimits_applied"],
         "network_namespace": result["network_namespace"],
+        "network_isolated": result.get("network_isolated"),
         "limitations": result["limitations"],
         "duration_seconds": result["duration_seconds"],
     }

@@ -1,9 +1,10 @@
 """Run a target in a restricted working directory.
 
 This strips credentials and applies POSIX rlimits when the platform allows
-them. It is not a virtual machine. A timeout, a truncated capture, or a
-resource-limit stop is not a pass. Target output is returned as bytes and is
-not executed.
+them. It is not a virtual machine. Network isolation is recorded only after
+a connect probe confirms the mechanism that wraps the target. A timeout, a
+truncated capture, or a resource-limit stop is not a pass. Target output is
+returned as bytes and is not executed.
 """
 
 from __future__ import annotations
@@ -18,6 +19,8 @@ import tempfile
 import threading
 import time
 from pathlib import Path
+
+from raee_reverse import netisolate
 
 _ALLOW = {"PATH", "LANG", "LC_ALL", "LC_CTYPE", "SYSTEMROOT", "WINDIR", "COMSPEC", "PATHEXT", "TZ"}
 _DENY_PARTS = (
@@ -39,19 +42,8 @@ _DENY_PARTS = (
 
 
 def probe_network_namespace() -> dict:
-    try:
-        completed = subprocess.run(
-            ["unshare", "-n", "true"],
-            capture_output=True,
-            timeout=3,
-            check=False,
-        )
-    except (FileNotFoundError, subprocess.TimeoutExpired, OSError) as exc:
-        return {"available": False, "detail": str(exc)}
-    if completed.returncode == 0:
-        return {"available": True, "detail": ""}
-    detail = (completed.stderr or completed.stdout or b"").decode("utf-8", "replace")[:500]
-    return {"available": False, "detail": detail or f"exit {completed.returncode}"}
+    """Whether `unshare -n` itself succeeded. This is not `network_isolated`."""
+    return netisolate.probe_unshare_n()
 
 
 def run_sandboxed(
@@ -71,33 +63,43 @@ def run_sandboxed(
         raise ValueError("max_output_bytes must be positive")
     work = Path(work_dir)
     work.mkdir(parents=True, exist_ok=True)
-    network = probe_network_namespace()
+    probe = dict(netisolate.probe_network_isolation())
+    if not probe.get("mechanism"):
+        probe["confirmed"] = False
+        probe["network_isolated"] = False
+        probe["network_namespace"] = False
+    isolated = bool(probe.get("confirmed"))
+    namespace = bool(isolated and probe.get("network_namespace"))
     limitations = [
         "process rlimits and a credential-stripped environment are not a hypervisor boundary",
         "target stdout and stderr are data and are not interpreted as instructions",
     ]
-    rlimits_applied = False
     if os.name != "posix":
         limitations.append("POSIX rlimits are unavailable on this platform")
-    if not network["available"]:
-        limitations.append("network namespace was not applied: " + (network["detail"] or "unavailable"))
+    if not namespace:
+        limitations.append("network namespace was not applied: " + str(probe.get("namespace_detail") or probe.get("reason") or "unavailable"))
+    if isolated:
+        limitations.append("network_isolated is true only because a connect probe failed inside " + str(probe.get("mechanism")))
+    else:
+        limitations.append("network_isolated is false: " + str(probe.get("reason") or "no mechanism was confirmed"))
     env = {key: value for key, value in os.environ.items() if key.upper() in _ALLOW and not any(part in key.upper() for part in _DENY_PARTS)}
     env["PATH"] = env.get("PATH", "/usr/bin:/bin")
     env["HOME"] = str(work)
     env["TMPDIR"] = str(work)
     env["LANG"] = "C"
     command = list(argv)
-    command, rlimits_applied, limit_note = _limit_command(
+    if isolated:
+        command = netisolate.wrap_argv(command, str(probe["mechanism"]))
+    command, rlimits_applied, limit_note, limit_env = _limit_command(
         command,
         cpu_seconds=cpu_seconds,
         fsize_bytes=fsize_bytes,
         as_bytes=as_bytes,
+        isolated_by_helper=isolated and probe.get("mechanism") == "seccomp-prctl",
     )
     if limit_note:
         limitations.append(limit_note)
-    if rlimits_applied and shutil.which("prlimit") is None and os.name == "posix":
-        env["RRL_RLIMITS"] = _rlimit_spec(cpu_seconds, fsize_bytes, as_bytes)
-        env["RRL_ARGV"] = json.dumps(list(argv))
+    env.update(limit_env)
     proc = subprocess.Popen(
         command,
         cwd=work,
@@ -162,8 +164,9 @@ def run_sandboxed(
         "truncated": was_truncated,
         "duration_seconds": duration,
         "rlimits_applied": rlimits_applied,
-        "network_namespace": bool(network["available"]),
-        "network_probe": network,
+        "network_namespace": namespace,
+        "network_isolated": isolated,
+        "network_probe": probe,
         "work_dir": str(work),
         "limitations": limitations,
         "argv": list(argv),
@@ -239,15 +242,16 @@ def _rlimit_spec(cpu_seconds, fsize_bytes, as_bytes) -> str:
     return json.dumps(spec)
 
 
-def _limit_command(argv, *, cpu_seconds, fsize_bytes, as_bytes):
-    """Return (command, applied, limitation note).
+def _limit_command(argv, *, cpu_seconds, fsize_bytes, as_bytes, isolated_by_helper=False):
+    """Return (command, applied, limitation note, extra env).
 
     Linux uses prlimit. Other POSIX hosts set the limits in a short-lived
     Python process that then execs the target. A missing mechanism is recorded
     and is not described as applied.
     """
     if os.name != "posix":
-        return list(argv), False, None
+        return list(argv), False, None, {}
+    spec = _rlimit_spec(cpu_seconds, fsize_bytes, as_bytes)
     prlimit = shutil.which("prlimit")
     if prlimit is not None:
         prefix = [prlimit]
@@ -258,8 +262,11 @@ def _limit_command(argv, *, cpu_seconds, fsize_bytes, as_bytes):
         if as_bytes is not None:
             prefix.append(f"--as={int(as_bytes)}")
         prefix.extend(["--nofile=64", "--nproc=128", "--"])
-        return prefix + list(argv), True, None
-    return [sys.executable, "-c", _RLIMIT_WRAPPER], True, "rlimits were applied with resource.setrlimit before exec because prlimit is absent"
+        return prefix + list(argv), True, None, {}
+    note = "rlimits were applied with resource.setrlimit before exec because prlimit is absent"
+    if isolated_by_helper:
+        return list(argv), True, note, {"RRL_RLIMITS": spec, "RRL_SECCOMP": "1"}
+    return [sys.executable, "-c", _RLIMIT_WRAPPER], True, note, {"RRL_RLIMITS": spec, "RRL_ARGV": json.dumps(list(argv))}
 
 
 def _kill(proc: subprocess.Popen) -> None:

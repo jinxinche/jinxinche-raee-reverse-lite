@@ -1,0 +1,3437 @@
+{
+  "kind": "zlib-1.4-engine-parity",
+  "accepted_pass": false,
+  "host": {
+    "system": "Linux-6.12.113+-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "python": "3.12.3"
+  },
+  "ghidra": {
+    "executed_this_run": false,
+    "source": "docs/evidence/zlib_phase2.json",
+    "export_sha256": "06dae92957e9a8267de9acce7835e47ff3d359f1eba300cea9d197ee8027db4d",
+    "binary_sha256": "e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636",
+    "functions": [
+      {
+        "name": "_init",
+        "entry": 1052672
+      },
+      {
+        "name": "__cxa_finalize",
+        "entry": 1053200
+      },
+      {
+        "name": "__snprintf_chk",
+        "entry": 1053216
+      },
+      {
+        "name": "free",
+        "entry": 1053232
+      },
+      {
+        "name": "__errno_location",
+        "entry": 1053248
+      },
+      {
+        "name": "unlink",
+        "entry": 1053264
+      },
+      {
+        "name": "ferror",
+        "entry": 1053280
+      },
+      {
+        "name": "fread",
+        "entry": 1053296
+      },
+      {
+        "name": "fcntl",
+        "entry": 1053312
+      },
+      {
+        "name": "write",
+        "entry": 1053328
+      },
+      {
+        "name": "fclose",
+        "entry": 1053344
+      },
+      {
+        "name": "strlen",
+        "entry": 1053360
+      },
+      {
+        "name": "__stack_chk_fail",
+        "entry": 1053376
+      },
+      {
+        "name": "strrchr",
+        "entry": 1053392
+      },
+      {
+        "name": "memset",
+        "entry": 1053408
+      },
+      {
+        "name": "close",
+        "entry": 1053424
+      },
+      {
+        "name": "memchr",
+        "entry": 1053440
+      },
+      {
+        "name": "read",
+        "entry": 1053456
+      },
+      {
+        "name": "strcmp",
+        "entry": 1053472
+      },
+      {
+        "name": "memcpy",
+        "entry": 1053488
+      },
+      {
+        "name": "fileno",
+        "entry": 1053504
+      },
+      {
+        "name": "malloc",
+        "entry": 1053520
+      },
+      {
+        "name": "__vsnprintf_chk",
+        "entry": 1053536
+      },
+      {
+        "name": "memmove",
+        "entry": 1053552
+      },
+      {
+        "name": "open",
+        "entry": 1053568
+      },
+      {
+        "name": "fopen",
+        "entry": 1053584
+      },
+      {
+        "name": "perror",
+        "entry": 1053600
+      },
+      {
+        "name": "exit",
+        "entry": 1053616
+      },
+      {
+        "name": "fwrite",
+        "entry": 1053632
+      },
+      {
+        "name": "lseek64",
+        "entry": 1053648
+      },
+      {
+        "name": "__fprintf_chk",
+        "entry": 1053664
+      },
+      {
+        "name": "strerror",
+        "entry": 1053680
+      },
+      {
+        "name": "main",
+        "entry": 1053760
+      },
+      {
+        "name": "_start",
+        "entry": 1054672
+      },
+      {
+        "name": "deregister_tm_clones",
+        "entry": 1054720
+      },
+      {
+        "name": "register_tm_clones",
+        "entry": 1054768
+      },
+      {
+        "name": "__do_global_dtors_aux",
+        "entry": 1054832
+      },
+      {
+        "name": "frame_dummy",
+        "entry": 1054896
+      },
+      {
+        "name": "error",
+        "entry": 1054912
+      },
+      {
+        "name": "gz_uncompress",
+        "entry": 1054976
+      },
+      {
+        "name": "gz_compress",
+        "entry": 1055216
+      },
+      {
+        "name": "file_compress",
+        "entry": 1055456
+      },
+      {
+        "name": "file_uncompress",
+        "entry": 1055856
+      },
+      {
+        "name": "gzclose",
+        "entry": 1056400
+      },
+      {
+        "name": "gz_open",
+        "entry": 1056448
+      },
+      {
+        "name": "gzopen",
+        "entry": 1057504
+      },
+      {
+        "name": "gzopen64",
+        "entry": 1057536
+      },
+      {
+        "name": "gzdopen",
+        "entry": 1057568
+      },
+      {
+        "name": "gzbuffer",
+        "entry": 1057696
+      },
+      {
+        "name": "gzrewind",
+        "entry": 1057776
+      },
+      {
+        "name": "gzseek64",
+        "entry": 1058016
+      },
+      {
+        "name": "gzseek",
+        "entry": 1058432
+      },
+      {
+        "name": "gztell64",
+        "entry": 1058448
+      },
+      {
+        "name": "gztell",
+        "entry": 1058512
+      },
+      {
+        "name": "gzoffset64",
+        "entry": 1058528
+      },
+      {
+        "name": "gzoffset",
+        "entry": 1058624
+      },
+      {
+        "name": "gzeof",
+        "entry": 1058640
+      },
+      {
+        "name": "gzerror",
+        "entry": 1058672
+      },
+      {
+        "name": "gzclearerr",
+        "entry": 1058768
+      },
+      {
+        "name": "gz_error",
+        "entry": 1058896
+      },
+      {
+        "name": "gz_intmax",
+        "entry": 1059120
+      },
+      {
+        "name": "gz_load",
+        "entry": 1059136
+      },
+      {
+        "name": "gz_avail",
+        "entry": 1059312
+      },
+      {
+        "name": "gz_look",
+        "entry": 1059808
+      },
+      {
+        "name": "gz_decomp",
+        "entry": 1060400
+      },
+      {
+        "name": "gz_fetch",
+        "entry": 1060912
+      },
+      {
+        "name": "gz_skip",
+        "entry": 1061120
+      },
+      {
+        "name": "gz_read",
+        "entry": 1061552
+      },
+      {
+        "name": "gzread",
+        "entry": 1062016
+      },
+      {
+        "name": "gzfread",
+        "entry": 1062240
+      },
+      {
+        "name": "gzgetc",
+        "entry": 1062464
+      },
+      {
+        "name": "gzgetc_",
+        "entry": 1062672
+      },
+      {
+        "name": "gzungetc",
+        "entry": 1062688
+      },
+      {
+        "name": "gzgets",
+        "entry": 1063136
+      },
+      {
+        "name": "gzdirect",
+        "entry": 1063568
+      },
+      {
+        "name": "gzclose_r",
+        "entry": 1063712
+      },
+      {
+        "name": "gz_init",
+        "entry": 1063872
+      },
+      {
+        "name": "gz_comp",
+        "entry": 1064144
+      },
+      {
+        "name": "gz_comp.constprop.0",
+        "entry": 1064752
+      },
+      {
+        "name": "gz_zero",
+        "entry": 1065344
+      },
+      {
+        "name": "gz_write",
+        "entry": 1065584
+      },
+      {
+        "name": "gzwrite",
+        "entry": 1066112
+      },
+      {
+        "name": "gzfwrite",
+        "entry": 1066240
+      },
+      {
+        "name": "gzputc",
+        "entry": 1066400
+      },
+      {
+        "name": "gzputs",
+        "entry": 1066672
+      },
+      {
+        "name": "gzvprintf",
+        "entry": 1066816
+      },
+      {
+        "name": "gzprintf",
+        "entry": 1067536
+      },
+      {
+        "name": "gzflush",
+        "entry": 1067728
+      },
+      {
+        "name": "gzsetparams",
+        "entry": 1067856
+      },
+      {
+        "name": "gzclose_w",
+        "entry": 1068096
+      },
+      {
+        "name": "longest_match",
+        "entry": 1068304
+      },
+      {
+        "name": "read_buf",
+        "entry": 1068832
+      },
+      {
+        "name": "flush_pending",
+        "entry": 1068976
+      },
+      {
+        "name": "deflate_stored",
+        "entry": 1069104
+      },
+      {
+        "name": "fill_window",
+        "entry": 1070528
+      },
+      {
+        "name": "deflate_slow",
+        "entry": 1071872
+      },
+      {
+        "name": "deflate_fast",
+        "entry": 1073504
+      },
+      {
+        "name": "deflateSetDictionary",
+        "entry": 1074736
+      },
+      {
+        "name": "deflateGetDictionary",
+        "entry": 1075488
+      },
+      {
+        "name": "deflateResetKeep",
+        "entry": 1075728
+      },
+      {
+        "name": "deflateReset",
+        "entry": 1076128
+      },
+      {
+        "name": "deflateSetHeader",
+        "entry": 1076368
+      },
+      {
+        "name": "deflatePending",
+        "entry": 1076496
+      },
+      {
+        "name": "deflateUsed",
+        "entry": 1076656
+      },
+      {
+        "name": "deflatePrime",
+        "entry": 1076784
+      },
+      {
+        "name": "deflateTune",
+        "entry": 1077440
+      },
+      {
+        "name": "deflateBound_z",
+        "entry": 1077600
+      },
+      {
+        "name": "deflateBound",
+        "entry": 1078144
+      },
+      {
+        "name": "deflate",
+        "entry": 1078160
+      },
+      {
+        "name": "deflateParams",
+        "entry": 1083200
+      },
+      {
+        "name": "deflateEnd",
+        "entry": 1084320
+      },
+      {
+        "name": "deflateInit2_",
+        "entry": 1084640
+      },
+      {
+        "name": "deflateInit_",
+        "entry": 1085456
+      },
+      {
+        "name": "deflateCopy",
+        "entry": 1085504
+      },
+      {
+        "name": "updatewindow",
+        "entry": 1086320
+      },
+      {
+        "name": "inflateResetKeep",
+        "entry": 1086624
+      },
+      {
+        "name": "inflateReset",
+        "entry": 1086864
+      },
+      {
+        "name": "inflateReset2",
+        "entry": 1087040
+      },
+      {
+        "name": "inflateInit2_",
+        "entry": 1087280
+      },
+      {
+        "name": "inflateInit_",
+        "entry": 1087584
+      },
+      {
+        "name": "inflatePrime",
+        "entry": 1087616
+      },
+      {
+        "name": "inflate",
+        "entry": 1087776
+      },
+      {
+        "name": "inflateEnd",
+        "entry": 1096768
+      },
+      {
+        "name": "inflateGetDictionary",
+        "entry": 1096928
+      },
+      {
+        "name": "inflateSetDictionary",
+        "entry": 1097104
+      },
+      {
+        "name": "inflateGetHeader",
+        "entry": 1097360
+      },
+      {
+        "name": "inflateSync",
+        "entry": 1097472
+      },
+      {
+        "name": "inflateSyncPoint",
+        "entry": 1098320
+      },
+      {
+        "name": "inflateCopy",
+        "entry": 1098416
+      },
+      {
+        "name": "inflateUndermine",
+        "entry": 1099200
+      },
+      {
+        "name": "inflateValidate",
+        "entry": 1099296
+      },
+      {
+        "name": "inflateMark",
+        "entry": 1099440
+      },
+      {
+        "name": "inflateCodesUsed",
+        "entry": 1099584
+      },
+      {
+        "name": "inflate_table",
+        "entry": 1099696
+      },
+      {
+        "name": "inflate_fixed",
+        "entry": 1103312
+      },
+      {
+        "name": "scan_tree",
+        "entry": 1103376
+      },
+      {
+        "name": "send_tree",
+        "entry": 1103760
+      },
+      {
+        "name": "compress_block",
+        "entry": 1105312
+      },
+      {
+        "name": "pqdownheap.constprop.0",
+        "entry": 1106288
+      },
+      {
+        "name": "build_tree",
+        "entry": 1106544
+      },
+      {
+        "name": "_tr_init",
+        "entry": 1109616
+      },
+      {
+        "name": "_tr_stored_block",
+        "entry": 1109936
+      },
+      {
+        "name": "_tr_flush_bits",
+        "entry": 1110352
+      },
+      {
+        "name": "_tr_align",
+        "entry": 1110496
+      },
+      {
+        "name": "_tr_flush_block",
+        "entry": 1110832
+      },
+      {
+        "name": "_tr_tally",
+        "entry": 1113056
+      },
+      {
+        "name": "zlibVersion",
+        "entry": 1113264
+      },
+      {
+        "name": "zlibCompileFlags",
+        "entry": 1113280
+      },
+      {
+        "name": "zError",
+        "entry": 1113296
+      },
+      {
+        "name": "zcalloc",
+        "entry": 1113344
+      },
+      {
+        "name": "zcfree",
+        "entry": 1113360
+      },
+      {
+        "name": "adler32_z",
+        "entry": 1113376
+      },
+      {
+        "name": "adler32",
+        "entry": 1115152
+      },
+      {
+        "name": "adler32_combine",
+        "entry": 1115168
+      },
+      {
+        "name": "adler32_combine64",
+        "entry": 1115408
+      },
+      {
+        "name": "get_crc_table",
+        "entry": 1115648
+      },
+      {
+        "name": "crc32_z",
+        "entry": 1115664
+      },
+      {
+        "name": "crc32",
+        "entry": 1118464
+      },
+      {
+        "name": "crc32_combine_gen64",
+        "entry": 1118480
+      },
+      {
+        "name": "crc32_combine_gen",
+        "entry": 1118624
+      },
+      {
+        "name": "crc32_combine_op",
+        "entry": 1118640
+      },
+      {
+        "name": "crc32_combine64",
+        "entry": 1118720
+      },
+      {
+        "name": "crc32_combine",
+        "entry": 1118768
+      },
+      {
+        "name": "inflate_fast",
+        "entry": 1118784
+      },
+      {
+        "name": "_fini",
+        "entry": 1123544
+      },
+      {
+        "name": "__snprintf_chk",
+        "entry": 1159168
+      },
+      {
+        "name": "free",
+        "entry": 1159176
+      },
+      {
+        "name": "__libc_start_main",
+        "entry": 1159184
+      },
+      {
+        "name": "__errno_location",
+        "entry": 1159192
+      },
+      {
+        "name": "unlink",
+        "entry": 1159200
+      },
+      {
+        "name": "_ITM_deregisterTMCloneTable",
+        "entry": 1159208
+      },
+      {
+        "name": "ferror",
+        "entry": 1159224
+      },
+      {
+        "name": "fread",
+        "entry": 1159232
+      },
+      {
+        "name": "fcntl",
+        "entry": 1159248
+      },
+      {
+        "name": "write",
+        "entry": 1159256
+      },
+      {
+        "name": "fclose",
+        "entry": 1159264
+      },
+      {
+        "name": "strlen",
+        "entry": 1159272
+      },
+      {
+        "name": "__stack_chk_fail",
+        "entry": 1159280
+      },
+      {
+        "name": "strrchr",
+        "entry": 1159288
+      },
+      {
+        "name": "memset",
+        "entry": 1159296
+      },
+      {
+        "name": "close",
+        "entry": 1159304
+      },
+      {
+        "name": "memchr",
+        "entry": 1159312
+      },
+      {
+        "name": "read",
+        "entry": 1159320
+      },
+      {
+        "name": "strcmp",
+        "entry": 1159328
+      },
+      {
+        "name": "__gmon_start__",
+        "entry": 1159336
+      },
+      {
+        "name": "memcpy",
+        "entry": 1159344
+      },
+      {
+        "name": "fileno",
+        "entry": 1159352
+      },
+      {
+        "name": "malloc",
+        "entry": 1159360
+      },
+      {
+        "name": "__vsnprintf_chk",
+        "entry": 1159368
+      },
+      {
+        "name": "memmove",
+        "entry": 1159376
+      },
+      {
+        "name": "open",
+        "entry": 1159384
+      },
+      {
+        "name": "fopen",
+        "entry": 1159392
+      },
+      {
+        "name": "perror",
+        "entry": 1159400
+      },
+      {
+        "name": "exit",
+        "entry": 1159408
+      },
+      {
+        "name": "fwrite",
+        "entry": 1159416
+      },
+      {
+        "name": "lseek64",
+        "entry": 1159424
+      },
+      {
+        "name": "__fprintf_chk",
+        "entry": 1159432
+      },
+      {
+        "name": "_ITM_registerTMCloneTable",
+        "entry": 1159440
+      },
+      {
+        "name": "strerror",
+        "entry": 1159448
+      },
+      {
+        "name": "__cxa_finalize",
+        "entry": 1159464
+      }
+    ],
+    "program_entry": 1054672,
+    "program_entry_name": "_start"
+  },
+  "backup": {
+    "installed": true,
+    "locate": {
+      "installed": true,
+      "interface": "r2pipe",
+      "r2pipe_version": "2.1.0",
+      "r2pipe_error": null,
+      "binary": "radare2",
+      "binary_path": "/usr/bin/radare2",
+      "rizin_on_path": false,
+      "radare2_on_path": true,
+      "angr_selected": false
+    },
+    "rizin_apt_policy": "apt-cache policy rizin exited 0 with empty output; apt-cache show exited 100: E: No packages found",
+    "radare2_apt_policy": "radare2:\n  Installed: 5.5.0+dfsg-1.1ubuntu3\n  Candidate: 5.5.0+dfsg-1.1ubuntu3\n  Version table:\n *** 5.5.0+dfsg-1.1ubuntu3 500\n        500 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages\n        100 /var/lib/dpkg/status",
+    "angr_installed": false,
+    "angr_selected": false,
+    "angr_note": "angr was not selected; r2pipe is the lighter interface and angr was not imported",
+    "analysis": {
+      "engine": "radare2",
+      "interface": "r2pipe",
+      "execution_result": "passed",
+      "applicability": "valid",
+      "provenance": "observed",
+      "accepted_pass": false,
+      "installed": true,
+      "binary": "radare2",
+      "binary_path": "/usr/bin/radare2",
+      "binary_version": "radare2 5.5.0 0 @ linux-x86-64 git.5.5.0",
+      "r2pipe_version": "2.1.0",
+      "rizin_on_path": false,
+      "radare2_on_path": true,
+      "angr_selected": false,
+      "rizin_via_symlink": false,
+      "analysis_commands": [
+        "aa",
+        "aflj",
+        "iej"
+      ],
+      "program_entry": 6096,
+      "duration_seconds": 0.36990681900010713,
+      "observations": [
+        {
+          "kind": "function_list",
+          "count": 168
+        }
+      ],
+      "limitations": [
+        "a function list is a static observation, not a behavior proof",
+        "accepted_pass stays false until a claim evaluation with an explicit scope says otherwise"
+      ],
+      "simulated": false
+    },
+    "functions": [
+      {
+        "name": "entry0",
+        "entry": 6096
+      },
+      {
+        "name": "sym.error",
+        "entry": 6336
+      },
+      {
+        "name": "sym.imp.perror",
+        "entry": 5024
+      },
+      {
+        "name": "sym.imp.exit",
+        "entry": 5040
+      },
+      {
+        "name": "sym.imp.fopen",
+        "entry": 5008
+      },
+      {
+        "name": "sym.imp.fileno",
+        "entry": 4928
+      },
+      {
+        "name": "sym.gzdopen",
+        "entry": 8992
+      },
+      {
+        "name": "sym.imp.malloc",
+        "entry": 4944
+      },
+      {
+        "name": "sym.imp.__snprintf_chk",
+        "entry": 4640
+      },
+      {
+        "name": "sym.gz_open",
+        "entry": 7872
+      },
+      {
+        "name": "sym.imp.free",
+        "entry": 4656
+      },
+      {
+        "name": "sym.gzopen",
+        "entry": 8928
+      },
+      {
+        "name": "sym.imp.__fprintf_chk",
+        "entry": 5088
+      },
+      {
+        "name": "sym.imp.__stack_chk_fail",
+        "entry": 4800
+      },
+      {
+        "name": "sym.imp.fwrite",
+        "entry": 5056
+      },
+      {
+        "name": "sym.gzread",
+        "entry": 13440
+      },
+      {
+        "name": "sym.imp.fclose",
+        "entry": 4768
+      },
+      {
+        "name": "sym.gzerror",
+        "entry": 10096
+      },
+      {
+        "name": "sym.gzwrite",
+        "entry": 17536
+      },
+      {
+        "name": "sym.imp.fread",
+        "entry": 4720
+      },
+      {
+        "name": "sym.imp.ferror",
+        "entry": 4704
+      },
+      {
+        "name": "sym.imp.strlen",
+        "entry": 4784
+      },
+      {
+        "name": "sym.imp.unlink",
+        "entry": 4688
+      },
+      {
+        "name": "sym.imp.strcmp",
+        "entry": 4896
+      },
+      {
+        "name": "sym.gz_error",
+        "entry": 10320
+      },
+      {
+        "name": "sym.imp.close",
+        "entry": 4848
+      },
+      {
+        "name": "sym.inflateEnd",
+        "entry": 48192
+      },
+      {
+        "name": "sym.gz_comp",
+        "entry": 15568
+      },
+      {
+        "name": "sym.gz_zero",
+        "entry": 16768
+      },
+      {
+        "name": "sym.deflateEnd",
+        "entry": 35744
+      },
+      {
+        "name": "sym.gz_uncompress",
+        "entry": 6400
+      },
+      {
+        "name": "sym.gz_compress",
+        "entry": 6640
+      },
+      {
+        "name": "sym.gz_compress.cold",
+        "entry": 5120
+      },
+      {
+        "name": "sym.file_compress",
+        "entry": 6880
+      },
+      {
+        "name": "sym.file_compress.cold",
+        "entry": 5142
+      },
+      {
+        "name": "sym.file_uncompress",
+        "entry": 7280
+      },
+      {
+        "name": "sym.main.cold",
+        "entry": 5160
+      },
+      {
+        "name": "sym.deregister_tm_clones",
+        "entry": 6144
+      },
+      {
+        "name": "sym.register_tm_clones",
+        "entry": 6192
+      },
+      {
+        "name": "sym.__do_global_dtors_aux",
+        "entry": 6256
+      },
+      {
+        "name": "fcn.00001210",
+        "entry": 4624
+      },
+      {
+        "name": "entry.init0",
+        "entry": 6320
+      },
+      {
+        "name": "sym.gz_load",
+        "entry": 10560
+      },
+      {
+        "name": "sym.imp.__errno_location",
+        "entry": 4672
+      },
+      {
+        "name": "sym.imp.read",
+        "entry": 4880
+      },
+      {
+        "name": "sym.imp.strerror",
+        "entry": 5104
+      },
+      {
+        "name": "sym.gz_avail",
+        "entry": 10736
+      },
+      {
+        "name": "sym.gz_look",
+        "entry": 11232
+      },
+      {
+        "name": "sym.gz_decomp",
+        "entry": 11824
+      },
+      {
+        "name": "sym.inflate",
+        "entry": 39200
+      },
+      {
+        "name": "sym.gz_fetch",
+        "entry": 12336
+      },
+      {
+        "name": "sym.gz_skip",
+        "entry": 12544
+      },
+      {
+        "name": "sym.gz_read",
+        "entry": 12976
+      },
+      {
+        "name": "sym.gz_init",
+        "entry": 15296
+      },
+      {
+        "name": "sym.deflateInit2_",
+        "entry": 36064
+      },
+      {
+        "name": "sym.gz_comp.constprop.0",
+        "entry": 16176
+      },
+      {
+        "name": "sym.gz_write",
+        "entry": 17008
+      },
+      {
+        "name": "sym.longest_match",
+        "entry": 19728
+      },
+      {
+        "name": "sym.read_buf",
+        "entry": 20256
+      },
+      {
+        "name": "sym.imp.memcpy",
+        "entry": 4912
+      },
+      {
+        "name": "sym.adler32",
+        "entry": 66576
+      },
+      {
+        "name": "sym.crc32",
+        "entry": 69888
+      },
+      {
+        "name": "sym.flush_pending",
+        "entry": 20400
+      },
+      {
+        "name": "sym.deflate_stored",
+        "entry": 20528
+      },
+      {
+        "name": "sym.fill_window",
+        "entry": 21952
+      },
+      {
+        "name": "sym.deflate_slow",
+        "entry": 23296
+      },
+      {
+        "name": "sym.deflate_fast",
+        "entry": 24928
+      },
+      {
+        "name": "sym.updatewindow",
+        "entry": 37744
+      },
+      {
+        "name": "sym.scan_tree",
+        "entry": 54800
+      },
+      {
+        "name": "sym.send_tree",
+        "entry": 55184
+      },
+      {
+        "name": "sym.compress_block",
+        "entry": 56736
+      },
+      {
+        "name": "sym.pqdownheap.constprop.0",
+        "entry": 57712
+      },
+      {
+        "name": "sym.build_tree",
+        "entry": 57968
+      },
+      {
+        "name": "sym._tr_init",
+        "entry": 61040
+      },
+      {
+        "name": "sym._tr_flush_block",
+        "entry": 62256
+      },
+      {
+        "name": "sym._tr_stored_block",
+        "entry": 61360
+      },
+      {
+        "name": "sym.inflate_fast",
+        "entry": 70208
+      },
+      {
+        "name": "sym.inflate_table",
+        "entry": 51120
+      },
+      {
+        "name": "sym._tr_align",
+        "entry": 61920
+      },
+      {
+        "name": "sym._tr_flush_bits",
+        "entry": 61776
+      },
+      {
+        "name": "sym.inflate_fixed",
+        "entry": 54736
+      },
+      {
+        "name": "sym.get_crc_table",
+        "entry": 67072
+      },
+      {
+        "name": "sym.crc32_combine_gen",
+        "entry": 70048
+      },
+      {
+        "name": "sym.crc32_z",
+        "entry": 67088
+      },
+      {
+        "name": "sym.gzvprintf",
+        "entry": 18240
+      },
+      {
+        "name": "sym.gzclose",
+        "entry": 7824
+      },
+      {
+        "name": "sym.gzseek64",
+        "entry": 9440
+      },
+      {
+        "name": "sym.inflateValidate",
+        "entry": 50720
+      },
+      {
+        "name": "sym.inflateGetDictionary",
+        "entry": 48352
+      },
+      {
+        "name": "sym.gzclose_r",
+        "entry": 15136
+      },
+      {
+        "name": "sym.gzgets",
+        "entry": 14560
+      },
+      {
+        "name": "sym.gzgetc",
+        "entry": 13888
+      },
+      {
+        "name": "sym.crc32_combine_gen64",
+        "entry": 69904
+      },
+      {
+        "name": "sym._tr_tally",
+        "entry": 64480
+      },
+      {
+        "name": "sym.crc32_combine64",
+        "entry": 70144
+      },
+      {
+        "name": "sym.inflateResetKeep",
+        "entry": 38048
+      },
+      {
+        "name": "sym.gzbuffer",
+        "entry": 9120
+      },
+      {
+        "name": "sym.gzprintf",
+        "entry": 18960
+      },
+      {
+        "name": "sym.inflateUndermine",
+        "entry": 50624
+      },
+      {
+        "name": "sym._fini",
+        "entry": 74968
+      },
+      {
+        "name": "sym.gzoffset",
+        "entry": 10048
+      },
+      {
+        "name": "sym.deflatePrime",
+        "entry": 28208
+      },
+      {
+        "name": "sym.gzclearerr",
+        "entry": 10192
+      },
+      {
+        "name": "sym.inflateCodesUsed",
+        "entry": 51008
+      },
+      {
+        "name": "sym.gzseek",
+        "entry": 9856
+      },
+      {
+        "name": "sym.gzfread",
+        "entry": 13664
+      },
+      {
+        "name": "sym.zError",
+        "entry": 64720
+      },
+      {
+        "name": "sym.deflateReset",
+        "entry": 27552
+      },
+      {
+        "name": "sym.adler32_combine",
+        "entry": 66592
+      },
+      {
+        "name": "sym.deflate",
+        "entry": 29584
+      },
+      {
+        "name": "sym.gz_intmax",
+        "entry": 10544
+      },
+      {
+        "name": "sym.inflateMark",
+        "entry": 50864
+      },
+      {
+        "name": "sym.adler32_combine64",
+        "entry": 66832
+      },
+      {
+        "name": "sym.gzeof",
+        "entry": 10064
+      },
+      {
+        "name": "sym.gztell64",
+        "entry": 9872
+      },
+      {
+        "name": "sym.crc32_combine_op",
+        "entry": 70064
+      },
+      {
+        "name": "sym.deflateGetDictionary",
+        "entry": 26912
+      },
+      {
+        "name": "sym.deflateParams",
+        "entry": 34624
+      },
+      {
+        "name": "sym.deflateSetHeader",
+        "entry": 27792
+      },
+      {
+        "name": "sym.gzflush",
+        "entry": 19152
+      },
+      {
+        "name": "sym.deflateInit_",
+        "entry": 36880
+      },
+      {
+        "name": "sym.deflateBound_z",
+        "entry": 29024
+      },
+      {
+        "name": "sym.zcfree",
+        "entry": 64784
+      },
+      {
+        "name": "sym.gzopen64",
+        "entry": 8960
+      },
+      {
+        "name": "sym.gzsetparams",
+        "entry": 19280
+      },
+      {
+        "name": "sym.inflateSyncPoint",
+        "entry": 49744
+      },
+      {
+        "name": "sym.gzputs",
+        "entry": 18096
+      },
+      {
+        "name": "sym.inflateSetDictionary",
+        "entry": 48528
+      },
+      {
+        "name": "sym.deflateBound",
+        "entry": 29568
+      },
+      {
+        "name": "sym.inflateGetHeader",
+        "entry": 48784
+      },
+      {
+        "name": "sym.gzputc",
+        "entry": 17824
+      },
+      {
+        "name": "sym.inflatePrime",
+        "entry": 39040
+      },
+      {
+        "name": "sym.gzclose_w",
+        "entry": 19520
+      },
+      {
+        "name": "sym.gzrewind",
+        "entry": 9200
+      },
+      {
+        "name": "sym.gzoffset64",
+        "entry": 9952
+      },
+      {
+        "name": "sym.inflateCopy",
+        "entry": 49840
+      },
+      {
+        "name": "sym.deflateUsed",
+        "entry": 28080
+      },
+      {
+        "name": "main",
+        "entry": 5184
+      },
+      {
+        "name": "sym.inflateInit_",
+        "entry": 39008
+      },
+      {
+        "name": "sym.deflatePending",
+        "entry": 27920
+      },
+      {
+        "name": "sym.deflateCopy",
+        "entry": 36928
+      },
+      {
+        "name": "sym.gzgetc_",
+        "entry": 14096
+      },
+      {
+        "name": "sym.crc32_combine",
+        "entry": 70192
+      },
+      {
+        "name": "sym.inflateInit2_",
+        "entry": 38704
+      },
+      {
+        "name": "sym.zcalloc",
+        "entry": 64768
+      },
+      {
+        "name": "sym.gzfwrite",
+        "entry": 17664
+      },
+      {
+        "name": "sym.gzdirect",
+        "entry": 14992
+      },
+      {
+        "name": "sym.inflateReset",
+        "entry": 38288
+      },
+      {
+        "name": "sym.zlibVersion",
+        "entry": 64688
+      },
+      {
+        "name": "sym.deflateResetKeep",
+        "entry": 27152
+      },
+      {
+        "name": "sym.inflateReset2",
+        "entry": 38464
+      },
+      {
+        "name": "sym.gztell",
+        "entry": 9936
+      },
+      {
+        "name": "sym.gzungetc",
+        "entry": 14112
+      },
+      {
+        "name": "sym.deflateSetDictionary",
+        "entry": 26160
+      },
+      {
+        "name": "sym.zlibCompileFlags",
+        "entry": 64704
+      },
+      {
+        "name": "sym.adler32_z",
+        "entry": 64800
+      },
+      {
+        "name": "sym.inflateSync",
+        "entry": 48896
+      },
+      {
+        "name": "sym._init",
+        "entry": 4096
+      },
+      {
+        "name": "sym.deflateTune",
+        "entry": 28864
+      },
+      {
+        "name": "sym.imp.fcntl",
+        "entry": 4736
+      },
+      {
+        "name": "sym.imp.write",
+        "entry": 4752
+      },
+      {
+        "name": "sym.imp.strrchr",
+        "entry": 4816
+      },
+      {
+        "name": "sym.imp.memset",
+        "entry": 4832
+      },
+      {
+        "name": "sym.imp.memchr",
+        "entry": 4864
+      },
+      {
+        "name": "sym.imp.__vsnprintf_chk",
+        "entry": 4960
+      },
+      {
+        "name": "sym.imp.memmove",
+        "entry": 4976
+      },
+      {
+        "name": "sym.imp.open",
+        "entry": 4992
+      },
+      {
+        "name": "sym.imp.lseek64",
+        "entry": 5072
+      }
+    ],
+    "binary_sha256": "e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636",
+    "elf_entry": 6096
+  },
+  "same_binary": true,
+  "parity_executed": true,
+  "identical": false,
+  "disagreements": {
+    "normalization": "strip prefixes sym.imp., sym., imp., reloc. in that order; compare sets of entry addresses",
+    "only_ghidra": [
+      "_ITM_deregisterTMCloneTable",
+      "_ITM_registerTMCloneTable",
+      "__cxa_finalize",
+      "__gmon_start__",
+      "__libc_start_main",
+      "_start",
+      "frame_dummy"
+    ],
+    "only_backup": [
+      "entry.init0",
+      "entry0",
+      "fcn.00001210",
+      "file_compress.cold",
+      "gz_compress.cold",
+      "main.cold"
+    ],
+    "entry_disagreements": [
+      {
+        "name": "__do_global_dtors_aux",
+        "ghidra": [
+          1054832
+        ],
+        "backup": [
+          6256
+        ]
+      },
+      {
+        "name": "__errno_location",
+        "ghidra": [
+          1053248,
+          1159192
+        ],
+        "backup": [
+          4672
+        ]
+      },
+      {
+        "name": "__fprintf_chk",
+        "ghidra": [
+          1053664,
+          1159432
+        ],
+        "backup": [
+          5088
+        ]
+      },
+      {
+        "name": "__snprintf_chk",
+        "ghidra": [
+          1053216,
+          1159168
+        ],
+        "backup": [
+          4640
+        ]
+      },
+      {
+        "name": "__stack_chk_fail",
+        "ghidra": [
+          1053376,
+          1159280
+        ],
+        "backup": [
+          4800
+        ]
+      },
+      {
+        "name": "__vsnprintf_chk",
+        "ghidra": [
+          1053536,
+          1159368
+        ],
+        "backup": [
+          4960
+        ]
+      },
+      {
+        "name": "_fini",
+        "ghidra": [
+          1123544
+        ],
+        "backup": [
+          74968
+        ]
+      },
+      {
+        "name": "_init",
+        "ghidra": [
+          1052672
+        ],
+        "backup": [
+          4096
+        ]
+      },
+      {
+        "name": "_tr_align",
+        "ghidra": [
+          1110496
+        ],
+        "backup": [
+          61920
+        ]
+      },
+      {
+        "name": "_tr_flush_bits",
+        "ghidra": [
+          1110352
+        ],
+        "backup": [
+          61776
+        ]
+      },
+      {
+        "name": "_tr_flush_block",
+        "ghidra": [
+          1110832
+        ],
+        "backup": [
+          62256
+        ]
+      },
+      {
+        "name": "_tr_init",
+        "ghidra": [
+          1109616
+        ],
+        "backup": [
+          61040
+        ]
+      },
+      {
+        "name": "_tr_stored_block",
+        "ghidra": [
+          1109936
+        ],
+        "backup": [
+          61360
+        ]
+      },
+      {
+        "name": "_tr_tally",
+        "ghidra": [
+          1113056
+        ],
+        "backup": [
+          64480
+        ]
+      },
+      {
+        "name": "adler32",
+        "ghidra": [
+          1115152
+        ],
+        "backup": [
+          66576
+        ]
+      },
+      {
+        "name": "adler32_combine",
+        "ghidra": [
+          1115168
+        ],
+        "backup": [
+          66592
+        ]
+      },
+      {
+        "name": "adler32_combine64",
+        "ghidra": [
+          1115408
+        ],
+        "backup": [
+          66832
+        ]
+      },
+      {
+        "name": "adler32_z",
+        "ghidra": [
+          1113376
+        ],
+        "backup": [
+          64800
+        ]
+      },
+      {
+        "name": "build_tree",
+        "ghidra": [
+          1106544
+        ],
+        "backup": [
+          57968
+        ]
+      },
+      {
+        "name": "close",
+        "ghidra": [
+          1053424,
+          1159304
+        ],
+        "backup": [
+          4848
+        ]
+      },
+      {
+        "name": "compress_block",
+        "ghidra": [
+          1105312
+        ],
+        "backup": [
+          56736
+        ]
+      },
+      {
+        "name": "crc32",
+        "ghidra": [
+          1118464
+        ],
+        "backup": [
+          69888
+        ]
+      },
+      {
+        "name": "crc32_combine",
+        "ghidra": [
+          1118768
+        ],
+        "backup": [
+          70192
+        ]
+      },
+      {
+        "name": "crc32_combine64",
+        "ghidra": [
+          1118720
+        ],
+        "backup": [
+          70144
+        ]
+      },
+      {
+        "name": "crc32_combine_gen",
+        "ghidra": [
+          1118624
+        ],
+        "backup": [
+          70048
+        ]
+      },
+      {
+        "name": "crc32_combine_gen64",
+        "ghidra": [
+          1118480
+        ],
+        "backup": [
+          69904
+        ]
+      },
+      {
+        "name": "crc32_combine_op",
+        "ghidra": [
+          1118640
+        ],
+        "backup": [
+          70064
+        ]
+      },
+      {
+        "name": "crc32_z",
+        "ghidra": [
+          1115664
+        ],
+        "backup": [
+          67088
+        ]
+      },
+      {
+        "name": "deflate",
+        "ghidra": [
+          1078160
+        ],
+        "backup": [
+          29584
+        ]
+      },
+      {
+        "name": "deflateBound",
+        "ghidra": [
+          1078144
+        ],
+        "backup": [
+          29568
+        ]
+      },
+      {
+        "name": "deflateBound_z",
+        "ghidra": [
+          1077600
+        ],
+        "backup": [
+          29024
+        ]
+      },
+      {
+        "name": "deflateCopy",
+        "ghidra": [
+          1085504
+        ],
+        "backup": [
+          36928
+        ]
+      },
+      {
+        "name": "deflateEnd",
+        "ghidra": [
+          1084320
+        ],
+        "backup": [
+          35744
+        ]
+      },
+      {
+        "name": "deflateGetDictionary",
+        "ghidra": [
+          1075488
+        ],
+        "backup": [
+          26912
+        ]
+      },
+      {
+        "name": "deflateInit2_",
+        "ghidra": [
+          1084640
+        ],
+        "backup": [
+          36064
+        ]
+      },
+      {
+        "name": "deflateInit_",
+        "ghidra": [
+          1085456
+        ],
+        "backup": [
+          36880
+        ]
+      },
+      {
+        "name": "deflateParams",
+        "ghidra": [
+          1083200
+        ],
+        "backup": [
+          34624
+        ]
+      },
+      {
+        "name": "deflatePending",
+        "ghidra": [
+          1076496
+        ],
+        "backup": [
+          27920
+        ]
+      },
+      {
+        "name": "deflatePrime",
+        "ghidra": [
+          1076784
+        ],
+        "backup": [
+          28208
+        ]
+      },
+      {
+        "name": "deflateReset",
+        "ghidra": [
+          1076128
+        ],
+        "backup": [
+          27552
+        ]
+      },
+      {
+        "name": "deflateResetKeep",
+        "ghidra": [
+          1075728
+        ],
+        "backup": [
+          27152
+        ]
+      },
+      {
+        "name": "deflateSetDictionary",
+        "ghidra": [
+          1074736
+        ],
+        "backup": [
+          26160
+        ]
+      },
+      {
+        "name": "deflateSetHeader",
+        "ghidra": [
+          1076368
+        ],
+        "backup": [
+          27792
+        ]
+      },
+      {
+        "name": "deflateTune",
+        "ghidra": [
+          1077440
+        ],
+        "backup": [
+          28864
+        ]
+      },
+      {
+        "name": "deflateUsed",
+        "ghidra": [
+          1076656
+        ],
+        "backup": [
+          28080
+        ]
+      },
+      {
+        "name": "deflate_fast",
+        "ghidra": [
+          1073504
+        ],
+        "backup": [
+          24928
+        ]
+      },
+      {
+        "name": "deflate_slow",
+        "ghidra": [
+          1071872
+        ],
+        "backup": [
+          23296
+        ]
+      },
+      {
+        "name": "deflate_stored",
+        "ghidra": [
+          1069104
+        ],
+        "backup": [
+          20528
+        ]
+      },
+      {
+        "name": "deregister_tm_clones",
+        "ghidra": [
+          1054720
+        ],
+        "backup": [
+          6144
+        ]
+      },
+      {
+        "name": "error",
+        "ghidra": [
+          1054912
+        ],
+        "backup": [
+          6336
+        ]
+      },
+      {
+        "name": "exit",
+        "ghidra": [
+          1053616,
+          1159408
+        ],
+        "backup": [
+          5040
+        ]
+      },
+      {
+        "name": "fclose",
+        "ghidra": [
+          1053344,
+          1159264
+        ],
+        "backup": [
+          4768
+        ]
+      },
+      {
+        "name": "fcntl",
+        "ghidra": [
+          1053312,
+          1159248
+        ],
+        "backup": [
+          4736
+        ]
+      },
+      {
+        "name": "ferror",
+        "ghidra": [
+          1053280,
+          1159224
+        ],
+        "backup": [
+          4704
+        ]
+      },
+      {
+        "name": "file_compress",
+        "ghidra": [
+          1055456
+        ],
+        "backup": [
+          6880
+        ]
+      },
+      {
+        "name": "file_uncompress",
+        "ghidra": [
+          1055856
+        ],
+        "backup": [
+          7280
+        ]
+      },
+      {
+        "name": "fileno",
+        "ghidra": [
+          1053504,
+          1159352
+        ],
+        "backup": [
+          4928
+        ]
+      },
+      {
+        "name": "fill_window",
+        "ghidra": [
+          1070528
+        ],
+        "backup": [
+          21952
+        ]
+      },
+      {
+        "name": "flush_pending",
+        "ghidra": [
+          1068976
+        ],
+        "backup": [
+          20400
+        ]
+      },
+      {
+        "name": "fopen",
+        "ghidra": [
+          1053584,
+          1159392
+        ],
+        "backup": [
+          5008
+        ]
+      },
+      {
+        "name": "fread",
+        "ghidra": [
+          1053296,
+          1159232
+        ],
+        "backup": [
+          4720
+        ]
+      },
+      {
+        "name": "free",
+        "ghidra": [
+          1053232,
+          1159176
+        ],
+        "backup": [
+          4656
+        ]
+      },
+      {
+        "name": "fwrite",
+        "ghidra": [
+          1053632,
+          1159416
+        ],
+        "backup": [
+          5056
+        ]
+      },
+      {
+        "name": "get_crc_table",
+        "ghidra": [
+          1115648
+        ],
+        "backup": [
+          67072
+        ]
+      },
+      {
+        "name": "gz_avail",
+        "ghidra": [
+          1059312
+        ],
+        "backup": [
+          10736
+        ]
+      },
+      {
+        "name": "gz_comp",
+        "ghidra": [
+          1064144
+        ],
+        "backup": [
+          15568
+        ]
+      },
+      {
+        "name": "gz_comp.constprop.0",
+        "ghidra": [
+          1064752
+        ],
+        "backup": [
+          16176
+        ]
+      },
+      {
+        "name": "gz_compress",
+        "ghidra": [
+          1055216
+        ],
+        "backup": [
+          6640
+        ]
+      },
+      {
+        "name": "gz_decomp",
+        "ghidra": [
+          1060400
+        ],
+        "backup": [
+          11824
+        ]
+      },
+      {
+        "name": "gz_error",
+        "ghidra": [
+          1058896
+        ],
+        "backup": [
+          10320
+        ]
+      },
+      {
+        "name": "gz_fetch",
+        "ghidra": [
+          1060912
+        ],
+        "backup": [
+          12336
+        ]
+      },
+      {
+        "name": "gz_init",
+        "ghidra": [
+          1063872
+        ],
+        "backup": [
+          15296
+        ]
+      },
+      {
+        "name": "gz_intmax",
+        "ghidra": [
+          1059120
+        ],
+        "backup": [
+          10544
+        ]
+      },
+      {
+        "name": "gz_load",
+        "ghidra": [
+          1059136
+        ],
+        "backup": [
+          10560
+        ]
+      },
+      {
+        "name": "gz_look",
+        "ghidra": [
+          1059808
+        ],
+        "backup": [
+          11232
+        ]
+      },
+      {
+        "name": "gz_open",
+        "ghidra": [
+          1056448
+        ],
+        "backup": [
+          7872
+        ]
+      },
+      {
+        "name": "gz_read",
+        "ghidra": [
+          1061552
+        ],
+        "backup": [
+          12976
+        ]
+      },
+      {
+        "name": "gz_skip",
+        "ghidra": [
+          1061120
+        ],
+        "backup": [
+          12544
+        ]
+      },
+      {
+        "name": "gz_uncompress",
+        "ghidra": [
+          1054976
+        ],
+        "backup": [
+          6400
+        ]
+      },
+      {
+        "name": "gz_write",
+        "ghidra": [
+          1065584
+        ],
+        "backup": [
+          17008
+        ]
+      },
+      {
+        "name": "gz_zero",
+        "ghidra": [
+          1065344
+        ],
+        "backup": [
+          16768
+        ]
+      },
+      {
+        "name": "gzbuffer",
+        "ghidra": [
+          1057696
+        ],
+        "backup": [
+          9120
+        ]
+      },
+      {
+        "name": "gzclearerr",
+        "ghidra": [
+          1058768
+        ],
+        "backup": [
+          10192
+        ]
+      },
+      {
+        "name": "gzclose",
+        "ghidra": [
+          1056400
+        ],
+        "backup": [
+          7824
+        ]
+      },
+      {
+        "name": "gzclose_r",
+        "ghidra": [
+          1063712
+        ],
+        "backup": [
+          15136
+        ]
+      },
+      {
+        "name": "gzclose_w",
+        "ghidra": [
+          1068096
+        ],
+        "backup": [
+          19520
+        ]
+      },
+      {
+        "name": "gzdirect",
+        "ghidra": [
+          1063568
+        ],
+        "backup": [
+          14992
+        ]
+      },
+      {
+        "name": "gzdopen",
+        "ghidra": [
+          1057568
+        ],
+        "backup": [
+          8992
+        ]
+      },
+      {
+        "name": "gzeof",
+        "ghidra": [
+          1058640
+        ],
+        "backup": [
+          10064
+        ]
+      },
+      {
+        "name": "gzerror",
+        "ghidra": [
+          1058672
+        ],
+        "backup": [
+          10096
+        ]
+      },
+      {
+        "name": "gzflush",
+        "ghidra": [
+          1067728
+        ],
+        "backup": [
+          19152
+        ]
+      },
+      {
+        "name": "gzfread",
+        "ghidra": [
+          1062240
+        ],
+        "backup": [
+          13664
+        ]
+      },
+      {
+        "name": "gzfwrite",
+        "ghidra": [
+          1066240
+        ],
+        "backup": [
+          17664
+        ]
+      },
+      {
+        "name": "gzgetc",
+        "ghidra": [
+          1062464
+        ],
+        "backup": [
+          13888
+        ]
+      },
+      {
+        "name": "gzgetc_",
+        "ghidra": [
+          1062672
+        ],
+        "backup": [
+          14096
+        ]
+      },
+      {
+        "name": "gzgets",
+        "ghidra": [
+          1063136
+        ],
+        "backup": [
+          14560
+        ]
+      },
+      {
+        "name": "gzoffset",
+        "ghidra": [
+          1058624
+        ],
+        "backup": [
+          10048
+        ]
+      },
+      {
+        "name": "gzoffset64",
+        "ghidra": [
+          1058528
+        ],
+        "backup": [
+          9952
+        ]
+      },
+      {
+        "name": "gzopen",
+        "ghidra": [
+          1057504
+        ],
+        "backup": [
+          8928
+        ]
+      },
+      {
+        "name": "gzopen64",
+        "ghidra": [
+          1057536
+        ],
+        "backup": [
+          8960
+        ]
+      },
+      {
+        "name": "gzprintf",
+        "ghidra": [
+          1067536
+        ],
+        "backup": [
+          18960
+        ]
+      },
+      {
+        "name": "gzputc",
+        "ghidra": [
+          1066400
+        ],
+        "backup": [
+          17824
+        ]
+      },
+      {
+        "name": "gzputs",
+        "ghidra": [
+          1066672
+        ],
+        "backup": [
+          18096
+        ]
+      },
+      {
+        "name": "gzread",
+        "ghidra": [
+          1062016
+        ],
+        "backup": [
+          13440
+        ]
+      },
+      {
+        "name": "gzrewind",
+        "ghidra": [
+          1057776
+        ],
+        "backup": [
+          9200
+        ]
+      },
+      {
+        "name": "gzseek",
+        "ghidra": [
+          1058432
+        ],
+        "backup": [
+          9856
+        ]
+      },
+      {
+        "name": "gzseek64",
+        "ghidra": [
+          1058016
+        ],
+        "backup": [
+          9440
+        ]
+      },
+      {
+        "name": "gzsetparams",
+        "ghidra": [
+          1067856
+        ],
+        "backup": [
+          19280
+        ]
+      },
+      {
+        "name": "gztell",
+        "ghidra": [
+          1058512
+        ],
+        "backup": [
+          9936
+        ]
+      },
+      {
+        "name": "gztell64",
+        "ghidra": [
+          1058448
+        ],
+        "backup": [
+          9872
+        ]
+      },
+      {
+        "name": "gzungetc",
+        "ghidra": [
+          1062688
+        ],
+        "backup": [
+          14112
+        ]
+      },
+      {
+        "name": "gzvprintf",
+        "ghidra": [
+          1066816
+        ],
+        "backup": [
+          18240
+        ]
+      },
+      {
+        "name": "gzwrite",
+        "ghidra": [
+          1066112
+        ],
+        "backup": [
+          17536
+        ]
+      },
+      {
+        "name": "inflate",
+        "ghidra": [
+          1087776
+        ],
+        "backup": [
+          39200
+        ]
+      },
+      {
+        "name": "inflateCodesUsed",
+        "ghidra": [
+          1099584
+        ],
+        "backup": [
+          51008
+        ]
+      },
+      {
+        "name": "inflateCopy",
+        "ghidra": [
+          1098416
+        ],
+        "backup": [
+          49840
+        ]
+      },
+      {
+        "name": "inflateEnd",
+        "ghidra": [
+          1096768
+        ],
+        "backup": [
+          48192
+        ]
+      },
+      {
+        "name": "inflateGetDictionary",
+        "ghidra": [
+          1096928
+        ],
+        "backup": [
+          48352
+        ]
+      },
+      {
+        "name": "inflateGetHeader",
+        "ghidra": [
+          1097360
+        ],
+        "backup": [
+          48784
+        ]
+      },
+      {
+        "name": "inflateInit2_",
+        "ghidra": [
+          1087280
+        ],
+        "backup": [
+          38704
+        ]
+      },
+      {
+        "name": "inflateInit_",
+        "ghidra": [
+          1087584
+        ],
+        "backup": [
+          39008
+        ]
+      },
+      {
+        "name": "inflateMark",
+        "ghidra": [
+          1099440
+        ],
+        "backup": [
+          50864
+        ]
+      },
+      {
+        "name": "inflatePrime",
+        "ghidra": [
+          1087616
+        ],
+        "backup": [
+          39040
+        ]
+      },
+      {
+        "name": "inflateReset",
+        "ghidra": [
+          1086864
+        ],
+        "backup": [
+          38288
+        ]
+      },
+      {
+        "name": "inflateReset2",
+        "ghidra": [
+          1087040
+        ],
+        "backup": [
+          38464
+        ]
+      },
+      {
+        "name": "inflateResetKeep",
+        "ghidra": [
+          1086624
+        ],
+        "backup": [
+          38048
+        ]
+      },
+      {
+        "name": "inflateSetDictionary",
+        "ghidra": [
+          1097104
+        ],
+        "backup": [
+          48528
+        ]
+      },
+      {
+        "name": "inflateSync",
+        "ghidra": [
+          1097472
+        ],
+        "backup": [
+          48896
+        ]
+      },
+      {
+        "name": "inflateSyncPoint",
+        "ghidra": [
+          1098320
+        ],
+        "backup": [
+          49744
+        ]
+      },
+      {
+        "name": "inflateUndermine",
+        "ghidra": [
+          1099200
+        ],
+        "backup": [
+          50624
+        ]
+      },
+      {
+        "name": "inflateValidate",
+        "ghidra": [
+          1099296
+        ],
+        "backup": [
+          50720
+        ]
+      },
+      {
+        "name": "inflate_fast",
+        "ghidra": [
+          1118784
+        ],
+        "backup": [
+          70208
+        ]
+      },
+      {
+        "name": "inflate_fixed",
+        "ghidra": [
+          1103312
+        ],
+        "backup": [
+          54736
+        ]
+      },
+      {
+        "name": "inflate_table",
+        "ghidra": [
+          1099696
+        ],
+        "backup": [
+          51120
+        ]
+      },
+      {
+        "name": "longest_match",
+        "ghidra": [
+          1068304
+        ],
+        "backup": [
+          19728
+        ]
+      },
+      {
+        "name": "lseek64",
+        "ghidra": [
+          1053648,
+          1159424
+        ],
+        "backup": [
+          5072
+        ]
+      },
+      {
+        "name": "main",
+        "ghidra": [
+          1053760
+        ],
+        "backup": [
+          5184
+        ]
+      },
+      {
+        "name": "malloc",
+        "ghidra": [
+          1053520,
+          1159360
+        ],
+        "backup": [
+          4944
+        ]
+      },
+      {
+        "name": "memchr",
+        "ghidra": [
+          1053440,
+          1159312
+        ],
+        "backup": [
+          4864
+        ]
+      },
+      {
+        "name": "memcpy",
+        "ghidra": [
+          1053488,
+          1159344
+        ],
+        "backup": [
+          4912
+        ]
+      },
+      {
+        "name": "memmove",
+        "ghidra": [
+          1053552,
+          1159376
+        ],
+        "backup": [
+          4976
+        ]
+      },
+      {
+        "name": "memset",
+        "ghidra": [
+          1053408,
+          1159296
+        ],
+        "backup": [
+          4832
+        ]
+      },
+      {
+        "name": "open",
+        "ghidra": [
+          1053568,
+          1159384
+        ],
+        "backup": [
+          4992
+        ]
+      },
+      {
+        "name": "perror",
+        "ghidra": [
+          1053600,
+          1159400
+        ],
+        "backup": [
+          5024
+        ]
+      },
+      {
+        "name": "pqdownheap.constprop.0",
+        "ghidra": [
+          1106288
+        ],
+        "backup": [
+          57712
+        ]
+      },
+      {
+        "name": "read",
+        "ghidra": [
+          1053456,
+          1159320
+        ],
+        "backup": [
+          4880
+        ]
+      },
+      {
+        "name": "read_buf",
+        "ghidra": [
+          1068832
+        ],
+        "backup": [
+          20256
+        ]
+      },
+      {
+        "name": "register_tm_clones",
+        "ghidra": [
+          1054768
+        ],
+        "backup": [
+          6192
+        ]
+      },
+      {
+        "name": "scan_tree",
+        "ghidra": [
+          1103376
+        ],
+        "backup": [
+          54800
+        ]
+      },
+      {
+        "name": "send_tree",
+        "ghidra": [
+          1103760
+        ],
+        "backup": [
+          55184
+        ]
+      },
+      {
+        "name": "strcmp",
+        "ghidra": [
+          1053472,
+          1159328
+        ],
+        "backup": [
+          4896
+        ]
+      },
+      {
+        "name": "strerror",
+        "ghidra": [
+          1053680,
+          1159448
+        ],
+        "backup": [
+          5104
+        ]
+      },
+      {
+        "name": "strlen",
+        "ghidra": [
+          1053360,
+          1159272
+        ],
+        "backup": [
+          4784
+        ]
+      },
+      {
+        "name": "strrchr",
+        "ghidra": [
+          1053392,
+          1159288
+        ],
+        "backup": [
+          4816
+        ]
+      },
+      {
+        "name": "unlink",
+        "ghidra": [
+          1053264,
+          1159200
+        ],
+        "backup": [
+          4688
+        ]
+      },
+      {
+        "name": "updatewindow",
+        "ghidra": [
+          1086320
+        ],
+        "backup": [
+          37744
+        ]
+      },
+      {
+        "name": "write",
+        "ghidra": [
+          1053328,
+          1159256
+        ],
+        "backup": [
+          4752
+        ]
+      },
+      {
+        "name": "zError",
+        "ghidra": [
+          1113296
+        ],
+        "backup": [
+          64720
+        ]
+      },
+      {
+        "name": "zcalloc",
+        "ghidra": [
+          1113344
+        ],
+        "backup": [
+          64768
+        ]
+      },
+      {
+        "name": "zcfree",
+        "ghidra": [
+          1113360
+        ],
+        "backup": [
+          64784
+        ]
+      },
+      {
+        "name": "zlibCompileFlags",
+        "ghidra": [
+          1113280
+        ],
+        "backup": [
+          64704
+        ]
+      },
+      {
+        "name": "zlibVersion",
+        "ghidra": [
+          1113264
+        ],
+        "backup": [
+          64688
+        ]
+      }
+    ],
+    "entry_matches": 0,
+    "program_entry_disagreement": {
+      "ghidra": 1054672,
+      "backup": 6096,
+      "missing": false
+    },
+    "identical": false,
+    "counts": {
+      "ghidra_functions": 200,
+      "backup_functions": 168,
+      "normalized_ghidra": 169,
+      "normalized_backup": 168,
+      "only_ghidra": 7,
+      "only_backup": 6,
+      "entry_disagreements": 162,
+      "entry_matches": 0
+    },
+    "address_base": {
+      "ghidra_minus_backup": 1048576,
+      "single_address_pairs": 132,
+      "note": "raw entry_disagreements stay in this object; this block only records whether one constant separates the single-address pairs",
+      "after": {
+        "only_ghidra": [
+          "_ITM_deregisterTMCloneTable",
+          "_ITM_registerTMCloneTable",
+          "__cxa_finalize",
+          "__gmon_start__",
+          "__libc_start_main",
+          "_start",
+          "frame_dummy"
+        ],
+        "only_backup": [
+          "entry.init0",
+          "entry0",
+          "fcn.00001210",
+          "file_compress.cold",
+          "gz_compress.cold",
+          "main.cold"
+        ],
+        "entry_disagreements": [
+          {
+            "name": "__errno_location",
+            "ghidra": [
+              4672,
+              110616
+            ],
+            "backup": [
+              4672
+            ]
+          },
+          {
+            "name": "__fprintf_chk",
+            "ghidra": [
+              5088,
+              110856
+            ],
+            "backup": [
+              5088
+            ]
+          },
+          {
+            "name": "__snprintf_chk",
+            "ghidra": [
+              4640,
+              110592
+            ],
+            "backup": [
+              4640
+            ]
+          },
+          {
+            "name": "__stack_chk_fail",
+            "ghidra": [
+              4800,
+              110704
+            ],
+            "backup": [
+              4800
+            ]
+          },
+          {
+            "name": "__vsnprintf_chk",
+            "ghidra": [
+              4960,
+              110792
+            ],
+            "backup": [
+              4960
+            ]
+          },
+          {
+            "name": "close",
+            "ghidra": [
+              4848,
+              110728
+            ],
+            "backup": [
+              4848
+            ]
+          },
+          {
+            "name": "exit",
+            "ghidra": [
+              5040,
+              110832
+            ],
+            "backup": [
+              5040
+            ]
+          },
+          {
+            "name": "fclose",
+            "ghidra": [
+              4768,
+              110688
+            ],
+            "backup": [
+              4768
+            ]
+          },
+          {
+            "name": "fcntl",
+            "ghidra": [
+              4736,
+              110672
+            ],
+            "backup": [
+              4736
+            ]
+          },
+          {
+            "name": "ferror",
+            "ghidra": [
+              4704,
+              110648
+            ],
+            "backup": [
+              4704
+            ]
+          },
+          {
+            "name": "fileno",
+            "ghidra": [
+              4928,
+              110776
+            ],
+            "backup": [
+              4928
+            ]
+          },
+          {
+            "name": "fopen",
+            "ghidra": [
+              5008,
+              110816
+            ],
+            "backup": [
+              5008
+            ]
+          },
+          {
+            "name": "fread",
+            "ghidra": [
+              4720,
+              110656
+            ],
+            "backup": [
+              4720
+            ]
+          },
+          {
+            "name": "free",
+            "ghidra": [
+              4656,
+              110600
+            ],
+            "backup": [
+              4656
+            ]
+          },
+          {
+            "name": "fwrite",
+            "ghidra": [
+              5056,
+              110840
+            ],
+            "backup": [
+              5056
+            ]
+          },
+          {
+            "name": "lseek64",
+            "ghidra": [
+              5072,
+              110848
+            ],
+            "backup": [
+              5072
+            ]
+          },
+          {
+            "name": "malloc",
+            "ghidra": [
+              4944,
+              110784
+            ],
+            "backup": [
+              4944
+            ]
+          },
+          {
+            "name": "memchr",
+            "ghidra": [
+              4864,
+              110736
+            ],
+            "backup": [
+              4864
+            ]
+          },
+          {
+            "name": "memcpy",
+            "ghidra": [
+              4912,
+              110768
+            ],
+            "backup": [
+              4912
+            ]
+          },
+          {
+            "name": "memmove",
+            "ghidra": [
+              4976,
+              110800
+            ],
+            "backup": [
+              4976
+            ]
+          },
+          {
+            "name": "memset",
+            "ghidra": [
+              4832,
+              110720
+            ],
+            "backup": [
+              4832
+            ]
+          },
+          {
+            "name": "open",
+            "ghidra": [
+              4992,
+              110808
+            ],
+            "backup": [
+              4992
+            ]
+          },
+          {
+            "name": "perror",
+            "ghidra": [
+              5024,
+              110824
+            ],
+            "backup": [
+              5024
+            ]
+          },
+          {
+            "name": "read",
+            "ghidra": [
+              4880,
+              110744
+            ],
+            "backup": [
+              4880
+            ]
+          },
+          {
+            "name": "strcmp",
+            "ghidra": [
+              4896,
+              110752
+            ],
+            "backup": [
+              4896
+            ]
+          },
+          {
+            "name": "strerror",
+            "ghidra": [
+              5104,
+              110872
+            ],
+            "backup": [
+              5104
+            ]
+          },
+          {
+            "name": "strlen",
+            "ghidra": [
+              4784,
+              110696
+            ],
+            "backup": [
+              4784
+            ]
+          },
+          {
+            "name": "strrchr",
+            "ghidra": [
+              4816,
+              110712
+            ],
+            "backup": [
+              4816
+            ]
+          },
+          {
+            "name": "unlink",
+            "ghidra": [
+              4688,
+              110624
+            ],
+            "backup": [
+              4688
+            ]
+          },
+          {
+            "name": "write",
+            "ghidra": [
+              4752,
+              110680
+            ],
+            "backup": [
+              4752
+            ]
+          }
+        ],
+        "entry_matches": 132,
+        "program_entry_disagreement": null,
+        "identical": false,
+        "counts": {
+          "ghidra_functions": 200,
+          "backup_functions": 168,
+          "normalized_ghidra": 169,
+          "normalized_backup": 168,
+          "only_ghidra": 7,
+          "only_backup": 6,
+          "entry_disagreements": 30,
+          "entry_matches": 132
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Ghidra was not executed in this run; its function list is the committed export",
+    "accepted_pass stays false; a disagreement list is not a behavior proof"
+  ],
+  "build": {
+    "compiler": "gcc",
+    "compiler_path": "/usr/bin/gcc",
+    "requested_cflags": "-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN",
+    "makefile_cflags": "-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN",
+    "makefile_cc": "gcc",
+    "configure_exit": 0,
+    "make_exit": 0,
+    "binary": "/tmp/rrl-engine-parity-m_m70es6/zlib-1.4/minigzip",
+    "binary_sha256": "e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636",
+    "compile_line": "gcc -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN  -c -o crc32.o crc32.c",
+    "link_line": "gcc -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -I. -c -o minigzip.o test/minigzip.c",
+    "compile_line_has_requested_cflags": true
+  },
+  "backup_entry_matches_elf": true
+}

@@ -103,6 +103,7 @@ def _observe(minigzip: str, crc_bin: str, data: bytes, work: Path) -> dict:
         "truncated": compressed["truncated"],
         "rlimits_applied": compressed["rlimits_applied"],
         "network_namespace": compressed["network_namespace"],
+        "network_isolated": compressed.get("network_isolated"),
         "limitations": compressed["limitations"],
     }
 
@@ -155,6 +156,7 @@ def main() -> int:
                 "sandbox": True,
                 "rlimits_applied": bool(make["rlimits_applied"]),
                 "network_namespace": bool(make["network_namespace"]),
+                "network_isolated": bool(make.get("network_isolated")),
             },
             "acceptance": "non-blind",
             "acceptance_reason": "the same agent generated the sealed outputs and can read them",
