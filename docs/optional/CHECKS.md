@@ -41,6 +41,14 @@ Program entry disagreement: `{"ghidra": 1054672, "backup": 6096, "missing": fals
 The 132 single-address entry disagreements differ by ghidra_minus_backup=1048576. After subtracting that constant, identical is False, entry_matches=132, remaining entry_disagreements=30.
 Backup program entry matches the ELF header: True. Analysis commands: ['aa', 'aflj', 'iej'].
 
+## Radare2 6.0.7 function names
+
+Upstream `radare2 6.0.7 1 @ linux-x86-64` analyzed the pinned minigzip with `aa`. `main_recovered` is true. Names that contain main: sym.main.cold, main. Functions named main: main.
+`offset` is in the first aflj entry: false. `addr` is in the first aflj entry: true. The addr type is `int`.
+The parser kept a function only when offset was an int. Radare2 6.0.7 aflj stores the address in addr and omits offset, so every function, including main, was dropped and the test saw no name ending in main.
+The Ubuntu 26.04 package `radare2 6.0.7+ds-1` was executed here: false. the resolute amd64v3 package requires GLIBC_2.42 and did not start on this host.
+`accepted_pass` is false. Record: `docs/evidence/radare2_607_main.json`.
+
 ## Compiler gzip bytes
 
 gcc: gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0. clang: Ubuntu clang version 18.1.3 (1ubuntu1).

@@ -92,6 +92,29 @@ def main() -> int:
         )
     else:
         lines.append("No function-list comparison was stored. The limitations in the JSON say why.")
+    schema_path = ROOT / "docs" / "evidence" / "radare2_607_main.json"
+    if schema_path.is_file():
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        lines.append("")
+        lines.append("## Radare2 6.0.7 function names")
+        lines.append("")
+        lines.append(
+            f"Upstream `{schema['version_line']}` analyzed the pinned minigzip with `{schema['analysis_command']}`. "
+            f"`main_recovered` is {_flag(bool(schema['main_recovered']))}. "
+            f"Names that contain main: {', '.join(schema['names_containing_main'])}. "
+            f"Functions named main: {', '.join(schema['main_names'])}."
+        )
+        lines.append(
+            f"`offset` is in the first aflj entry: {_flag(bool(schema['offset_in_first_entry']))}. "
+            f"`addr` is in the first aflj entry: {_flag(bool(schema['addr_in_first_entry']))}. "
+            f"The addr type is `{schema['first_addr_type']}`."
+        )
+        lines.append(schema["ci_failure_cause"])
+        lines.append(
+            f"The Ubuntu 26.04 package `{schema['ubuntu_2604_package']}` was executed here: {_flag(bool(schema['ubuntu_package_executed_here']))}. "
+            f"{schema['ubuntu_package_not_executed_because']}."
+        )
+        lines.append("`accepted_pass` is false. Record: `docs/evidence/radare2_607_main.json`.")
     lines.append("")
     lines.append("## Compiler gzip bytes")
     lines.append("")

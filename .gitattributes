@@ -33,6 +33,7 @@ targets/zlib/blind_acceptance/GFDL-1.2.txt text eol=lf
 targets/zlib/blind_acceptance/crc32_stdin.c text eol=lf
 targets/zlib/blind_acceptance/enwik8.zip -text
 docs/evidence/network_isolation.json text eol=lf
+docs/evidence/radare2_607_main.json text eol=lf
 docs/evidence/engine_parity_zlib.json text eol=lf
 docs/evidence/compiler_gzip_bytes.json text eol=lf
 docs/optional/CHECKS.md text eol=lf

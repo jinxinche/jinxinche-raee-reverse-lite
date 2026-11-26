@@ -118,7 +118,6 @@ class BackupEngine:
             "angr_selected": False,
             "rizin_via_symlink": located["binary"] == "rizin",
             "analysis_commands": list(_COMMANDS),
-            "open_flags": ["-e", "bin.relocs.apply=true"],
             "functions": functions,
             "program_entry": program_entry,
             "duration_seconds": time.monotonic() - started,
@@ -156,11 +155,10 @@ def _analyze_open(artifact: Path, located: dict, *, timeout: float):
     state = {"timed_out": False}
     opened = None
     try:
-        open_flags = ["-e", "bin.relocs.apply=true"]
         if home:
-            opened = r2pipe.open(str(artifact), flags=open_flags, radare2home=home)
+            opened = r2pipe.open(str(artifact), radare2home=home)
         else:
-            opened = r2pipe.open(str(artifact), flags=open_flags)
+            opened = r2pipe.open(str(artifact))
 
         def _kill():
             state["timed_out"] = True

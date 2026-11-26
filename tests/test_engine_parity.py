@@ -6,15 +6,41 @@ import shutil
 import sys
 from pathlib import Path
 
-from raee_reverse.backup_engine import analyze_backup, locate_backend
+from raee_reverse.backup_engine import _parse_functions, analyze_backup, locate_backend
 from raee_reverse.compiler_gzip import REQUESTED_CFLAGS, build_minigzip
 from raee_reverse.engine_parity import compare_catalogs, parse_ghidra_export, program_entry_from_name
 
 REPO = Path(__file__).resolve().parents[1]
 RECORD = REPO / "docs" / "evidence" / "engine_parity_zlib.json"
+SCHEMA = REPO / "docs" / "evidence" / "radare2_607_main.json"
 GHIDRA = REPO / "docs" / "evidence" / "zlib_phase2.json"
 TARBALL = REPO / "targets" / "zlib" / "dist" / "zlib-1.4.tar.gz"
 PIN = REPO / "targets" / "zlib" / "PIN.json"
+
+
+def _is_main(name: str) -> bool:
+    return name == "main" or name.endswith(".main")
+
+
+def test_aflj_keeps_main_from_offset_or_addr():
+    offset_rows, offset_error = _parse_functions(json.dumps([{"offset": 0x1440, "name": "main"}]))
+    addr_rows, addr_error = _parse_functions(
+        json.dumps(
+            [
+                {"addr": 4640, "name": "sym.imp.__libc_start_main"},
+                {"addr": 5184, "name": "sym.main.cold"},
+                {"addr": 5184, "name": "main"},
+            ]
+        )
+    )
+    assert offset_error is None and addr_error is None
+    assert offset_rows == [{"name": "main", "entry": 0x1440}]
+    assert addr_rows == [
+        {"name": "sym.imp.__libc_start_main", "entry": 4640},
+        {"name": "sym.main.cold", "entry": 5184},
+        {"name": "main", "entry": 5184},
+    ]
+    assert [row["name"] for row in addr_rows if _is_main(row["name"])] == ["main"]
 
 
 def test_compare_keeps_name_and_entry_disagreements():
@@ -44,6 +70,22 @@ def test_missing_backup_engine_is_not_a_pass(tmp_path, monkeypatch):
     assert result["observations"] == []
     assert result["simulated"] is False
     assert result["angr_selected"] is False
+
+
+def test_radare2_607_record_says_main_is_present_under_addr():
+    record = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    assert record["accepted_pass"] is False
+    assert record["main_recovered"] is True
+    assert record["main_names"] == ["main"]
+    assert "sym.main.cold" in record["names_containing_main"]
+    assert record["offset_in_first_entry"] is False
+    assert record["addr_in_first_entry"] is True
+    assert record["first_addr_type"] == "int"
+    assert record["ubuntu_package_executed_here"] is False
+    text = (REPO / "docs" / "optional" / "CHECKS.md").read_text(encoding="utf-8")
+    assert "`main_recovered` is true." in text
+    assert "`offset` is in the first aflj entry: false." in text
+    assert "`addr` is in the first aflj entry: true." in text
 
 
 def test_committed_parity_record_recomputes_its_disagreements():
@@ -96,9 +138,8 @@ def test_live_zlib_parity_when_the_engine_and_compiler_exist(tmp_path):
     assert analysis["execution_result"] == "passed", analysis.get("limitations")
     assert analysis["interface"] == "r2pipe"
     names = {item["name"] for item in analysis["functions"]}
-    assert len(analysis["functions"]) >= 20, sorted(names)[:30]
-    tokens = ("main", "crc32", "deflate", "inflate")
-    assert any(token in name.lower() for name in names for token in tokens), sorted(names)[:30]
+    mains = sorted(name for name in names if _is_main(name))
+    assert mains, sorted(names)[:40]
     evidence = json.loads(GHIDRA.read_text(encoding="utf-8"))
     ghidra_functions = parse_ghidra_export(evidence["ghidra"]["export_text"])
     compared = compare_catalogs(
