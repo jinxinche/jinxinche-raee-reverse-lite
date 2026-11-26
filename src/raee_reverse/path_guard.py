@@ -14,6 +14,7 @@ DENIED = (
     "targets/zlib/sealed_observations.json",
     "targets/zlib/published_acceptance",
     "targets/zlib/blind_acceptance",
+    "targets/zlib/blind_broad",
 )
 
 
