@@ -88,15 +88,32 @@ Records: `docs/evidence/blind_broad_stock.json`, `docs/evidence/blind_broad_atte
 
 ### Other hosts
 
-These JSON files are one host. They are not several hosts. `.github/workflows/blind-broad.yml` runs the same checker on `ubuntu-latest` and on `macos-latest`. Those runs are separate hosts. Their results are not in the JSON above. On a non-x86_64 runner, attempt 2 may fail to compile because the frozen patch passes `-msse4.2 -mpclmul`. That failure is not a pass. This x86_64 run did not hit it.
+The JSON files above are one host. The push event and the pull_request event are two CI events, not two extra hosts. Each event ran the blind check once on `ubuntu-latest` and once on `macos-latest`. Windows ran the core tests only. It did not run this blind check.
+
+Commit `d9a6fda3d1210da00fde13fad9e58ce61e96ae82`. Core, both events, 6/6: `ubuntu-latest`, `windows-latest`, and `macos-latest`, each on Python 3.11 and 3.15.
+
+| Event | Workflow | URL | Result |
+| --- | --- | --- | --- |
+| push | core | https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/45901579909 | 6/6 success |
+| push | blind-broad | https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/45901579992 | ubuntu and macos success |
+| pull_request | core | https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/45901603365 | 6/6 success |
+| pull_request | blind-broad | https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/45901603392 | ubuntu and macos success |
+
+The host lines below are from the push-run artifacts. The pull_request jobs on the same commit also succeeded. Those jobs are not a third and fourth machine.
+
+Ubuntu `ubuntu-latest`, x86_64. Linux 7.0.0-1020-azure, gcc 15.2.0, GNU gzip 1.14, CPython 3.12.16, oracle zlib 1.3.1. Stock, attempt 2, and attempt 3 each built and passed all 11 inputs: CRC against CPython, GNU gzip, CPython zlib, injected CRC `00000000`, and the flipped byte. The same stock and attempt-2 binaries also passed the existing enwik8 checker: CRC `81838409`, gzip length 36,548,933. The minigzip hashes are not the pin from the gcc 13 host. Stock `c7a6a0b875ba9250559b7c52e96ece39b99c06b6ca5c47a82e4f918a4e63fea7`. Attempt 2 `5ea326cff2c89167100b462debe67e01b8a5abb32baa536417831f5894f69a8a`. Attempt 3 `4b8ce8d962e693e839c6400351cc20d3c13ba7b4157e0dd32d3559cbc3bf53a3`.
+
+macOS `macos-latest`, arm64. Darwin 25.6.0, Apple clang 21.0.0 reported as `gcc`, GNU gzip 1.15, CPython 3.12.10, oracle zlib 1.2.11. Stock passed all 11 inputs and the enwik8 check, with the same CRC `81838409` and gzip length 36,548,933. Attempt 3 passed all 11 inputs. Its minigzip SHA-256 equals the stock minigzip SHA-256 on this host, `77e76353b224bd0284fbfa6ff24ecd203746531edd146a261e4e0373126ec633`. The frozen attempt-3 edit is compiled only for `__x86_64__`, so this arm64 binary is the stock copy loop. Attempt 2 did not build. `make` exited 2. The log says `clang: error: unsupported option '-mpclmul' for target 'arm64-apple-darwin25.6.0'` and warns that `-msse4.2` was unused. `pass` is false. `executed` is false. That is not a pass.
+
+The recorded CRC and gzip length for each of the 11 inputs are the same on the local host, Ubuntu, and macOS. The gzip bytes were not stored and were not compared.
 
 ### Unverified
 
-- Whether the three gzip streams are byte-for-byte identical. The recorded lengths match. The bytes were not stored and were not compared.
-- Any host other than the Linux host named above.
+- Whether the gzip streams are byte-for-byte identical across candidates or hosts. The recorded lengths match. The bytes were not stored and were not compared.
 - Wall time. This run does not measure the closed speed goals.
 - The Canterbury files. They remain `blind` false.
+- A Windows run of these minigzip binaries. Windows ran pytest only.
 
 ### Not finished here
 
-The local checks finished. The Actions runs on Ubuntu and macOS are not recorded in this commit. The closed LTO miss, the attempt-2 wall-time miss, and the attempt-3 wall-time miss stay missed.
+The local check and both Actions events finished. Nothing in those checks was left unrun except attempt 2 on arm64, which the frozen recipe does not compile. The closed LTO miss, the attempt-2 wall-time miss, and the attempt-3 wall-time miss stay missed.
