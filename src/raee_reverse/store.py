@@ -158,6 +158,10 @@ class Store:
         self.failpoint: str | None = None
         self._proj_cache: dict[str, dict] = {}
         self._family_retracted_cache: dict[str, bool] = {}
+        # One connection is shared by worker threads. check_same_thread is false
+        # so another thread may use it, but two statements at once are
+        # SQLITE_MISUSE: InterfaceError, or a row whose columns come back empty.
+        # _tx and _readlock are the serialization for every statement.
         self._conn = sqlite3.connect(self.db_path, check_same_thread=False, isolation_level=None)
         self._conn.row_factory = sqlite3.Row
         self._conn.execute("PRAGMA journal_mode=WAL")
@@ -425,37 +429,39 @@ class Store:
             return [self.get(row["id"]) for row in rows]
 
     def list_events(self) -> list[dict]:
-        rows = self._conn.execute("SELECT * FROM events ORDER BY seq").fetchall()
-        return [
-            {
-                "seq": row["seq"],
-                "event_id": row["event_id"],
-                "event_type": row["event_type"],
-                "subject_id": row["subject_id"],
-                "payload": json.loads(row["payload_json"]),
-                "created_at": row["created_at"],
-            }
-            for row in rows
-        ]
+        with self._readlock():
+            rows = self._conn.execute("SELECT * FROM events ORDER BY seq").fetchall()
+            return [
+                {
+                    "seq": row["seq"],
+                    "event_id": row["event_id"],
+                    "event_type": row["event_type"],
+                    "subject_id": row["subject_id"],
+                    "payload": json.loads(row["payload_json"]),
+                    "created_at": row["created_at"],
+                }
+                for row in rows
+            ]
 
     def list_relations(self) -> list[dict]:
-        rows = self._conn.execute("SELECT * FROM relations ORDER BY created_at, id").fetchall()
-        result = []
-        for row in rows:
-            result.append(
-                {
-                    "id": row["id"],
-                    "rel_type": row["rel_type"],
-                    "src_id": row["src_id"],
-                    "dst_id": row["dst_id"],
-                    "role": row["role"],
-                    "premise_slot": row["premise_slot"],
-                    "basis": json.loads(row["basis_json"]),
-                    "content_digest": row["content_digest"],
-                    "projection": self._proj(row["id"]),
-                }
-            )
-        return result
+        with self._readlock():
+            rows = self._conn.execute("SELECT * FROM relations ORDER BY created_at, id").fetchall()
+            result = []
+            for row in rows:
+                result.append(
+                    {
+                        "id": row["id"],
+                        "rel_type": row["rel_type"],
+                        "src_id": row["src_id"],
+                        "dst_id": row["dst_id"],
+                        "role": row["role"],
+                        "premise_slot": row["premise_slot"],
+                        "basis": json.loads(row["basis_json"]),
+                        "content_digest": row["content_digest"],
+                        "projection": self._proj(row["id"]),
+                    }
+                )
+            return result
 
     def cache_put(self, components: dict, result: bytes) -> dict:
         prepared = prepare_cache(components)
@@ -497,10 +503,18 @@ class Store:
                 "cache_key": prepared["key"],
                 "limitations": prepared["limitations"],
             }
-        row = self._conn.execute(
-            "SELECT * FROM cache_entries WHERE cache_key=?", (prepared["key"],)
-        ).fetchone()
-        if row is None or not row["reusable"]:
+        with self._readlock():
+            row = self._conn.execute(
+                "SELECT * FROM cache_entries WHERE cache_key=?", (prepared["key"],)
+            ).fetchone()
+            if row is None or not row["reusable"]:
+                cached = None
+            else:
+                cached = {
+                    "digest": row["result_digest"],
+                    "limitations": json.loads(row["limitations_json"]),
+                }
+        if cached is None:
             return {
                 "hit": False,
                 "reason": "miss",
@@ -511,14 +525,18 @@ class Store:
             "hit": True,
             "reason": "content_bound_hit",
             "cache_key": prepared["key"],
-            "result": self.get_blob(row["result_digest"]),
-            "limitations": json.loads(row["limitations_json"]),
+            "result": self.get_blob(cached["digest"]),
+            "limitations": cached["limitations"],
         }
 
     def audit_tree(self, root: str | Path, declared_third_party: set[str] | None = None) -> dict:
         return audit_python_tree(Path(root), declared_third_party)
 
     def status_summary(self) -> dict:
+        with self._readlock():
+            return self._status_summary()
+
+    def _status_summary(self) -> dict:
         counts: dict[str, int] = {}
         for row in self._conn.execute("SELECT kind, COUNT(*) AS n FROM records GROUP BY kind"):
             counts[row["kind"]] = row["n"]
@@ -545,6 +563,10 @@ class Store:
         }
 
     def verify_integrity(self) -> None:
+        with self._readlock():
+            self._verify_integrity()
+
+    def _verify_integrity(self) -> None:
         record_ids = {row["id"] for row in self._conn.execute("SELECT id FROM records")}
         proj_ids = {row["entity_id"] for row in self._conn.execute("SELECT entity_id FROM proj")}
         relation_ids = {row["id"] for row in self._conn.execute("SELECT id FROM relations")}
@@ -659,16 +681,18 @@ class Store:
                         (state, reason, row["id"]),
                     )
                     self._event("task_transition", row["id"], {"from": row["state"], "to": state, "reason": reason})
-        return self.list_tasks()
+            return self.list_tasks()
 
     def list_tasks(self) -> list[dict]:
-        return [self._task_dict(row) for row in self._conn.execute("SELECT * FROM tasks ORDER BY id")]
+        with self._readlock():
+            return [self._task_dict(row) for row in self._conn.execute("SELECT * FROM tasks ORDER BY id")]
 
     def get_task(self, task_id: str) -> dict:
-        row = self._conn.execute("SELECT * FROM tasks WHERE id=?", (task_id,)).fetchone()
-        if row is None:
-            raise RrlError("E_NOT_FOUND", "task not found", id=task_id)
-        return self._task_dict(row)
+        with self._readlock():
+            row = self._conn.execute("SELECT * FROM tasks WHERE id=?", (task_id,)).fetchone()
+            if row is None:
+                raise RrlError("E_NOT_FOUND", "task not found", id=task_id)
+            return self._task_dict(row)
 
     def begin_attempt(self, task_id: str) -> dict:
         with self._tx():
@@ -688,7 +712,9 @@ class Store:
                 (TaskState.RUNNING.value, attempts, utcnow(), task_id),
             )
             self._event("task_transition", task_id, {"from": row["state"], "to": "RUNNING", "attempt": attempts})
-        return self.get_task(task_id)
+            # Read the row in this transaction. The lock is still held, so the
+            # snapshot matches the update that commit publishes on the way out.
+            return self._task_dict(self._task_row(task_id))
 
     def set_checkpoint(self, task_id: str, checkpoint: dict) -> None:
         with self._tx():
