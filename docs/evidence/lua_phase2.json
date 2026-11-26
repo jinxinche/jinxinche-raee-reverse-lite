@@ -1,0 +1,275 @@
+{
+  "kind": "lua-5.4.9-luac-p-phase2",
+  "synthetic": false,
+  "acceptance": "non-blind",
+  "pin": {
+    "project": "lua",
+    "tag": "5.4.9",
+    "source_url": "https://www.lua.org/ftp/lua-5.4.9.tar.gz",
+    "tarball_sha256": "2335b6c582a52654f94612bf10d2f4672805d05329aa6568b1d8cd9e5c6fb8e6",
+    "license": "MIT, from doc/readme.html in this tarball",
+    "tool": "luac",
+    "interface": "luac -p reads a Lua file and checks its syntax",
+    "kind": "syntax checker, not a compressor",
+    "pinned_before_analysis": true,
+    "luac_sha256": "022af191fac69891b7abc599ab67ff9a2a13f93e067110b79fec78107e703d45",
+    "elf": {
+      "elf": true,
+      "class": 2,
+      "endian": 1,
+      "type": 3,
+      "machine": 62,
+      "class_name": "ELF64",
+      "machine_name": "x86-64"
+    },
+    "build": {
+      "command": "make linux",
+      "make_exit": 0,
+      "sandbox": true,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "truncated": false
+    },
+    "acceptance": "non-blind",
+    "acceptance_reason": "the same agent generated the sealed outputs and can read them"
+  },
+  "ghidra": {
+    "executed": false,
+    "accepted_pass": false,
+    "reason": "Ghidra is not installed. Static decompilation was not run. That is not a pass."
+  },
+  "final_rerun_match": true,
+  "dev": {
+    "dev:empty": {
+      "args": [
+        "-p",
+        "chunk.lua"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "input_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "",
+      "stderr_preview": "",
+      "output_file_exists": false,
+      "output_file_sha256": null,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "dev:return1": {
+      "args": [
+        "-p",
+        "chunk.lua"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "input_sha256": "0805bfdc02e872ed322a4a4e440ae985f3a4335f4dd59f3d373dfaf2a68a4a3c",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "",
+      "stderr_preview": "",
+      "output_file_exists": false,
+      "output_file_sha256": null,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "dev:print_abc": {
+      "args": [
+        "-p",
+        "chunk.lua"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "input_sha256": "5d12774892b788091175034fe2d6c40566a87b6f4003c32d1909426805a19722",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "",
+      "stderr_preview": "",
+      "output_file_exists": false,
+      "output_file_sha256": null,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "dev:syntax_error": {
+      "args": [
+        "-p",
+        "chunk.lua"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "input_sha256": "64216e062649be1337a7ed2fd7b7613ee01bc3c80676691f3de111800859d3c8",
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "f96e214441de2dc8fb34642e9da5ed3edd408f426814925aa4a01a4b56a2452f",
+      "stdout_preview": "",
+      "stderr_preview": "./luac: chunk.lua:1: <name> expected near '='\n",
+      "output_file_exists": false,
+      "output_file_sha256": null,
+      "execution_result": "failed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "dev:return1-stdin": {
+      "args": [
+        "-p",
+        "-"
+      ],
+      "stdin_sha256": "0805bfdc02e872ed322a4a4e440ae985f3a4335f4dd59f3d373dfaf2a68a4a3c",
+      "input_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "",
+      "stderr_preview": "",
+      "output_file_exists": false,
+      "output_file_sha256": null,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "dev:return1-dump": {
+      "args": [
+        "chunk.lua"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "input_sha256": "0805bfdc02e872ed322a4a4e440ae985f3a4335f4dd59f3d373dfaf2a68a4a3c",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "",
+      "stderr_preview": "",
+      "output_file_exists": true,
+      "output_file_sha256": "2748d1f241deede220c0f7b96016e0ce5a7eaf2648d99652b0c191acd8b3ede5",
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "dev:version": {
+      "args": [
+        "-v"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "input_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "b0f630b857b5d84db9a6455cc7bc7d0e9d881e9b00b4f3165c52cf7430446175",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "Lua 5.4.9  Copyright (C) 1994-2026 Lua.org, PUC-Rio\n",
+      "stderr_preview": "",
+      "output_file_exists": false,
+      "output_file_sha256": null,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "dev:missing": {
+      "args": [
+        "-p",
+        "chunk.lua"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "input_sha256": null,
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "06f7af514f5a76bdae2e87b8f3429ae9eae9a0aacf5fdeae0c70f9197fbfbd1d",
+      "stdout_preview": "",
+      "stderr_preview": "./luac: cannot open chunk.lua: No such file or directory\n",
+      "output_file_exists": false,
+      "output_file_sha256": null,
+      "execution_result": "failed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "dev:unknown-option": {
+      "args": [
+        "-z"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "input_sha256": null,
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "7330f6b0e0aa166defea4dd929628333c20574fc6b35797822a33f53dd277716",
+      "stdout_preview": "",
+      "stderr_preview": "./luac: unrecognized option '-z'\nusage: ./luac [options] [filenames]\nAvailable options are:\n  -l       list (use -l -l for full listing)\n  -o name  output to file 'name' (default i",
+      "output_file_exists": false,
+      "output_file_sha256": null,
+      "execution_result": "failed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    }
+  },
+  "behavior": {
+    "parse_only_exit_0_on_return1": true,
+    "parse_only_writes_no_output_file_on_return1": true,
+    "syntax_error_exit": 1,
+    "syntax_error_stderr_nonempty": true,
+    "dump_without_p_writes_output_file": true,
+    "stdin_matches_file_on_return1": true,
+    "version_exit": 0,
+    "version_preview": "Lua 5.4.9  Copyright (C) 1994-2026 Lua.org, PUC-Rio\n",
+    "missing_exit": 1,
+    "missing_stderr_preview": "./luac: cannot open chunk.lua: No such file or directory\n",
+    "unknown_option_exit": 1,
+    "unknown_option_stderr_preview": "./luac: unrecognized option '-z'\nusage: ./luac [options] [filenames]\nAvailable options are:\n  -l       list (use -l -l for full listing)\n  -o name  output to file 'name' (default i",
+    "syntax_error_stderr_preview": "./luac: chunk.lua:1: <name> expected near '='\n",
+    "return1_stderr_preview": "",
+    "empty_exit": 0,
+    "empty_stderr_preview": ""
+  }
+}

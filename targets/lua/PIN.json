@@ -7,5 +7,25 @@
   "tool": "luac",
   "interface": "luac -p reads a Lua file and checks its syntax",
   "kind": "syntax checker, not a compressor",
-  "pinned_before_analysis": true
+  "pinned_before_analysis": true,
+  "luac_sha256": "022af191fac69891b7abc599ab67ff9a2a13f93e067110b79fec78107e703d45",
+  "elf": {
+    "elf": true,
+    "class": 2,
+    "endian": 1,
+    "type": 3,
+    "machine": 62,
+    "class_name": "ELF64",
+    "machine_name": "x86-64"
+  },
+  "build": {
+    "command": "make linux",
+    "make_exit": 0,
+    "sandbox": true,
+    "rlimits_applied": true,
+    "network_namespace": false,
+    "truncated": false
+  },
+  "acceptance": "non-blind",
+  "acceptance_reason": "the same agent generated the sealed outputs and can read them"
 }

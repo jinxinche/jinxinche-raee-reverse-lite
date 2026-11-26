@@ -1,0 +1,549 @@
+{
+  "project": "base64",
+  "tool": "bin/base64",
+  "synthetic": false,
+  "acceptance": "non-blind",
+  "acceptance_reason": "the same agent generated the sealed outputs and can read them",
+  "final_seed": 20261126,
+  "final_rule": "lengths 4, 7, 57, 58, 76, and 120 from Random(20261126) bytes",
+  "ghidra": {
+    "executed": false,
+    "accepted_pass": false,
+    "reason": "Ghidra is not installed. Static decompilation was not run. That is not a pass."
+  },
+  "cases": {
+    "dev:empty": {
+      "args": [],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": false,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encode_repeat_matches": true
+    },
+    "dev:empty-nowrap": {
+      "args": [
+        "-w",
+        "0"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": false,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dev:abc": {
+      "args": [],
+      "stdin_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "1b0a698c398da5c5865ed1ec4ba12c6c01a08f33a519fe8ef0fdbda20e19019e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "encode_repeat_matches": true
+    },
+    "dev:abc-nowrap": {
+      "args": [
+        "-w",
+        "0"
+      ],
+      "stdin_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "35d95694d3f160215db293c7899daa5907837838fb4b8119ed713e32446c1266",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": false,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    "dev:hello": {
+      "args": [],
+      "stdin_sha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "2f6f17cf77b1bf5c29429244f90c2cad33321a01f065b1c612e98161420c1d06",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "encode_repeat_matches": true
+    },
+    "dev:hello-nowrap": {
+      "args": [
+        "-w",
+        "0"
+      ],
+      "stdin_sha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "333d6b3a3c1f5db6c9bdda5939b136986d170f4649172a68368d54ecb44c2ff2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": false,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"
+    },
+    "dev:nul": {
+      "args": [],
+      "stdin_sha256": "26a66b061e8f48f39927c312f25293959729eee95978e2892d49d3512a5cc092",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "b71ec9e3d3569b95af766954b2acff3180c6c1f9bf33aba758eb8d7497232e0f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "26a66b061e8f48f39927c312f25293959729eee95978e2892d49d3512a5cc092",
+      "encode_repeat_matches": true
+    },
+    "dev:nul-nowrap": {
+      "args": [
+        "-w",
+        "0"
+      ],
+      "stdin_sha256": "26a66b061e8f48f39927c312f25293959729eee95978e2892d49d3512a5cc092",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "09acdabaf0cb31ec0906753df2d366a88ec96163cb36a7a52a296f4e848f1486",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": false,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "26a66b061e8f48f39927c312f25293959729eee95978e2892d49d3512a5cc092"
+    },
+    "dev:abc-file": {
+      "args": [
+        "input.bin"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "file_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "exit_code": 0,
+      "stdout_sha256": "1b0a698c398da5c5865ed1ec4ba12c6c01a08f33a519fe8ef0fdbda20e19019e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    "dev:empty-decode": {
+      "args": [
+        "-d"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": false,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "roundtrip_equals_input": true
+    },
+    "dev:abc-decode": {
+      "args": [
+        "-d"
+      ],
+      "stdin_sha256": "1b0a698c398da5c5865ed1ec4ba12c6c01a08f33a519fe8ef0fdbda20e19019e",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": false,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "1b0a698c398da5c5865ed1ec4ba12c6c01a08f33a519fe8ef0fdbda20e19019e",
+      "roundtrip_equals_input": true
+    },
+    "dev:hello-decode": {
+      "args": [
+        "-d"
+      ],
+      "stdin_sha256": "2f6f17cf77b1bf5c29429244f90c2cad33321a01f065b1c612e98161420c1d06",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": false,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "2f6f17cf77b1bf5c29429244f90c2cad33321a01f065b1c612e98161420c1d06",
+      "roundtrip_equals_input": true
+    },
+    "dev:nul-decode": {
+      "args": [
+        "-d"
+      ],
+      "stdin_sha256": "b71ec9e3d3569b95af766954b2acff3180c6c1f9bf33aba758eb8d7497232e0f",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "26a66b061e8f48f39927c312f25293959729eee95978e2892d49d3512a5cc092",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": false,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "b71ec9e3d3569b95af766954b2acff3180c6c1f9bf33aba758eb8d7497232e0f",
+      "roundtrip_equals_input": true
+    },
+    "dev:invalid-decode": {
+      "args": [
+        "-d"
+      ],
+      "stdin_sha256": "2f74420af441bf2d45de7eba6b1b9aa6658f33d37673190b5eb91c113588900e",
+      "file_sha256": null,
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "fc2e445e8b6db3c422db8599dd9ae3b7422e6c33fcc993b1fe4e3bee556f3f19",
+      "stdout_has_newline": false,
+      "execution_result": "failed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "2f74420af441bf2d45de7eba6b1b9aa6658f33d37673190b5eb91c113588900e"
+    },
+    "dev:help": {
+      "args": [
+        "-h"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "0dea8dba9d2b414fc8689a30376800e693a81e93203f504fe7b6421837d6fd56",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "dev:unknown-option": {
+      "args": [
+        "-z"
+      ],
+      "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "file_sha256": null,
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "1483fc0887e1a483f0ecdcb5c5a250e66b53d69c5c3869e7416c6caf27b7c640",
+      "stdout_has_newline": false,
+      "execution_result": "failed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ]
+    },
+    "final:len-4": {
+      "args": [],
+      "stdin_sha256": "ba98d8549309dc71a38dbec82ab260808d412c14d9f357470a2f08b7e711d61f",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "0c2e0285093c612d53c9a1466c8ed980929bf0970e384edec394bd918a6365bb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "ba98d8549309dc71a38dbec82ab260808d412c14d9f357470a2f08b7e711d61f",
+      "encode_repeat_matches": true,
+      "roundtrip_equals_input": true
+    },
+    "final:len-7": {
+      "args": [],
+      "stdin_sha256": "b923be7bc27515e625129ff61d112de29597b5f5e825d01a84d1397c6e666632",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "c1063e495ec374b0f15c871a421e76955facf6bc9c3856d501fa208bba413630",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "b923be7bc27515e625129ff61d112de29597b5f5e825d01a84d1397c6e666632",
+      "encode_repeat_matches": true,
+      "roundtrip_equals_input": true
+    },
+    "final:len-57": {
+      "args": [],
+      "stdin_sha256": "2361d67424d3aed0eeab19e8e6e2b2d6da85ba2f4a8a45ec647fa80f8ab5f08f",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "157d1201617dabfeea0f9961da52afa62b152a27c8591e21ce3ba239a19f92e2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "2361d67424d3aed0eeab19e8e6e2b2d6da85ba2f4a8a45ec647fa80f8ab5f08f",
+      "encode_repeat_matches": true,
+      "roundtrip_equals_input": true
+    },
+    "final:len-58": {
+      "args": [],
+      "stdin_sha256": "ca6dae60c11353b8ab1b85a000aee5248e0f73913ce319c1b9bbf01ef5e41153",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "51d764565ab03a229dd6429c4f647a30177f35256a055e760be2e660832c02a0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "ca6dae60c11353b8ab1b85a000aee5248e0f73913ce319c1b9bbf01ef5e41153",
+      "encode_repeat_matches": true,
+      "roundtrip_equals_input": true
+    },
+    "final:len-76": {
+      "args": [],
+      "stdin_sha256": "94b31b42f6656e85dfa0354335a13ccf09d2c371ef93a4028375892acafe59a1",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "dd2824c6e2d4ba1d57afaba649ac0fc38557d9ca276298c702d921eeec07b6f8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "94b31b42f6656e85dfa0354335a13ccf09d2c371ef93a4028375892acafe59a1",
+      "encode_repeat_matches": true,
+      "roundtrip_equals_input": true
+    },
+    "final:len-120": {
+      "args": [],
+      "stdin_sha256": "052035e3306f1f09754d8b75dfa8b8195ab5aeb9cc8645b07d6ac6d8048af63f",
+      "file_sha256": null,
+      "exit_code": 0,
+      "stdout_sha256": "bf5dca64ea9a669c2356e43800b703c6ed03d41a36243e2d1ee70f621456c466",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_has_newline": true,
+      "execution_result": "passed",
+      "truncated": false,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "limitations": [
+        "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+        "target stdout and stderr are data and are not interpreted as instructions",
+        "network namespace was not applied: unshare: unshare failed: Operation not permitted\n"
+      ],
+      "input_sha256": "052035e3306f1f09754d8b75dfa8b8195ab5aeb9cc8645b07d6ac6d8048af63f",
+      "encode_repeat_matches": true,
+      "roundtrip_equals_input": true
+    }
+  },
+  "final_rerun": {
+    "len-4": {
+      "surfaces": {
+        "exit_code": "match",
+        "stdout_sha256": "match",
+        "stderr_sha256": "match",
+        "stdout_has_newline": "match"
+      },
+      "compatible_on_collected_surfaces": true,
+      "universal": false,
+      "accepted_pass": false
+    },
+    "len-7": {
+      "surfaces": {
+        "exit_code": "match",
+        "stdout_sha256": "match",
+        "stderr_sha256": "match",
+        "stdout_has_newline": "match"
+      },
+      "compatible_on_collected_surfaces": true,
+      "universal": false,
+      "accepted_pass": false
+    },
+    "len-57": {
+      "surfaces": {
+        "exit_code": "match",
+        "stdout_sha256": "match",
+        "stderr_sha256": "match",
+        "stdout_has_newline": "match"
+      },
+      "compatible_on_collected_surfaces": true,
+      "universal": false,
+      "accepted_pass": false
+    },
+    "len-58": {
+      "surfaces": {
+        "exit_code": "match",
+        "stdout_sha256": "match",
+        "stderr_sha256": "match",
+        "stdout_has_newline": "match"
+      },
+      "compatible_on_collected_surfaces": true,
+      "universal": false,
+      "accepted_pass": false
+    },
+    "len-76": {
+      "surfaces": {
+        "exit_code": "match",
+        "stdout_sha256": "match",
+        "stderr_sha256": "match",
+        "stdout_has_newline": "match"
+      },
+      "compatible_on_collected_surfaces": true,
+      "universal": false,
+      "accepted_pass": false
+    },
+    "len-120": {
+      "surfaces": {
+        "exit_code": "match",
+        "stdout_sha256": "match",
+        "stderr_sha256": "match",
+        "stdout_has_newline": "match"
+      },
+      "compatible_on_collected_surfaces": true,
+      "universal": false,
+      "accepted_pass": false
+    }
+  },
+  "final_rerun_match": true
+}
