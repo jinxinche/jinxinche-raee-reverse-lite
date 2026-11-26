@@ -56,7 +56,11 @@ def test_injected_crc_fails_and_the_guard_refuses_the_published_tree():
 
 
 def test_measure_scripts_do_not_name_the_sealed_trees():
-    for name in ("tools/measure_zlib_crc32.py", "tools/measure_zlib_minigzip_attempt2.py"):
+    for name in (
+        "tools/measure_zlib_crc32.py",
+        "tools/measure_zlib_minigzip_attempt2.py",
+        "tools/measure_zlib_minigzip_attempt3.py",
+    ):
         text = (REPO / name).read_text(encoding="utf-8")
         assert "install(REPO)" in text
         assert "held_out" not in text

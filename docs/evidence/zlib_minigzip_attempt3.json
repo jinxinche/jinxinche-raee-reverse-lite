@@ -1,0 +1,137 @@
+{
+  "goal": "docs/phase4/GOAL_MINIGZIP_ATTEMPT3.json",
+  "goal_sha256": "9c37508874c48dac08bcd0da73a7ed0effc9ae6c2f30e9f2ece91dafa38ed901",
+  "closed_goal_untouched": true,
+  "attempt2_untouched": true,
+  "supersedes_closed_goal": false,
+  "supersedes_attempt2": false,
+  "candidate": "inflate_fast direct-match 16-byte SSE2 copy when distance >= 16",
+  "decompress_bar": 0.9,
+  "compress_cap": 1.05,
+  "payload_sha256": "a117210941a0b00dcb2d8577e680d84b6fa0eaf760d2afc654c953b9859d54fa",
+  "payload_bytes": 4194304,
+  "runs_per_median": 21,
+  "warmup_excluded": 1,
+  "baseline_recipe": "./configure && make",
+  "candidate_recipe": "./configure && make",
+  "cflags_override": null,
+  "ldflags_override": null,
+  "threads": 1,
+  "environment": {
+    "os": "Linux",
+    "machine": "x86_64",
+    "python": "3.12.3",
+    "python_implementation": "CPython",
+    "platform": "Linux-6.12.113+-x86_64-with-glibc2.39",
+    "uname": "Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Mon Nov 16 16:06:22 UTC 2026 x86_64",
+    "gcc": "13",
+    "cpu": "Intel(R) Xeon(R) Processor",
+    "nproc": 4,
+    "kernel": "6.12.113+"
+  },
+  "enhancement_met": false,
+  "stable_improvement": false,
+  "attempt_status": "closed_missed",
+  "baseline_build": {
+    "configure_exit": 0,
+    "make_exit": 0,
+    "recipe": [
+      "./configure",
+      "make"
+    ],
+    "cflags_override": null,
+    "ldflags_override": null,
+    "makefile_cflags": "CFLAGS=-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN",
+    "configure_stderr_tail": "",
+    "make_stderr_tail": "",
+    "minigzip": true,
+    "libz": true
+  },
+  "candidate_build": {
+    "configure_exit": 0,
+    "make_exit": 0,
+    "recipe": [
+      "./configure",
+      "make"
+    ],
+    "cflags_override": null,
+    "ldflags_override": null,
+    "makefile_cflags": "CFLAGS=-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN",
+    "configure_stderr_tail": "",
+    "make_stderr_tail": "",
+    "minigzip": true,
+    "libz": true
+  },
+  "makefile_cflags_identical": true,
+  "correct": true,
+  "identity": {
+    "empty": {
+      "same_stdout": true,
+      "bytes": 20
+    },
+    "abc": {
+      "same_stdout": true,
+      "bytes": 23
+    },
+    "hello": {
+      "same_stdout": true,
+      "bytes": 25
+    }
+  },
+  "extra_identity": {
+    "zeros-10000": {
+      "same_gzip_and_round_trip": true,
+      "bytes": 45
+    },
+    "period-3": {
+      "same_gzip_and_round_trip": true,
+      "bytes": 57
+    },
+    "period-15": {
+      "same_gzip_and_round_trip": true,
+      "bytes": 87
+    },
+    "period-16": {
+      "same_gzip_and_round_trip": true,
+      "bytes": 89
+    },
+    "period-17": {
+      "same_gzip_and_round_trip": true,
+      "bytes": 100
+    },
+    "abc-repeat": {
+      "same_gzip_and_round_trip": true,
+      "bytes": 53
+    },
+    "fixed-seed-8000": {
+      "same_gzip_and_round_trip": true,
+      "bytes": 8023
+    }
+  },
+  "gzip_bytes_identical_on_payload": true,
+  "candidate_decompresses_baseline_gzip": true,
+  "gzip_magic_and_zero_mtime": true,
+  "candidate_crc32_abc": "352441c2",
+  "baseline_decompress_median_seconds": 0.011944525999979305,
+  "candidate_decompress_median_seconds": 0.01191764000003559,
+  "decompress_ratio_candidate_over_baseline": 0.9977490944434495,
+  "baseline_compress_median_seconds": 0.024580331000038314,
+  "candidate_compress_median_seconds": 0.024523283000007723,
+  "compress_ratio_candidate_over_baseline": 0.9976791199422619,
+  "decompress_bar_met": false,
+  "compress_cap_met": true,
+  "floor": {
+    "decides_enhancement": false,
+    "true_present": true,
+    "true_exit": 0,
+    "true_median_seconds": 0.011671332999981132,
+    "true_runs": 21,
+    "empty_decompress_exit": 0,
+    "empty_decompress_stdout_empty": true,
+    "empty_decompress_median_seconds": 0.011932761000025494,
+    "empty_decompress_runs": 21
+  },
+  "sample_size": 21,
+  "hosts": 1,
+  "delivery": "attempt 3 closed as missed"
+}
