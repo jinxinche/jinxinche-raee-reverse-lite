@@ -96,7 +96,9 @@ def test_live_zlib_parity_when_the_engine_and_compiler_exist(tmp_path):
     assert analysis["execution_result"] == "passed", analysis.get("limitations")
     assert analysis["interface"] == "r2pipe"
     names = {item["name"] for item in analysis["functions"]}
-    assert any(name == "main" or name.endswith(".main") or name.endswith("main") for name in names)
+    assert len(analysis["functions"]) >= 20, sorted(names)[:30]
+    tokens = ("main", "crc32", "deflate", "inflate")
+    assert any(token in name.lower() for name in names for token in tokens), sorted(names)[:30]
     evidence = json.loads(GHIDRA.read_text(encoding="utf-8"))
     ghidra_functions = parse_ghidra_export(evidence["ghidra"]["export_text"])
     compared = compare_catalogs(

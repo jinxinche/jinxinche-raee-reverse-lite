@@ -118,6 +118,7 @@ class BackupEngine:
             "angr_selected": False,
             "rizin_via_symlink": located["binary"] == "rizin",
             "analysis_commands": list(_COMMANDS),
+            "open_flags": ["-e", "bin.relocs.apply=true"],
             "functions": functions,
             "program_entry": program_entry,
             "duration_seconds": time.monotonic() - started,
@@ -155,7 +156,11 @@ def _analyze_open(artifact: Path, located: dict, *, timeout: float):
     state = {"timed_out": False}
     opened = None
     try:
-        opened = r2pipe.open(str(artifact), radare2home=home) if home else r2pipe.open(str(artifact))
+        open_flags = ["-e", "bin.relocs.apply=true"]
+        if home:
+            opened = r2pipe.open(str(artifact), flags=open_flags, radare2home=home)
+        else:
+            opened = r2pipe.open(str(artifact), flags=open_flags)
 
         def _kill():
             state["timed_out"] = True
@@ -206,11 +211,37 @@ def _parse_functions(raw: str | None) -> tuple[list[dict], str | None]:
     for item in parsed:
         if not isinstance(item, dict):
             continue
-        name = item.get("name")
-        offset = item.get("offset")
-        if isinstance(name, str) and isinstance(offset, int):
-            functions.append({"name": name, "entry": offset})
+        name = item.get("name") or item.get("realname") or item.get("fullname")
+        if not isinstance(name, str) or not name.strip():
+            continue
+        entry = None
+        for key in ("offset", "addr", "vaddr"):
+            entry = _as_int(item.get(key))
+            if entry is not None:
+                break
+        if entry is None:
+            continue
+        functions.append({"name": name.strip(), "entry": entry})
+    if parsed and not functions:
+        sample = parsed[0]
+        keys = list(sample)[:12] if isinstance(sample, dict) else type(sample).__name__
+        return [], f"aflj entries had no usable name and address; sample={keys}"
     return functions, None
+
+
+def _as_int(value):
+    if isinstance(value, bool) or value is None:
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    if isinstance(value, str):
+        try:
+            return int(value, 0)
+        except ValueError:
+            return None
+    return None
 
 
 def _parse_entry(raw: str | None) -> tuple[int | None, str | None]:
@@ -223,6 +254,10 @@ def _parse_entry(raw: str | None) -> tuple[int | None, str | None]:
     if not isinstance(parsed, list):
         return None, "iej JSON was not a list"
     for item in parsed:
-        if isinstance(item, dict) and item.get("type") == "program" and isinstance(item.get("vaddr"), int):
-            return item["vaddr"], None
+        if isinstance(item, dict) and item.get("type") == "program":
+            entry = _as_int(item.get("vaddr"))
+            if entry is None:
+                entry = _as_int(item.get("addr"))
+            if entry is not None:
+                return entry, None
     return None, "iej had no program entry"
