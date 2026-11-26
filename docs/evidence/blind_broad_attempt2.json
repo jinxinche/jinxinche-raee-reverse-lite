@@ -1,0 +1,692 @@
+{
+  "label": "attempt2",
+  "executed": true,
+  "pass": true,
+  "blind": true,
+  "blind_claim": true,
+  "blind_reason": "The set author is bc-2508fd5e-68a5-584e-8806-b3b3fa0c959d. This agent did not author the stock zlib 1.4 minigzip, the attempt-2 candidate, or the attempt-3 candidate. Those candidates were already frozen at starting_ref d538cb64feb965d3d849759ec0ffdb4086dff1af before this manifest was written. The attempt-2 candidate author is bc-641141af-3ffd-5b16-acb9-663777242042. The attempt-3 candidate author is bc-cfef56ea-f25b-5590-a266-7684b5589b8e. The enwik8 set author is bc-b2b647e7-62a7-5f3e-b41b-f15985b779c4. The inputs are the published SQLite 3.54.1 Linux x64 command-line tools and the data files shipped in NIST STS 2.1.2. They were not invented for these candidates. Expected gzip bytes are not stored. The set was not used to tune the candidates.",
+  "inputs_invented_for_this_candidate": false,
+  "tuned_on_this_set": false,
+  "expected_gzip_stored": false,
+  "starting_ref": "d538cb64feb965d3d849759ec0ffdb4086dff1af",
+  "candidates_frozen_before_seal": true,
+  "set_author": {
+    "role": "set_author",
+    "agent": "bc-2508fd5e-68a5-584e-8806-b3b3fa0c959d",
+    "run_url": "https://cursor.com/agents/bc-2508fd5e-68a5-584e-8806-b3b3fa0c959d"
+  },
+  "candidate_authors": [
+    {
+      "role": "candidate_author",
+      "agent": "bc-641141af-3ffd-5b16-acb9-663777242042",
+      "candidates": [
+        "stock zlib 1.4 minigzip",
+        "attempt 2"
+      ],
+      "commits": [
+        "52d4a9e8b4918f75653b2912602a23d1cf510088",
+        "a912990a978ee37a595b82ae11ae6b0e4cb6ab81",
+        "dce39956bc96275342517d9aa307be2ffc743435"
+      ],
+      "frozen_at": "8a06e96fffff1cfe6958010babaea5a9308d4961",
+      "run_url": "https://cursor.com/agents/bc-641141af-3ffd-5b16-acb9-663777242042"
+    },
+    {
+      "role": "candidate_author",
+      "agent": "bc-cfef56ea-f25b-5590-a266-7684b5589b8e",
+      "candidates": [
+        "attempt 3"
+      ],
+      "commits": [
+        "1130d45dfdd04c46784b14e6974294c437c91eba",
+        "c1680fcad53b9a76bdcc40f640f1962392244dd9"
+      ],
+      "frozen_at": "d538cb64feb965d3d849759ec0ffdb4086dff1af",
+      "run_url": "https://cursor.com/agents/bc-cfef56ea-f25b-5590-a266-7684b5589b8e"
+    }
+  ],
+  "seal_time": "2026-11-26T21:53:35Z",
+  "source_commit": "3b6e405f70129bf075cc7f654dfbfea74d8ceae5",
+  "seal_match": true,
+  "checker_match": true,
+  "frozen_dependency_match": true,
+  "inputs_match_manifest": true,
+  "oracle": "GNU gzip and CPython zlib",
+  "gzip": "gzip 1.12",
+  "python": "3.12.3",
+  "python_implementation": "CPython",
+  "python_zlib": "1.3",
+  "uname": "Linux 6.12.113+ #1 SMP PREEMPT_DYNAMIC Wed Nov 25 22:23:42 UTC 2026 x86_64",
+  "machine": "x86_64",
+  "minigzip": "/tmp/blind-broad/candidate/zlib-1.4/minigzip",
+  "minigzip_sha256": "6b0fb8208e1ccc4a6729c46592d5aaaf53a86dffe353d2c2543fb1742c64dee8",
+  "crc_stdin": "/tmp/blind-broad/candidate/zlib-1.4/crc32_stdin",
+  "crc_stdin_sha256": "25a3b78a0dbee0f0a86dc39fc2933305e196a7419787d7792b2e48bb8cbff972",
+  "reproduction": {
+    "candidate_patch": true,
+    "source": "/tmp/blind-broad/candidate/zlib-1.4",
+    "configure_exit": 0,
+    "make_exit": 0,
+    "recipe": [
+      "./configure",
+      "make"
+    ],
+    "cflags_override": null,
+    "ldflags_override": null,
+    "configure_stderr_tail": "",
+    "make_stderr_tail": "",
+    "minigzip": "/tmp/blind-broad/candidate/zlib-1.4/minigzip",
+    "minigzip_sha256": "6b0fb8208e1ccc4a6729c46592d5aaaf53a86dffe353d2c2543fb1742c64dee8",
+    "libz_sha256": "c3c6011b6166b48d5f281f35d4d0a9c4f6b54da312d45ed9a0d254a5ef08d9d6",
+    "crc_stdin": {
+      "command": [
+        "gcc",
+        "-O2",
+        "-I.",
+        "-o",
+        "crc32_stdin",
+        "/workspace/targets/zlib/blind_acceptance/crc32_stdin.c",
+        "libz.a"
+      ],
+      "exit": 0,
+      "stderr_tail": "",
+      "present": true,
+      "sha256": "25a3b78a0dbee0f0a86dc39fc2933305e196a7419787d7792b2e48bb8cbff972"
+    }
+  },
+  "rows": [
+    {
+      "name": "sqlite3",
+      "corpus": "sqlite-tools-linux-x64-3.54.1",
+      "kind": "executable",
+      "length": 2037360,
+      "sha256": "c9daa875c28379f0d61a833d47928c6e43b352d98638cd824ec405f23c99d870",
+      "crc_exit": 0,
+      "observed_crc32": "ff17be7e",
+      "python_crc32": "ff17be7e",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 1056293,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "sqlite3",
+        "injected_crc": "00000000",
+        "python_crc32": "ff17be7e",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 528146,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "sqldiff",
+      "corpus": "sqlite-tools-linux-x64-3.54.1",
+      "kind": "executable",
+      "length": 1596160,
+      "sha256": "62b3014603bbf427eeaba2767f32ffc4c88ea261d5960dfff6683c26bf50d56b",
+      "crc_exit": 0,
+      "observed_crc32": "a41d4bc7",
+      "python_crc32": "a41d4bc7",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 845946,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "sqldiff",
+        "injected_crc": "00000000",
+        "python_crc32": "a41d4bc7",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 422973,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "sqlite3_analyzer",
+      "corpus": "sqlite-tools-linux-x64-3.54.1",
+      "kind": "executable",
+      "length": 3334360,
+      "sha256": "e2ffb7e4471e17dfa2f0b1829350b30a36a46cdafb9ecb870891781df6b1fbd3",
+      "crc_exit": 0,
+      "observed_crc32": "1c107e0b",
+      "python_crc32": "1c107e0b",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 1607487,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "sqlite3_analyzer",
+        "injected_crc": "00000000",
+        "python_crc32": "1c107e0b",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 803743,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "sqlite3_rsync",
+      "corpus": "sqlite-tools-linux-x64-3.54.1",
+      "kind": "executable",
+      "length": 1559168,
+      "sha256": "5203304e7ce33b872eea14ad3888d557d86f6860cf3643a6d03fa987e8d980fa",
+      "crc_exit": 0,
+      "observed_crc32": "a788ddf3",
+      "python_crc32": "a788ddf3",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 827578,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "sqlite3_rsync",
+        "injected_crc": "00000000",
+        "python_crc32": "a788ddf3",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 413789,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "BBS.dat",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "length": 37500000,
+      "sha256": "8b808e72e5b9e50893f5714a948d3a87c3a014fc8b8e0be3f64e3da07ad8ed6c",
+      "crc_exit": 0,
+      "observed_crc32": "3f3e2732",
+      "python_crc32": "3f3e2732",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 37511458,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "BBS.dat",
+        "injected_crc": "00000000",
+        "python_crc32": "3f3e2732",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 18755729,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "data.bad_rng",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "length": 1572864,
+      "sha256": "4a596370fcb4263c99f4fddcbd5c766c4abf5cfaab645bef1d3611d86f1c3e60",
+      "crc_exit": 0,
+      "observed_crc32": "cf68852f",
+      "python_crc32": "cf68852f",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 1573362,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "data.bad_rng",
+        "injected_crc": "00000000",
+        "python_crc32": "cf68852f",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 786681,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "data.e",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "length": 1165666,
+      "sha256": "b4b49e2987dacdbd5fe75a8ad767f4139e7be7d8f0ff9ddfb23e6081a5feed2d",
+      "crc_exit": 0,
+      "observed_crc32": "7404fe79",
+      "python_crc32": "7404fe79",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 210565,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "data.e",
+        "injected_crc": "00000000",
+        "python_crc32": "7404fe79",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 105282,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "data.pi",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "length": 1165666,
+      "sha256": "8efe68d864d53540de7a7a3c54743cb0f47ffcd28b2950992519068474498823",
+      "crc_exit": 0,
+      "observed_crc32": "b9d96c9c",
+      "python_crc32": "b9d96c9c",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 210370,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "data.pi",
+        "injected_crc": "00000000",
+        "python_crc32": "b9d96c9c",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 105185,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "data.sha1",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "length": 125000,
+      "sha256": "dcc306053a40b5f0c94508425660620b932a1803aadc7207a1b669eb4e3bd6a3",
+      "crc_exit": 0,
+      "observed_crc32": "bc71ef68",
+      "python_crc32": "bc71ef68",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 125058,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "data.sha1",
+        "injected_crc": "00000000",
+        "python_crc32": "bc71ef68",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 62529,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "data.sqrt2",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "length": 1165667,
+      "sha256": "66e6fd40d1e7b14613801cdb8af67ee6b4fde988f348e0a09e7be84257ee3ed3",
+      "crc_exit": 0,
+      "observed_crc32": "87d25482",
+      "python_crc32": "87d25482",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 210201,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "data.sqrt2",
+        "injected_crc": "00000000",
+        "python_crc32": "87d25482",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 105100,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    },
+    {
+      "name": "data.sqrt3",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "length": 1165667,
+      "sha256": "6b1fc9f59f701b4c75d013cb3854bcc545f971da057d8140a8d7600bd34850e0",
+      "crc_exit": 0,
+      "observed_crc32": "008c1e73",
+      "python_crc32": "008c1e73",
+      "judge": {
+        "pass": true,
+        "reason": "matched python zlib; no expected crc or gzip bytes are stored",
+        "oracles_agree": true,
+        "published_crc32_hex": null
+      },
+      "minigzip_exit": 0,
+      "minigzip_stdout_bytes": 210402,
+      "gzip_external_ran": true,
+      "gzip_external_match": true,
+      "python_zlib_decompress_match": true,
+      "negative_control": {
+        "name": "data.sqrt3",
+        "injected_crc": "00000000",
+        "python_crc32": "008c1e73",
+        "judge_pass": false,
+        "judge_reason": "observed crc is the injected 00000000 value",
+        "failed_as_required": true,
+        "corrupted_gzip": {
+          "ran": true,
+          "byte_index": 105201,
+          "gzip_external_ran": true,
+          "gzip_external_accepted_original": false,
+          "python_zlib_accepted_original": false,
+          "rejected": true
+        }
+      }
+    }
+  ],
+  "negative_controls": [
+    {
+      "name": "sqlite3",
+      "injected_crc": "00000000",
+      "python_crc32": "ff17be7e",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 528146,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "sqldiff",
+      "injected_crc": "00000000",
+      "python_crc32": "a41d4bc7",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 422973,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "sqlite3_analyzer",
+      "injected_crc": "00000000",
+      "python_crc32": "1c107e0b",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 803743,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "sqlite3_rsync",
+      "injected_crc": "00000000",
+      "python_crc32": "a788ddf3",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 413789,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "BBS.dat",
+      "injected_crc": "00000000",
+      "python_crc32": "3f3e2732",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 18755729,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "data.bad_rng",
+      "injected_crc": "00000000",
+      "python_crc32": "cf68852f",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 786681,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "data.e",
+      "injected_crc": "00000000",
+      "python_crc32": "7404fe79",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 105282,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "data.pi",
+      "injected_crc": "00000000",
+      "python_crc32": "b9d96c9c",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 105185,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "data.sha1",
+      "injected_crc": "00000000",
+      "python_crc32": "bc71ef68",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 62529,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "data.sqrt2",
+      "injected_crc": "00000000",
+      "python_crc32": "87d25482",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 105100,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    },
+    {
+      "name": "data.sqrt3",
+      "injected_crc": "00000000",
+      "python_crc32": "008c1e73",
+      "judge_pass": false,
+      "judge_reason": "observed crc is the injected 00000000 value",
+      "failed_as_required": true,
+      "corrupted_gzip": {
+        "ran": true,
+        "byte_index": 105201,
+        "gzip_external_ran": true,
+        "gzip_external_accepted_original": false,
+        "python_zlib_accepted_original": false,
+        "rejected": true
+      }
+    }
+  ],
+  "unverified": [
+    "Expected gzip bytes are not stored and are not compared across candidates.",
+    "This report is the host that ran this process. Another host is a separate run.",
+    "Wall time is not measured.",
+    "The Canterbury corpus stays non-blind. The enwik8 records are not rewritten."
+  ],
+  "unfinished": [],
+  "sample_size": 11
+}
