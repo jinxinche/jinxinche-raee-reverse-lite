@@ -1,4 +1,4 @@
-"""Refuse opens of the held-out acceptance tree and the non-blind seal.
+"""Refuse opens of the sealed acceptance trees.
 
 The guard covers this process's open() calls. It does not make a single-agent
 run blind: the same agent can still read the files by not installing the guard.
@@ -12,6 +12,8 @@ from pathlib import Path
 DENIED = (
     "targets/zlib/held_out",
     "targets/zlib/sealed_observations.json",
+    "targets/zlib/published_acceptance",
+    "targets/zlib/blind_acceptance",
 )
 
 

@@ -1,7 +1,12 @@
 docs/phase4/GOAL.md text eol=lf
 docs/phase4/GOAL_CRC32.md text eol=lf
 docs/phase4/GOAL_CRC32.json text eol=lf
+docs/phase4/GOAL_MINIGZIP_ATTEMPT2.md text eol=lf
+docs/phase4/GOAL_MINIGZIP_ATTEMPT2.json text eol=lf
 docs/evidence/zlib_enhancement.json text eol=lf
+docs/evidence/BLIND_ACCEPTANCE.md text eol=lf
+docs/evidence/blind_acceptance_stock.json text eol=lf
+docs/evidence/blind_acceptance_attempt2.json text eol=lf
 docs/a18/routing_comparison.json text eol=lf
 docs/a18/REA_COMPARISON.md text eol=lf
 docs/a19/*.json text eol=lf
@@ -11,3 +16,15 @@ targets/zlib/held_out/MANIFEST.json text eol=lf
 targets/zlib/held_out/SEAL.sha256 text eol=lf
 targets/zlib/held_out/ISOLATION.md text eol=lf
 targets/zlib/held_out/inputs/* -text
+targets/zlib/published_acceptance/MANIFEST.json text eol=lf
+targets/zlib/published_acceptance/SEAL.sha256 text eol=lf
+targets/zlib/published_acceptance/ORIGIN.md text eol=lf
+targets/zlib/published_acceptance/inputs/* -text
+targets/zlib/blind_acceptance/MANIFEST.json text eol=lf
+targets/zlib/blind_acceptance/SEAL.sha256 text eol=lf
+targets/zlib/blind_acceptance/ORIGIN.md text eol=lf
+targets/zlib/blind_acceptance/ISOLATION.md text eol=lf
+targets/zlib/blind_acceptance/LICENSE.md text eol=lf
+targets/zlib/blind_acceptance/GFDL-1.2.txt text eol=lf
+targets/zlib/blind_acceptance/crc32_stdin.c text eol=lf
+targets/zlib/blind_acceptance/enwik8.zip -text
