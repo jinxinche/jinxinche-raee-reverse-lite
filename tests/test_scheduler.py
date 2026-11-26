@@ -68,6 +68,49 @@ def test_dependencies_retries_cancel_and_exclusivity(store):
     assert store.get_task("slow")["schedule_succeeded"] is False
 
 
+def test_task_reads_stay_consistent_beside_a_writer(store):
+    """A task read must not share the connection with an open write.
+
+    One sqlite connection is used by every thread. Overlapping statements are
+    SQLITE_MISUSE. This loop fails on that code with InterfaceError, a missing
+    task, or a row whose JSON columns are None.
+    """
+    import threading
+
+    _submit(store, "t", "ok")
+    errors = []
+
+    def writer():
+        for n in range(200):
+            try:
+                store.set_checkpoint("t", {"n": n})
+            except Exception as exc:
+                errors.append(exc)
+
+    def reader():
+        for _ in range(200):
+            try:
+                task = store.get_task("t")
+                if task["id"] != "t" or not isinstance(task["deps"], list):
+                    errors.append(AssertionError("torn task row"))
+                if not any(item["id"] == "t" for item in store.list_tasks()):
+                    errors.append(AssertionError("task missing from list"))
+            except Exception as exc:
+                errors.append(exc)
+
+    threads = [
+        threading.Thread(target=writer),
+        threading.Thread(target=reader),
+        threading.Thread(target=reader),
+    ]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
+    assert errors == []
+    assert store.get_task("t")["checkpoint"]["n"] == 199
+
+
 def test_perf_task_does_not_share_a_batch(store):
     _submit(store, "measure", "ok", resource_class="perf")
     _submit(store, "dev", "ok")
