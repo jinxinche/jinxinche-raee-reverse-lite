@@ -610,6 +610,37 @@
         "the review recorded here is of 746addd and does not cover the crc32 goal, the extended tier, or this branch",
         "this agent is not an independent reviewer of its own commit"
       ]
+    },
+    {
+      "id": "A20",
+      "title": "Lua 5.4.9 luac -p and aklomp base64 0.5.3",
+      "deps": [
+        "A02"
+      ],
+      "state": "SUCCEEDED",
+      "owner": "solo-agent",
+      "inputs_version": "docs/phase0/MORE_TARGETS.md",
+      "budget": {
+        "agents": 1
+      },
+      "exit_gate": "Both extra targets are pinned before analysis, each enhancement goal is frozen before its candidate, and each measurement is recorded as met or missed.",
+      "gate_met": true,
+      "checkpoint": "Lua parse ratio 0.9475223614074023 missed 0.90. Base64 encode ratio 0.652379288319424 met 0.90 on one sample. stable_improvement is false for both. Ghidra was not run.",
+      "evidence": [
+        "docs/phase0/MORE_TARGETS.md",
+        "docs/phase2/LUA.md",
+        "docs/phase2/BASE64.md",
+        "docs/phase4/LUA_RESULT.md",
+        "docs/phase4/BASE64_RESULT.md"
+      ],
+      "limitations": [
+        "acceptance is non-blind",
+        "Ghidra was not installed and was not run",
+        "network namespace was not applied",
+        "one sample is not a stable improvement",
+        "the Lua goal was missed and was not reopened",
+        "this unit does not change the zlib evidence"
+      ]
     }
   ]
 }
