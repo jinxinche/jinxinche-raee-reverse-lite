@@ -13,6 +13,11 @@ docs/phase4/LUA_RESULT.md text eol=lf
 docs/phase4/BASE64_RESULT.md text eol=lf
 docs/evidence/lua_parse_goal.json text eol=lf
 docs/evidence/base64_encode_goal.json text eol=lf
+docs/phase4/GOAL_MINIGZIP_ATTEMPT4.md text eol=lf
+docs/phase4/GOAL_MINIGZIP_ATTEMPT4.json text eol=lf
+docs/phase4/ATTEMPT4_RESULT.md text eol=lf
+docs/evidence/zlib_minigzip_attempt4.json text eol=lf
+targets/zlib/harness/inflate_deflate_bench.c text eol=lf
 docs/phase4/ATTEMPT3_RESULT.md text eol=lf
 docs/evidence/zlib_minigzip_attempt3.json text eol=lf
 docs/evidence/zlib_enhancement.json text eol=lf
@@ -42,3 +47,10 @@ targets/zlib/blind_acceptance/crc32_stdin.c text eol=lf
 targets/zlib/blind_acceptance/enwik8.zip -text
 targets/lua/dist/lua-5.4.9.tar.gz -text
 targets/base64/dist/base64-0.5.3.tar.gz -text
+targets/zlib/blind_broad/MANIFEST.json text eol=lf
+targets/zlib/blind_broad/SEAL.sha256 text eol=lf
+targets/zlib/blind_broad/ORIGIN.md text eol=lf
+targets/zlib/blind_broad/ISOLATION.md text eol=lf
+targets/zlib/blind_broad/LICENSE.md text eol=lf
+targets/zlib/blind_broad/*.zip -text
+docs/evidence/blind_broad_*.json text eol=lf

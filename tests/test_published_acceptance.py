@@ -60,6 +60,7 @@ def test_measure_scripts_do_not_name_the_sealed_trees():
         "tools/measure_zlib_crc32.py",
         "tools/measure_zlib_minigzip_attempt2.py",
         "tools/measure_zlib_minigzip_attempt3.py",
+        "tools/measure_zlib_minigzip_attempt4.py",
     ):
         text = (REPO / name).read_text(encoding="utf-8")
         assert "install(REPO)" in text

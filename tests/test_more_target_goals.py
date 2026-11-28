@@ -5,7 +5,7 @@ import json
 import statistics
 from pathlib import Path
 
-from raee_reverse.path_guard import SealViolation, install, restore
+from raee_reverse.path_guard_targets import SealViolation, install, restore
 
 REPO = Path(__file__).resolve().parents[1]
 

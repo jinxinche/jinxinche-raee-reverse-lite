@@ -20,7 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from raee_reverse.path_guard import install, restore  # noqa: E402
+from raee_reverse.path_guard_targets import install, restore  # noqa: E402
 from raee_reverse.sandbox import run_sandboxed  # noqa: E402
 
 REPO = ROOT

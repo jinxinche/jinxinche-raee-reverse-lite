@@ -1,0 +1,55 @@
+name: blind-broad
+
+on:
+  push:
+    branches: ["main", "cursor/**"]
+  pull_request:
+
+jobs:
+  check:
+    name: blind-broad / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Require GNU gzip
+        run: |
+          set -euo pipefail
+          if gzip --version 2>&1 | head -n 1 | grep -Eq '^gzip [0-9]'; then
+            gzip --version
+          else
+            if [ "$(uname -s)" != "Darwin" ]; then
+              echo "GNU gzip is missing" >&2
+              exit 1
+            fi
+            brew install gzip
+            echo "$(brew --prefix gzip)/bin" >> "$GITHUB_PATH"
+          fi
+      - name: Show the compiler and the oracles
+        run: |
+          set -euo pipefail
+          gcc --version
+          gzip --version
+          uname -srvm
+          python -c "import zlib,platform; print(platform.python_version(), zlib.ZLIB_VERSION)"
+      - name: Run the sealed blind check
+        run: |
+          set -euo pipefail
+          unset CFLAGS || true
+          unset LDFLAGS || true
+          unset CC || true
+          python tools/run_blind_broad.py /tmp/blind-broad
+      - name: Upload the check reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blind-broad-${{ matrix.os }}
+          path: /tmp/blind-broad/reports
+          if-no-files-found: ignore

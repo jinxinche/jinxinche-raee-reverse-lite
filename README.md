@@ -50,12 +50,14 @@ python3 -m raee_reverse --root /tmp/rrl-readme report --out /tmp/rrl-readme/repo
 - Two later real targets, pinned before they were built: Lua 5.4.9 `luac -p` and aklomp/base64 0.5.3. They are not the synthetic dev sample. Notes: `docs/phase2/LUA.md` and `docs/phase2/BASE64.md`.
 - The Lua `-O3` parse goal missed: median ratio 0.9475223614074023 against 0.90. `docs/phase4/LUA_RESULT.md`. `stable_improvement` is false.
 - The base64 x86-codec goal met its 0.90 bar on one sample: median ratio 0.652379288319424. `bin/base64` grew from 35568 bytes to 84720 bytes. `docs/phase4/BASE64_RESULT.md`. `stable_improvement` is false.
+- Minigzip attempt 4 clocks in-process inflate and deflate instead of sandboxed wall time: `docs/phase4/ATTEMPT4_RESULT.md`. Decompress median ratio 1.1347656764517347. The earlier wall-time misses stay misses. `stable_improvement` is false.
 - REA 6.9.0 static comparison: `docs/a18/REA_COMPARISON.md`. The 2026-11-15 runtime attempt did not become a comparison. A 2026-11-17 run scored four pairs and is not a ranking: `docs/a18/REA_RUNTIME_2026-11-17.md`.
 - The five routing policies were not executed. `docs/a18/routing_comparison_2026-11-17.json` has `executed` false and `savings_percent` null.
 - Standard stress tier: the stopped load remains a failure in `docs/a19/standard_tier.json`. A later run passed the declared floors: `docs/a19/standard_tier_v3.json`.
 - Held-out zlib inputs are in `targets/zlib/held_out/`. They are not blind. `targets/zlib/NON_BLIND.md` is unchanged.
 - The Canterbury corpus under `targets/zlib/published_acceptance/` is a separate check. It is not blind. Expected gzip bytes are not stored.
 - The enwik8 check under `targets/zlib/blind_acceptance/` was sealed before the frozen binaries were run. `blind` is true. Result: `docs/evidence/BLIND_ACCEPTANCE.md`. The MIT license does not cover `enwik8.zip`.
+- A second blind set is under `targets/zlib/blind_broad/`: the SQLite 3.54.1 Linux x64 tools and the NIST STS 2.1.2 data files. It was sealed before those candidates were run. The enwik8 records are unchanged. The Canterbury set remains `blind` false. The MIT license does not cover those zips.
 - Extended stress tier passed the floors declared in `docs/a19/EXTENDED_TIER_BUDGET.md`. The earlier standard-tier failures stay failures. Result: `docs/a19/extended_tier.json`.
 - `python3 -m raee_reverse --root /tmp/rrl-route route --task-json /tmp/route-task.json --profiles config/model_profiles.json --prices config/prices.json` chose `deterministic_tool` at T0. `accepted_pass` in that result was false. Record id `d5ead1c546af4d1398f43f7daf259908`.
 

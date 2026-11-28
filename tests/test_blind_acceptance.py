@@ -69,7 +69,11 @@ def test_injected_crc_fails_and_the_guard_refuses_the_blind_tree():
         assert raised is True
     finally:
         restore(original)
-    for name in ("tools/measure_zlib_crc32.py", "tools/measure_zlib_minigzip_attempt2.py"):
+    for name in (
+        "tools/measure_zlib_crc32.py",
+        "tools/measure_zlib_minigzip_attempt2.py",
+        "tools/measure_zlib_minigzip_attempt4.py",
+    ):
         text = (REPO / name).read_text(encoding="utf-8")
         assert "blind_acceptance" not in text
 

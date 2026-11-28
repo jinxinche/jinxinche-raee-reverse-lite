@@ -1,0 +1,242 @@
+{
+  "blind": true,
+  "blind_claim": true,
+  "inputs_invented_for_this_candidate": false,
+  "tuned_on_this_set": false,
+  "expected_gzip_stored": false,
+  "candidates_frozen_before_seal": true,
+  "starting_ref": "d538cb64feb965d3d849759ec0ffdb4086dff1af",
+  "seal_time": "2026-11-26T21:53:35Z",
+  "set_author": {
+    "role": "set_author",
+    "agent": "bc-2508fd5e-68a5-584e-8806-b3b3fa0c959d",
+    "run_url": "https://cursor.com/agents/bc-2508fd5e-68a5-584e-8806-b3b3fa0c959d"
+  },
+  "candidate_authors": [
+    {
+      "role": "candidate_author",
+      "agent": "bc-641141af-3ffd-5b16-acb9-663777242042",
+      "candidates": [
+        "stock zlib 1.4 minigzip",
+        "attempt 2"
+      ],
+      "commits": [
+        "52d4a9e8b4918f75653b2912602a23d1cf510088",
+        "a912990a978ee37a595b82ae11ae6b0e4cb6ab81",
+        "dce39956bc96275342517d9aa307be2ffc743435"
+      ],
+      "frozen_at": "8a06e96fffff1cfe6958010babaea5a9308d4961",
+      "run_url": "https://cursor.com/agents/bc-641141af-3ffd-5b16-acb9-663777242042"
+    },
+    {
+      "role": "candidate_author",
+      "agent": "bc-cfef56ea-f25b-5590-a266-7684b5589b8e",
+      "candidates": [
+        "attempt 3"
+      ],
+      "commits": [
+        "1130d45dfdd04c46784b14e6974294c437c91eba",
+        "c1680fcad53b9a76bdcc40f640f1962392244dd9"
+      ],
+      "frozen_at": "d538cb64feb965d3d849759ec0ffdb4086dff1af",
+      "run_url": "https://cursor.com/agents/bc-cfef56ea-f25b-5590-a266-7684b5589b8e"
+    }
+  ],
+  "inputs_origin": "SQLite 3.54.1 official Linux x64 command-line tools, and the data directory of NIST STS 2.1.2",
+  "sqlite_origin_url": "https://sqlite.org/2026/sqlite-tools-linux-x64-3540100.zip",
+  "sqlite_documentation_url": "https://sqlite.org/download.html",
+  "sqlite_license_url": "https://sqlite.org/copyright.html",
+  "sqlite_sha256": "a21062b333c7d66d7d8c42054c0fab1c1899729185289ad14bd4f25f9f576d14",
+  "sqlite_sha3_256": "555635de98534d87a67ee2e6e1b0d79f494b1b33b223477d3e7a8ea0c66e416f",
+  "sqlite_bytes": 4324601,
+  "nist_origin_url": "https://csrc.nist.gov/CSRC/media/Projects/Random-Bit-Generation/documents/sts-2_1_2.zip",
+  "nist_documentation_url": "https://csrc.nist.gov/Projects/Random-Bit-Generation/Documentation-and-Software",
+  "nist_sha256": "0238d2f1d26e120e3cc748ed2d4c674cdc636de37fc4027c76cc2a394fff9157",
+  "nist_bytes": 43915127,
+  "nist_publisher_digest": null,
+  "nist_download_check": "two downloads of the NIST URL were byte-identical; the page does not publish a digest",
+  "excluded_canterbury_tar_sha256": "f140e8a5b73d3f53198555a63bfb827889394a42f20825df33c810c3d5e3f8fb",
+  "excluded_enwik8_zip_sha256": "547994d9980ebed1288380d652999f38a14fe291a6247c157c3d33d4932534bc",
+  "silesia_files_not_used": [
+    "mozilla",
+    "x-ray",
+    "sao"
+  ],
+  "license": "SQLite 3.54.1 tools are dedicated to the public domain by their authors. See https://sqlite.org/copyright.html. The NIST Statistical Test Suite is a United States government work and is in the public domain under 17 USC 105. See the disclaimer on https://csrc.nist.gov/Projects/Random-Bit-Generation/Documentation-and-Software. The repository MIT license does not cover these zips. Silesia mozilla, x-ray, and sao were not included because that corpus page states no clear license for them.",
+  "oracle": "GNU gzip and CPython zlib, not the candidate",
+  "blind_reason": "The set author is bc-2508fd5e-68a5-584e-8806-b3b3fa0c959d. This agent did not author the stock zlib 1.4 minigzip, the attempt-2 candidate, or the attempt-3 candidate. Those candidates were already frozen at starting_ref d538cb64feb965d3d849759ec0ffdb4086dff1af before this manifest was written. The attempt-2 candidate author is bc-641141af-3ffd-5b16-acb9-663777242042. The attempt-3 candidate author is bc-cfef56ea-f25b-5590-a266-7684b5589b8e. The enwik8 set author is bc-b2b647e7-62a7-5f3e-b41b-f15985b779c4. The inputs are the published SQLite 3.54.1 Linux x64 command-line tools and the data files shipped in NIST STS 2.1.2. They were not invented for these candidates. Expected gzip bytes are not stored. The set was not used to tune the candidates.",
+  "checker_files": [
+    {
+      "path": "src/raee_reverse/blind_broad.py",
+      "sha256": "46ac6398069e35e04b39f6e529a6416d7c23610a976a45a87c38b4e806917d14"
+    },
+    {
+      "path": "src/raee_reverse/path_guard.py",
+      "sha256": "ae51de0c68fd766ae739faf992e456f02d59855a61193862e49ff2e38e4a4c64"
+    },
+    {
+      "path": "tools/check_blind_broad.py",
+      "sha256": "808794f0ec3da5d72e09e958a85bc74995ddbde5c77a0ce51c964a9894296605"
+    },
+    {
+      "path": "tools/reproduce_frozen_zlib_attempt3.py",
+      "sha256": "3c0648fa5deb786714a81c3f24ed5cbd5fbf8b3312b0f354d3c1251b36cc5edd"
+    },
+    {
+      "path": "tools/run_blind_broad.py",
+      "sha256": "ed0ccef01c968c9398d5b8832b509410766392dc60a9a96835b785c3d03774f1"
+    }
+  ],
+  "frozen_dependencies": [
+    {
+      "path": "src/raee_reverse/blind_acceptance.py",
+      "sha256": "7545a3cdc3c97f2989a7a75e5e075259e5a4deae9f6a4aa9b1fc83d95f798df3"
+    },
+    {
+      "path": "tools/check_blind_acceptance.py",
+      "sha256": "ac0e813ae671c34f34cf642dd2c31e9d16b233c84a865e429724cb0a66573da5"
+    },
+    {
+      "path": "tools/reproduce_frozen_zlib_builds.py",
+      "sha256": "25723f237bf9334d4643e8f75ce73d057beb8eced724e273e632430fe831374e"
+    },
+    {
+      "path": "targets/zlib/blind_acceptance/crc32_stdin.c",
+      "sha256": "20ecf8b1fcd9ab9aee3928239597095a718c28087f71771b833a7298ce6efda4"
+    }
+  ],
+  "inputs": [
+    {
+      "name": "sqlite3",
+      "corpus": "sqlite-tools-linux-x64-3.54.1",
+      "kind": "executable",
+      "container": "sqlite-tools-linux-x64-3540100.zip",
+      "container_member": "sqlite3",
+      "container_sha256": "a21062b333c7d66d7d8c42054c0fab1c1899729185289ad14bd4f25f9f576d14",
+      "sha256": "c9daa875c28379f0d61a833d47928c6e43b352d98638cd824ec405f23c99d870",
+      "md5": "d6cb8930060909a8b74edeba8671d3ca",
+      "sha1": "a65ebcee469736358b8f2f2d7a9287901fcac0fe",
+      "length": 2037360
+    },
+    {
+      "name": "sqldiff",
+      "corpus": "sqlite-tools-linux-x64-3.54.1",
+      "kind": "executable",
+      "container": "sqlite-tools-linux-x64-3540100.zip",
+      "container_member": "sqldiff",
+      "container_sha256": "a21062b333c7d66d7d8c42054c0fab1c1899729185289ad14bd4f25f9f576d14",
+      "sha256": "62b3014603bbf427eeaba2767f32ffc4c88ea261d5960dfff6683c26bf50d56b",
+      "md5": "7d61893b9407b8704d6acc5cf2cfd732",
+      "sha1": "9df36c07cf21b5a19102860594579a8d111ba853",
+      "length": 1596160
+    },
+    {
+      "name": "sqlite3_analyzer",
+      "corpus": "sqlite-tools-linux-x64-3.54.1",
+      "kind": "executable",
+      "container": "sqlite-tools-linux-x64-3540100.zip",
+      "container_member": "sqlite3_analyzer",
+      "container_sha256": "a21062b333c7d66d7d8c42054c0fab1c1899729185289ad14bd4f25f9f576d14",
+      "sha256": "e2ffb7e4471e17dfa2f0b1829350b30a36a46cdafb9ecb870891781df6b1fbd3",
+      "md5": "32b470f4ed9ea8336bcab28c5536abfd",
+      "sha1": "4f72fd1490713e3c962fcf1f845dd6efa8711cd1",
+      "length": 3334360
+    },
+    {
+      "name": "sqlite3_rsync",
+      "corpus": "sqlite-tools-linux-x64-3.54.1",
+      "kind": "executable",
+      "container": "sqlite-tools-linux-x64-3540100.zip",
+      "container_member": "sqlite3_rsync",
+      "container_sha256": "a21062b333c7d66d7d8c42054c0fab1c1899729185289ad14bd4f25f9f576d14",
+      "sha256": "5203304e7ce33b872eea14ad3888d557d86f6860cf3643a6d03fa987e8d980fa",
+      "md5": "4d644bae2924702d0f38f3645a6b8483",
+      "sha1": "9a17d734181acda55e335b79ce2a2d35217d5ed1",
+      "length": 1559168
+    },
+    {
+      "name": "BBS.dat",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "container": "sts-2_1_2.zip",
+      "container_member": "sts-2.1.2/sts-2.1.2/data/BBS.dat",
+      "container_sha256": "0238d2f1d26e120e3cc748ed2d4c674cdc636de37fc4027c76cc2a394fff9157",
+      "sha256": "8b808e72e5b9e50893f5714a948d3a87c3a014fc8b8e0be3f64e3da07ad8ed6c",
+      "md5": "28db13aecb917e6b367ebaf25de3cbaf",
+      "sha1": "b314cdf9f051af25d687470ec0e0211b2a5da3a7",
+      "length": 37500000
+    },
+    {
+      "name": "data.bad_rng",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "container": "sts-2_1_2.zip",
+      "container_member": "sts-2.1.2/sts-2.1.2/data/data.bad_rng",
+      "container_sha256": "0238d2f1d26e120e3cc748ed2d4c674cdc636de37fc4027c76cc2a394fff9157",
+      "sha256": "4a596370fcb4263c99f4fddcbd5c766c4abf5cfaab645bef1d3611d86f1c3e60",
+      "md5": "8fe4cf7434ca8704c5ee240af15dd0ba",
+      "sha1": "4c9fc61f0b89534a133a5a3c8f7d41916a98af8d",
+      "length": 1572864
+    },
+    {
+      "name": "data.e",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "container": "sts-2_1_2.zip",
+      "container_member": "sts-2.1.2/sts-2.1.2/data/data.e",
+      "container_sha256": "0238d2f1d26e120e3cc748ed2d4c674cdc636de37fc4027c76cc2a394fff9157",
+      "sha256": "b4b49e2987dacdbd5fe75a8ad767f4139e7be7d8f0ff9ddfb23e6081a5feed2d",
+      "md5": "4302cf4dde510c45a9caeab8f5cb43bb",
+      "sha1": "2f6e9e1b309698e381e5d70be921983e29231889",
+      "length": 1165666
+    },
+    {
+      "name": "data.pi",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "container": "sts-2_1_2.zip",
+      "container_member": "sts-2.1.2/sts-2.1.2/data/data.pi",
+      "container_sha256": "0238d2f1d26e120e3cc748ed2d4c674cdc636de37fc4027c76cc2a394fff9157",
+      "sha256": "8efe68d864d53540de7a7a3c54743cb0f47ffcd28b2950992519068474498823",
+      "md5": "979c03cca4849a36e174703673da9a56",
+      "sha1": "9bc7e4fb6b5f2bb9276bddf6f00a4a4a8a856ce0",
+      "length": 1165666
+    },
+    {
+      "name": "data.sha1",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "container": "sts-2_1_2.zip",
+      "container_member": "sts-2.1.2/sts-2.1.2/data/data.sha1",
+      "container_sha256": "0238d2f1d26e120e3cc748ed2d4c674cdc636de37fc4027c76cc2a394fff9157",
+      "sha256": "dcc306053a40b5f0c94508425660620b932a1803aadc7207a1b669eb4e3bd6a3",
+      "md5": "f53e0568b6ab7658468be1ef504875fb",
+      "sha1": "83afe955854a80e1a1a904d3210e668af104c963",
+      "length": 125000
+    },
+    {
+      "name": "data.sqrt2",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "container": "sts-2_1_2.zip",
+      "container_member": "sts-2.1.2/sts-2.1.2/data/data.sqrt2",
+      "container_sha256": "0238d2f1d26e120e3cc748ed2d4c674cdc636de37fc4027c76cc2a394fff9157",
+      "sha256": "66e6fd40d1e7b14613801cdb8af67ee6b4fde988f348e0a09e7be84257ee3ed3",
+      "md5": "61cffd1b32b0aeff012785c520f52d5f",
+      "sha1": "bf01ca6bb82b4ef1ac9a0ccaf254c85ce402574b",
+      "length": 1165667
+    },
+    {
+      "name": "data.sqrt3",
+      "corpus": "nist-sts-2.1.2-data",
+      "kind": "random-like",
+      "container": "sts-2_1_2.zip",
+      "container_member": "sts-2.1.2/sts-2.1.2/data/data.sqrt3",
+      "container_sha256": "0238d2f1d26e120e3cc748ed2d4c674cdc636de37fc4027c76cc2a394fff9157",
+      "sha256": "6b1fc9f59f701b4c75d013cb3854bcc545f971da057d8140a8d7600bd34850e0",
+      "md5": "bd3262d164bb0b2eb279e497ae0412ef",
+      "sha1": "71b40e2490510240b5aa68b1cb70112838d6038a",
+      "length": 1165667
+    }
+  ]
+}
