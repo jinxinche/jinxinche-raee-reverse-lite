@@ -47,6 +47,7 @@ python3 -m raee_reverse --root /tmp/rrl-readme report --out /tmp/rrl-readme/repo
 - A separate crc32 goal is in `docs/phase4/GOAL_CRC32.md`. Its measurement is `docs/evidence/zlib_crc32_goal.json`.
 - Minigzip attempt 2 missed the same wall-time bar: `docs/phase4/ATTEMPT2_RESULT.md`. `stable_improvement` is false.
 - Minigzip attempt 3 missed that bar again: `docs/phase4/ATTEMPT3_RESULT.md`. Decompress median ratio 0.9977490944434495. `stable_improvement` is false.
+- Minigzip attempt 4 clocks in-process inflate and deflate instead of sandboxed wall time: `docs/phase4/ATTEMPT4_RESULT.md`. Decompress median ratio 1.1347656764517347. The earlier wall-time misses stay misses. `stable_improvement` is false.
 - REA 6.9.0 static comparison: `docs/a18/REA_COMPARISON.md`. The 2026-11-15 runtime attempt did not become a comparison. A 2026-11-17 run scored four pairs and is not a ranking: `docs/a18/REA_RUNTIME_2026-11-17.md`.
 - The five routing policies were not executed. `docs/a18/routing_comparison_2026-11-17.json` has `executed` false and `savings_percent` null.
 - Standard stress tier: the stopped load remains a failure in `docs/a19/standard_tier.json`. A later run passed the declared floors: `docs/a19/standard_tier_v3.json`.
