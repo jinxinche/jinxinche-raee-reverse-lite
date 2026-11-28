@@ -1,0 +1,34 @@
+{
+  "project": "base64",
+  "upstream": "aklomp/base64",
+  "tag": "v0.5.3",
+  "source_url": "https://github.com/aklomp/base64/archive/refs/tags/v0.5.3.tar.gz",
+  "tarball_sha256": "74f83a5396660dfe5a09f0339982c03c44ef018e459a8bfcde8b31ca7444aa42",
+  "license": "BSD-2-Clause, from LICENSE in this tarball",
+  "tool": "bin/base64",
+  "interface": "stdin/stdout encode and decode, the same role as a base64 utility",
+  "kind": "encoder, not a compressor",
+  "pinned_before_analysis": true,
+  "base64_sha256": "1849b1e96c54bc8398ee4a24dfe33765406e43c036339e299926b92d3d368776",
+  "elf": {
+    "elf": true,
+    "class": 2,
+    "endian": 1,
+    "type": 3,
+    "machine": 62,
+    "class_name": "ELF64",
+    "machine_name": "x86-64"
+  },
+  "codec_config": "#define HAVE_AVX512 0\n#define HAVE_AVX2   0\n#define HAVE_NEON32 0\n#define HAVE_NEON64 0\n#define HAVE_SSSE3  0\n#define HAVE_SSE41  0\n#define HAVE_SSE42  0\n#define HAVE_AVX    0\n",
+  "build": {
+    "command": "make -j4",
+    "make_exit": 0,
+    "extra_cflags": null,
+    "sandbox": true,
+    "rlimits_applied": true,
+    "network_namespace": false,
+    "truncated": false
+  },
+  "acceptance": "non-blind",
+  "acceptance_reason": "the same agent generated the sealed outputs and can read them"
+}

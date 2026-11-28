@@ -2,6 +2,17 @@
 
 One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. A different crc32 goal was frozen in `docs/phase4/GOAL_CRC32.md` before its measurement. A second minigzip wall-time goal was frozen in `docs/phase4/GOAL_MINIGZIP_ATTEMPT2.md` before its candidate was built. That attempt is closed as missed.
 
+## Two more real targets
+
+Pinned in `782cd114e8a4a19a801cca5652c187f5f0e33304` before either program was built. Goals frozen in `39ee2082521a5ef6944330e4f3a63cb43e9fbcfb` before either candidate was built. These are not the synthetic dev sample in `samples/dev/checksum_cli.c`. zlib evidence was not edited. Ghidra was not installed, so static decompilation is not done.
+
+| Target | Why | Pin | Goal | Result |
+| --- | --- | --- | --- | --- |
+| Lua 5.4.9 `luac -p` | MIT language front end, not a compressor | `https://www.lua.org/ftp/lua-5.4.9.tar.gz` SHA-256 `2335b6c582a52654f94612bf10d2f4672805d05329aa6568b1d8cd9e5c6fb8e6` | in-process `luaL_loadbuffer`, candidate `make linux MYCFLAGS=-O3`, ratio ≤ 0.90 | missed. Median 14706541 / 15521049 = 0.9475223614074023. Correct. `stable_improvement` false. |
+| aklomp/base64 0.5.3 | BSD-2-Clause encoder, not a compressor | `https://github.com/aklomp/base64/archive/refs/tags/v0.5.3.tar.gz` SHA-256 `74f83a5396660dfe5a09f0339982c03c44ef018e459a8bfcde8b31ca7444aa42` | in-process `base64_encode` with flags 0, candidate is the README x86 codec line, ratio ≤ 0.90 | met on this one sample. Median 2764818 / 4238053 = 0.652379288319424. Encoded bytes matched. `bin/base64` grew from 35568 to 84720 bytes. `stable_improvement` false. |
+
+jq 1.x and Lua 5.5.1 were not substituted after these numbers.
+
 ## Versions
 
 - Tool: `raee-reverse-lite` 0.1.0.
@@ -37,12 +48,13 @@ One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. A di
 - REA runtime on 2026-11-17: `python3 tools/run_rea_runtime.py /tmp/rea-runtime-2026 /tmp/rea-runtime-2026.json /tmp/checksum_cli`. `comparison_complete` true for four scored pairs. `ranking` false. `capture-process` still ended with signal 9 `idle_timeout` and did not show the contract line. One-shot `debug-with-gdb run` still reported `No executable file specified`. `docs/a18/rea_runtime_2026-11-17.json`.
 - Minigzip attempt 2: `python3 tools/measure_zlib_minigzip_attempt2.py /tmp/zlib-minigzip-attempt2 /tmp/zlib-minigzip-attempt2.json`. Decompress median ratio 1.003810222421081 against 0.90. Compress median ratio 1.0277633298808058 against 1.05. Correct. `enhancement_met` false. `stable_improvement` false. `attempt_status` `closed_missed`. `docs/evidence/zlib_minigzip_attempt2.json`.
 - Minigzip attempt 3: `python3 tools/measure_zlib_minigzip_attempt3.py /tmp/zlib-minigzip-attempt3 /tmp/zlib-minigzip-attempt3.json`. Decompress median ratio 0.9977490944434495 against 0.90. Compress median ratio 0.9976791199422619 against 1.05. Correct. `enhancement_met` false. `stable_improvement` false. `attempt_status` `closed_missed`. `docs/evidence/zlib_minigzip_attempt3.json`.
+- Minigzip attempt 4: `python3 tools/measure_zlib_minigzip_attempt4.py /tmp/zlib-minigzip-attempt4 /tmp/zlib-minigzip-attempt4.json`. The metric is in-process gzip inflate and deflate, not sandboxed wall time. Decompress median ratio 1.1347656764517347 against 0.90. Compress median ratio 1.005786271052055 against 1.05. Correct. `enhancement_met` false. `stable_improvement` false. `attempt_status` `closed_missed`. `docs/evidence/zlib_minigzip_attempt4.json`. Changing that metric did not turn the earlier wall-time misses into passes.
 - Extended probe: `python3 tools/probe_extended_tier.py /tmp/a19-extended-probe /tmp/a19-extended-probe.json`. Finished in 2.851 seconds. Projected 2336.889 seconds and 2,719,779,400 directory bytes. `start_allowed` true. `docs/a19/extended_probe.json`.
 - Extended tier: `python3 tools/run_extended_tier.py /tmp/a19-extended /tmp/a19-extended-result.json /tmp/checksum_cli /tmp/a19-extended-probe.json`. `extended_tier_executed` true and `extended_tier_pass` true. Load 170.475 seconds, mixed 1801.876 seconds, 250,006 relations, 10,002 claims, 100,032 observations, 20 target runs, directory 682,324,385 bytes. Load P50/P95/P99 seconds: 0.000200465, 0.001171793, 0.004716798 (sample size 360,000). Mixed P50/P95/P99 seconds: 0.000451200, 0.518006233, 2.978321967 (sample size 13,081). `docs/a19/extended_tier.json`.
 
-**Unverified.** Whether another compiler or another machine emits the same crc32 ratio or the same attempt-2 minigzip ratio. Each ratio is one pair of medians on this host. Whether the four-task REA sample would look the same on another host. Whether a live five-policy comparison would change cost. Whether the attempt-3 16-byte copy reduces inflate CPU time. That CPU time was not clocked. Hosted CI for `dce3995` is recorded below. This paragraph is a later commit, so it is not itself that green SHA.
+**Unverified.** Whether another compiler or another machine emits the same crc32 ratio or the same attempt-2 minigzip ratio. Each ratio is one pair of medians on this host. Whether the four-task REA sample would look the same on another host. Whether a live five-policy comparison would change cost. Whether the attempt-3 16-byte copy reduces inflate CPU time. That CPU time was not clocked. Hosted CI for `dce3995` is recorded below. This paragraph is a later commit, so it is not itself that green SHA. Attempt 4 later clocked in-process inflate and deflate on one host. That ratio is `docs/evidence/zlib_minigzip_attempt4.json`. It does not replace the attempt-3 wall-time result.
 
-**Not done.** A live five-policy comparison. Prices and a callable model endpoint were missing, so savings stays null. A blind acceptance set. The Canterbury check is explicitly not blind: the same agent selected the corpus, wrote the harness, and wrote the attempt-2 candidate. `rizin` is still absent. Network namespaces were not available. No savings percentage is claimed. The closed zlib wall-time goal was not met and was not reopened. Attempt 2 on the same metric was also missed and was not turned into a pass. Attempt 3 on that metric was missed and was not turned into a pass. This attempt did not run the held-out or Canterbury checkers and did not invent a blind-set result.
+**Not done.** A live five-policy comparison. Prices and a callable model endpoint were missing, so savings stays null. A blind acceptance set. The Canterbury check is explicitly not blind: the same agent selected the corpus, wrote the harness, and wrote the attempt-2 candidate. `rizin` is still absent. Network namespaces were not available. No savings percentage is claimed. The closed zlib wall-time goal was not met and was not reopened. Attempt 2 on the same metric was also missed and was not turned into a pass. Attempt 3 on that metric was missed and was not turned into a pass. Attempt 4 changed the clock to in-process time and missed that bar. Changing the metric did not turn those three misses into passes. This attempt did not run the held-out or Canterbury checkers and did not invent a blind-set result.
 
 ## Live models
 
@@ -55,6 +67,8 @@ No comparison was executed. `config/model_profiles.json` has no available model 
 `docs/phase4/GOAL_MINIGZIP_ATTEMPT2.md` is the same minigzip wall-time metric as the closed goal: 4 MiB buffer, sandboxed process, 21-run median, decompress ratio at most 0.90, compress ratio at most 1.05. Both trees use `./configure && make` with no `CFLAGS` or `LDFLAGS` override. The candidate changes `minigzip` buffering and hooks the existing PCLMULQDQ crc32 path. Outcome: closed as missed. Decompress ratio 1.003810222421081. Compress ratio 1.0277633298808058. `stable_improvement` false.
 
 `docs/phase4/GOAL_MINIGZIP_ATTEMPT3.md` keeps that metric and those bars. The candidate is a 16-byte SSE2 copy on the direct match path in `inflate_fast`. Outcome: closed as missed. Decompress ratio 0.9977490944434495. Compress ratio 0.9976791199422619. `stable_improvement` false.
+
+`docs/phase4/GOAL_MINIGZIP_ATTEMPT4.md` is a different metric: median in-process gzip inflate time of the same 4 MiB buffer, with the same 0.90 and 1.05 bars. The candidate is that same 16-byte copy, not retuned. Outcome: closed as missed. Decompress ratio 1.1347656764517347. Compress ratio 1.005786271052055. `stable_improvement` false. The three wall-time attempts stay missed.
 
 ## Acceptance
 
@@ -75,6 +89,8 @@ On 2026-11-17 those two failures were run again and still failed the same way. A
 ## Local tests on this tree
 
 On this slice, after the measurements above, `python3 -m pip install .` and `python3 -m pytest -q --tb=line` : 104 passed in 6.96s. `python3 tools/check_collection_floor.py` printed `collection floor matches 104 tests`. The earlier 93-test run stays a record of that tree.
+
+On the attempt-4 slice, after that measurement, `python3 -m pip install .` and `python3 -m pytest -q --tb=line` : 112 passed in 7.72s. `python3 tools/check_collection_floor.py` printed `collection floor matches 112 tests`.
 
 Hosted CI for `dce39956bc96275342517d9aa307be2ffc743435` succeeded on both runs. Each run had six jobs: Ubuntu, Windows, and macOS, on Python 3.11 and 3.15.
 

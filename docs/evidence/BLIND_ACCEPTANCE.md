@@ -38,3 +38,82 @@ Records: `docs/evidence/blind_acceptance_stock.json` and `docs/evidence/blind_ac
 ## Not finished here
 
 Nothing in this check was left unrun. The Canterbury set remains `blind` false. `targets/zlib/NON_BLIND.md` is unchanged. The closed LTO miss and the closed attempt-2 wall-time miss stay missed.
+
+## Broad corpora
+
+The section above is the enwik8 record. It is unchanged. This section is a later set. The checker and the input hashes were committed in `3b6e405f70129bf075cc7f654dfbfea74d8ceae5` before stock, attempt 2, or attempt 3 was run on these files. `source_commit` on each JSON file is that seal.
+
+### Corpora
+
+Silesia `mozilla`, `x-ray`, and `sao` are not in this set. The Silesia page states no license for the corpus or for those files. `x-ray` is described there as a hospital image of a child's hand. `mozilla` is described as a tar of an installed tree, not an official Mozilla release with a stated source offer. `sao` is described as a star catalog with no redistribution license on that page. Details: `targets/zlib/blind_broad/LICENSE.md`.
+
+Two published corpora are sealed instead. The repository MIT license does not cover either zip.
+
+- Executable: SQLite 3.54.1 official Linux x64 command-line tools, `sqlite-tools-linux-x64-3540100.zip`. Public domain, as dedicated at `https://sqlite.org/copyright.html`. Published SHA3-256 `555635de98534d87a67ee2e6e1b0d79f494b1b33b223477d3e7a8ea0c66e416f`. Release date 2026-10-16. Members: `sqlite3`, `sqldiff`, `sqlite3_analyzer`, `sqlite3_rsync`. All four are ELF x86-64 executables. None were rebuilt here.
+- Random-like: every file in the `data/` directory of NIST STS 2.1.2, `sts-2_1_2.zip`. United States government work, public domain under 17 USC 105, as stated on the CSRC page. The page does not publish a digest. Two downloads of the URL were byte-identical. SHA-256 `0238d2f1d26e120e3cc748ed2d4c674cdc636de37fc4027c76cc2a394fff9157`. Members: `BBS.dat`, `data.bad_rng`, `data.sha1` (binary) and `data.e`, `data.pi`, `data.sqrt2`, `data.sqrt3` (ASCII `0`/`1` expansions).
+
+`inputs_invented_for_this_candidate` is false. `tuned_on_this_set` is false. Set author `bc-2508fd5e-68a5-584e-8806-b3b3fa0c959d`. Attempt-2 candidate author `bc-641141af-3ffd-5b16-acb9-663777242042`. Attempt-3 candidate author `bc-cfef56ea-f25b-5590-a266-7684b5589b8e`. The enwik8 set author is a different agent.
+
+### This host
+
+One host for the JSON files below: Linux 6.12.113+ x86_64, gcc 13, GNU gzip 1.12, CPython 3.12.3, oracle zlib 1.3. `CFLAGS`, `LDFLAGS`, and `CC` were unset. Stock and attempt 2 were built by `tools/reproduce_frozen_zlib_builds.py`. Attempt 3 was built by `tools/reproduce_frozen_zlib_attempt3.py` from the frozen `./configure && make` recipe, with the patch applied only in a temporary tree. Attempt 3 did build on this x86_64 host.
+
+The reproduced stock `minigzip` and `libz.a` hashes equal `targets/zlib/PIN.json`. The attempt-2 `minigzip` hash equals the hash in the enwik8 attempt-2 record. That is this compiler and the frozen recipe, not a flag change.
+
+The same binaries were also run through the existing enwik8 checker. Stock and attempt 2 again recorded CRC `81838409` and gzip length 36,548,933. The committed enwik8 JSON files were not modified. The enwik8 checker still accepts only `stock` and `attempt2`. Attempt 3 was not given a new enwik8 label.
+
+| Candidate | minigzip SHA-256 | inputs | CRC vs CPython | external gzip | CPython zlib | injected CRC | flipped byte | pass | blind |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| stock zlib 1.4 | `e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636` | 11 | match | match | match | fail, as required | rejected | true | true |
+| attempt 2 | `6b0fb8208e1ccc4a6729c46592d5aaaf53a86dffe353d2c2543fb1742c64dee8` | 11 | match | match | match | fail, as required | rejected | true | true |
+| attempt 3 | `ad20f09247ad065a7b571209a8495cf2fa58f3146666c102e69c174571fef1e3` | 11 | match | match | match | fail, as required | rejected | true | true |
+
+The three reports record the same CRC and the same gzip length on each input. The gzip bytes were not stored and were not compared.
+
+| Input | Kind | Length | CRC | Gzip length |
+| --- | --- | --- | --- | --- |
+| `sqlite3` | executable | 2037360 | `ff17be7e` | 1056293 |
+| `sqldiff` | executable | 1596160 | `a41d4bc7` | 845946 |
+| `sqlite3_analyzer` | executable | 3334360 | `1c107e0b` | 1607487 |
+| `sqlite3_rsync` | executable | 1559168 | `a788ddf3` | 827578 |
+| `BBS.dat` | random-like | 37500000 | `3f3e2732` | 37511458 |
+| `data.bad_rng` | random-like | 1572864 | `cf68852f` | 1573362 |
+| `data.e` | random-like | 1165666 | `7404fe79` | 210565 |
+| `data.pi` | random-like | 1165666 | `b9d96c9c` | 210370 |
+| `data.sha1` | random-like | 125000 | `bc71ef68` | 125058 |
+| `data.sqrt2` | random-like | 1165667 | `87d25482` | 210201 |
+| `data.sqrt3` | random-like | 1165667 | `008c1e73` | 210402 |
+
+Records: `docs/evidence/blind_broad_stock.json`, `docs/evidence/blind_broad_attempt2.json`, and `docs/evidence/blind_broad_attempt3.json`.
+
+### Other hosts
+
+The JSON files above are one host. The push event and the pull_request event are two CI events, not two extra hosts. Each event ran the blind check once on `ubuntu-latest` and once on `macos-latest`. Windows ran the core tests only. It did not run this blind check.
+
+Commit `d9a6fda3d1210da00fde13fad9e58ce61e96ae82`. Core, both events, 6/6: `ubuntu-latest`, `windows-latest`, and `macos-latest`, each on Python 3.11 and 3.15.
+
+| Event | Workflow | URL | Result |
+| --- | --- | --- | --- |
+| push | core | https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/45901579909 | 6/6 success |
+| push | blind-broad | https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/45901579992 | ubuntu and macos success |
+| pull_request | core | https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/45901603365 | 6/6 success |
+| pull_request | blind-broad | https://github.com/jinxinche/jinxinche-raee-reverse-lite/actions/runs/45901603392 | ubuntu and macos success |
+
+The host lines below are from the push-run artifacts. The pull_request jobs on the same commit also succeeded. Those jobs are not a third and fourth machine.
+
+Ubuntu `ubuntu-latest`, x86_64. Linux 7.0.0-1020-azure, gcc 15.2.0, GNU gzip 1.14, CPython 3.12.16, oracle zlib 1.3.1. Stock, attempt 2, and attempt 3 each built and passed all 11 inputs: CRC against CPython, GNU gzip, CPython zlib, injected CRC `00000000`, and the flipped byte. The same stock and attempt-2 binaries also passed the existing enwik8 checker: CRC `81838409`, gzip length 36,548,933. The minigzip hashes are not the pin from the gcc 13 host. Stock `c7a6a0b875ba9250559b7c52e96ece39b99c06b6ca5c47a82e4f918a4e63fea7`. Attempt 2 `5ea326cff2c89167100b462debe67e01b8a5abb32baa536417831f5894f69a8a`. Attempt 3 `4b8ce8d962e693e839c6400351cc20d3c13ba7b4157e0dd32d3559cbc3bf53a3`.
+
+macOS `macos-latest`, arm64. Darwin 25.6.0, Apple clang 21.0.0 reported as `gcc`, GNU gzip 1.15, CPython 3.12.10, oracle zlib 1.2.11. Stock passed all 11 inputs and the enwik8 check, with the same CRC `81838409` and gzip length 36,548,933. Attempt 3 passed all 11 inputs. Its minigzip SHA-256 equals the stock minigzip SHA-256 on this host, `77e76353b224bd0284fbfa6ff24ecd203746531edd146a261e4e0373126ec633`. The frozen attempt-3 edit is compiled only for `__x86_64__`, so this arm64 binary is the stock copy loop. Attempt 2 did not build. `make` exited 2. The log says `clang: error: unsupported option '-mpclmul' for target 'arm64-apple-darwin25.6.0'` and warns that `-msse4.2` was unused. `pass` is false. `executed` is false. That is not a pass.
+
+The recorded CRC and gzip length for each of the 11 inputs are the same on the local host, Ubuntu, and macOS. The gzip bytes were not stored and were not compared.
+
+### Unverified
+
+- Whether the gzip streams are byte-for-byte identical across candidates or hosts. The recorded lengths match. The bytes were not stored and were not compared.
+- Wall time. This run does not measure the closed speed goals.
+- The Canterbury files. They remain `blind` false.
+- A Windows run of these minigzip binaries. Windows ran pytest only.
+
+### Not finished here
+
+The local check and both Actions events finished. Nothing in those checks was left unrun except attempt 2 on arm64, which the frozen recipe does not compile. The closed LTO miss, the attempt-2 wall-time miss, and the attempt-3 wall-time miss stay missed.
