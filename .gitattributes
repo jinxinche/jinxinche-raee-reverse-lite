@@ -37,3 +37,10 @@ targets/zlib/blind_acceptance/LICENSE.md text eol=lf
 targets/zlib/blind_acceptance/GFDL-1.2.txt text eol=lf
 targets/zlib/blind_acceptance/crc32_stdin.c text eol=lf
 targets/zlib/blind_acceptance/enwik8.zip -text
+targets/zlib/blind_broad/MANIFEST.json text eol=lf
+targets/zlib/blind_broad/SEAL.sha256 text eol=lf
+targets/zlib/blind_broad/ORIGIN.md text eol=lf
+targets/zlib/blind_broad/ISOLATION.md text eol=lf
+targets/zlib/blind_broad/LICENSE.md text eol=lf
+targets/zlib/blind_broad/*.zip -text
+docs/evidence/blind_broad_*.json text eol=lf
