@@ -2,6 +2,17 @@
 
 One agent. The speed goal in `docs/phase4/GOAL.md` stays closed and missed. A different crc32 goal was frozen in `docs/phase4/GOAL_CRC32.md` before its measurement. A second minigzip wall-time goal was frozen in `docs/phase4/GOAL_MINIGZIP_ATTEMPT2.md` before its candidate was built. That attempt is closed as missed.
 
+## Two more real targets
+
+Pinned in `782cd114e8a4a19a801cca5652c187f5f0e33304` before either program was built. Goals frozen in `39ee2082521a5ef6944330e4f3a63cb43e9fbcfb` before either candidate was built. These are not the synthetic dev sample in `samples/dev/checksum_cli.c`. zlib evidence was not edited. Ghidra was not installed, so static decompilation is not done.
+
+| Target | Why | Pin | Goal | Result |
+| --- | --- | --- | --- | --- |
+| Lua 5.4.9 `luac -p` | MIT language front end, not a compressor | `https://www.lua.org/ftp/lua-5.4.9.tar.gz` SHA-256 `2335b6c582a52654f94612bf10d2f4672805d05329aa6568b1d8cd9e5c6fb8e6` | in-process `luaL_loadbuffer`, candidate `make linux MYCFLAGS=-O3`, ratio ≤ 0.90 | missed. Median 14706541 / 15521049 = 0.9475223614074023. Correct. `stable_improvement` false. |
+| aklomp/base64 0.5.3 | BSD-2-Clause encoder, not a compressor | `https://github.com/aklomp/base64/archive/refs/tags/v0.5.3.tar.gz` SHA-256 `74f83a5396660dfe5a09f0339982c03c44ef018e459a8bfcde8b31ca7444aa42` | in-process `base64_encode` with flags 0, candidate is the README x86 codec line, ratio ≤ 0.90 | met on this one sample. Median 2764818 / 4238053 = 0.652379288319424. Encoded bytes matched. `bin/base64` grew from 35568 to 84720 bytes. `stable_improvement` false. |
+
+jq 1.x and Lua 5.5.1 were not substituted after these numbers.
+
 ## Versions
 
 - Tool: `raee-reverse-lite` 0.1.0.

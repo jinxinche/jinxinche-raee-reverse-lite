@@ -1,0 +1,160 @@
+{
+  "kind": "base64-0.5.3-phase2",
+  "synthetic": false,
+  "acceptance": "non-blind",
+  "pin": {
+    "project": "base64",
+    "upstream": "aklomp/base64",
+    "tag": "v0.5.3",
+    "source_url": "https://github.com/aklomp/base64/archive/refs/tags/v0.5.3.tar.gz",
+    "tarball_sha256": "74f83a5396660dfe5a09f0339982c03c44ef018e459a8bfcde8b31ca7444aa42",
+    "license": "BSD-2-Clause, from LICENSE in this tarball",
+    "tool": "bin/base64",
+    "interface": "stdin/stdout encode and decode, the same role as a base64 utility",
+    "kind": "encoder, not a compressor",
+    "pinned_before_analysis": true,
+    "base64_sha256": "1849b1e96c54bc8398ee4a24dfe33765406e43c036339e299926b92d3d368776",
+    "elf": {
+      "elf": true,
+      "class": 2,
+      "endian": 1,
+      "type": 3,
+      "machine": 62,
+      "class_name": "ELF64",
+      "machine_name": "x86-64"
+    },
+    "codec_config": "#define HAVE_AVX512 0\n#define HAVE_AVX2   0\n#define HAVE_NEON32 0\n#define HAVE_NEON64 0\n#define HAVE_SSSE3  0\n#define HAVE_SSE41  0\n#define HAVE_SSE42  0\n#define HAVE_AVX    0\n",
+    "build": {
+      "command": "make -j4",
+      "make_exit": 0,
+      "extra_cflags": null,
+      "sandbox": true,
+      "rlimits_applied": true,
+      "network_namespace": false,
+      "truncated": false
+    },
+    "acceptance": "non-blind",
+    "acceptance_reason": "the same agent generated the sealed outputs and can read them"
+  },
+  "ghidra": {
+    "executed": false,
+    "accepted_pass": false,
+    "reason": "Ghidra is not installed. Static decompilation was not run. That is not a pass."
+  },
+  "final_rerun_match": true,
+  "codec_config": "#define HAVE_AVX512 0\n#define HAVE_AVX2   0\n#define HAVE_NEON32 0\n#define HAVE_NEON64 0\n#define HAVE_SSSE3  0\n#define HAVE_SSE41  0\n#define HAVE_SSE42  0\n#define HAVE_AVX    0\n",
+  "dev_previews": {
+    "dev:empty": {
+      "exit_code": 0,
+      "stdout_preview": "",
+      "stderr_preview": "",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": null
+    },
+    "dev:empty-nowrap": {
+      "exit_code": 0,
+      "stdout_preview": "",
+      "stderr_preview": "",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": null
+    },
+    "dev:abc": {
+      "exit_code": 0,
+      "stdout_preview": "YWJj\n",
+      "stderr_preview": "",
+      "stdout_has_newline": true,
+      "roundtrip_equals_input": null
+    },
+    "dev:abc-nowrap": {
+      "exit_code": 0,
+      "stdout_preview": "YWJj",
+      "stderr_preview": "",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": null
+    },
+    "dev:hello": {
+      "exit_code": 0,
+      "stdout_preview": "aGVsbG8=\n",
+      "stderr_preview": "",
+      "stdout_has_newline": true,
+      "roundtrip_equals_input": null
+    },
+    "dev:hello-nowrap": {
+      "exit_code": 0,
+      "stdout_preview": "aGVsbG8=",
+      "stderr_preview": "",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": null
+    },
+    "dev:nul": {
+      "exit_code": 0,
+      "stdout_preview": "AAH/\n",
+      "stderr_preview": "",
+      "stdout_has_newline": true,
+      "roundtrip_equals_input": null
+    },
+    "dev:nul-nowrap": {
+      "exit_code": 0,
+      "stdout_preview": "AAH/",
+      "stderr_preview": "",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": null
+    },
+    "dev:abc-file": {
+      "exit_code": 0,
+      "stdout_preview": "YWJj\n",
+      "stderr_preview": "",
+      "stdout_has_newline": true,
+      "roundtrip_equals_input": null
+    },
+    "dev:empty-decode": {
+      "exit_code": 0,
+      "stdout_preview": "",
+      "stderr_preview": "",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": true
+    },
+    "dev:abc-decode": {
+      "exit_code": 0,
+      "stdout_preview": "abc",
+      "stderr_preview": "",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": true
+    },
+    "dev:hello-decode": {
+      "exit_code": 0,
+      "stdout_preview": "hello",
+      "stderr_preview": "",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": true
+    },
+    "dev:nul-decode": {
+      "exit_code": 0,
+      "stdout_preview": "\u0000\u0001\ufffd",
+      "stderr_preview": "",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": true
+    },
+    "dev:invalid-decode": {
+      "exit_code": 1,
+      "stdout_preview": "",
+      "stderr_preview": "./base64: stdin: decoding error\n",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": null
+    },
+    "dev:help": {
+      "exit_code": 0,
+      "stdout_preview": "Usage: ./base64 [OPTION]... [FILE]\nIf no FILE is given or is specified as '-', read from standard input.\nOptions:\n  -d, ",
+      "stderr_preview": "",
+      "stdout_has_newline": true,
+      "roundtrip_equals_input": null
+    },
+    "dev:unknown-option": {
+      "exit_code": 1,
+      "stdout_preview": "",
+      "stderr_preview": "./base64: unknown option 'z'\nUsage: ./base64 [OPTION]... [FILE]\nIf no FILE is given or is specified as '-', read from standard input.\nOptions:\n  -d, --decode             Decode a b",
+      "stdout_has_newline": false,
+      "roundtrip_equals_input": null
+    }
+  }
+}
