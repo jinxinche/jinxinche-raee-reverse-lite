@@ -127,7 +127,12 @@ def test_unreadable_file_is_uncertain(tmp_path, monkeypatch):
 
 def test_package_audit_is_not_a_closure_proof():
     root = Path(__file__).resolve().parents[1] / "src"
-    report = audit_python_tree(root, set())
+    undeclared = audit_python_tree(root, set())
+    assert undeclared["closure_proof"] is False
+    assert undeclared["accepted_pass"] is False
+    assert undeclared["status"] == "incomplete_scope"
+    assert undeclared["missing_declarations"] == ["r2pipe"]
+    report = audit_python_tree(root, {"r2pipe"})
     assert report["closure_proof"] is False
     assert report["accepted_pass"] is False
     assert report["status"] == "no_omission_detected"

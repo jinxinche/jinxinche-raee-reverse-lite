@@ -1,0 +1,254 @@
+{
+  "kind": "zlib-1.4-compiler-gzip",
+  "accepted_pass": false,
+  "tarball_sha256": "02dd159783677a749c04adbdd02b55b8a2bcc7e054f51b76b549199a916ad584",
+  "requested_cflags": "-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN",
+  "host": {
+    "system": "Linux-6.12.113+-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "python": "3.12.3"
+  },
+  "gcc_version": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "clang_version": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+  "inputs": [
+    {
+      "name": "empty",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "name": "abc",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "length": 3
+    },
+    {
+      "name": "hello",
+      "sha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "length": 5
+    },
+    {
+      "name": "range4096",
+      "sha256": "d67c656e01756650d77717b0839985a056ec28ffe174601d690fc407a2ceffca",
+      "length": 4096
+    }
+  ],
+  "builds": {
+    "gcc": {
+      "compiler": "gcc",
+      "compiler_path": "/usr/bin/gcc",
+      "requested_cflags": "-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN",
+      "makefile_cflags": "-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN",
+      "makefile_cc": "gcc",
+      "configure_exit": 0,
+      "make_exit": 0,
+      "binary": "/tmp/rrl-compiler-gzip-5qvibosz/gcc/zlib-1.4/minigzip",
+      "binary_sha256": "e5990e7d1b34bcbb8d7f9aff732887ba90d63c0e5d3e92f58a0156f5e7cec636",
+      "compile_line": "gcc -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN  -c -o crc32.o crc32.c",
+      "link_line": "gcc -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -I. -c -o minigzip.o test/minigzip.c",
+      "compile_line_has_requested_cflags": true,
+      "configure_stderr_tail": "",
+      "make_stderr_tail": ""
+    },
+    "clang": {
+      "compiler": "clang",
+      "compiler_path": "/usr/bin/clang",
+      "requested_cflags": "-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN",
+      "makefile_cflags": "-O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN",
+      "makefile_cc": "clang",
+      "configure_exit": 0,
+      "make_exit": 0,
+      "binary": "/tmp/rrl-compiler-gzip-5qvibosz/clang/zlib-1.4/minigzip",
+      "binary_sha256": "a5aade18660eac8fb188725126aad33ba2bec58e5bbee0841aa06b06384db87c",
+      "compile_line": "clang -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN  -c -o crc32.o crc32.c",
+      "link_line": "clang -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -I. -c -o minigzip.o test/minigzip.c",
+      "compile_line_has_requested_cflags": true,
+      "configure_stderr_tail": "",
+      "make_stderr_tail": ""
+    }
+  },
+  "outputs": {
+    "gcc": [
+      {
+        "name": "empty",
+        "input_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_length": 0,
+        "returncode": 0,
+        "execution_result": "passed",
+        "truncated": false,
+        "stdout_sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2",
+        "stdout_length": 20,
+        "prefix_hex": "1f8b0800000000000003030000000000",
+        "network_isolated": true,
+        "network_namespace": true,
+        "network_mechanism": "unshare-rn",
+        "roundtrip_equals_input": true,
+        "decompress_returncode": 0
+      },
+      {
+        "name": "abc",
+        "input_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "input_length": 3,
+        "returncode": 0,
+        "execution_result": "passed",
+        "truncated": false,
+        "stdout_sha256": "a058a4f3405f909f3a49df0cb75d96198d371ae7913e5ef6b8114a382746ee5a",
+        "stdout_length": 23,
+        "prefix_hex": "1f8b08000000000000034b4c4a0600c2",
+        "network_isolated": true,
+        "network_namespace": true,
+        "network_mechanism": "unshare-rn",
+        "roundtrip_equals_input": true,
+        "decompress_returncode": 0
+      },
+      {
+        "name": "hello",
+        "input_sha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+        "input_length": 5,
+        "returncode": 0,
+        "execution_result": "passed",
+        "truncated": false,
+        "stdout_sha256": "f901eda57fd86d4239806fd4b76f64036c1c20711267a7bc776ab2aa45069b2a",
+        "stdout_length": 25,
+        "prefix_hex": "1f8b0800000000000003cb48cdc9c907",
+        "network_isolated": true,
+        "network_namespace": true,
+        "network_mechanism": "unshare-rn",
+        "roundtrip_equals_input": true,
+        "decompress_returncode": 0
+      },
+      {
+        "name": "range4096",
+        "input_sha256": "d67c656e01756650d77717b0839985a056ec28ffe174601d690fc407a2ceffca",
+        "input_length": 4096,
+        "returncode": 0,
+        "execution_result": "passed",
+        "truncated": false,
+        "stdout_sha256": "69c95331538d28682cd5e646c37fb1530c7385609624f0b87cd9226cde4098dc",
+        "stdout_length": 321,
+        "prefix_hex": "1f8b0800000000000003636064626661",
+        "network_isolated": true,
+        "network_namespace": true,
+        "network_mechanism": "unshare-rn",
+        "roundtrip_equals_input": true,
+        "decompress_returncode": 0
+      }
+    ],
+    "clang": [
+      {
+        "name": "empty",
+        "input_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_length": 0,
+        "returncode": 0,
+        "execution_result": "passed",
+        "truncated": false,
+        "stdout_sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2",
+        "stdout_length": 20,
+        "prefix_hex": "1f8b0800000000000003030000000000",
+        "network_isolated": true,
+        "network_namespace": true,
+        "network_mechanism": "unshare-rn",
+        "roundtrip_equals_input": true,
+        "decompress_returncode": 0
+      },
+      {
+        "name": "abc",
+        "input_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "input_length": 3,
+        "returncode": 0,
+        "execution_result": "passed",
+        "truncated": false,
+        "stdout_sha256": "a058a4f3405f909f3a49df0cb75d96198d371ae7913e5ef6b8114a382746ee5a",
+        "stdout_length": 23,
+        "prefix_hex": "1f8b08000000000000034b4c4a0600c2",
+        "network_isolated": true,
+        "network_namespace": true,
+        "network_mechanism": "unshare-rn",
+        "roundtrip_equals_input": true,
+        "decompress_returncode": 0
+      },
+      {
+        "name": "hello",
+        "input_sha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+        "input_length": 5,
+        "returncode": 0,
+        "execution_result": "passed",
+        "truncated": false,
+        "stdout_sha256": "f901eda57fd86d4239806fd4b76f64036c1c20711267a7bc776ab2aa45069b2a",
+        "stdout_length": 25,
+        "prefix_hex": "1f8b0800000000000003cb48cdc9c907",
+        "network_isolated": true,
+        "network_namespace": true,
+        "network_mechanism": "unshare-rn",
+        "roundtrip_equals_input": true,
+        "decompress_returncode": 0
+      },
+      {
+        "name": "range4096",
+        "input_sha256": "d67c656e01756650d77717b0839985a056ec28ffe174601d690fc407a2ceffca",
+        "input_length": 4096,
+        "returncode": 0,
+        "execution_result": "passed",
+        "truncated": false,
+        "stdout_sha256": "69c95331538d28682cd5e646c37fb1530c7385609624f0b87cd9226cde4098dc",
+        "stdout_length": 321,
+        "prefix_hex": "1f8b0800000000000003636064626661",
+        "network_isolated": true,
+        "network_namespace": true,
+        "network_mechanism": "unshare-rn",
+        "roundtrip_equals_input": true,
+        "decompress_returncode": 0
+      }
+    ]
+  },
+  "identical": true,
+  "same_flags": true,
+  "limitations": [
+    "gzip bytes are the minigzip stdout from this host",
+    "accepted_pass stays false; this file is not an enhancement goal"
+  ],
+  "comparison": {
+    "identical": true,
+    "inputs": [
+      {
+        "name": "empty",
+        "equal": true,
+        "stdout_sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2",
+        "other_sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2",
+        "stdout_length": 20,
+        "other_length": 20,
+        "first_mismatch_offset": null,
+        "roundtrip_equals_input": true
+      },
+      {
+        "name": "abc",
+        "equal": true,
+        "stdout_sha256": "a058a4f3405f909f3a49df0cb75d96198d371ae7913e5ef6b8114a382746ee5a",
+        "other_sha256": "a058a4f3405f909f3a49df0cb75d96198d371ae7913e5ef6b8114a382746ee5a",
+        "stdout_length": 23,
+        "other_length": 23,
+        "first_mismatch_offset": null,
+        "roundtrip_equals_input": true
+      },
+      {
+        "name": "hello",
+        "equal": true,
+        "stdout_sha256": "f901eda57fd86d4239806fd4b76f64036c1c20711267a7bc776ab2aa45069b2a",
+        "other_sha256": "f901eda57fd86d4239806fd4b76f64036c1c20711267a7bc776ab2aa45069b2a",
+        "stdout_length": 25,
+        "other_length": 25,
+        "first_mismatch_offset": null,
+        "roundtrip_equals_input": true
+      },
+      {
+        "name": "range4096",
+        "equal": true,
+        "stdout_sha256": "69c95331538d28682cd5e646c37fb1530c7385609624f0b87cd9226cde4098dc",
+        "other_sha256": "69c95331538d28682cd5e646c37fb1530c7385609624f0b87cd9226cde4098dc",
+        "stdout_length": 321,
+        "other_length": 321,
+        "first_mismatch_offset": null,
+        "roundtrip_equals_input": true
+      }
+    ]
+  }
+}

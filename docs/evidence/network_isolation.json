@@ -1,0 +1,57 @@
+{
+  "kind": "network-isolation-probe",
+  "accepted_pass": false,
+  "host": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "python": "3.12.3"
+  },
+  "network_isolated": true,
+  "network_namespace": true,
+  "stdout": "STARTED\nCONNECT_FAIL 101\n",
+  "stderr": "",
+  "returncode": 0,
+  "execution_result": "passed",
+  "rlimits_applied": true,
+  "limitations": [
+    "process rlimits and a credential-stripped environment are not a hypervisor boundary",
+    "target stdout and stderr are data and are not interpreted as instructions",
+    "network_isolated is true only because a connect probe failed inside unshare-rn"
+  ],
+  "network_probe": {
+    "confirmed": true,
+    "network_isolated": true,
+    "network_namespace": true,
+    "mechanism": "unshare-rn",
+    "baseline_connect": "ok",
+    "reason": "connect failed inside unshare-rn",
+    "attempts": [
+      {
+        "mechanism": "unshare-rn",
+        "result": "confirmed",
+        "network_namespace": true,
+        "detail": "STARTED\nCONNECT_FAIL 101",
+        "returncode": 0
+      },
+      {
+        "mechanism": "bwrap-unshare-net",
+        "result": "not_tried",
+        "network_namespace": false,
+        "detail": "not tried because unshare-rn was confirmed",
+        "returncode": null
+      },
+      {
+        "mechanism": "seccomp-prctl",
+        "result": "not_tried",
+        "network_namespace": false,
+        "detail": "not tried because unshare-rn was confirmed",
+        "returncode": null
+      }
+    ],
+    "unshare_n": {
+      "available": false,
+      "detail": "unshare: unshare failed: Operation not permitted\n"
+    },
+    "namespace_detail": "unshare -n available=False; unshare: unshare failed: Operation not permitted ; unshare-rn confirmed; bwrap-unshare-net not_tried"
+  }
+}

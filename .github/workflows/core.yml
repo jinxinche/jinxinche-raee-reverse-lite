@@ -23,7 +23,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install .
-          python -m pip install pytest
+          python -m pip install pytest r2pipe
+      - name: Install radare2 where the OS packages it
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y radare2 build-essential
       - name: Run the core tests
         run: python -m pytest -q --tb=line
       - name: Require the committed test id set
